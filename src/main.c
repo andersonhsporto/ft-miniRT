@@ -16,6 +16,5 @@ int	main(void)
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 	mlx_loop(mlx);
 }
