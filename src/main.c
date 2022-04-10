@@ -1,4 +1,4 @@
-#include "../include/mlx.h"
+#include <mlx.h>
 
 typedef struct	s_data {
 	void	*img;
@@ -15,6 +15,6 @@ int	main(void)
 	t_data	img;
 
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_win = mlx_new_window(mlx, 200, 100, "Hello world!");
 	mlx_loop(mlx);
 }
