@@ -9,4 +9,10 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct	s_coordinate {
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}				t_coo;
 #endif
