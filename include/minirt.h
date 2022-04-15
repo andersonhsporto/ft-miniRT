@@ -12,4 +12,12 @@ t_coo	*matrix_addition(t_coo *a, t_coo *b);
 t_coo	*matrix_subtration(t_coo *a, t_coo *b);
 
 t_coo	*matrix_multipli_scalar(double scalar, t_coo *a);
+
+double	matrix_lenght(t_coo *a);
+
+t_coo	*matrix_normalize(t_coo *a);
+
+double	matrix_abs(t_coo *a, t_coo *b);
+
+t_coo	*matrix_cross(t_coo *a, t_coo *b);
 #endif

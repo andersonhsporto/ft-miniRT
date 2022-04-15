@@ -35,3 +35,22 @@ t_coo	*matrix_multipli_scalar(double scalar, t_coo *a)
 	res->w = a->w * scalar;
 	return (res);
 }
+
+double	matrix_lenght(t_coo *a)
+{
+	return (sqrt(a->x * a->x + a->y * a->y + a->z * a->z));
+}
+
+t_coo	*matrix_normalize(t_coo *a)
+{
+	t_coo	*res;
+	double	lenght;
+
+	lenght = matrix_lenght(a);
+	res = (t_coo *)malloc(sizeof(t_coo));
+	res->x = a->x / lenght;
+	res->y = a->y / lenght;
+	res->z = a->z / lenght;
+	res->w = a->w / lenght;
+	return (res);
+}
