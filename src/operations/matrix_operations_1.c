@@ -1,6 +1,6 @@
 #include "../include/minirt.h"
 
-t_coo	*matrix_addition(t_coo *a, t_coo *b)
+t_coo	*vector_addition(t_coo *a, t_coo *b)
 {
 	t_coo *res;
 
@@ -12,7 +12,7 @@ t_coo	*matrix_addition(t_coo *a, t_coo *b)
 	return (res);
 }
 
-t_coo	*matrix_subtration(t_coo *a, t_coo *b)
+t_coo	*vector_subtration(t_coo *a, t_coo *b)
 {
 	t_coo *res;
 
@@ -24,7 +24,7 @@ t_coo	*matrix_subtration(t_coo *a, t_coo *b)
 	return (res);
 }
 
-t_coo	*matrix_multipli_scalar(double scalar, t_coo *a)
+t_coo	*vector_multipli_scalar(double scalar, t_coo *a)
 {
 	t_coo *res;
 
@@ -36,17 +36,17 @@ t_coo	*matrix_multipli_scalar(double scalar, t_coo *a)
 	return (res);
 }
 
-double	matrix_lenght(t_coo *a)
+double	vector_lenght(t_coo *a)
 {
 	return (sqrt(a->x * a->x + a->y * a->y + a->z * a->z));
 }
 
-t_coo	*matrix_normalize(t_coo *a)
+t_coo	*vector_normalize(t_coo *a)
 {
 	t_coo	*res;
 	double	lenght;
 
-	lenght = matrix_lenght(a);
+	lenght = vector_lenght(a);
 	res = (t_coo *)malloc(sizeof(t_coo));
 	res->x = a->x / lenght;
 	res->y = a->y / lenght;
