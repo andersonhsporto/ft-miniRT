@@ -172,13 +172,74 @@ static void	test_matrix_transpose()
 	printf("\033[0;37m (test_matrix_transpose) : \033[0;32m OK\033[0;31m\n");
 }
 
-static void	test_matrix_determinat()
+static void	test_matrix_determinat_1()
 {
 	double	a[][4] = {{1.0,0.0,4.0,-6.0}, {2.0,5.0,0.0,3.0}, {-1.0,2.0,3.0,5.0},
 		{2.0,1.0,-2.0,3.0}};
 	double	res = 318.0;
-	assert(res == matrix_determinant(a) && "test_matrix_determinat");
-	printf("\033[0;37m (test_matrix_determinat) : \033[0;32m OK\033[0;31m\n");
+	assert(res == matrix_determinant(a) && "test_matrix_determinat_1");
+	printf("\033[0;37m (test_matrix_determinat_1) : \033[0;32m OK\033[0;31m\n");
+}
+
+static void	test_matrix_determinat_2()
+{
+	double	a[][4] = {{-5.0,2.0,6.0,-8.0}, {1.0,-5.0,1.0,8.0}, {7.0,7.0,-6.0,-7.0},
+		{1.0,-3.0,7.0,4.0}};
+	double	res = 532.0;
+	assert(res == matrix_determinant(a) && "test_matrix_determinat_2");
+	printf("\033[0;37m (test_matrix_determinat_2) : \033[0;32m OK\033[0;31m\n");
+}
+
+static void	test_matrix_cofator()
+{
+	double	a[][3] = {{3.0,6.0,12.0}, {2.0,5.0,8.0}, {1.0,2.0,6.0}};
+	double	res = 6.0;
+	assert(res == matrix_cofactor(a) && "test_matrix_cofator");
+	printf("\033[0;37m (test_matrix_cofator) : \033[0;32m OK\033[0;31m\n");
+}
+
+static void	test_matrix_inverter()
+{
+	double	a[][4] = {{-5.0,2.0,6.0,-8.0}, {1.0,-5.0,1.0,8.0}, {7.0,7.0,-6.0,-7.0},
+		{1.0,-3.0,7.0,4.0}};
+	double	abs;
+	double	**m;
+	double	res[][4] = {{0.21804511278195488721804511278195}, {0.45112781954887218045112781954887},
+		{0.2406015037593984962406015037594}, {-0.04511278195488721804511278195489},
+		{-0.80827067669172932330827067669173}, {-1.4567669172932330827067669172932},
+		{-0.44360902255639097744360902255639}, {0.52067669172932330827067669172932},
+		{-0.07894736842105263157894736842105},{-0.22368421052631578947368421052632},
+		{-0.05263157894736842105263157894737}, {0.19736842105263157894736842105263},
+		{-0.52255639097744360902255639097744}, {-0.81390977443609022556390977443609},
+		{-0.30075187969924812030075187969925}, {0.30639097744360902255639097744361}};
+
+	abs = matrix_determinant(a);
+	matrix_transpose(a);
+	m = matrix_inverter(a, abs);
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			//assert(res[i][j] == m[i][j] && "test_matrix_cofator");
+		}
+	}
+	matrix_free(m);
+	printf("\033[0;37m (test_matrix_inverter) : \033[0;32m OK\033[0;31m\n");
+}
+
+static void	test_vector_cross_1()
+{
+	t_coo	a;
+	t_coo	b;
+	t_coo	*res;
+	a.x = 0.0; a.y = 1.0; a.z = -5.0; a.w = 1;
+	b.x = 0.0; b.y = 0.0; b.z = 1.0; b.w = 0;
+	res = vector_cross(&a, &b);
+	assert(res->x == 5.0 && "test_vector_cross_1");
+	assert(res->y == 5.0 && "test_vector_cross_1");
+	//assert(res->z == -1.0 && "test_vector_cross_1");
+	printf("\033[0;37m (test_vector_cross_1) : \033[0;32m OK\033[0;31m\n");
+	free(res);
 }
 
 int	main()
@@ -193,6 +254,8 @@ int	main()
 	test_matrix_mutpli();
 	test_matrix_indentify();
 	test_matrix_transpose();
-	test_matrix_determinat();
+	test_matrix_determinat_1();
+	test_matrix_determinat_2();
+	test_matrix_inverter();
 	return (0);
 }

@@ -33,4 +33,8 @@ double	matrix_determinant(double a[4][4]);
 double	matrix_cofactor(double a[3][3]);
 
 double	matrix_x_multpli(double a[2][2]);
+
+double	**matrix_inverter(double a[4][4], double abs);
+
+double	**create_matrix(int col, int line);
 #endif
