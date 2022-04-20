@@ -234,11 +234,12 @@ static void	test_vector_cross_1()
 	t_coo	*res;
 	a.x = 0.0; a.y = 1.0; a.z = -5.0; a.w = 1;
 	b.x = 0.0; b.y = 0.0; b.z = 1.0; b.w = 0;
-	res = vector_cross(&a, &b);
-	assert(res->x == 5.0 && "test_vector_cross_1");
-	assert(res->y == 5.0 && "test_vector_cross_1");
+	res = vector_cross(&b, &a);
+	//assert(res->x == 5.0 && "test_vector_cross_1");
+	//assert(res->y == 5.0 && "test_vector_cross_1");
+	printf("x : %f, y : %f, z : %f\n", res->x, res->y, res->z);
 	//assert(res->z == -1.0 && "test_vector_cross_1");
-	printf("\033[0;37m (test_vector_cross_1) : \033[0;32m OK\033[0;31m\n");
+	//printf("\033[0;37m (test_vector_cross_1) : \033[0;32m OK\033[0;31m\n");
 	free(res);
 }
 
@@ -257,5 +258,6 @@ int	main()
 	test_matrix_determinat_1();
 	test_matrix_determinat_2();
 	test_matrix_inverter();
+	test_vector_cross_1();
 	return (0);
 }

@@ -1,4 +1,4 @@
-#include "../include/minirt.h"
+#include "../../include/minirt.h"
 
 double	vector_abs(t_coo *a, t_coo *b)
 {

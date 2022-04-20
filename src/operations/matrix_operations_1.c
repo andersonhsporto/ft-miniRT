@@ -1,4 +1,4 @@
-#include "../include/minirt.h"
+#include "../../include/minirt.h"
 
 t_coo	*vector_addition(t_coo *a, t_coo *b)
 {
