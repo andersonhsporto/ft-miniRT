@@ -8,7 +8,7 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	hit_sphere(t_coo *origin, t_coo *center, double radius, t_coo *direction)
+double	hit_sphere(t_coo *origin, t_coo *center, double radius, t_coo *direction)
 {
 	t_coo *oc = vector_subtration(origin, center);
 	double	a = vector_abs(direction, direction);
@@ -16,24 +16,32 @@ int	hit_sphere(t_coo *origin, t_coo *center, double radius, t_coo *direction)
 	double	c = vector_abs(oc, oc) - (radius*radius);
 	double	discriminant = (b*b)-(4*a*c);
 	free(oc);
-	if (discriminant > 0)
-		return (1);
+	if (discriminant < 0)
+		return (-1.0);
 	else
-		return (0);
+		return ((-b - sqrt(discriminant)) / (2.0 * a));
 }
 
 t_coo	*colory(t_coo *origin, t_coo *direction)
 {
 	t_coo	center;
 	center.x = 0.0;center.y = 0.0;center.z = -1.0;
-	if (hit_sphere(origin, &center, 0.5, direction))
+	double	t = hit_sphere(origin, &center, 0.5, direction);
+	if (t > 0.0)
 	{
-		t_coo	*res = (t_coo *)malloc(sizeof(t_coo));
-		res->x = 1.0;res->y = 0.0;res->z = 0.0;
+		t_coo	*res = vector_multipli_scalar(t, direction);
+		t_coo	*var = vector_addition(origin, res);
+		free(res);
+		res = vector_subtration(var, &center);
+		free(var);
+		var = vector_normalize(res);
+		var->x++;var->y++;var->z++;
+		res = vector_multipli_scalar(0.5, var);
+		free(var);
 		return (res);
 	}
 	t_coo	*unity_direction = vector_normalize(direction);
-	double	t = 0.5 * (unity_direction->y + 1.0);
+	t = 0.5 * (unity_direction->y + 1.0);
 	t_coo	m;
 	m.x = 1.0;m.y = 1.0;m.z = 1.0;
 	t_coo	b;
