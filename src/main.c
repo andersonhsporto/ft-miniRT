@@ -112,15 +112,17 @@ t_coo	*colory(t_coo *origin, t_coo *direction, t_sence **hiter)
 
 int	main(void)
 {
+	#define NX 900
+	#define NY 400
 	void	*mlx;
 	void	*mlx_win;
 	int		color;
 	t_data	img;
 
 	mlx = mlx_init();
-	img.img = mlx_new_image(mlx, 200, 100);
+	img.img = mlx_new_image(mlx, NX, NY);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	mlx_win = mlx_new_window(mlx, 200, 100, "Hello world!");
+	mlx_win = mlx_new_window(mlx, NX, NY, "Hello world!");
 	t_coo	lower;
 	lower.x = -2.0;lower.y = -1.0;lower.z = -1.0;
 	t_coo	h;
@@ -140,12 +142,12 @@ int	main(void)
 	back.x = 0.0;back.y = 100.5;back.z = -1.0;
 	hiter[1]->center = &back;
 	hiter[1]->raio = 100;
-	for (size_t i = 99; i > 0; i--)
+	for (size_t i = NY - 1; i > 0; i--)
 	{
-		for (size_t j = 0; j < 200; j++)
+		for (size_t j = 0; j < NX; j++)
 		{
-			double	u = (double)j / (double)200;
-			double	v = (double)i / (double)100;
+			double	u = (double)j / (double)NX;
+			double	v = (double)i / (double)NY;
 			t_coo	*var = vector_addition(&lower, vector_addition(vector_multipli_scalar(u, &h), vector_multipli_scalar(v, &vertical)));
 			t_coo	*ray = vector_subtration(var, &origin);
 			free(var);
