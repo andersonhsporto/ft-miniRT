@@ -66,13 +66,31 @@ int	hiter_point(t_coo *origin, t_sence **hiter, t_coo *direction, t_sence *rec)
 	return (hitable);
 }
 
+t_coo	*random_unit_sphere(void)
+{
+	t_coo	*p;
+	t_coo	*aux;
+	t_coo	var;
+
+	do
+	{
+		var.x = drand48();var.y = drand48();var.z = drand48();
+		aux = vector_multipli_scalar(2.0, &var);
+		var.x = 1.0;var.y = 1.0;var.z = 1.0;
+		p = vector_subtration(aux, &var);
+		free(aux);
+	} while (vector_abs(p, p) >= 1.0);
+	return (p);
+}
+
 t_coo	*colory(t_coo *origin, t_coo *direction, t_sence **hiter)
 {
 	t_sence *rec;
 	if (hiter_point(origin, hiter, direction, rec))
 	{
-		race->normal->x++;race->normal->y++;race->normal->z++;
-		t_coo	*res = vector_multipli_scalar(0.5, race->normal);
+		t_coo	*aux = vector_addition(race->p, race->normal);
+		t_coo	*targ = vector_addition(aux, random_unit_sphere());
+		t_coo	*res = vector_multipli_scalar(0.5, colory(race->p, vector_subtration(targ, race->p), hiter));
 		return (res);
 	}
 	else
@@ -119,17 +137,20 @@ int	main(void)
 	sphere.x = 0.0;sphere.y = 0.0;sphere.z = -1.0;
 	hiter[0]->center = &sphere;
 	t_coo	back;
-	back.x = 0.0;back.y = -100.5;back.z = -1.0;
+	back.x = 0.0;back.y = 100.5;back.z = -1.0;
 	hiter[1]->center = &back;
 	hiter[1]->raio = 100;
 	for (size_t i = 99; i > 0; i--)
 	{
-		for (size_t j = 0; j < 199; j++)
+		for (size_t j = 0; j < 200; j++)
 		{
 			double	u = (double)j / (double)200;
 			double	v = (double)i / (double)100;
-			t_coo	*ray = vector_addition(&lower, vector_addition(vector_multipli_scalar(u, &h), vector_multipli_scalar(v, &vertical)));
+			t_coo	*var = vector_addition(&lower, vector_addition(vector_multipli_scalar(u, &h), vector_multipli_scalar(v, &vertical)));
+			t_coo	*ray = vector_subtration(var, &origin);
+			free(var);
 			t_coo *cc = colory(&origin, ray, hiter);
+			cc->x = sqrt(cc->x);cc->y = sqrt(cc->y);cc->z = sqrt(cc->z);
 			color = ((int)(255.99 * cc->x)<<16) + ((int)(255.99 * cc->y)<<8) + ((int)(255.99 * cc->z));
 			free(cc);
 			free(ray);

@@ -2,7 +2,7 @@
 
 double	vector_abs(t_coo *a, t_coo *b)
 {
-	return (a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w);
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
 t_coo	*vector_cross(t_coo *a, t_coo *b)
