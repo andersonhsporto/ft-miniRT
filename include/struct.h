@@ -15,4 +15,13 @@ typedef struct	s_coordinate {
 	double	z;
 	double	w;
 }				t_coo;
+
+typedef struct	s_sences {
+	t_coo	*center;
+	double	raio;
+	t_coo	*p;
+	double	t;
+	t_coo	*normal;
+}				t_sence;
+
 #endif

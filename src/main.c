@@ -1,5 +1,7 @@
 #include "../include/minirt.h"
 
+t_sence *race;
+
 static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -8,50 +10,86 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-double	hit_sphere(t_coo *origin, t_coo *center, double radius, t_coo *direction)
+int	hit_sphere(t_coo *origin, t_sence *sphere, t_coo *direction, double t_max, double t_min)
 {
-	t_coo *oc = vector_subtration(origin, center);
+	t_coo *oc = vector_subtration(origin, sphere->center);
 	double	a = vector_abs(direction, direction);
-	double	b = 2.0 * vector_abs(oc, direction);
-	double	c = vector_abs(oc, oc) - (radius*radius);
-	double	discriminant = (b*b)-(4*a*c);
-	free(oc);
-	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((-b - sqrt(discriminant)) / (2.0 * a));
+	double	b = vector_abs(oc, direction);
+	double	c = vector_abs(oc, oc) - (sphere->raio*sphere->raio);
+	double	discriminant = (b*b)-(a*c);
+	if (discriminant > 0)
+	{
+		double temp = (-b - sqrt(discriminant))/a;
+		if (temp < t_max && temp > t_min)
+		{
+			sphere->t = temp;
+			// A + B*t
+			t_coo	*var = vector_multipli_scalar(sphere->t, direction);
+			sphere->p = vector_addition(origin, var);
+			free(var);
+			var = vector_subtration(sphere->p, sphere->center);
+			sphere->normal = vector_multipli_scalar(1.0/sphere->raio, var);
+			free(var);
+			return (1);
+		}
+		temp = (-b + sqrt(discriminant))/a;
+		if (temp < t_max && temp > t_min)
+		{
+			sphere->t = temp;
+			// A + B*t
+			t_coo	*var = vector_multipli_scalar(sphere->t, direction);
+			sphere->p = vector_addition(origin, var);
+			free(var);
+			var = vector_subtration(sphere->p, sphere->center);
+			sphere->normal = vector_multipli_scalar(1.0/sphere->raio, var);
+			free(var);
+			return (1);
+		}
+	}
+	return (0);
 }
 
-t_coo	*colory(t_coo *origin, t_coo *direction)
+int	hiter_point(t_coo *origin, t_sence **hiter, t_coo *direction, t_sence *rec)
 {
-	t_coo	center;
-	center.x = 0.0;center.y = 0.0;center.z = -1.0;
-	double	t = hit_sphere(origin, &center, 0.5, direction);
-	if (t > 0.0)
+	double	t_max = __FLT_MAX__;
+	double	t_min = 0.0;
+	int		hitable = 0;
+	for (size_t i = 0; i < 2; i++)
 	{
-		t_coo	*res = vector_multipli_scalar(t, direction);
-		t_coo	*var = vector_addition(origin, res);
-		free(res);
-		res = vector_subtration(var, &center);
-		free(var);
-		var = vector_normalize(res);
-		var->x++;var->y++;var->z++;
-		res = vector_multipli_scalar(0.5, var);
-		free(var);
+		if (hit_sphere(origin, hiter[i], direction, t_max, t_min))
+		{
+			hitable = 1;
+			t_max = hiter[i]->t;
+			race = hiter[i];
+		}
+	}
+	return (hitable);
+}
+
+t_coo	*colory(t_coo *origin, t_coo *direction, t_sence **hiter)
+{
+	t_sence *rec;
+	if (hiter_point(origin, hiter, direction, rec))
+	{
+		race->normal->x++;race->normal->y++;race->normal->z++;
+		t_coo	*res = vector_multipli_scalar(0.5, race->normal);
 		return (res);
 	}
-	t_coo	*unity_direction = vector_normalize(direction);
-	t = 0.5 * (unity_direction->y + 1.0);
-	t_coo	m;
-	m.x = 1.0;m.y = 1.0;m.z = 1.0;
-	t_coo	b;
-	b.x = 0.5;b.y = 0.7;b.z = 1.0;
-	t_coo	*multi = vector_multipli_scalar(1.0 - t, &m);
-	t_coo	*sec = vector_multipli_scalar(t, &b);
-	t_coo	*soma = vector_addition(multi, sec);
-	free(multi);
-	free(sec);
-	return(soma);
+	else
+	{
+		t_coo	*unity_direction = vector_normalize(direction);
+		double t = 0.5 * (unity_direction->y + 1.0);
+		t_coo	m;
+		m.x = 1.0;m.y = 1.0;m.z = 1.0;
+		t_coo	b;
+		b.x = 0.5;b.y = 0.7;b.z = 1.0;
+		t_coo	*multi = vector_multipli_scalar(1.0 - t, &m);
+		t_coo	*sec = vector_multipli_scalar(t, &b);
+		t_coo	*soma = vector_addition(multi, sec);
+		free(multi);
+		free(sec);
+		return(soma);
+	}
 }
 
 int	main(void)
@@ -73,15 +111,25 @@ int	main(void)
 	vertical.x = 0.0;vertical.y = 2.0;vertical.z = 0.0;
 	t_coo	origin;
 	origin.x = 0.0;origin.y = 0.0;origin.z = 0.0;
-	for (size_t i = 99; i != 0; i--)
+	t_sence **hiter = (t_sence **)malloc(sizeof(t_sence *) * 2);
+	hiter[0] = (t_sence *)malloc(sizeof(t_sence));
+	hiter[1] = (t_sence *)malloc(sizeof(t_sence));
+	hiter[0]->raio = 0.5;
+	t_coo	sphere;
+	sphere.x = 0.0;sphere.y = 0.0;sphere.z = -1.0;
+	hiter[0]->center = &sphere;
+	t_coo	back;
+	back.x = 0.0;back.y = -100.5;back.z = -1.0;
+	hiter[1]->center = &back;
+	hiter[1]->raio = 100;
+	for (size_t i = 99; i > 0; i--)
 	{
 		for (size_t j = 0; j < 199; j++)
 		{
-			// r << 16 g << 8 b 255
-			double	u = (double)j / (double)199;
-			double	v = (double)i / (double)99;
+			double	u = (double)j / (double)200;
+			double	v = (double)i / (double)100;
 			t_coo	*ray = vector_addition(&lower, vector_addition(vector_multipli_scalar(u, &h), vector_multipli_scalar(v, &vertical)));
-			t_coo *cc = colory(&origin, ray);
+			t_coo *cc = colory(&origin, ray, hiter);
 			color = ((int)(255.99 * cc->x)<<16) + ((int)(255.99 * cc->y)<<8) + ((int)(255.99 * cc->z));
 			free(cc);
 			free(ray);

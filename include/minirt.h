@@ -6,6 +6,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <assert.h>
+# include <limits.h>
 
 # define INDENTIFY {{1.0,0.0,0.0,0.0}, {0.0,1.0,0.0,0.0}, {0.0,0.0,1.0,0.0}, {0.0,0.0,0.0,1.0}}
 t_coo	*vector_addition(t_coo *a, t_coo *b);
