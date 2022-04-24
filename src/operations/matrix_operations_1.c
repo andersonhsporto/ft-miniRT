@@ -12,6 +12,18 @@ t_coo	*vector_addition(t_coo *a, t_coo *b)
 	return (res);
 }
 
+t_coo	*vector_multipli(t_coo *a, t_coo *b)
+{
+	t_coo *res;
+
+	res = (t_coo *)malloc(sizeof(t_coo));
+	res->x = a->x * b->x;
+	res->y = a->y * b->y;
+	res->z = a->z * b->z;
+	res->w = a->w * b->w;
+	return (res);
+}
+
 t_coo	*vector_subtration(t_coo *a, t_coo *b)
 {
 	t_coo *res;

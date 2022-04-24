@@ -22,6 +22,7 @@ typedef struct	s_sences {
 	t_coo	*p;
 	double	t;
 	t_coo	*normal;
+	t_coo	*material;
 }				t_sence;
 
 #endif

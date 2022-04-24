@@ -38,4 +38,6 @@ double	matrix_x_multpli(double a[2][2]);
 double	**matrix_inverter(double a[4][4], double abs);
 
 double	**create_matrix(int col, int line);
+
+t_coo	*vector_multipli(t_coo *a, t_coo *b);
 #endif
