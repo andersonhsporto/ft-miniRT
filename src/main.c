@@ -3,13 +3,6 @@
 t_sence *race;
 t_coo	*scared;
 t_coo	*altetion;
-static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 int	hit_sphere(t_coo *origin, t_sence *sphere, t_coo *direction, double t_max, double t_min)
 {
@@ -48,23 +41,6 @@ int	hit_sphere(t_coo *origin, t_sence *sphere, t_coo *direction, double t_max, d
 		}
 	}
 	return (0);
-}
-
-int	hiter_point(t_coo *origin, t_sence **hiter, t_coo *direction, t_sence *rec)
-{
-	double	t_max = __FLT_MAX__;
-	double	t_min = 0.001;
-	int		hitable = 0;
-	for (size_t i = 0; i < 2; i++)
-	{
-		if (hit_sphere(origin, hiter[i], direction, t_max, t_min))
-		{
-			hitable = 1;
-			t_max = hiter[i]->t;
-			race = hiter[i];
-		}
-	}
-	return (hitable);
 }
 
 t_coo	*random_unit_sphere(void)
@@ -106,6 +82,7 @@ t_coo	*colory(t_coo *origin, t_coo *direction, t_sence **hiter, int deat)
 	t_sence *rec;
 	if (hiter_point(origin, hiter, direction, rec))
 	{
+
 		if (deat < 50 && scatter(direction, race))
 		{
 			t_coo	*res = vector_multipli(altetion, colory(race->p, scared, hiter, deat+1));
@@ -137,9 +114,6 @@ t_coo	*colory(t_coo *origin, t_coo *direction, t_sence **hiter, int deat)
 
 int	main(void)
 {
-	#define NX 200
-	#define NY 100
-	#define NS 100
 	void	*mlx;
 	void	*mlx_win;
 	int		color;

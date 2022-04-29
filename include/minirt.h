@@ -8,7 +8,10 @@
 # include <assert.h>
 # include <limits.h>
 
-# define INDENTIFY {{1.0,0.0,0.0,0.0}, {0.0,1.0,0.0,0.0}, {0.0,0.0,1.0,0.0}, {0.0,0.0,0.0,1.0}}
+#define NX 200
+#define NY 100
+#define NS 100
+
 t_coo	*vector_addition(t_coo *a, t_coo *b);
 
 t_coo	*vector_subtration(t_coo *a, t_coo *b);
@@ -23,21 +26,29 @@ double	vector_abs(t_coo *a, t_coo *b);
 
 t_coo	*vector_cross(t_coo *a, t_coo *b);
 
-double	**matrix_multpli(double a[4][4], double b[4][4]);
-
-void	matrix_free(double **a);
-
-void	matrix_transpose(double a[4][4]);
-
-double	matrix_determinant(double a[4][4]);
-
-double	matrix_cofactor(double a[3][3]);
-
-double	matrix_x_multpli(double a[2][2]);
-
-double	**matrix_inverter(double a[4][4], double abs);
-
-double	**create_matrix(int col, int line);
-
 t_coo	*vector_multipli(t_coo *a, t_coo *b);
+
+t_coo	*creat_vector(double x, double y, double z);
+
+t_coo	*background_3d_color(t_ray *ray);
+
+t_coo	*point_at_parameter(double t, t_ray *ray);
+
+int		hit_sphere(t_ray *ray, t_scene *sphere, double t_max, double t_min);
+
+t_coo	*reflect(t_coo *v, t_coo *n);
+
+void	make_image(t_data *img, t_view *view);
+
+t_coo	*pixel_gerator(double y, double x, t_view *data);
+
+t_coo	*colory(t_ray *ray, t_scene **hiter, int deat);
+
+t_ray	*gerate_ray(t_cam	*cam, double u, double v);
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+t_scene	*hiter_point(t_ray *ray, t_scene **hiter, t_scene *rec);
+
+t_ray	*scatter(t_ray *ray, t_scene *rec, t_ray *scattered);
 #endif

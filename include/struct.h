@@ -13,16 +13,31 @@ typedef struct	s_coordinate {
 	double	x;
 	double	y;
 	double	z;
-	double	w;
 }				t_coo;
 
-typedef struct	s_sences {
+typedef struct	s_ray {
+	t_coo	*origin;
+	t_coo	*direction;
+}				t_ray;
+
+typedef struct	s_scenes {
 	t_coo	*center;
-	double	raio;
-	t_coo	*p;
+	double	radius;
 	double	t;
+	t_coo	*p;
 	t_coo	*normal;
 	t_coo	*material;
-}				t_sence;
+}				t_scene;
 
+typedef struct	s_cam {
+	t_coo	*lower_left_corner;
+	t_coo	*horizontal;
+	t_coo	*origin;
+	t_coo	*vertical;
+}				t_cam;
+
+typedef struct	s_view {
+	t_scene	**scenes;
+	t_cam	*cam;
+}				t_view;
 #endif
