@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 01:19:43 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:27:39 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # include <math.h>
 # include <string.h> // check in end
 
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 600
+# define HEIGHT 600
+# define RESOLUTION 600
 
 # define KEY_RELEASE 3
 # define DESTROY_NOTIFY 17
@@ -60,11 +61,12 @@ t_ray		ray_new(t_vector origin, t_vector direction);
 t_ray		ray_image(t_mini *data, double u, double v);
 t_vector	ray_at(t_ray ray, double t);
 
-void		print_image(t_img_data *img, t_scene_re *scene);
 int			exit_esc(int keycode, t_mini *data);
 int			red_cross(t_mini *data);
 int			put_image(t_mini *data);
-void		rt_pixel_put_vector(t_image *img, int x, int y, t_vector color);
+
+void	rt_pixel_put_vector(t_image *img, int x, int y, t_vector color);
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 
 int			hit(t_element *list, t_ray *ray, t_record *rec);
 int			hit_element(t_element *list, t_ray *ray, t_record *rec);
@@ -76,4 +78,6 @@ double		get_discriminant(t_ray ray, t_sphere spr);
 
 void	debug(t_mini *data);
 void	print_vector(char *vector, t_vector vec);
+void	print_cam_data(t_datacam *data);
+void	render(t_scene *scene, t_image *img, int resolution);
 #endif

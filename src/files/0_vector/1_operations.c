@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 23:58:47 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/04 21:48:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 02:32:53 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	vector_normalize(t_vector v)
+t_vector	vector_normalize_vec(t_vector v)
 {
 	t_vector	v_norm;
 	double		mod;

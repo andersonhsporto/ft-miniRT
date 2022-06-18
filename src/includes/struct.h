@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/15 00:12:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:25:34 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCT_H
 
 # include "vector.h"
+# include "tracer.h"
 
 enum e_type
 {
@@ -56,10 +57,10 @@ typedef struct s_datacam {
 }	t_datacam;
 
 typedef struct s_image {
-	void	*ptr;
-	char	*data;
-	int		bpp;
-	int		size_line;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
 	int		endian;
 }	t_image;
 
@@ -128,11 +129,12 @@ typedef struct s_mini {
 	t_cam			*cam;
 	t_light			*light;
 	t_element		*element;
-	t_mlx			*mlx;
-	t_image			*img;
 	t_datacam		*data_cam;
 	t_record		hit_record;
 	t_ray			ray;
+	t_mlx			mlx;
+	t_image			img;
+	t_scene			*scene;
 }	t_mini;
 
 #endif

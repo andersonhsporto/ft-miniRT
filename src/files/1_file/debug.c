@@ -1,6 +1,7 @@
 #include "minirt.h"
 
 void	print_element_lst(t_element *lst);
+void	print_cam_data(t_datacam *data);
 
 void	debug(t_mini *data)
 {

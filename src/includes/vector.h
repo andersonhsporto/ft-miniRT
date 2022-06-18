@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/13 01:02:00 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 02:33:12 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_mult(t_vector v1, double k);
 t_vector	vector_div(t_vector v1, double k);
 
-t_vector	vector_normalize(t_vector v);
+t_vector	vector_normalize_vec(t_vector v);
 t_vector	vector_scale(t_vector v, double k);
 t_vector	vector_cross(t_vector v, t_vector w);
 

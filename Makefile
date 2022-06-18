@@ -11,6 +11,10 @@ VECTOR	= $(addprefix 0_vector/, \
 		0_operations.c 1_operations.c 2_operations.c 3_unit.c \
 )
 
+MATRIX	= $(addprefix 0_matrix/, \
+		0_matrix.c 1_matrix.c 2_vector.c 3_vector.c \
+)
+
 FILE	= $(addprefix 1_file/, \
 		0_check_file.c 1_start_file.c 2_init_file.c \
 		3_ambient.c 4_camera.c 5_light.c 6_sphere.c \
@@ -20,7 +24,7 @@ FILE	= $(addprefix 1_file/, \
 
 UTILITY = $(addprefix 2_utility/, \
 		0_aid.c 1_char_double.c 2_strparser.c 3_linked.c \
-		4_color.c 5_hooks.c 6_point.c \
+		4_color.c 5_hooks.c\
 )
 
 CAMERA	= $(addprefix 3_camera/, \
@@ -35,8 +39,12 @@ IMAGE	= $(addprefix 5_image/, \
 		0_image.c 1_mlx.c 2_hit.c 3_element.c \
 )
 
+MERGE	= $(addprefix 6_merge/, \
+		0_init.c \
+)
+
 SRC		= $(addprefix ./src/files/, \
-		$(VECTOR) $(FILE) $(UTILITY) $(CAMERA) $(RAY) $(IMAGE) \
+		$(MATRIX) $(VECTOR) $(FILE) $(UTILITY) $(CAMERA) $(RAY) $(IMAGE) $(MERGE)\
 		minirt.c 1_init.c 2_error.c\
 )
 

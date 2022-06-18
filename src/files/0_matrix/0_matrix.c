@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 01:09:11 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 01:13:29 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 02:54:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,29 +94,6 @@ double	**matrix_inverter(double **a, double abs)
 			res[t][u] = (signal * matrix_cofactor(matrix)) / abs;
 			signal = 1.0;
 		}
-	}
-	return (res);
-}
-
-
-double	**matrix_multiply(double **a, double **b, int line)
-{
-	double	**res;
-	double	*var;
-
-	res = (double **)malloc(sizeof(double *) * line);
-	for (int i = 0; i < line; i++)
-	{
-		var = (double *)malloc(sizeof(double) * 4);
-		for (size_t u = 0; u < 4; u++)
-		{
-			var[u] = 0;
-			for (size_t j = 0; j < 4; j++)
-			{
-				var[u] += a[i][j] * b[j][u];
-			}
-		}
-		res[i] = var;
 	}
 	return (res);
 }
