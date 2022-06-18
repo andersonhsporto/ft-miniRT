@@ -20,7 +20,7 @@ FILE	= $(addprefix 1_file/, \
 
 UTILITY = $(addprefix 2_utility/, \
 		0_aid.c 1_char_double.c 2_strparser.c 3_linked.c \
-		4_color.c 5_hooks.c \
+		4_color.c 5_hooks.c 6_point.c \
 )
 
 CAMERA	= $(addprefix 3_camera/, \

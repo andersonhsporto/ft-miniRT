@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/17 20:57:31 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 01:19:43 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "file.h"
 # include "error_msg.h"
+
+# include "tracer.h"
 
 # include <stdio.h>
 # include <mlx.h>
@@ -58,7 +60,7 @@ t_ray		ray_new(t_vector origin, t_vector direction);
 t_ray		ray_image(t_mini *data, double u, double v);
 t_vector	ray_at(t_ray ray, double t);
 
-void		print_image(t_mini *data);
+void		print_image(t_img_data *img, t_scene_re *scene);
 int			exit_esc(int keycode, t_mini *data);
 int			red_cross(t_mini *data);
 int			put_image(t_mini *data);

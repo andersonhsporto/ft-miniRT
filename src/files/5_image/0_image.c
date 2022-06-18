@@ -6,46 +6,41 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:09:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/17 20:57:28 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/18 01:19:43 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_vector	get_color(t_mini *data, double u, double v);
-
-void	print_image(t_mini *data)
+void	print_image(t_img_data *img, t_scene_re *scene)
 {
-	int		i;
-	int		j;
-	double	u;
-	double	v;
-
-	i = HEIGHT;
-	while (--i >= 0)
+	double	*camera = make_point(0, 0, -5);
+	double	*wall = make_point(0,0,7.0);
+	double	wallsize = 7.0;
+	t_ray_re	*ray = (t_ray_re *)malloc(sizeof(t_ray_re));
+	int	x = 0;
+	while (x < WIDTH)
 	{
-		j = -1;
-		while (++j < WIDTH)
+		int	y = 0;
+		while (y < WIDTH)
 		{
-			u = (double)j / WIDTH;
-			v = (double)i / HEIGHT;
-			rt_pixel_put_vector(data->img, j, i, get_color(data, u, v));
+			double	increment = wallsize / WIDTH;
+			double	*current_wall_pixel = vector_subtraction(wall, creat_vector((wallsize * 0.5) - (x * increment), (wallsize * 0.5) - (y * increment), wall[2]));
+			double	*point = vector_subtraction(current_wall_pixel, camera);
+			double	*direction = vector_normalize(point);
+			ray->direction = direction;
+			ray->origin = camera;
+			t_hit_re	*hit = hiter_seine_object(ray, scene);
+			if(hit != NULL)
+			{
+				double	*hitposition = position(ray, hit->t);
+				double	*lighting = slighting(hitposition, scene->light[0], ray->direction, scene->object[0]->material, vector_normalize(hitposition));
+				int color = ((int)(255.99 * lighting[0])<<16) + ((int)(255.99 * lighting[1])<<8) + ((int)(255.99 * lighting[2]));
+				my_mlx_pixel_put(img, x, y, color);
+			}
+			y++;
 		}
+		x++;
 	}
-	mlx_put_image_to_window(data->mlx->mlx, \
-							data->mlx->win, \
-							data->img->ptr, 0, 0);
 }
 
-static t_vector	get_color(t_mini *data, double u, double v)
-{
-	t_ray ray;
-
-	data->hit_record.min = 0.000001;
-	data->hit_record.max = INFINITY;
-	ray = ray_image(data, u, v);
-	if (hit(data->element, &ray, &data->hit_record))
-		return (vector_new(0, 0, 0));
-	else
-		return (vector_new(176, 224, 230));
-}
