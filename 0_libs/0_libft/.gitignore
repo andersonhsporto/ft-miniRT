@@ -36,16 +36,15 @@
 *.x86_64
 *.hex
 
-# Valgrind files
-callgrind*
-vgcore*
-
-
 # Debug files
 *.dSYM/
 *.su
 *.idb
 *.pdb
+
+# Valgrind files
+callgrind*
+vgcore*
 
 # Kernel Module Compile Results
 *.mod*
@@ -56,11 +55,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-
 #Temp files and folders
-objs/
-a.out
 libft.a
-miniRT
 .vscode/
 *.json
