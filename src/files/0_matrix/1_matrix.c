@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 01:15:02 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 01:16:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/19 23:23:28 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,33 @@ double	**matrix_multiply(double **a, double **b, int line)
 	return (res);
 }
 
+double	**matrix_identify(double x, double y, double z, double w)
+{
+	double	**res;
+	int		i;
+
+	i = 0;
+	res = (double **)malloc(sizeof(double *) * 4);
+	while (i < 4)
+	{
+		res[i] = (double *)malloc(sizeof(double) * 4);
+		i++;
+	}
+	res[0][0] = (double)x;
+	res[0][1] = 0.0;
+	res[0][2] = 0.0;
+	res[0][3] = 0.0;
+	res[1][0] = 0.0;
+	res[1][1] = (double)y;
+	res[1][2] = 0.0;
+	res[1][3] = 0.0;
+	res[2][0] = 0.0;
+	res[2][1] = 0.0;
+	res[2][2] = (double)z;
+	res[2][3] = 0.0;
+	res[3][0] = 0.0;
+	res[3][1] = 0.0;
+	res[3][2] = 0.0;
+	res[3][3] = (double)w;
+	return (res);
+}

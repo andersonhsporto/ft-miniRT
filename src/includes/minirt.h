@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 20:27:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/19 19:45:03 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ double		str_to_double(char *str);
 double		get_viewport_height(int fov);
 void		orienting_camera(t_mini *data);
 
-t_ray		ray_new(t_vector origin, t_vector direction);
-t_ray		ray_image(t_mini *data, double u, double v);
-t_vector	ray_at(t_ray ray, double t);
 
 int			exit_esc(int keycode, t_mini *data);
 int			red_cross(t_mini *data);
@@ -67,14 +64,6 @@ int			put_image(t_mini *data);
 
 void	rt_pixel_put_vector(t_image *img, int x, int y, t_vector color);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
-
-int			hit(t_element *list, t_ray *ray, t_record *rec);
-int			hit_element(t_element *list, t_ray *ray, t_record *rec);
-int			hit_sphere(t_element *list, t_ray *ray, t_record *rec);
-int			set_face_normal(t_ray *ray, t_record *rec, double root, t_sphere *sp);
-
-double		get_root(t_ray ray, t_sphere spr, double discriminant, int flag);
-double		get_discriminant(t_ray ray, t_sphere spr);
 
 void	debug(t_mini *data);
 void	print_vector(char *vector, t_vector vec);

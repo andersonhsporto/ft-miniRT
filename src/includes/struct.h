@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 20:25:34 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/19 19:48:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ typedef	struct s_record {
 	t_vector	normal;
 	t_vector	albedo;
 }				t_record;
-
-typedef	struct s_ray {
-	t_vector	origin;
-	t_vector	direction;
-}				t_ray;
 
 typedef struct s_datacam {
 	double		viewport_height;

@@ -1,6 +1,8 @@
 # ifndef TRACER_H
 #define TRACER_H
 
+#include "struct.h"
+
 typedef struct s_material
 {
 	double	*color;
@@ -22,16 +24,10 @@ typedef struct s_intersec
 	double	t2;
 }	t_intersec;
 
-typedef struct s_ray_d
-{
-	double	*origin;
-	double	*direction;
-}	t_ray_d;
-
 typedef struct s_hit_d
 {
 	double			t;
-}	t_hit_d;
+}	t_hit;
 
 typedef struct s_object_d
 {
@@ -48,6 +44,11 @@ typedef struct s_scene
 	t_obj_d			**object;
 	int				cont;
 }	t_scene;
+
+typedef struct s_ray {
+	double	*origin;
+	double	*direction;
+}	t_ray;
 
 t_scene	*init_scene(void);
 
@@ -74,15 +75,15 @@ double	*reflect(double *v, double *n);
 
 
 double		**matrix_identify(double x, double y, double z, double w);
-t_ray_d		*ray_to_object_space(t_ray_d *ray, double **local);
+t_ray		*ray_to_object_space(t_ray *ray, double **local);
 double		*make_point(double x, double y, double z);
-t_intersec	*plane_intersection(t_ray_d *ray);
-t_intersec	*sphere_intersection(t_ray_d *rayy, t_obj_d *obj);
-t_intersec	*cylinder_intersection(t_ray_d *ray, t_obj_d *obj);
-t_hit_d		*hiter_point(t_intersec *intersections);
-double		*position(t_ray_d *ray, double t);
+t_intersec	*plane_intersection(t_ray *ray);
+t_intersec	*sphere_intersection(t_ray *rayy, t_obj_d *obj);
+t_intersec	*cylinder_intersection(t_ray *ray, t_obj_d *obj);
+t_hit		*hit_point(t_intersec *intersections);
+double		*position(t_ray *ray, double t);
 double		*slighting(double *position, t_light_d *light, double *eye, t_material_d *material, double *normal);
-t_hit_d		*hiter_scene_object(t_ray_d *ray, t_scene *scene);
+t_hit		*hit_scene_object(t_ray *ray, t_scene *scene);
 
 t_scene		*init_scene(void);
 #endif

@@ -7,12 +7,12 @@ LIBFT	=	-L ./0_libs/0_libft -lft
 MLX		=   -lmlx -lXext -lX11
 HEADER	= 	./src/includes/minirt.h
 
-VECTOR	= $(addprefix 0_vector/, \
-		0_operations.c 1_operations.c 2_operations.c 3_unit.c \
-)
-
 MATRIX	= $(addprefix 0_matrix/, \
 		0_matrix.c 1_matrix.c 2_vector.c 3_vector.c \
+)
+
+VECTOR	= $(addprefix 0_vector/, \
+		0_operations.c 1_operations.c 2_operations.c 3_unit.c \
 )
 
 FILE	= $(addprefix 1_file/, \
@@ -27,24 +27,20 @@ UTILITY = $(addprefix 2_utility/, \
 		4_color.c 5_hooks.c\
 )
 
-CAMERA	= $(addprefix 3_camera/, \
-		0_init.c \
+RAY	= $(addprefix 3_ray/, \
+		0_ray.c 1_hit.c \
 )
 
-RAY	= $(addprefix 4_ray/, \
-		0_ray.c \
-)
-
-IMAGE	= $(addprefix 5_image/, \
+IMAGE	= $(addprefix 4_image/, \
 		0_image.c 1_mlx.c 2_hit.c 3_element.c \
 )
 
-MERGE	= $(addprefix 6_merge/, \
-		0_init.c \
+REFACTOR	= $(addprefix 5_refactor/, \
+		0_render.c 1_sphere.c 2_plane.c 3_cylinder.c \
 )
 
 SRC		= $(addprefix ./src/files/, \
-		$(MATRIX) $(VECTOR) $(FILE) $(UTILITY) $(CAMERA) $(RAY) $(IMAGE) $(MERGE)\
+		$(MATRIX) $(VECTOR) $(FILE) $(UTILITY) $(RAY) $(IMAGE) $(REFACTOR)\
 		minirt.c 1_init.c 2_error.c\
 )
 
@@ -72,3 +68,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+test:
+	make
+	./miniRT teste.rt
