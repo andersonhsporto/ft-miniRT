@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 20:28:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/21 02:22:26 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_args(int argc, char **argv)
 	}
 }
 
-int	check_extension(char	*file)
+int	check_extension(char *file)
 {
 	char	*string;
 

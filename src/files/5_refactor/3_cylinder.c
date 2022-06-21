@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:35:41 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 02:03:00 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/21 02:21:44 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 t_intersec	*cylinder_intersection(t_ray *ray, t_obj_d *obj)
 {
-	t_intersec	*intersection_points = NULL;
+	t_intersec	*intersection_points;
 
 	double *oc = vector_subtraction(ray->origin, obj->position);
 	double	a = ray->direction[0] * ray->direction[0] + ray->direction[2] * ray->direction[2];
 	double	b = 2.0 * oc[0] * ray->direction[0] + 2.0 * oc[2] * ray->direction[2];
-
 	double	c = oc[0] * oc[0] + oc[2] * oc[2] - obj->radius;
 	double	discriminant = (b * b)-(4 * a * c);
+	
 	if (discriminant < 0)
-		return intersection_points;
+		return (NULL);
 	intersection_points = (t_intersec *)malloc(sizeof(t_intersec));
 	intersection_points->cont = 0;
 	double t0 = (-b - sqrt(discriminant)) / (2.0 * a);

@@ -8,7 +8,7 @@ MLX		=   -lmlx -lXext -lX11
 HEADER	= 	./src/includes/minirt.h
 
 MATRIX	= $(addprefix 0_matrix/, \
-		0_matrix.c 1_matrix.c 2_vector.c 3_vector.c \
+		0_matrix.c 1_matrix.c 2_matrix_co.c 3_vector.c 4_vector.c \
 )
 
 VECTOR	= $(addprefix 0_vector/, \

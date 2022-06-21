@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/19 19:45:03 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/20 20:21:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	debug(t_mini *data);
 void	print_vector(char *vector, t_vector vec);
 void	print_cam_data(t_datacam *data);
-void	render(t_scene *scene, t_image *img, int resolution);
+void	render(t_mini *data, t_scene *scene, t_image *img, int resolution);
 #endif

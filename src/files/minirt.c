@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	{
 		init_data(&data);
 		check_file(&data, argv[1]);
-		render(data.scene, &data.img, RESOLUTION);
+		render(&data, data.scene, &data.img, RESOLUTION);
 		mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.img.img, 0, 0);
 		mlx_hook(data.mlx.win, KEY_RELEASE, BUTTON_RELEASE, exit_esc, &data);
 		mlx_hook(data.mlx.win, EXPOSE, EXPOSURE_MASK, put_image, &data);
