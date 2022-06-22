@@ -6,38 +6,55 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 02:09:04 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/22 00:08:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	render(t_mini *data, t_scene *scene, t_image *img, int resolution)
+double	*temp_direction(double wallsize, double wall_nbr, int nbr_x, int nbr_y)
+{
+	const double	x = (wallsize * 0.5) - (nbr_x * wallsize / RESOLUTION);
+	const double	y = (wallsize * 0.5) - (nbr_y * wallsize / RESOLUTION);
+
+	return (create_vector(x, y, wall_nbr));
+}
+
+double	*find_direction(double *wall, double w_size, double *cam, int x, int y)
+{
+	const double	*temp = temp_direction(w_size, wall[2], x, y);
+	const double	*wall_pixel = vector_subtraction(wall, temp);
+	const double	*point = vector_subtraction(wall_pixel, cam);
+	double			*direction;
+
+	direction = vector_normalize_double(point);
+	free(temp);
+	free(wall_pixel);
+	free(point);
+	return (direction);
+}
+
+void	render(t_mini *data, t_scene *scene, t_image *img)
 {
 	double	*camera = make_point(0, 0, -5);
 	double	*wall = make_point(0, 0, 7.0);
-	double	wallsize = 7.0;
+	double	wallsize = 7;
 
 	t_ray	*ray = (t_ray *)malloc(sizeof(t_ray));
 	int	x = 0;
-	while (x < resolution)
+	while (x < RESOLUTION)
 	{
 		int	y = 0;
-		while (y < resolution)
+		while (y < RESOLUTION)
 		{
-			double	increment = wallsize / resolution;
-			double	*current_wall_pixel = vector_subtraction(wall, create_vector((wallsize * 0.5) - (x * increment), (wallsize * 0.5) - (y * increment), wall[2]));
-			double	*point = vector_subtraction(current_wall_pixel, camera);
-			ray->direction = vector_normalize_double(point);
-			// ray->direction = direction;
+			ray->direction = find_direction(wall, wallsize, camera, x, y);
 			ray->origin = camera;
 			t_hit	*hit = hit_scene_object(ray, scene);
 			if (hit != NULL)
 			{
 				double	*hitposition = position(ray, hit->t);
 				double	*lighting = slighting(hitposition, scene->light[0], ray->direction, scene->object[0]->material, vector_normalize_double(hitposition));
-				int color = ((int)(255.99 * lighting[0])<<16) + ((int)(255.99 * lighting[1])<<8) + ((int)(255.99 * lighting[2]));
-				my_mlx_pixel_put(img, x, y, color);
+				my_mlx_pixel_put(img, x, y, get_color(lighting));
 				free(hitposition);
 				free(lighting);
 			}

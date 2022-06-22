@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:44:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/18 19:53:44 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/21 23:20:59 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,15 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
+}
+
+int	get_color(double *vector)
+{
+	int	color;
+
+	color = ((int)(255.99 * vector[0]) << 16) \
+		+ ((int)(255.99 * vector[1]) << 8) \
+		+ ((int)(255.99 * vector[2]));
+	return (color);
 }

@@ -40,7 +40,7 @@ typedef struct s_object_d
 
 typedef struct s_scene
 {
-	t_light_d			**light;
+	t_light_d		**light;
 	t_obj_d			**object;
 	int				cont;
 }	t_scene;
@@ -84,6 +84,6 @@ t_hit		*hit_point(t_intersec *intersections);
 double		*position(t_ray *ray, double t);
 double		*slighting(double *position, t_light_d *light, double *eye, t_material_d *material, double *normal);
 t_hit		*hit_scene_object(t_ray *ray, t_scene *scene);
-
+int			get_color(double *vector);
 t_scene		*init_scene(void);
 #endif

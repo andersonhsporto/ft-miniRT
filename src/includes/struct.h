@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/19 19:48:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/21 23:45:23 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ enum e_type
 	cylinder,
 	triangle,
 	light,
-	camera,
 	ambient,
 	none
 };
