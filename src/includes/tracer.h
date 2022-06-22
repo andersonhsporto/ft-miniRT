@@ -86,4 +86,7 @@ double		*slighting(double *position, t_light_d *light, double *eye, t_material_d
 t_hit		*hit_scene_object(t_ray *ray, t_scene *scene);
 int			get_color(double *vector);
 t_scene		*init_scene(void);
+
+double	*tmp_direction(double wall_size, double wall_nbr, int nbr_x, int nbr_y);
+double	*find_direction(double *wall, double w_size, double *cam, int x, int y);
 #endif

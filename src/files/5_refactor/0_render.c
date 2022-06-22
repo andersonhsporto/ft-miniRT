@@ -6,39 +6,17 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/22 00:08:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/22 00:22:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	*temp_direction(double wallsize, double wall_nbr, int nbr_x, int nbr_y)
-{
-	const double	x = (wallsize * 0.5) - (nbr_x * wallsize / RESOLUTION);
-	const double	y = (wallsize * 0.5) - (nbr_y * wallsize / RESOLUTION);
-
-	return (create_vector(x, y, wall_nbr));
-}
-
-double	*find_direction(double *wall, double w_size, double *cam, int x, int y)
-{
-	const double	*temp = temp_direction(w_size, wall[2], x, y);
-	const double	*wall_pixel = vector_subtraction(wall, temp);
-	const double	*point = vector_subtraction(wall_pixel, cam);
-	double			*direction;
-
-	direction = vector_normalize_double(point);
-	free(temp);
-	free(wall_pixel);
-	free(point);
-	return (direction);
-}
-
 void	render(t_mini *data, t_scene *scene, t_image *img)
 {
 	double	*camera = make_point(0, 0, -5);
 	double	*wall = make_point(0, 0, 7.0);
-	double	wallsize = 7;
+	double	wall_size = 7;
 
 	t_ray	*ray = (t_ray *)malloc(sizeof(t_ray));
 	int	x = 0;
@@ -47,7 +25,7 @@ void	render(t_mini *data, t_scene *scene, t_image *img)
 		int	y = 0;
 		while (y < RESOLUTION)
 		{
-			ray->direction = find_direction(wall, wallsize, camera, x, y);
+			ray->direction = find_direction(wall, wall_size, camera, x, y);
 			ray->origin = camera;
 			t_hit	*hit = hit_scene_object(ray, scene);
 			if (hit != NULL)
