@@ -24,7 +24,7 @@ FILE	= $(addprefix 1_file/, \
 
 UTILITY = $(addprefix 2_utility/, \
 		0_aid.c 1_char_double.c 2_strparser.c 3_linked.c \
-		4_color.c 5_hooks.c\
+		4_color.c 5_hooks.c 6_conversion.c \
 )
 
 RAY	= $(addprefix 3_ray/, \
@@ -36,7 +36,7 @@ IMAGE	= $(addprefix 4_image/, \
 )
 
 REFACTOR	= $(addprefix 5_refactor/, \
-		0_render.c 1_sphere.c 2_plane.c 3_cylinder.c \
+		0_render.c 1_sphere.c 2_plane.c 3_cylinder.c 4_light.c \
 )
 
 SRC		= $(addprefix ./src/files/, \

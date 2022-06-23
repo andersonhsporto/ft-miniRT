@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:03:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/19 23:52:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:11:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ t_ray	*ray_to_object_space(t_ray *ray, double **local)
 	aux = matrix_multiply(aux, inverse, 1);
 	res->origin = aux[0];
 	return (res);
-}
-
-double	*position(t_ray *ray, double t)
-{
-	const double	*temp = vector_multipli_scalar(t, ray->direction);
-	double			*position;
-
-	position = vector_addition(ray->origin, temp);
-	free(temp);
-	return (position);
 }
 
 double	*reflect(double *v, double *n)

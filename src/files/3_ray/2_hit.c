@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_hit.c                                            :+:      :+:    :+:   */
+/*   2_hit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:47:33 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/19 23:48:44 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:19:53 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_hit	*hit_scene_object(t_ray *ray, t_scene *scene)
+t_hit	*hit_scene_object(t_mini *data)
 {
 	t_intersec	*intersection;
 	t_hit		*hit;
@@ -20,25 +20,25 @@ t_hit	*hit_scene_object(t_ray *ray, t_scene *scene)
 
 	i = 0;
 	hit = NULL;
-	while (i < scene->cont)
+	while (i < data->scene->cont)
 	{
-		if (scene->object[i]->type == 'C')
+		if (data->scene->object[i]->type == 'C')
 		{
-			intersection = cylinder_intersection(ray, scene->object[i]);
+			intersection = cylinder_intersection(data->ray, data->scene->object[i]);
 			hit = hit_point(intersection);
 			if (hit)
 				return(hit);
 		}
-		if (scene->object[i]->type == 'S')
+		if (data->scene->object[i]->type == 'S')
 		{
-			intersection = sphere_intersection(ray, scene->object[i]);
+			intersection = sphere_intersection(data->ray, data->scene->object[i]);
 			hit = hit_point(intersection);
 			if (hit)
 				return(hit);
 		}
-		if (scene->object[i]->type == 'P')
+		if (data->scene->object[i]->type == 'P')
 		{
-			intersection = plane_intersection(ray);
+			intersection = plane_intersection(data->ray);
 			hit = hit_point(intersection);
 			if (hit)
 				return(hit);

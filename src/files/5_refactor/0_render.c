@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/22 23:52:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:24:02 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	render(t_mini *data, t_scene *scene, t_image *img)
 {
-	double	*camera = make_point(0, 0, -5);
-	double	*wall = make_point(0, 0, 7.0);
-	double	wall_size = 7;
+	int	x;
+	int	y;
 
-	int	x = 0;
+	x = 0;
 	while (x < RESOLUTION)
 	{
-		int	y = 0;
+		y = 0;
 		while (y < RESOLUTION)
 		{
-			data->ray = ray_direction(wall, wall_size, camera, x, y);
-			t_hit	*hit = hit_scene_object(data->ray, scene);
+			data->ray = ray_direction(data, x, y);
+			t_hit	*hit = hit_scene_object(data);
 			if (hit != NULL)
 			{
 				double	*hitposition = position(data->ray, hit->t);

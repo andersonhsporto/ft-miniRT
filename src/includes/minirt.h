@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 23:22:16 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:24:26 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,7 @@ void	debug(t_mini *data);
 void	print_vector(char *vector, t_vector vec);
 void	print_cam_data(t_datacam *data);
 void	render(t_mini *data, t_scene *scene, t_image *img);
+
+t_hit		*hit_scene_object(t_mini *data);
+t_ray		*ray_direction(t_mini *data, int x, int y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/22 23:51:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:20:52 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ typedef struct s_mini {
 	t_mlx			mlx;
 	t_image			img;
 	t_scene			*scene;
+	double			*wall;
+	double			wall_size;
 }	t_mini;
 
 #endif

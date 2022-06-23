@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_ray.c                                            :+:      :+:    :+:   */
+/*   6_conversion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/22 23:22:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:23:37 by anhigo-s         ###   ########.fr       */
+/*   Created: 2022/06/23 00:04:07 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/06/23 00:04:29 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	*ray_direction(t_mini *data, int x, int y)
+double	*vector_to_double(t_vector vector)
 {
-	t_ray	*ray = (t_ray *)malloc(sizeof(t_ray));
-	double	*camera;
+	double	*double_vector;
 
-	camera = vector_to_double(data->cam->view_point);
-	ray->direction = find_direction(data->wall, data->wall_size, camera, x, y);
-	ray->origin = camera;
-	return (ray);
+	double_vector = (double *)malloc(sizeof(double) * 3);
+	double_vector[0] = vector.x;
+	double_vector[1] = vector.y;
+	double_vector[2] = vector.z;
+	return (double_vector);
 }
