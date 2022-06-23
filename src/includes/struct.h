@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 23:45:23 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/22 23:51:52 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_mini {
 	t_element		*element;
 	t_datacam		*data_cam;
 	t_record		hit_record;
-	t_ray			ray;
+	t_ray			*ray;
 	t_mlx			mlx;
 	t_image			img;
 	t_scene			*scene;

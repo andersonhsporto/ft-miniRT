@@ -28,7 +28,7 @@ UTILITY = $(addprefix 2_utility/, \
 )
 
 RAY	= $(addprefix 3_ray/, \
-		0_ray.c 1_hit.c 2_direction.c \
+		0_ray.c 1_ray.c 2_hit.c 3_direction.c \
 )
 
 IMAGE	= $(addprefix 4_image/, \

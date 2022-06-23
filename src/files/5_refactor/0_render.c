@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/22 00:22:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/22 23:52:21 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@ void	render(t_mini *data, t_scene *scene, t_image *img)
 	double	*wall = make_point(0, 0, 7.0);
 	double	wall_size = 7;
 
-	t_ray	*ray = (t_ray *)malloc(sizeof(t_ray));
 	int	x = 0;
 	while (x < RESOLUTION)
 	{
 		int	y = 0;
 		while (y < RESOLUTION)
 		{
-			ray->direction = find_direction(wall, wall_size, camera, x, y);
-			ray->origin = camera;
-			t_hit	*hit = hit_scene_object(ray, scene);
+			data->ray = ray_direction(wall, wall_size, camera, x, y);
+			t_hit	*hit = hit_scene_object(data->ray, scene);
 			if (hit != NULL)
 			{
-				double	*hitposition = position(ray, hit->t);
-				double	*lighting = slighting(hitposition, scene->light[0], ray->direction, scene->object[0]->material, vector_normalize_double(hitposition));
+				double	*hitposition = position(data->ray, hit->t);
+				double	*lighting = slighting(hitposition, scene->light[0], data->ray->direction, scene->object[0]->material, vector_normalize_double(hitposition));
 				my_mlx_pixel_put(img, x, y, get_color(lighting));
 				free(hitposition);
 				free(lighting);
@@ -40,7 +38,7 @@ void	render(t_mini *data, t_scene *scene, t_image *img)
 		}
 		x++;
 	}
-	free(ray);
+	free(data->ray);
 }
 
 double	*slighting(double *position, t_light_d *light, double *eye, t_material_d *material, double *normal)
