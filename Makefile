@@ -36,7 +36,8 @@ IMAGE	= $(addprefix 4_image/, \
 )
 
 REFACTOR	= $(addprefix 5_refactor/, \
-		0_render.c 1_sphere.c 2_plane.c 3_cylinder.c 4_light.c \
+		0_render.c 1_sphere.c 2_plane.c 3_cylinder.c \
+		4_light.c 5_light.c \
 )
 
 SRC		= $(addprefix ./src/files/, \

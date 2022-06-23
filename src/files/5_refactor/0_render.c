@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:24:02 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:24:29 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,28 @@
 
 void	render(t_mini *data, t_scene *scene, t_image *img)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	double	*lighting;
 
-	x = 0;
-	while (x < RESOLUTION)
+	x = -1;
+	while (++x < RESOLUTION)
 	{
-		y = 0;
-		while (y < RESOLUTION)
+		y = -1;
+		while (++y < RESOLUTION)
 		{
 			data->ray = ray_direction(data, x, y);
-			t_hit	*hit = hit_scene_object(data);
-			if (hit != NULL)
+			data->hit = hit_scene_object(data);
+			if (data->hit != NULL)
 			{
-				double	*hitposition = position(data->ray, hit->t);
-				double	*lighting = slighting(hitposition, scene->light[0], data->ray->direction, scene->object[0]->material, vector_normalize_double(hitposition));
+				lighting = there_is_light(data);
 				my_mlx_pixel_put(img, x, y, get_color(lighting));
-				free(hitposition);
 				free(lighting);
+				free(data->hit);
 			}
-			y++;
 		}
-		x++;
 	}
 	free(data->ray);
-}
-
-double	*slighting(double *position, t_light_d *light, double *eye, t_material_d *material, double *normal)
-{
-	double	*temp = material->color;
-	double	*effectivecolor = vector_multipli(temp, light->intensity);
-	double	*lightvec = vector_normalize_double(vector_subtraction(light->posi, position));
-	double	*ambienteColor = vector_multipli_scalar(material->ambient, temp);
-	double	*difusecolor;
-	double	*specularcolor;
-
-	double	lDOtn = vector_abs(lightvec, normal);
-	if (lDOtn <= 0.0)
-	{
-		difusecolor = make_point(0.0, 0.0, 0.0);
-		specularcolor = make_point(0.0, 0.0, 0.0);
-	}
-	else
-	{
-		difusecolor = vector_multipli_scalar(lDOtn, vector_multipli_scalar(material->diffuse, effectivecolor));
-		double	*refle = reflect(vector_multipli_scalar(-1.0, lightvec), normal);
-		double	rDote = vector_abs(refle, eye);
-		if (rDote <= 0.0)
-			specularcolor = make_point(0.0, 0.0, 0.0);
-		else
-		{
-			//Shinniness ou Brilho e depois do rDote
-			double	factor = pow(rDote, 200.0);
-			specularcolor = vector_multipli_scalar(material->specular * factor, light->intensity);
-		}
-	}
-	return vector_addition(vector_addition(ambienteColor, difusecolor), specularcolor);
 }
 
 t_scene	*init_scene(void)

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:03:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:11:25 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:54:24 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ double	*reflect(double *v, double *n)
 	const double	*temp = vector_multipli_scalar(2.0 * vector_abs(v, n), n);
 	double			*res;
 
-	res = vector_subtraction(v, temp);
-	free(temp);
+	res = vector_subtraction(v, (double *)temp);
+	free((double *)temp);
 	return(res);
 }
 
