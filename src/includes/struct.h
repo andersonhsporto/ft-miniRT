@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:27:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:03:22 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ enum e_type
 	plane,
 	square,
 	cylinder,
-	triangle,
-	light,
 	ambient,
-	none
 };
+
+typedef struct s_utils {
+	double	*ambient;
+	double	*specular;
+	double	*diffuse;
+	double	*normal;
+	double	dot_l;
+	double	dot_r;
+	double	factor;
+}			t_utils;
 
 typedef	struct s_record {
 	double		t;

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 00:39:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 02:20:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:08:30 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,44 @@
 // t_material_d	data->scene->object[0]->material,
 // normal			vector_normalize_double(hitposition)
 
-// double	light_dot()
+double	*difuse_color(double l_dot, t_material_d *material, t_light_d *light);
+double	r_dot(double *light, double *normal, double *eye);
+double	l_dot(double *light, double *normal, double *position);
+void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_material_d *material);
+
+double	*slighting(double *position, t_light_d *light, double *eye, t_material_d *material)
+{
+	t_utils	utils;
+
+	init_lighting(position, &utils, light, material);
+	if (utils.dot_l <= 0.0)
+	{
+		utils.diffuse = vector_zero();
+		utils.specular = vector_zero();
+	}
+	else
+	{
+		utils.diffuse = difuse_color(utils.dot_l, material, light);
+		utils.dot_r = r_dot(light, utils.normal, eye);
+		if (utils.dot_r <= 0.0)
+			utils.specular = vector_zero();
+		else
+		{
+			//Shinniness ou Brilho e depois do dot_r
+			utils.factor = pow(utils.dot_r, 200.0);
+			utils.specular = vector_multipli_scalar(material->specular * utils.factor, light->intensity);
+		}
+	}
+	return vector_addition(vector_addition(utils.ambient, utils.diffuse), utils.specular);
+}
+
+void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_material_d *material)
+{
+	utils->ambient = vector_multipli_scalar(material->ambient, material->color);
+	utils->normal = vector_normalize_double(position);
+	utils->dot_l = l_dot(light->posi, utils->normal, position);
+	return ;
+}
 
 double	*difuse_color(double l_dot, t_material_d *material, t_light_d *light)
 {
@@ -51,33 +88,4 @@ double	l_dot(double *light, double *normal, double *position)
 	free((double *)subtraction);
 	free((double *)lightvec);
 	return (l_dot);
-}
-
-double	*slighting(double *position, t_light_d *light, double *eye, t_material_d *material)
-{
-	double	*ambientColor = vector_multipli_scalar(material->ambient, material->color);
-	double	*specularcolor;
-	double	*normal = vector_normalize_double(position);
-	double	*difusecolor;
-
-	double	lDOtn = l_dot(light->posi, normal, position);
-	if (lDOtn <= 0.0)
-	{
-		difusecolor = vector_zero();
-		specularcolor = vector_zero();
-	}
-	else
-	{
-		difusecolor = difuse_color(lDOtn, material, light);
-		double	rDote = r_dot(light, normal, eye);
-		if (rDote <= 0.0)
-			specularcolor = vector_zero();
-		else
-		{
-			//Shinniness ou Brilho e depois do rDote
-			double	factor = pow(rDote, 200.0);
-			specularcolor = vector_multipli_scalar(material->specular * factor, light->intensity);
-		}
-	}
-	return vector_addition(vector_addition(ambientColor, difusecolor), specularcolor);
 }
