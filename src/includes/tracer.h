@@ -83,7 +83,6 @@ t_intersec	*sphere_intersection(t_ray *rayy, t_obj_d *obj);
 t_intersec	*cylinder_intersection(t_ray *ray, t_obj_d *obj);
 t_hit		*hit_point(t_intersec *intersections);
 double		*light_position(t_ray *ray, double t);
-double		*slighting(double *position, t_light_d *light, double *eye, t_material_d *material);
 int			get_color(double *vector);
 t_scene		*init_scene(void);
 
@@ -91,5 +90,6 @@ double	*tmp_direction(double wall_size, double wall_nbr, int nbr_x, int nbr_y);
 double	*find_direction(double *wall, double w_size, double *cam, int x, int y);
 
 double	*vector_to_double(t_vector vector);
+
 
 #endif

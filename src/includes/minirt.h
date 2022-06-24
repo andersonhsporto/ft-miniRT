@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:31:04 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 02:00:37 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,9 @@ void	render(t_mini *data, t_scene *scene, t_image *img);
 t_hit		*hit_scene_object(t_mini *data);
 t_ray		*ray_direction(t_mini *data, int x, int y);
 double		*there_is_light(t_mini *data);
+
+double		*slighting(double *position, t_mini *data, double *eye);
+
+void		*diffuse_specular_zero(t_utils	*utils);
+
 #endif

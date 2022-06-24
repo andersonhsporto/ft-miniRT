@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:47:33 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 00:12:12 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 00:22:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ t_hit	*hit_scene_object(t_mini *data)
 	return (hit);
 }
 
-int	hit_object()
-{
-	int		boolean;
-	t_hit	*hit;
+// int	hit_object(t_mini *data, t_element *element, t_ray *ray)
+// {
+// 	t_intersec	*intersection;
+// 	t_hit		*hit;
+// 	int			boolean;
 
-	boolean = 0;
-}
+// 	boolean = 0;
+// 	if (element->type == sphere)
+// 	{
+// 		intersection = sphere_intersection(data->ray, data->scene->object[i]);
+// 	}
+// }

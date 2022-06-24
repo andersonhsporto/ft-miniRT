@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:03 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 01:52:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 01:15:19 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_intersec	*get_intersection(t_ray *ray, double *oc, double discriminant)
 
 t_intersec	*sphere_intersection(t_ray *rayy, t_obj_d *obj)
 {
-	const t_ray		*ray = ray_to_object_space(rayy, obj->matrix);
+	const t_ray		*ray = ray_to_object_space(rayy, matrix_identify(1,1,1,1));
 	const double	*oc = vector_subtraction(ray->origin, obj->position);
 	const double	discriminant = get_sphere_discriminant(ray, obj, oc);
 	t_intersec		*intersection_points;

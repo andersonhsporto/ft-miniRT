@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 23:43:58 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 01:52:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ t_scene	*init_scene(void)
 	scene->cont = 1;
 	scene->object = (t_obj_d **)malloc(sizeof(t_obj_d *) * 2);
 	scene->object[0] = (t_obj_d*)malloc(sizeof(t_obj_d));
-	scene->object[0]->radius = 4.0;
-	scene->object[0]->type = 'C';
+	scene->object[0]->radius = 2.0;
+	scene->object[0]->type = 'S';
 	scene->object[0]->position = make_point(0.0, 0.0, 1.0);
-	scene->object[0]->matrix = matrix_identify(1,1,1,1);
+	// scene->object[0]->matrix = matrix_identify(1,1,1,1);
 	scene->object[0]->material = (t_material_d *)malloc(sizeof(t_material_d));
 	scene->object[0]->material->color = create_vector(1, 0.2, 1.0);
 	scene->object[0]->material->ambient = 0.1;
-	scene->object[0]->material->diffuse = 0.9;
+	// scene->object[0]->material->diffuse = 0.9;
 	scene->object[0]->material->specular = 0.9;
 	scene->object[1] = (t_obj_d*)malloc(sizeof(t_obj_d));
 	scene->object[1]->type = 'P';
