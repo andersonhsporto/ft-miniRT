@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:27:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:43:56 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_data(t_mini *data)
 									&data->img.endian);
 	data->scene = init_scene();
 
-	data->wall = make_point(0, 0, 7.0);
+	data->wall = create_vector(0, 0, 7.0);
 	data->wall_size = 7.0;
 	data->hit = NULL;
 }

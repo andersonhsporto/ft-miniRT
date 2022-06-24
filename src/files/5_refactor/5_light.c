@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 00:39:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 02:06:01 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:33:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,19 @@ double	*slighting(double *position, t_mini *data, double *eye)
 
 void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_ambient *ambient)
 {
-	const double	*temp = make_point(ambient->rgb.x, ambient->rgb.y, ambient->rgb.z);
-
-	utils->ambient = vector_multipli_scalar(0.1, temp);
+	utils->ambient = vector_multipli_scalar(0.1, ambient->rgb);
 	utils->normal = vector_normalize_double(position);
 	utils->dot_l = l_dot(light->posi, utils->normal, position);
-	free((double *)temp);
 	return ;
 }
 
 double	*diffuse_color(double l_dot, t_ambient *ambient, t_light_d *light)
 {
-	const double	*temp = make_point(ambient->rgb.x, ambient->rgb.y, ambient->rgb.z);
-	const double	*color = vector_multipli(temp, light->intensity);
+	const double	*color = vector_multipli(ambient->rgb, light->intensity);
 	double			*difuse_color;
 
 	difuse_color = vector_multipli_scalar(l_dot, \
 					vector_multipli_scalar(ambient->ratio, color));
-	free((double *)temp);
 	free((double *)color);
 	return(difuse_color);
 }

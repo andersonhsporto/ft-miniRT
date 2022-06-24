@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 23:03:22 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:21:42 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_cam {
 
 typedef struct s_ambient {
 	double		ratio;
-	t_vector	rgb;
+	double		*rgb;
 }	t_ambient;
 
 typedef struct s_index {

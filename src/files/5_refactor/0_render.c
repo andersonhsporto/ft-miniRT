@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 02:06:13 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:45:19 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ t_scene	*init_scene(void)
 	scene->object[0] = (t_obj_d*)malloc(sizeof(t_obj_d));
 	scene->object[0]->radius = 2.0;
 	scene->object[0]->type = 'S';
-	scene->object[0]->position = make_point(0.0, 0.0, 1.0);
+	scene->object[0]->position = create_vector(0.0, 0.0, 1.0);
 	// scene->object[0]->matrix = matrix_identify(1,1,1,1);
 	scene->object[1] = (t_obj_d*)malloc(sizeof(t_obj_d));
 	scene->object[1]->type = 'P';
 	scene->light = (t_light_d **)malloc(sizeof(t_light_d *));
 	scene->light[0] = (t_light_d *)malloc(sizeof(t_light_d));
-	scene->light[0]->posi = make_point(-10, 10, -10);
+	scene->light[0]->posi = create_vector(-10, 10, -10);
 	scene->light[0]->intensity = create_vector(1.0, 1.0, 1.0);
 	return (scene);
 }

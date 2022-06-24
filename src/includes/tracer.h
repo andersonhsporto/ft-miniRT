@@ -67,7 +67,7 @@ double	*reflect(double *v, double *n);
 
 double		**matrix_identify(double x, double y, double z, double w);
 t_ray		*ray_to_object_space(t_ray *ray, double **local);
-double		*make_point(double x, double y, double z);
+double		*create_vector(double x, double y, double z);
 double		*vector_zero(void);
 t_intersec	*plane_intersection(t_ray *ray);
 t_intersec	*sphere_intersection(t_ray *rayy, t_obj_d *obj);

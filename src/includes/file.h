@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/12 23:52:30 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:25:14 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ t_ambient	*init_ambient(char	**string);
 t_vector	*init_rgb(char	*string);
 
 int			find_camera(t_mini *data, char	**string);
-t_cam		*init_camera(char	**string);
+t_cam		*init_camera(char **string);
 
 int			find_light(t_mini *data, char **string);
 t_light		*init_light(char **string);
 
-t_vector	str_to_double_vector(char	*string, char *error_message);
+t_vector	str_to_double_vector(char *string, char *error_message);
+double		*str_to_double_pointer(char	*string, char *error_message);
 
 t_element	*element_new(int type, void *element);
 t_element	*get_last_node(t_element *lst);
