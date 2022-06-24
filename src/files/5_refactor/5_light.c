@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 00:39:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 02:00:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/24 02:06:01 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 // position		*hitposition,
 // eye				data->ray->direction,
-// t_material_d	data->scene->object[0]->material,
 // normal			vector_normalize_double(hitposition)
 
 double	*diffuse_color(double l_dot, t_ambient *ambient, t_light_d *light);

@@ -3,14 +3,6 @@
 
 #include "struct.h"
 
-typedef struct s_material
-{
-	double	*color;
-	double	ambient;
-	double	diffuse;
-	double	specular;
-}	t_material_d;
-
 typedef struct s_light_d
 {
 	double	*intensity;
@@ -35,7 +27,6 @@ typedef struct s_object_d
 	double			radius;
 	double			**matrix;
 	double			*position;
-	t_material_d	*material;
 }	t_obj_d;
 
 typedef struct s_scene

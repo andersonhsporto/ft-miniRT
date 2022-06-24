@@ -54,7 +54,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	rm -rf $(NAME)
-	make all -C ./0_libs/0_libft
+	make all  -C ./0_libs/0_libft 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -lm -o $(NAME)
 
 clean:
