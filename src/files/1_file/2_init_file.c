@@ -6,17 +6,20 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/05/30 20:56:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:19:31 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static void get_element_scene(t_mini *data, char **split);
 
 void	get_line_scene(t_mini *data, char *line)
 {
 	char	**split;
 
 	split = ft_split(line, '+');
+	free(line);
 	if (matrix_len(split) == 1)
 	{
 		matrix_free(split);
@@ -28,6 +31,12 @@ void	get_line_scene(t_mini *data, char *line)
 		print_error("miniRT: Invalid Line");
 		exit(0); // free memory
 	}
+	get_element_scene(data, split);
+	matrix_free(split);
+}
+
+static void get_element_scene(t_mini *data, char **split)
+{
 	if (find_ambient(data, split))
 		data->light_a = init_ambient(split);
 	else if (find_camera(data, split))
@@ -40,5 +49,5 @@ void	get_line_scene(t_mini *data, char *line)
 		lst_new_plane(data, split);
 	else if (find_cylinder(split))
 		lst_new_cylinder(data, split);
-	matrix_free(split);
+	return ;
 }

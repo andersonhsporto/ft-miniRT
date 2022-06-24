@@ -31,10 +31,10 @@ typedef struct s_hit_d
 
 typedef struct s_object_d
 {
-	double		radius;
-	double		**matrix;
-	char		type;
-	double		*position;
+	char			type;
+	double			radius;
+	double			**matrix;
+	double			*position;
 	t_material_d	*material;
 }	t_obj_d;
 
