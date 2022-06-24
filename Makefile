@@ -2,8 +2,8 @@ NAME	= miniRT
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -g #-Werror
-INCLUDE =	-I ./src/includes -I ./0_libs/0_libft
-LIBFT	=	-L ./0_libs/0_libft -lft
+INCLUDE =	-I ./src/includes -I ./libs/libft
+LIBFT	=	-L ./libs/libft -lft
 MLX		=   -lmlx -lXext -lX11
 HEADER	= 	./src/includes/minirt.h
 
@@ -54,16 +54,16 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	rm -rf $(NAME)
-	make all  -C ./0_libs/0_libft 
+	make all  -C ./libs/libft
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -lm -o $(NAME)
 
 clean:
-	make clean -C ./0_libs/0_libft
+	make clean -C ./libs/libft
 	rm -rf $(OBJ)
 	rm -rf ./a.out
 
 fclean: clean
-	make fclean -C ./0_libs/0_libft
+	make fclean -C ./libs/libft
 	rm -rf $(NAME)
 
 re: fclean all
