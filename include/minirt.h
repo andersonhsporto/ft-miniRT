@@ -51,4 +51,5 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_scene	*hiter_point(t_ray *ray, t_scene **hiter, t_scene *rec);
 
 t_ray	*scatter(t_ray *ray, t_scene *rec, t_ray *scattered);
+int	cylinder_intersection(t_ray *ray, t_scene *sphere, double t_max, double t_min);
 #endif

@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/04/28 22:38:17 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/06/17 09:57:57 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,23 @@ t_coo	*colory(t_ray *ray, t_scene **hiter, int deat)
 		return (background_3d_color(ray));
 }
 
+t_coo	*vector_scalar_division(double scalar, t_coo *a)
+{
+	t_coo *res;
+
+	res = (t_coo *)malloc(sizeof(t_coo));
+	res->x = scalar / a->x;
+	res->y = scalar / a->y;
+	res->z = scalar / a->z;
+	return (res);
+}
+
 t_coo	*pixel_gerator(double y, double x, t_view *data)
 {
 	t_ray	*ray;
 	t_coo	*rgb;
 	t_coo	*aux;
+	t_coo	*var;
 	int		s;
 
 	s = -1;
@@ -77,9 +89,10 @@ t_coo	*pixel_gerator(double y, double x, t_view *data)
 		ray = gerate_ray(data->cam, y/(double)NY, x/(double)NX);
 		aux = colory(ray, data->scenes, 0);
 		free(ray);
-		//free no ultimo rgb t_coo a = rgb depois free(a);
+		var = rgb;
 		rgb = vector_addition(rgb, aux);
 		free(aux);
+		free(var);
 	}
 	return (rgb);
 }

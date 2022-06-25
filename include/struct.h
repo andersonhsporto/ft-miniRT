@@ -27,6 +27,7 @@ typedef struct	s_scenes {
 	t_coo	*p;
 	t_coo	*normal;
 	t_coo	*material;
+	char	type;
 }				t_scene;
 
 typedef struct	s_cam {
