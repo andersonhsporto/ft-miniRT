@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:47:33 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:26:40 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:45:04 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_hit	*hit_scene_object(t_mini *data)
 		if (data->scene->object[i]->type == 'S')
 		{
 			t_sphere *sphere = get_sphere_in_list(data->element);
-			intersection = sphere_intersection(data->ray, data->scene->object[i]);
+			intersection = sphere_intersection(data->ray, sphere);
 			hit = hit_point(intersection);
 			if (hit)
 				return(hit);

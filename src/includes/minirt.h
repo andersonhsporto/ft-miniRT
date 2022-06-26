@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:14:37 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:44:55 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ double		*slighting(double *position, t_mini *data, double *eye);
 void		*diffuse_specular_zero(t_utils	*utils);
 
 void	hit(t_mini *data, int x, int y);
+
+t_intersec	*sphere_intersection(t_ray *rayy, t_sphere *lst);
 
 #endif

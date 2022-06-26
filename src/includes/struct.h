@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:31:16 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:37:35 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ typedef struct s_sphere {
 typedef struct s_element {
 	int					type;
 	void				*ptr;
-	t_vector			color;
 	struct s_element	*next;
 }	t_element;
 
