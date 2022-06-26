@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 02:00:37 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:14:37 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ double		*there_is_light(t_mini *data);
 double		*slighting(double *position, t_mini *data, double *eye);
 
 void		*diffuse_specular_zero(t_utils	*utils);
+
+void	hit(t_mini *data, int x, int y);
 
 #endif

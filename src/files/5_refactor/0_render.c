@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 13:45:19 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:14:03 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	render(t_mini *data, t_scene *scene, t_image *img)
 		y = -1;
 		while (++y < RESOLUTION)
 		{
-			data->ray = ray_direction(data, x, y);
-			data->hit = hit_scene_object(data);
+			hit(data, x, y);
 			if (data->hit != NULL)
 			{
 				lighting = there_is_light(data);
