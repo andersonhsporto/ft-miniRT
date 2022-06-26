@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:14:03 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:55:09 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	render(t_mini *data, t_scene *scene, t_image *img)
 			}
 		}
 	}
+	printf("FORA DO WHILE\n");
 	free(data->ray);
 }
 
@@ -44,7 +45,7 @@ t_scene	*init_scene(void)
 	scene->object = (t_obj_d **)malloc(sizeof(t_obj_d *) * 2);
 	scene->object[0] = (t_obj_d*)malloc(sizeof(t_obj_d));
 	scene->object[0]->radius = 2.0;
-	scene->object[0]->type = 'S';
+	scene->object[0]->type = 'C';
 	scene->object[0]->position = create_vector(0.0, 0.0, 1.0);
 	// scene->object[0]->matrix = matrix_identify(1,1,1,1);
 	scene->object[1] = (t_obj_d*)malloc(sizeof(t_obj_d));
