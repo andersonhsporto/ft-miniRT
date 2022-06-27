@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:47:33 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:08:46 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:43:56 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	hit_list(t_mini *data, t_element *lst);
 void	hit(t_mini *data, int x, int y)
 {
 	data->ray = ray_direction(data, x, y);
-	data->hit = hit_scene_object(data);
-	// hit_alternative(data);
+	// data->hit = hit_scene_object(data);
+	hit_alternative(data);
 }
 
 void	hit_alternative(t_mini *data)
@@ -39,40 +39,26 @@ void	hit_alternative(t_mini *data)
 	return ;
 }
 
+t_hit	*hit_element(t_mini *data, void	*ptr, \
+	t_hit *(*f)(t_mini *, void *))
+{
+	const t_intersec	*intersec = f(data->ray, ptr);
+	const t_hit			*hit = hit_point(intersec);
+
+	free((t_intersec *)intersec);
+	return (hit);
+}
+
 void	hit_list(t_mini *data, t_element *lst)
 {
 	if (lst->type == sphere)
 	{
-		data->hit = hit_sphere(data, lst->ptr);
+		data->hit = hit_element(data, lst->ptr, sphere_intersection);
 	}
-}
-
-t_hit	*hit_sphere(t_mini *data, t_sphere *ptr)
-{
-	t_intersec	*intersec;
-	t_hit		*hit;
-
-	intersec = sphere_intersection(data->ray, ptr);
-	hit = hit_point(intersec, ptr->color);
-	return (hit);
-}
-
-t_cylinder	*get_cy_in_list(t_element *lst)
-{
-	t_cylinder	*cy;
-	t_element	*temp;
-
-	temp = lst;
-	while (temp != NULL)
+	else if (lst->type == cylinder)
 	{
-		if (temp->type == cylinder)
-		{
-			cy = temp->ptr;
-			return (cy);
-		}
-		temp = temp->next;
+		data->hit = hit_element(data, lst->ptr, cylinder_intersection);
 	}
-	return (NULL);
 }
 
 t_hit	*hit_scene_object(t_mini *data)
@@ -85,20 +71,12 @@ t_hit	*hit_scene_object(t_mini *data)
 	hit = NULL;
 	while (i < data->scene->cont)
 	{
-		if (data->scene->object[i]->type == 'C')
-		{
-			t_cylinder	*cy = get_cy_in_list(data->element);
-			intersection = cylinder_intersection(data->ray, cy);
-			hit = hit_point(intersection, create_vector(0, 0, 1));
-			if (hit)
-				return(hit);
-		}
 		if (data->scene->object[i]->type == 'P')
 		{
 			intersection = plane_intersection(data->ray);
-			hit = hit_point(intersection, create_vector(0, 0, 1));
+			hit = hit_point(intersection);
 			if (hit)
-				return(hit);
+				return (hit);
 		}
 		i++;
 	}

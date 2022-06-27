@@ -14,6 +14,7 @@ typedef struct s_intersec
 	int		cont;
 	double	t1;
 	double	t2;
+	double	*color;
 }	t_intersec;
 
 typedef struct s_hit
@@ -72,7 +73,7 @@ double		*create_vector(double x, double y, double z);
 double		*vector_zero(void);
 t_intersec	*plane_intersection(t_ray *ray);
 
-t_hit	*hit_point(t_intersec *intersections, double *color);
+t_hit	*hit_point(t_intersec *intersections);
 double		*light_position(t_ray *ray, double t);
 int			get_color(double *vector);
 t_scene		*init_scene(void);

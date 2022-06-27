@@ -112,3 +112,21 @@ t_sphere	*get_sphere_in_list(t_element *lst)
 	}
 	return (NULL);
 }
+
+t_cylinder	*get_cy_in_list(t_element *lst)
+{
+	t_cylinder	*cy;
+	t_element	*temp;
+
+	temp = lst;
+	while (temp != NULL)
+	{
+		if (temp->type == cylinder)
+		{
+			cy = temp->ptr;
+			return (cy);
+		}
+		temp = temp->next;
+	}
+	return (NULL);
+}

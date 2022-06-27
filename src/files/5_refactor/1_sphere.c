@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:03 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 22:51:40 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:43:33 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_intersec	*sphere_intersection(t_ray *rayy, t_sphere *lst)
 		return (NULL);
 	}
 	intersection_points = get_intersection(ray, oc, discriminant);
+	intersection_points->color = lst->color;
 	free((double *)oc);
 	return (intersection_points);
 }

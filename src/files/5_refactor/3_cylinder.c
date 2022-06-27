@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:35:41 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:08:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:44:38 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_intersec	*cylinder_intersection(t_ray *ray, t_cylinder *ptr)
 	if (discriminant < 0)
 		return (NULL);
 	intersection_points = get_intersection(&cy, discriminant, ray);
+	intersection_points->color = ptr->color;
 	return (intersection_points);
 }

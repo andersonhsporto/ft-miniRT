@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:03:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 21:55:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:40:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ double	*reflect(double *v, double *n)
 	return(res);
 }
 
-t_hit	*hit_point(t_intersec *intersections, double *color)
+t_hit	*hit_point(t_intersec *intersections)
 {
 	t_hit	*first;
 
 	if (intersections)
 	{
 		first = (t_hit *)malloc(sizeof(t_hit));
-		first->color = color;
+		first->color = intersections->color;
 		if ((intersections->cont == 2 || intersections->cont == 3) && !(intersections->t1 < 0.0))
 		{
 			first->t = intersections->t1;
