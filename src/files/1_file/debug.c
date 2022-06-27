@@ -130,3 +130,21 @@ t_cylinder	*get_cy_in_list(t_element *lst)
 	}
 	return (NULL);
 }
+
+t_plane	*get_plane_in_list(t_element *lst)
+{
+	t_plane		*ptr;
+	t_element	*temp;
+
+	temp = lst;
+	while (temp != NULL)
+	{
+		if (temp->type == plane)
+		{
+			ptr = temp->ptr;
+			return (ptr);
+		}
+		temp = temp->next;
+	}
+	return (NULL);
+}

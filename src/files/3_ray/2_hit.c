@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:47:33 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:43:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:52:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ void	hit_list(t_mini *data, t_element *lst)
 	{
 		data->hit = hit_element(data, lst->ptr, cylinder_intersection);
 	}
+	else if (lst->type == plane)
+	{
+		data->hit = hit_element(data, lst->ptr, plane_intersection);
+	}
 }
 
 t_hit	*hit_scene_object(t_mini *data)
@@ -73,7 +77,8 @@ t_hit	*hit_scene_object(t_mini *data)
 	{
 		if (data->scene->object[i]->type == 'P')
 		{
-			intersection = plane_intersection(data->ray);
+			t_plane *ptr = get_plane_in_list(data->element);
+			intersection = plane_intersection(data->ray, ptr);
 			hit = hit_point(intersection);
 			if (hit)
 				return (hit);

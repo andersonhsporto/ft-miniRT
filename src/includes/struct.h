@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:06:23 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:53:39 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ typedef struct s_cy {
 }	t_cy;
 
 typedef struct s_plane {
-	t_vector	coordinates;
-	t_vector	normalized;
-	t_vector	color;
+	double		*coordinates;
+	double		*normalized;
+	double		*color;
 }	t_plane;
 
 typedef struct s_sphere {

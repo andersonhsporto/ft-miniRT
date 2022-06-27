@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:36:37 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 02:13:11 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:53:16 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_intersec	*plane_intersection(t_ray *ray)
+t_intersec	*plane_intersection(t_ray *ray, t_plane *ptr)
 {
 	t_intersec	*intersection_points;
 
@@ -21,5 +21,6 @@ t_intersec	*plane_intersection(t_ray *ray)
 	intersection_points = (t_intersec *)malloc(sizeof(t_intersec));
 	intersection_points->t1 = -ray->origin[1] / ray->direction[1];
 	intersection_points->cont = 2;
+	intersection_points->color = ptr->color;
 	return (intersection_points);
 }

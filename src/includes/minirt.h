@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:08:37 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:49:30 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	hit(t_mini *data, int x, int y);
 
 t_intersec	*sphere_intersection(t_ray *rayy, t_sphere *lst);
 t_intersec	*cylinder_intersection(t_ray *ray, t_cylinder *ptr);
-
+t_intersec	*plane_intersection(t_ray *ray, t_plane *ptr);
 
 #endif

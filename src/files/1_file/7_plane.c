@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/04 00:18:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:53:54 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ t_plane	*init_plane(char **string)
 {
 	t_plane	*plane;
 	plane = (t_plane *)malloc(sizeof(t_plane));
-	plane->coordinates = str_to_double_vector(string[1], ERR_PLANE);
-	plane->normalized = str_to_double_vector(string[2], ERR_PLANE);
-	plane->color = str_to_double_vector(string[3], ERR_PLANE);
-	if (out_range_int(plane->color, 0, 255))
+	plane->coordinates = str_to_double_pointer(string[1], ERR_PLANE);
+	plane->normalized = str_to_double_pointer(string[2], ERR_PLANE);
+	plane->color = str_to_double_pointer(string[3], ERR_PLANE);
+	if (out_of_range(plane->color, 0, 255))
 	{
 		print_error("miniRT: Invalid Plane Color");
 		exit(1);
