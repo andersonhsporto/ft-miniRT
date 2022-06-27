@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"mlx.h": "c",
-		"struct.h": "c"
+		"struct.h": "c",
+		"typeinfo": "c"
 	}
 }

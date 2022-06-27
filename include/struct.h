@@ -13,6 +13,7 @@ typedef struct	s_coordinate {
 	double	x;
 	double	y;
 	double	z;
+	double	w;
 }				t_coo;
 
 typedef struct	s_ray {
@@ -23,7 +24,6 @@ typedef struct	s_ray {
 typedef struct	s_scenes {
 	t_coo	*center;
 	double	radius;
-	double	t;
 	t_coo	*p;
 	t_coo	*normal;
 	t_coo	*material;
@@ -31,14 +31,57 @@ typedef struct	s_scenes {
 }				t_scene;
 
 typedef struct	s_cam {
-	t_coo	*lower_left_corner;
-	t_coo	*horizontal;
+	t_coo	*view;
+	t_coo	*pos;
+	double	fov;
+	double	**transform;
 	t_coo	*origin;
-	t_coo	*vertical;
+	double	pixel_size;
+	double	half_height;
+	double	half_width;
 }				t_cam;
 
 typedef struct	s_view {
 	t_scene	**scenes;
 	t_cam	*cam;
 }				t_view;
+
+typedef struct s_hit
+{
+	t_scene	*obj;
+	double	t;
+}	t_hit;
+
+typedef struct s_intersec
+{
+	double	t1;
+	double	t2;
+}	t_intersec;
+
+typedef struct intersect_list
+{
+	double	t;
+	t_scene	*obj;
+	struct intersect_list	*next;
+}	t_intersect_list;
+
+typedef struct s_light
+{
+	t_coo	*intensity;
+	t_coo	*posi;
+}	t_light;
+
+typedef struct		s_comps
+{
+	double		t;
+	t_coo	*position;
+	t_light	*light;
+	t_coo	*eye_vec;
+	t_scene	*obj;
+	t_coo	*normal_vec;
+	t_coo	*reflect_vec;
+	t_coo	*over_point;
+	int		inside;
+}		t_comps;
+
 #endif

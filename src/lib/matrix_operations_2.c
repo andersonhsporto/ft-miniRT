@@ -5,6 +5,19 @@ double	vector_abs(t_coo *a, t_coo *b)
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
+double	**vector_to_matrix(t_coo *a)
+{
+	double	**res;
+
+	res = (double **)malloc(sizeof(double *));
+	res[0] = (double *)malloc(sizeof(double) * 4);
+	res[0][0] = a->x;
+	res[0][1] = a->y;
+	res[0][2] = a->z;
+	res[0][3] = a->w;
+	return (res);
+}
+
 t_coo	*vector_cross(t_coo *a, t_coo *b)
 {
 	t_coo	*res;
@@ -13,6 +26,7 @@ t_coo	*vector_cross(t_coo *a, t_coo *b)
 	res->x = (a->y * b->z) - (a->z * b->y);
 	res->y = (a->z * b->x) - (a->x * b->z);
 	res->z = (a->x * b->y) - (a->y * b->x);
+	res->w = 0;
 	return (res);
 }
 
@@ -29,7 +43,7 @@ t_coo	*vector_normalize(t_coo *a)
 	return (res);
 }
 
-t_coo	*creat_vector(double x, double y, double z)
+t_coo	*create_vector(double x, double y, double z, double w)
 {
 	t_coo	*res;
 
@@ -37,5 +51,153 @@ t_coo	*creat_vector(double x, double y, double z)
 	res->x = x;
 	res->y = y;
 	res->z = z;
+	res->w = w;
 	return (res);
+}
+
+double	**matrix_multiply(double **a, double **b)
+{
+	double	**res;
+	double	*var;
+
+	res = (double **)malloc(sizeof(double *) * 4);
+	for (int i = 0; i < 4; i++)
+	{
+		var = (double *)malloc(sizeof(double) * 4);
+		for (size_t u = 0; u < 4; u++)
+		{
+			var[u] = 0;
+			for (size_t j = 0; j < 4; j++)
+			{
+				var[u] += a[i][j] * b[j][u];
+			}
+		}
+		res[i] = var;
+	}
+	return (res);
+}
+
+t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
+{
+	double		*new;
+	size_t		i;
+	size_t		j;
+	double		current[4];
+
+	i = 0;
+	new = (double *)malloc(sizeof(double) * 4);
+	current[0] = t1->x;
+	current[1] = t1->y;
+	current[2] = t1->z;
+	current[3] = t1->w;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			new[i] += (m1[i][j] * current[j]);
+			j++;
+		}
+		i++;
+	}
+	return (create_vector(new[0], new[1], new[2], new[3]));
+}
+
+double	**matrix_transpose(double **a)
+{
+	double	b[4][4];
+
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			b[i][j] = a[i][j];
+		}
+	}
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			a[i][j] = b[j][i];
+		}
+	}
+	return (a);
+}
+
+double	matrix_cofactor(double a[3][3])
+{
+	double	res;
+	int		jboo;
+	double	signal;
+	double	matrix[2][2];
+	int		size = 2;
+
+	res = 0.0;
+	for (int u = 0; u < 3; u++)
+	{
+		signal = 1.0;
+		if (u % 2 == 1)
+			signal = -1.0;
+		for (int i = 0; i < 2; i++)
+		{
+			jboo = 0;
+			for (int j = 0; j < size; j++)
+			{
+				if (j == u)
+					jboo = 1;
+				matrix[i][j] = a[i + 1][j + jboo];
+			}
+		}
+		res += (signal * a[0][u]) * matrix_x_multiply(matrix);
+	}
+	return (res);
+}
+
+double	matrix_determinant(double **a)
+{
+	double	res;
+	int		jboo;
+	int		size = 3;
+	int		signal;
+	double	matrix[3][3];
+
+	res = 0.0;
+	for (int u = 0; u < 4; u++)
+	{
+		signal = 1.0;
+		if (u % 2 == 1)
+			signal = -1.0;
+		for (int i = 0; i < 3; i++)
+		{
+			jboo = 0;
+			for (int j = 0; j < size; j++)
+			{
+				if (j == u)
+					jboo = 1;
+				matrix[i][j] = a[i + 1][j + jboo];
+			}
+		}
+		res += (signal * a[0][u]) * matrix_cofactor(matrix);
+	}
+	return (res);
+}
+
+double	**create_matrix(int col, int line)
+{
+	double	**res;
+	int		i;
+
+	i = 0;
+	res = (double **)malloc(sizeof(double *) * line);
+	while (i < line)
+	{
+		res[i] = (double *)malloc(sizeof(double) * col);
+		i++;
+	}
+	return (res);
+}
+
+double	matrix_x_multiply(double a[2][2])
+{
+	return (a[0][0] * a[1][1] - (a[0][1] * a[1][0]));
 }

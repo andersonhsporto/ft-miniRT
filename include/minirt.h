@@ -9,8 +9,7 @@
 # include <limits.h>
 
 #define NX 200
-#define NY 100
-#define NS 100
+#define NY 200
 
 t_coo	*vector_addition(t_coo *a, t_coo *b);
 
@@ -28,28 +27,29 @@ t_coo	*vector_cross(t_coo *a, t_coo *b);
 
 t_coo	*vector_multipli(t_coo *a, t_coo *b);
 
-t_coo	*creat_vector(double x, double y, double z);
+t_coo	*create_vector(double x, double y, double z, double w);
 
-t_coo	*background_3d_color(t_ray *ray);
+double	matrix_determinant(double **a);
 
-t_coo	*point_at_parameter(double t, t_ray *ray);
+double	matrix_cofactor(double a[3][3]);
 
-int		hit_sphere(t_ray *ray, t_scene *sphere, double t_max, double t_min);
+double	**matrix_transpose(double **a);
 
-t_coo	*reflect(t_coo *v, t_coo *n);
+double	**matrix_multiply(double **a, double **b);
 
-void	make_image(t_data *img, t_view *view);
+double	**matrix_inverter(double **a, double abs);
 
-t_coo	*pixel_gerator(double y, double x, t_view *data);
+double	**identity(double x, double y, double z);
 
-t_coo	*colory(t_ray *ray, t_scene **hiter, int deat);
+double	**translation(double x, double y, double z);
 
-t_ray	*gerate_ray(t_cam	*cam, double u, double v);
+double	**vector_to_matrix(t_coo *a);
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+double	**create_matrix(int col, int line);
 
-t_scene	*hiter_point(t_ray *ray, t_scene **hiter, t_scene *rec);
+double	matrix_x_multiply(double a[2][2]);
 
-t_ray	*scatter(t_ray *ray, t_scene *rec, t_ray *scattered);
-int	cylinder_intersection(t_ray *ray, t_scene *sphere, double t_max, double t_min);
+t_coo	*mult_matrix_vector(double **m1, t_coo *t1);
+
+static double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_coo *from);
 #endif
