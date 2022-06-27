@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:47:33 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:56:13 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 21:56:32 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	hit_alternative(t_mini *data)
 	while (lst != NULL)
 	{
 		hit_list(data, lst);
+		if (data->hit != NULL)
+			break ;
 		lst = lst->next;
 	}
 	return ;
@@ -51,7 +53,7 @@ t_hit	*hit_sphere(t_mini *data, t_sphere *ptr)
 	t_hit		*hit;
 
 	intersec = sphere_intersection(data->ray, ptr);
-	hit = hit_point(intersec);
+	hit = hit_point(intersec, ptr->color);
 	return (hit);
 }
 
@@ -73,39 +75,39 @@ t_sphere	*get_sphere_in_list(t_element *lst)
 	return (NULL);
 }
 
-t_hit	*hit_scene_object(t_mini *data)
-{
-	t_intersec	*intersection;
-	t_hit		*hit;
-	int			i;
+// t_hit	*hit_scene_object(t_mini *data)
+// {
+// 	t_intersec	*intersection;
+// 	t_hit		*hit;
+// 	int			i;
 
-	i = 0;
-	hit = NULL;
-	while (i < data->scene->cont)
-	{
-		if (data->scene->object[i]->type == 'C')
-		{
-			intersection = cylinder_intersection(data->ray, data->scene->object[i]);
-			hit = hit_point(intersection);
-			if (hit)
-				return(hit);
-		}
-		if (data->scene->object[i]->type == 'S')
-		{
-			t_sphere *sphere = get_sphere_in_list(data->element);
-			intersection = sphere_intersection(data->ray, sphere);
-			hit = hit_point(intersection);
-			if (hit)
-				return(hit);
-		}
-		if (data->scene->object[i]->type == 'P')
-		{
-			intersection = plane_intersection(data->ray);
-			hit = hit_point(intersection);
-			if (hit)
-				return(hit);
-		}
-		i++;
-	}
-	return (hit);
-}
+// 	i = 0;
+// 	hit = NULL;
+// 	while (i < data->scene->cont)
+// 	{
+// 		if (data->scene->object[i]->type == 'C')
+// 		{
+// 			intersection = cylinder_intersection(data->ray, data->scene->object[i]);
+// 			hit = hit_point(intersection);
+// 			if (hit)
+// 				return(hit);
+// 		}
+// 		if (data->scene->object[i]->type == 'S')
+// 		{
+// 			t_sphere *sphere = get_sphere_in_list(data->element);
+// 			intersection = sphere_intersection(data->ray, sphere);
+// 			hit = hit_point(intersection);
+// 			if (hit)
+// 				return(hit);
+// 		}
+// 		if (data->scene->object[i]->type == 'P')
+// 		{
+// 			intersection = plane_intersection(data->ray);
+// 			hit = hit_point(intersection);
+// 			if (hit)
+// 				return(hit);
+// 		}
+// 		i++;
+// 	}
+// 	return (hit);
+// }
