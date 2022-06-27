@@ -6,32 +6,28 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 00:39:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 13:33:25 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 23:11:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// position		*hitposition,
-// eye				data->ray->direction,
-// normal			vector_normalize_double(hitposition)
-
-double	*diffuse_color(double l_dot, t_ambient *ambient, t_light_d *light);
+void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_mini *data);
+double	*diffuse_color(double l_dot, t_mini *data, t_light_d *light);
 double	r_dot(double *light, double *normal, double *eye);
 double	l_dot(double *light, double *normal, double *position);
-void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_ambient *ambient);
 
 double	*slighting(double *position, t_mini *data, double *eye)
 {
 	const t_light_d	*light = data->scene->light[0];
 	t_utils			utils;
 
-	init_lighting(position, &utils, light, data->light_a);
+	init_lighting(position, &utils, light, data);
 	if (utils.dot_l <= 0.0)
 		diffuse_specular_zero(&utils);
 	else
 	{
-		utils.diffuse = diffuse_color(utils.dot_l, data->light_a, light);
+		utils.diffuse = diffuse_color(utils.dot_l, data, light);
 		utils.dot_r = r_dot(light, utils.normal, eye);
 		if (utils.dot_r <= 0.0)
 			utils.specular = vector_zero();
@@ -45,21 +41,21 @@ double	*slighting(double *position, t_mini *data, double *eye)
 	return vector_addition(vector_addition(utils.ambient, utils.diffuse), utils.specular);
 }
 
-void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_ambient *ambient)
+void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_mini *data)
 {
-	utils->ambient = vector_multipli_scalar(0.1, ambient->rgb);
+	utils->ambient = vector_multipli_scalar(0.1, data->hit->color); // cor da luz
 	utils->normal = vector_normalize_double(position);
 	utils->dot_l = l_dot(light->posi, utils->normal, position);
 	return ;
 }
 
-double	*diffuse_color(double l_dot, t_ambient *ambient, t_light_d *light)
+double	*diffuse_color(double l_dot, t_mini *data, t_light_d *light)
 {
-	const double	*color = vector_multipli(ambient->rgb, light->intensity);
+	const double	*color = vector_multipli(data->hit->color, light->intensity);
 	double			*difuse_color;
 
 	difuse_color = vector_multipli_scalar(l_dot, \
-					vector_multipli_scalar(ambient->ratio, color));
+					vector_multipli_scalar(data->light_a->ratio, color));
 	free((double *)color);
 	return(difuse_color);
 }

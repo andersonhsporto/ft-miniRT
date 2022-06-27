@@ -32,7 +32,7 @@ RAY	= $(addprefix 3_ray/, \
 )
 
 IMAGE	= $(addprefix 4_image/, \
-		0_image.c 1_mlx.c 2_hit.c 3_element.c \
+		0_mlx.c \
 )
 
 REFACTOR	= $(addprefix 5_refactor/, \

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 12:25:14 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:32:59 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int			legal_char(char character);
 int			out_range_int(t_vector vector, int min, int max);
+int			out_of_range(double *vector, int min, int max);
 void		get_line_scene(t_mini *data, char *line);
 
 int			find_ambient(t_mini *data, char	**string);

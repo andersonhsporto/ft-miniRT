@@ -34,13 +34,14 @@ void	print_element_lst(t_element *lst)
 		if (lst->type == sphere)
 		{
 			t_sphere *sphere_debug = (t_sphere *)lst->ptr;
-			printf("Sphere Center ->x %f\n", sphere_debug->center.x);
-			printf("Sphere Center ->y %f\n", sphere_debug->center.y);
-			printf("Sphere Center ->z %f\n", sphere_debug->center.z);
+			printf("Sphere Center ->x %f\n", sphere_debug->center[0]);
+			printf("Sphere Center ->y %f\n", sphere_debug->center[1]);
+			printf("Sphere Center ->z %f\n", sphere_debug->center[2]);
 			printf("Sphere Diameter ->%f\n", sphere_debug->diameter);
-			printf("Sphere Color ->x %f\n", sphere_debug->color.x);
-			printf("Sphere Color ->y %f\n", sphere_debug->color.y);
-			printf("Sphere Color ->z %f\n\n", sphere_debug->color.z);
+			printf("Sphere Color ->x %f\n", sphere_debug->color[0]);
+			printf("Sphere Color ->y %f\n", sphere_debug->color[1]);
+			printf("Sphere Color ->z %f\n", sphere_debug->color[2]);
+			ft_putchar_fd('\n', 1);
 		}
 		else if (lst->type == plane)
 		{
@@ -55,17 +56,17 @@ void	print_element_lst(t_element *lst)
 		else if (lst->type == cylinder)
 		{
 			t_cylinder *cylinder_debug = (t_cylinder *)lst->ptr;
-			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates.x);
-			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates.y);
-			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates.z);
-			printf("Cylinder Normalized ->x %f\n", cylinder_debug->normalized.x);
-			printf("Cylinder Normalized ->y %f\n", cylinder_debug->normalized.y);
-			printf("Cylinder Normalized ->z %f\n", cylinder_debug->normalized.z);
-			printf("Cylinder Diameter ->%f\n", cylinder_debug->radius);
+			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates[0]);
+			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates[1]);
+			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates[2]);
+			printf("Cylinder Normalized ->x %f\n", cylinder_debug->normalized[0]);
+			printf("Cylinder Normalized ->y %f\n", cylinder_debug->normalized[1]);
+			printf("Cylinder Normalized ->z %f\n", cylinder_debug->normalized[2]);
+			printf("Cylinder Diameter ->%f\n", cylinder_debug->diameter);
 			printf("Cylinder Height ->%f\n", cylinder_debug->height);
-			printf("Cylinder Color ->x %f\n", cylinder_debug->color.x);
-			printf("Cylinder Color ->y %f\n", cylinder_debug->color.y);
-			printf("Cylinder Color ->z %f\n", cylinder_debug->color.z);
+			printf("Cylinder Color ->x %f\n", cylinder_debug->color[0]);
+			printf("Cylinder Color ->y %f\n", cylinder_debug->color[1]);
+			printf("Cylinder Color ->z %f\n", cylinder_debug->color[2]);
 		}
 		lst = lst->next;
 	}
@@ -77,16 +78,6 @@ void	print_vector(char *vector, t_vector vec)
 	printf("Vector %s: %f, %f, %f \n", vector, vec.x, vec.y, vec.z);
 	return ;
 }
-
-	double		viewport_height;
-	double		viewport_width;
-	t_vector	view_up;
-	t_vector	w;
-	t_vector	u;
-	t_vector	v;
-	t_vector	hori_dir;
-	t_vector	vert_dir;
-	t_vector	lower_left_corner;
 
 void	print_cam_data(t_datacam *data)
 {
@@ -102,4 +93,22 @@ void	print_cam_data(t_datacam *data)
 	print_vector("llcorner", data->lower_left_corner);
 	printf("DEBUG CAM DATA END\n");
 	return ;
+}
+
+t_sphere	*get_sphere_in_list(t_element *lst)
+{
+	t_sphere	*sp;
+	t_element	*temp;
+
+	temp = lst;
+	while (temp != NULL)
+	{
+		if (temp->type == sphere)
+		{
+			sp = temp->ptr;
+			return (sp);
+		}
+		temp = temp->next;
+	}
+	return (NULL);
 }

@@ -6,47 +6,62 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:35:41 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 23:01:03 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:08:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_intersec	*cylinder_intersection(t_ray *ray, t_obj_d *obj)
+double	cylinder_discriminant(t_ray *ray, t_cy *cy, t_cylinder *ptr)
+{
+	double	discriminant;
+
+	cy->oc = vector_subtraction(ray->origin, ptr->coordinates);
+	cy->a = pow(ray->direction[0], 2) + pow(ray->direction[2], 2);
+	cy->b = 2.0 * cy->oc[0] * ray->direction[0] + 2.0 * cy->oc[2] \
+	* ray->direction[2];
+	cy->c = pow(cy->oc[0], 2) + pow(cy->oc[2], 2) - (ptr->diameter / 2);
+	discriminant = (pow(cy->b, 2)) - (4 * cy->a * cy->c);
+	cy->t0 = (-cy->b - sqrt(discriminant)) / (2.0 * cy->a);
+	cy->t1 = (-cy->b + sqrt(discriminant)) / (2.0 * cy->a);
+	cy->max = (pow((ptr->diameter / 2), 2)) / 2.0;
+	cy->min = -1.0 * cy->max;
+	return (discriminant);
+}
+
+static t_intersec	*get_intersection(t_cy *cy, double discriminant, t_ray *ray)
 {
 	t_intersec	*intersection_points;
+	double		y0;
+	double		y1;
 
-	double *oc = vector_subtraction(ray->origin, obj->position);
-	double	a = ray->direction[0] * ray->direction[0] + ray->direction[2] * ray->direction[2];
-	double	b = 2.0 * oc[0] * ray->direction[0] + 2.0 * oc[2] * ray->direction[2];
-	double	c = oc[0] * oc[0] + oc[2] * oc[2] - obj->radius;
-	double	discriminant = (b * b) - (4 * a * c);
+	intersection_points = (t_intersec *)malloc(sizeof(t_intersec));
+	intersection_points->cont = 0;
+	if (cy->t0 > cy->t1)
+		swap_double(&cy->t0, &cy->t1);
+	y0 = cy->oc[1] + cy->t0 * ray->direction[1];
+	if (cy->min < y0 && y0 < cy->max)
+	{
+		intersection_points->cont = 2;
+		intersection_points->t1 = cy->t0;
+	}
+	y1 = cy->oc[1] + cy->t1 * ray->direction[1];
+	if (cy->min < y1 && y1 < cy->max)
+	{
+		intersection_points->cont++;
+		intersection_points->t2 = cy->t1;
+	}
+	return (intersection_points);
+}
+
+t_intersec	*cylinder_intersection(t_ray *ray, t_cylinder *ptr)
+{
+	t_intersec		*intersection_points;
+	t_cy			cy;
+	const double	discriminant = cylinder_discriminant(ray, &cy, ptr);
 
 	if (discriminant < 0)
 		return (NULL);
-	intersection_points = (t_intersec *)malloc(sizeof(t_intersec));
-	intersection_points->cont = 0;
-	double t0 = (-b - sqrt(discriminant)) / (2.0 * a);
-	double t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-	if (t0 > t1)
-	{
-		double temp = t0;
-		t0 = t1;
-		t1 = temp;
-	}
-	double	y0 = oc[1] + t0 * ray->direction[1];
-	double max =  (obj->radius * obj->radius) / 2.0;
-	double min = -1.0 * max;
-	if (min < y0 && y0 < max)
-	{
-		intersection_points->cont = 2;
-		intersection_points->t1 = t0;
-	}
-	double	y1 = oc[1] + t1 * ray->direction[1];
-	if (min < y1 && y1 < max)
-	{
-		intersection_points->cont++;
-		intersection_points->t2 = t1;
-	}
-	return intersection_points;
+	intersection_points = get_intersection(&cy, discriminant, ray);
+	return (intersection_points);
 }

@@ -16,8 +16,9 @@ typedef struct s_intersec
 	double	t2;
 }	t_intersec;
 
-typedef struct s_hit_d
+typedef struct s_hit
 {
+	double			*color;
 	double			t;
 }	t_hit;
 
@@ -70,9 +71,8 @@ t_ray		*ray_to_object_space(t_ray *ray, double **local);
 double		*create_vector(double x, double y, double z);
 double		*vector_zero(void);
 t_intersec	*plane_intersection(t_ray *ray);
-t_intersec	*sphere_intersection(t_ray *rayy, t_obj_d *obj);
-t_intersec	*cylinder_intersection(t_ray *ray, t_obj_d *obj);
-t_hit		*hit_point(t_intersec *intersections);
+
+t_hit	*hit_point(t_intersec *intersections, double *color);
 double		*light_position(t_ray *ray, double t);
 int			get_color(double *vector);
 t_scene		*init_scene(void);

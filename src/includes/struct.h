@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 12:21:42 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:06:23 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ typedef struct s_utils {
 	double	dot_r;
 	double	factor;
 }			t_utils;
-
-typedef	struct s_record {
-	double		t;
-	double		max;
-	double		min;
-	t_vector	p;
-	t_vector	normal;
-	t_vector	albedo;
-}				t_record;
 
 typedef struct s_datacam {
 	double		viewport_height;
@@ -75,12 +66,25 @@ typedef struct s_mlx {
 }	t_mlx;
 
 typedef struct s_cylinder {
-	t_vector	coordinates;
-	t_vector	normalized;
-	double		radius;
+	double		*coordinates;
+	double		*normalized;
+	double		diameter;
 	double		height;
-	t_vector	color;
+	double		*color;
 }	t_cylinder;
+
+typedef struct s_cy {
+	double	a;
+	double	b;
+	double	c;
+	double	*oc;
+	double	t0;
+	double	t1;
+	double	y0;
+	double	max;
+	double	min;
+	double	y1;
+}	t_cy;
 
 typedef struct s_plane {
 	t_vector	coordinates;
@@ -89,15 +93,14 @@ typedef struct s_plane {
 }	t_plane;
 
 typedef struct s_sphere {
-	t_vector	center;
+	double		*center;
+	double		*color;
 	double		diameter;
-	t_vector	color;
 }				t_sphere;
 
 typedef struct s_element {
 	int					type;
 	void				*ptr;
-	t_vector			color;
 	struct s_element	*next;
 }	t_element;
 
@@ -131,7 +134,6 @@ typedef struct s_mini {
 	t_light			*light;
 	t_element		*element;
 	t_datacam		*data_cam;
-	t_record		hit_record;
 	t_ray			*ray;
 	t_mlx			mlx;
 	t_image			img;
