@@ -6,15 +6,11 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 00:39:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 22:05:08 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/26 23:11:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// position		*hitposition,
-// eye				data->ray->direction,
-// normal			vector_normalize_double(hitposition)
 
 void	init_lighting(double *position, t_utils *utils, t_light_d *light, t_mini *data);
 double	*diffuse_color(double l_dot, t_mini *data, t_light_d *light);

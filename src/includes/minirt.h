@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:44:55 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:08:37 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			matrix_len(char **matrix);
 void		matrix_free(char **matrix);
 char		*replace_string(char *string, char character);
 int			out_range_double(t_vector vector, double min, double max);
+void		swap_double(double *a, double *b);
 
 double		str_to_double(char *str);
 
@@ -81,5 +82,7 @@ void		*diffuse_specular_zero(t_utils	*utils);
 void	hit(t_mini *data, int x, int y);
 
 t_intersec	*sphere_intersection(t_ray *rayy, t_sphere *lst);
+t_intersec	*cylinder_intersection(t_ray *ray, t_cylinder *ptr);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:34:00 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 22:07:14 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:00:33 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	render(t_mini *data, t_scene *scene, t_image *img)
 			}
 		}
 	}
-	printf("FORA DO WHILE\n");
+	printf("FIM DO RENDER\n");
 	free(data->ray);
 }
 
 t_scene	*init_scene(void)
 {
 	t_scene	*scene = (t_scene *)malloc(sizeof(t_scene));
-	scene->cont = 1;
+	scene->cont = 2;
 	scene->object = (t_obj_d **)malloc(sizeof(t_obj_d *) * 2);
 	scene->object[0] = (t_obj_d*)malloc(sizeof(t_obj_d));
 	scene->object[0]->radius = 2.0;
@@ -50,6 +50,7 @@ t_scene	*init_scene(void)
 	// scene->object[0]->matrix = matrix_identify(1,1,1,1);
 	scene->object[1] = (t_obj_d*)malloc(sizeof(t_obj_d));
 	scene->object[1]->type = 'P';
+	scene->object[1]->position = create_vector(0.0, 0.0, 1.0);
 	scene->light = (t_light_d **)malloc(sizeof(t_light_d *));
 	scene->light[0] = (t_light_d *)malloc(sizeof(t_light_d));
 	scene->light[0]->posi = create_vector(-10, 10, -10);

@@ -71,7 +71,7 @@ t_ray		*ray_to_object_space(t_ray *ray, double **local);
 double		*create_vector(double x, double y, double z);
 double		*vector_zero(void);
 t_intersec	*plane_intersection(t_ray *ray);
-t_intersec	*cylinder_intersection(t_ray *ray, t_obj_d *obj);
+
 t_hit	*hit_point(t_intersec *intersections, double *color);
 double		*light_position(t_ray *ray, double t);
 int			get_color(double *vector);
