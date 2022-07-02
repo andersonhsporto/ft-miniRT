@@ -16,6 +16,12 @@ typedef struct	s_coordinate {
 	double	w;
 }				t_coo;
 
+typedef struct s_light
+{
+	t_coo	*intensity;
+	t_coo	*posi;
+}	t_light;
+
 typedef struct	s_ray {
 	t_coo	*origin;
 	t_coo	*direction;
@@ -29,6 +35,27 @@ typedef struct	s_scenes {
 	t_coo	*material;
 	char	type;
 }				t_scene;
+
+typedef struct	s_material
+{
+	t_coo	*color;
+	double	diffuse;
+	double	ambient;
+	double	specular;
+	double	shininess;
+	double	reflect;
+}	t_material;
+
+typedef struct	s_sphere
+{
+	t_coo	*center;
+	double	diameter;
+	double	radius;
+	t_coo	*color;
+	double	**transform;
+	t_material	*material;
+	struct s_sphere		*next;
+}	t_sphere;
 
 typedef struct	s_cam {
 	t_coo	*view;
@@ -48,7 +75,8 @@ typedef struct	s_view {
 
 typedef struct s_hit
 {
-	t_scene	*obj;
+	t_sphere	*obj;
+	t_light	*light;
 	double	t;
 }	t_hit;
 
@@ -61,15 +89,21 @@ typedef struct s_intersec
 typedef struct intersect_list
 {
 	double	t;
-	t_scene	*obj;
+	t_sphere	*obj;
 	struct intersect_list	*next;
 }	t_intersect_list;
 
-typedef struct s_light
+typedef struct			s_ltparams
 {
-	t_coo	*intensity;
-	t_coo	*posi;
-}	t_light;
+	double		light_dot_normal;
+	double		reflect_dot_eye;
+	t_coo	*effective_color;
+	t_coo	*light_v;
+	t_coo	*ambient;
+	t_coo	*diffuse;
+	t_coo	*specular;
+	t_coo	*reflect_v;
+}						t_ltparams;
 
 typedef struct		s_comps
 {
@@ -77,7 +111,7 @@ typedef struct		s_comps
 	t_coo	*position;
 	t_light	*light;
 	t_coo	*eye_vec;
-	t_scene	*obj;
+	t_sphere	*obj;
 	t_coo	*normal_vec;
 	t_coo	*reflect_vec;
 	t_coo	*over_point;

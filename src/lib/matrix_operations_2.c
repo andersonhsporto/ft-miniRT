@@ -124,61 +124,23 @@ double	**matrix_transpose(double **a)
 	return (a);
 }
 
-double	matrix_cofactor(double a[3][3])
-{
-	double	res;
-	int		jboo;
-	double	signal;
-	double	matrix[2][2];
-	int		size = 2;
-
-	res = 0.0;
-	for (int u = 0; u < 3; u++)
-	{
-		signal = 1.0;
-		if (u % 2 == 1)
-			signal = -1.0;
-		for (int i = 0; i < 2; i++)
-		{
-			jboo = 0;
-			for (int j = 0; j < size; j++)
-			{
-				if (j == u)
-					jboo = 1;
-				matrix[i][j] = a[i + 1][j + jboo];
-			}
-		}
-		res += (signal * a[0][u]) * matrix_x_multiply(matrix);
-	}
-	return (res);
-}
 
 double	matrix_determinant(double **a)
 {
 	double	res;
-	int		jboo;
-	int		size = 3;
-	int		signal;
-	double	matrix[3][3];
+	double	*sub;
+	int		index[2];
 
-	res = 0.0;
-	for (int u = 0; u < 4; u++)
+	index[0] = 0;
+	index[1] = 0;
+	sub = (double *)malloc(sizeof(double) * 4);
+	while (index[1] < 4)
 	{
-		signal = 1.0;
-		if (u % 2 == 1)
-			signal = -1.0;
-		for (int i = 0; i < 3; i++)
-		{
-			jboo = 0;
-			for (int j = 0; j < size; j++)
-			{
-				if (j == u)
-					jboo = 1;
-				matrix[i][j] = a[i + 1][j + jboo];
-			}
-		}
-		res += (signal * a[0][u]) * matrix_cofactor(matrix);
+		sub[index[1]] = cofator_4x4(a, index);
+		index[1]++;
 	}
+	res = a[0][0] * sub[0] + a[0][1] * sub[1]
+		+ a[0][2] * sub[2] + a[0][3] * sub[3];
 	return (res);
 }
 

@@ -53,41 +53,107 @@ double	vector_lenght(t_coo *a)
 	return (sqrt(a->x * a->x + a->y * a->y + a->z * a->z + a->w * a->w));
 }
 
-double	**matrix_inverter(double **a, double abs)
+double	**sub_matrix(double	**a, int index[2], int col, int row)
+{
+	int		i;
+	int		j;
+	int		idx[2];
+	double	**res;
+
+	i = 0;
+	idx[0] = 0;
+	res = create_matrix(row, col);
+	while (idx[0] < row)
+	{
+		if (i == index[0])
+			i++;
+		j = 0;
+		idx[1] = 0;
+		while (idx[1] < col)
+		{
+			if (j == index[1])
+				j++;
+			res[idx[0]][idx[1]] = a[i][j];
+			j++;
+			idx[1]++;
+		}
+		idx[0]++;
+		i++;
+	}
+	return (res);
+}
+
+double		det_3x3(double **mat)
+{
+	double	result;
+
+	result = (mat[0][0] * mat[1][1] * mat[2][2] +
+			mat[0][1] * mat[1][2] * mat[2][0] +
+			mat[0][2] * mat[1][0] * mat[2][1])
+			-
+			(mat[2][0] * mat[1][1] * mat[0][2] +
+			mat[2][1] * mat[1][2] * mat[0][0] +
+			mat[2][2] * mat[1][0] * mat[0][1]);
+	return (result);
+}
+
+double	cofator_4x4(double **a, int index[2])
+{
+	double	**sub;
+	double	cofator;
+
+	sub = sub_matrix(a, index, 3, 3);
+	if ((index[0] + index[1]) % 2 == 0)
+		cofator = det_3x3(sub);
+	else
+		cofator = -1 * det_3x3(sub);
+	return (cofator);
+}
+
+double	**scalar_4x4_matrix(double **mat, double abs)
+{
+	double	**new;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	new = create_matrix(4, 4);
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			new[i][j] = mat[i][j] * abs;
+			j++;
+		}
+		i++;
+	}
+	return (new);
+}
+
+double	**matrix_inverter(double **a)
 {
 	double	**res;
-	int		jboo;
-	int		iboo;
-	int		signal = 1.0;
-	double	matrix[3][3];
+	double	**transp;
+	int		index[2];
+	double	abs;
 
 	res = create_matrix(4, 4);
-	if (abs == 1.0)
-		return (a);
-	for (size_t t = 0; t < 4; t++)
+	abs = matrix_determinant(a);
+	if (abs == 0)
+		return (NULL);
+	index[0] = 0;
+	while (index[0] < 4)
 	{
-		if (t % 2 == 1)
-			signal = -1.0;
-		for (size_t u = 0; u < 4; u++)
+		index[1] = 0;
+		while (index[1] < 4)
 		{
-			if ((t % 2 == 0 && u % 2 == 1) || (t % 2 == 1 && u % 2 == 0))
-				signal = -1.0;
-			iboo = 0;
-			for (size_t i = 0; i < 3; i++)
-			{
-				if (i == t)
-					iboo = 1;
-				jboo = 0;
-				for (size_t j = 0; j < 3; j++)
-				{
-					if (j == u)
-						jboo = 1;
-					matrix[i][j] = a[i + iboo][j + jboo];
-				}
-			}
-			res[t][u] = (signal * matrix_cofactor(matrix)) / abs;
-			signal = 1.0;
+			res[index[0]][index[1]] = cofator_4x4(a, index);
+			index[1]++;
 		}
+		index[0]++;
 	}
+	transp = matrix_transpose(res);
+	res = scalar_4x4_matrix(transp, 1 / abs);
 	return (res);
 }
