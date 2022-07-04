@@ -2,7 +2,7 @@
 
 double	vector_abs(t_coo *a, t_coo *b)
 {
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
+	return (a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w);
 }
 
 double	**vector_to_matrix(t_coo *a)
