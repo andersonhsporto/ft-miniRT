@@ -80,18 +80,18 @@ typedef struct s_hit
 	double	t;
 }	t_hit;
 
-typedef struct s_intersec
-{
-	double	t1;
-	double	t2;
-}	t_intersec;
-
 typedef struct intersect_list
 {
 	double	t;
 	t_sphere	*obj;
 	struct intersect_list	*next;
-}	t_intersect_list;
+}	t_intersec;
+
+typedef struct s_caster
+{
+	int	cont;
+	t_intersec	*intersec;
+}	t_caster;
 
 typedef struct			s_ltparams
 {
@@ -117,5 +117,10 @@ typedef struct		s_comps
 	t_coo	*over_point;
 	int		inside;
 }		t_comps;
+
+typedef struct s_sence
+{
+	t_sphere	**obj;
+}	t_sence;
 
 #endif

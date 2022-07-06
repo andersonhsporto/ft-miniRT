@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/04 11:02:29 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/06 09:28:37 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,12 @@ t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj)
 	if (vals[2] >= 0)
 	{
 		intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
-		intersectionPoints->t1 = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
-		intersectionPoints->t2 = (((-1 * vals[1]) + sqrt(vals[2])) / (2 * vals[0]));
+		intersectionPoints->t = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
+		intersectionPoints->obj = obj;
+		intersectionPoints->next = (t_intersec *)malloc(sizeof(t_intersec));
+		intersectionPoints->next->t = (((-1 * vals[1]) + sqrt(vals[2])) / (2 * vals[0]));
+		intersectionPoints->next->obj = obj;
+		intersectionPoints->next->next = NULL;
 	}
 	return (intersectionPoints);
 }
@@ -207,8 +211,8 @@ t_intersec	*plane_intersection(t_ray *base_ray, t_sphere *obj)
 	if (fabs(ray->direction->y) < EPSILON)
 		return NULL;
 	intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
-	intersectionPoints->t1 = (-1 *ray->origin->y) / ray->direction->y;
-	intersectionPoints->t2 = intersectionPoints->t1;
+	intersectionPoints->t = (-1 *ray->origin->y) / ray->direction->y;
+	intersectionPoints->next = NULL;
 	return intersectionPoints;
 }
 
@@ -224,7 +228,7 @@ t_sphere	*init_sphere(void)
 	sphere->material->color = create_vector(1, 0.2, 0.3, 0);
 	sphere->material->ambient = 0.1;
 	sphere->material->diffuse = 0.9;
-	sphere->material->specular = 0.9;
+	sphere->material->specular = 0.4;
 	sphere->material->shininess = 100.0;
 	return (sphere);
 }
@@ -273,29 +277,74 @@ t_coo	*ray_position(t_ray *ray, double t)
 	return (vector_addition(ray->origin, vector_multipli_scalar(t, ray->direction)));
 }
 
-t_hit	*hiter_point(t_intersec *intersections, t_sphere *sphere)
+t_caster	*init_intersec_list(t_caster *list)
 {
-	t_hit	*first = NULL;
-	if (intersections == NULL)
-		return (NULL);
-	if (intersections->t1 >= 0)
-	{
-		first = (t_hit *)malloc(sizeof(t_hit));
-		first->t = intersections->t1;
-		first->obj = sphere;
-	}
-	if (intersections->t2 >= 0 && intersections->t2 > intersections->t1)
-	{
-		first = (t_hit *)malloc(sizeof(t_hit));
-		first->t = intersections->t2;
-		first->obj = sphere;
-	}
-	return (first);
+	list->cont = 0;
+	list->intersec = NULL;
+	return (list);
 }
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_hit *hit)
+t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec	*intersec)
 {
-	comps->light = hit->light;
+	int	i;
+	t_intersec	*aux;
+
+	i = 0;
+	aux = cast->intersec;
+	if (intersec)
+	{
+		while (i < cast->cont)
+		{
+			cast->intersec  = cast->intersec->next;
+			i++;
+		}
+		cast->intersec = intersec;
+		if (aux)
+			cast->intersec = aux;
+		cast->cont += 2;
+	}
+	return (cast);
+}
+
+void	all_intersec(t_caster *cast, t_ray *ray, t_sence *sence)
+{
+	int	i;
+
+	i = 0;
+	while (sence->obj[i])
+	{
+		cast = put_intersection_in_cast(cast, sphere_intersection(ray, sence->obj[i]));
+		i++;
+	}
+}
+
+t_intersec	*hiter_point(t_caster	*head)
+{
+	t_intersec	*hit;
+	t_intersec	*tmp_intersec;
+	t_intersec	*current;
+
+	if (head->intersec == NULL)
+		return (NULL);
+	current = head->intersec;
+	hit = NULL;
+	while (current != NULL)
+	{
+		tmp_intersec = current;
+		if (!hit && tmp_intersec->t >= 0)
+			hit = tmp_intersec;
+		else if (tmp_intersec->t >= 0 && tmp_intersec->t < hit->t)
+			hit = tmp_intersec;
+		current = current->next;
+	}
+	if (hit && hit == 0)
+		hit = NULL;
+	return (hit);
+}
+
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light)
+{
+	comps->light = light;
 	comps->t = hit->t;
 	comps->obj = hit->obj;
 	comps->position = ray_position(rt, comps->t);
@@ -309,25 +358,27 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_hit *hit)
 	else
 		comps->inside = 0;
 	comps->reflect_vec = reflect(rt->direction, comps->normal_vec);
-	comps->over_point = vector_addition(comps->position,
-		vector_multipli_scalar(EPSILON, comps->normal_vec));
+	comps->over_point = vector_addition(vector_multipli_scalar(EPSILON, comps->normal_vec), comps->position);
 }
 
-int	is_shadowed(t_comps *comps, t_light *light)
+int	is_shadowed(t_comps *comps, t_light *light, t_sence *sence)
 {
 	t_coo	*path;
 	double	distance;
 	t_ray	*rc;
-	t_hit	*hit;
-	t_intersec	*intersec;
+	t_intersec	*hit;
+	t_caster	*intersec;
 	int	result;
 
 	path = vector_subtration(light->posi, comps->over_point);
 	distance = vector_abs(path, path);
 	rc = create_ray(comps->over_point, vector_normalize(path));
-	intersec = sphere_intersection(rc, comps->obj);
+	intersec = (t_caster *)malloc(sizeof(t_caster));
+	intersec = init_intersec_list(intersec);
+
+	all_intersec(intersec, rc, sence);
 	//intersec = plane_intersection(rc, comps->obj);
-	hit = hiter_point(intersec, comps->obj);
+	hit = hiter_point(intersec);
 	if (hit && hit->t < distance)
 		result = 0;
 	else
@@ -339,8 +390,7 @@ static void	set_light_params(t_comps *args, t_ltparams *params, t_light *lt)
 {
 	params->effective_color = vector_multipli(args->obj->material->color,
 	lt->intensity);
-	params->light_v = vector_normalize(vector_subtration(lt->posi,
-		args->over_point));
+	params->light_v = vector_normalize(vector_subtration(args->over_point, lt->posi));
 	params->ambient = vector_multipli_scalar(args->obj->material->ambient, params->effective_color);
 	params->light_dot_normal = vector_abs(params->light_v, args->normal_vec);
 }
@@ -380,73 +430,49 @@ t_coo	*position(t_ray *ray, double t)
 	return (position);
 }
 
-t_coo	*slighting(t_coo *position, t_light *light, t_coo *eye, t_material *material, t_coo *normal, int shadow)
-{
-	t_coo	*temp = material->color;
-	t_coo	*effectivecolor = vector_multipli(temp, light->intensity);
-	t_coo	*lightvec = vector_normalize(vector_subtration(light->posi, position));
-	t_coo	*ambienteColor = vector_multipli_scalar(material->ambient, temp);
-	t_coo	*difusecolor;
-	t_coo	*specularcolor;
-
-	double	lDOtn = vector_abs(lightvec, normal);
-	if (lDOtn <= 0.0 || shadow)
-	{
-		difusecolor = create_vector(0.0, 0.0, 0.0, 0.0);
-		specularcolor = create_vector(0.0, 0.0, 0.0, 0.0);
-	}
-	else
-	{
-		difusecolor = vector_multipli_scalar(lDOtn, vector_multipli_scalar(material->diffuse, effectivecolor));
-		t_coo	*refle = reflect(vector_multipli_scalar(-1.0, lightvec), normal);
-		double	rDote = vector_abs(refle, eye);
-		if (rDote <= 0.0)
-			specularcolor = create_vector(0.0, 0.0, 0.0, 0.0);
-		else
-		{
-			//Shinniness ou Brilho e depois do rDote
-			double	factor = pow(rDote, 200.0);
-			specularcolor = vector_multipli_scalar(material->specular * factor, light->intensity);
-		}
-	}
-	return vector_addition(vector_addition(ambienteColor, difusecolor), specularcolor);
-}
 
 int	render(t_data *img)
 {
 	t_cam	*cam;
 	t_ray	*ray;
-	t_intersec	*intersec;
 	t_sphere	*spher;
 	t_light		*light;
+	t_sence		*sence;
 	int color;
 	t_comps	comp;
 
 	int	y = 0;
 	cam = init_cam();
 	spher = init_sphere();
+	sence = (t_sence *)malloc(sizeof(t_sence));
+	sence->obj = (t_sphere **)malloc(sizeof(t_sphere *) * 2);
+	sence->obj[0] = spher;
+	sence->obj[1] = NULL;
 	render_sphere_transform(spher);
 	light = (t_light *)malloc(sizeof(t_light));
-	light->posi = create_vector(0, 8, -3, 0);
-	light->intensity = create_vector(1, 1 ,1 , 1);
+	light->posi = create_vector(0, -8, 3, 0);
+	light->intensity = create_vector(0, 0 ,1 , 0);
 	t_coo	*rgb;
 
+	t_caster	*intersec;
 	while (y < NY)
 	{
 		int	x = 0;
 		while (x < NX)
 		{
 			ray = ray_for_pixel(cam, x, y);
+			intersec = (t_caster *)malloc(sizeof(t_caster));
+			intersec = init_intersec_list(intersec);
 			//printf("ray_origin : (%f, %f, %f)\t ray_direction : (%f, %f, %f)\n", ray->origin->x,ray->origin->y, ray->origin->z, ray->direction->x, ray->direction->y, ray->direction->z);
-			intersec = sphere_intersection(ray, spher);
+
 			//intersec = plane_intersection(ray, spher);
-			t_hit	*hit = hiter_point(intersec, spher);
+			all_intersec(intersec, ray, sence);
+			t_intersec	*hit = hiter_point(intersec);
 			if (hit)
 			{
 				t_coo	*hitposition = position(ray, hit->t);
-				prepare_computations(&comp, ray, hit);
-				//rgb = slighting(hitposition, light, ray->direction, spher->material, vector_normalize(hitposition), is_shadowed(&comp, light));
-				rgb = lighting(comp, light, is_shadowed(&comp,light));
+				prepare_computations(&comp, ray, hit, light);
+				rgb = lighting(comp, light, is_shadowed(&comp,light, sence));
 			}
 			else
 				rgb = create_vector(0, 0, 0, 0);
