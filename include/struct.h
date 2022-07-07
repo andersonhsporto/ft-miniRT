@@ -51,11 +51,17 @@ typedef struct	s_sphere
 	t_coo	*center;
 	double	diameter;
 	double	radius;
-	t_coo	*color;
 	double	**transform;
 	t_material	*material;
-	struct s_sphere		*next;
 }	t_sphere;
+
+typedef struct	s_plane
+{
+	t_coo	*pos;
+	t_coo	*norm;
+	double	**transform;
+	t_material	*material;
+}	t_plane;
 
 typedef struct	s_cam {
 	t_coo	*view;
@@ -72,13 +78,6 @@ typedef struct	s_view {
 	t_scene	**scenes;
 	t_cam	*cam;
 }				t_view;
-
-typedef struct s_hit
-{
-	t_sphere	*obj;
-	t_light	*light;
-	double	t;
-}	t_hit;
 
 typedef struct intersect_list
 {
@@ -121,6 +120,7 @@ typedef struct		s_comps
 typedef struct s_sence
 {
 	t_sphere	**obj;
+	t_plane		**plane;
 }	t_sence;
 
 #endif

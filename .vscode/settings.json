@@ -3,6 +3,7 @@
 		"mlx.h": "c",
 		"struct.h": "c",
 		"typeinfo": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"minirt.h": "c"
 	}
 }

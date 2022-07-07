@@ -59,4 +59,52 @@ double	cofator_4x4(double **a, int index[2]);
 double	**sub_matrix(double	**a, int index[2], int col, int row);
 
 double	**scalar_4x4_matrix(double **mat, double abs);
+
+t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj);
+
+t_sphere	*init_sphere(void);
+
+void	render_sphere_transform(t_sphere *sphere);
+
+t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj);
+
+t_ray	*ray_for_pixel(t_cam *cam, int x, int y);
+
+t_ray	*create_ray(t_coo *origin, t_coo *direction);
+
+double	**view_transform(t_coo *from, t_coo *to, t_coo *up);
+
+void	camera_pixel_size(int width, int height, t_cam *cam);
+
+t_cam	*init_cam(void);
+
+t_coo	*reflect(t_coo *v, t_coo *n);
+
+t_coo	*normal_object_type(t_material *poly, t_coo *o_point);
+
+t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly);
+
+static void		get_obj_props(t_sphere *sphere, t_comps *comps);
+
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light);
+
+t_coo	*ray_position(t_ray *ray, double t);
+
+t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec	*intersec);
+
+t_caster	*init_intersec_list(t_caster *list);
+
+int	is_shadowed(t_comps *comps, t_light *light, t_sence *sence);
+
+t_coo	*lighting(t_comps args, t_light *current_light, int in_shadow);
+
+void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_sence *sence);
+
+t_intersec	*hiter_point(t_caster	*head);
+
+void	all_plane_intersec(t_caster *cast, t_ray *ray, t_sence *sence);
+
+int	render(t_data *img);
+
+t_ray	*ray_to_object_space(t_ray *ray, double **matrix);
 #endif

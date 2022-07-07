@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/06 09:28:37 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 09:10:57 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,111 +20,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-
-double	**identity(double x, double y, double z)
-{
-	double	**res;
-	int		i;
-
-	i = 0;
-	res = (double **)malloc(sizeof(double *) * 4);
-	while (i < 4)
-	{
-		res[i] = (double *)malloc(sizeof(double) * 4);
-		i++;
-	}
-	res[0][0] = (double)x;res[0][1] = 0.0;res[0][2] = 0.0;res[0][3] = 0.0;
-	res[1][0] = 0.0;res[1][1] = (double)y;res[1][2] = 0.0;res[1][3] = 0.0;
-	res[2][0] = 0.0;res[2][1] = 0.0;res[2][2] = (double)z;res[2][3] = 0.0;
-	res[3][0] = 0.0;res[3][1] = 0.0;res[3][2] = 0.0;res[3][3] = 1.0;
-	return (res);
-}
-
-double	**translation(double x, double y, double z)
-{
-	double	**res;
-
-	res = identity(1, 1, 1);
-	res[0][3] = x;
-	res[1][3] = y;
-	res[2][3] = z;
-	return (res);
-}
-
-static double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_coo *from)
-{
-	double	**matrix;
-	double	**translate;
-	double	**orientation;
-
-	matrix = create_matrix(4, 4);
-	matrix[0][0] = left->x;
-	matrix[0][1] = left->y;
-	matrix[0][2] = left->z;
-	matrix[1][0] = true_up->x;
-	matrix[1][1] = true_up->y;
-	matrix[1][2] = true_up->z;
-	matrix[2][0] = -1.0 * forward->x;
-	matrix[2][1] = -1.0 * forward->y;
-	matrix[2][2] = -1.0 * forward->z;
-	matrix[3][3] = 1.0;
-	translate =  translation(-1.0 * from->x, -1.0 * from->y, -1.0 * from->z);
-	orientation = matrix_multiply(matrix, translate);
-	return (orientation);
-}
-
-double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
-{
-	t_coo		*forward;
-	t_coo		*up_normal;
-	t_coo		*left;
-	t_coo		*true_up;
-
-	forward = vector_normalize(vector_subtration(to, from));
-	up_normal = vector_normalize(up);
-	left = vector_cross(forward, up_normal);
-	true_up = vector_cross(left, forward);
-	return (calculate_orientation(left, true_up, forward, from));
-}
-
-void	camera_pixel_size(int width, int height, t_cam *cam)
-{
-	double	half_view;
-	double	aspect;
-	double	rad;
-
-	rad = (cam->fov * M_PI)/180;
-	half_view = tan(rad / 2);
-	aspect = (double)width / (double)height;
-	if (aspect >= 1)
-	{
-		cam->half_width = half_view;
-		cam->half_height = half_view / aspect;
-	}
-	else
-	{
-		cam->half_width = half_view * aspect;
-		cam->half_height = half_view;
-	}
-	cam->pixel_size = (cam->half_width * 2) / width;
-}
-
-t_cam	*init_cam(void)
-{
-	t_cam	*cam;
-
-	cam = (t_cam *)malloc(sizeof(t_cam));
-	cam->fov = 85;
-	cam->view = create_vector(0, 0.5, -8, 0);
-	cam->pos = create_vector(0, 0, 1, 0);
-	cam->transform = view_transform(cam->view, vector_addition(cam->view, cam->pos),
-		vector_cross(vector_cross(cam->pos, create_vector(0, 1, 0, 0)), cam->pos));
-	cam->transform = matrix_inverter(cam->transform);
-	camera_pixel_size(NX, NY, cam);
-	//printf("half_height : %f, half_width : %f, pixel_size : %f\n", cam->half_height, cam->half_width, cam->pixel_size);
-	cam->origin = mult_matrix_vector(cam->transform, create_vector(0, 0, 0, 1));
-	return(cam);
-}
 
 t_ray	*create_ray(t_coo *origin, t_coo *direction)
 {
@@ -145,25 +40,9 @@ t_ray	*ray_for_pixel(t_cam *cam, int x, int y)
 
 	x_offset = (x + 0.5) * cam->pixel_size;
 	y_offset = (y + 0.5) * cam->pixel_size;
-	//printf("x_offset : %f, y_offset : %f\n", x_offset, y_offset);
 	test = create_vector(cam->half_width - x_offset, cam->half_height - y_offset, -1, 1);
 	direction = vector_normalize(vector_subtration(mult_matrix_vector(cam->transform, test), cam->origin));
-	//printf("vector : (%f, %f, %f)\n",test->x, test->y, test->z);
-	//printf("ray_direction : (%f, %f, %f)\n",direction->x, direction->y, direction->z);
 	return (create_ray(cam->origin, direction));
-}
-
-void	render_sphere_transform(t_sphere *sphere)
-{
-	double	**translate;
-	double	**scale;
-	double	**transform;
-
-	translate = translation(sphere->center->x,
-		sphere->center->y, sphere->center->z);
-	scale = identity(sphere->radius, sphere->radius, sphere->radius);
-	transform = matrix_multiply(scale, translate);
-	sphere->transform = transform;
 }
 
 t_ray	*ray_to_object_space(t_ray *ray, double **matrix)
@@ -179,258 +58,6 @@ t_ray	*ray_to_object_space(t_ray *ray, double **matrix)
 	return (res);
 }
 
-t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj)
-{
-	t_intersec	*intersectionPoints = NULL;
-	t_ray *ray = ray_to_object_space(base_ray, obj->transform);
-	double		dot;
-	double		vals[3];
-
-	t_coo	*sphere_to_ray = vector_subtration(ray->origin, create_vector(0, 0, 0, 1));
-	vals[0] = vector_abs(ray->direction, ray->direction);
-	vals[1] = 2 * vector_abs(ray->direction, sphere_to_ray);
-	dot = vector_abs(sphere_to_ray, sphere_to_ray) - 1;
-	vals[2] = ((vals[1] * vals[1]) - (4 * vals[0] * dot));
-	if (vals[2] >= 0)
-	{
-		intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
-		intersectionPoints->t = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
-		intersectionPoints->obj = obj;
-		intersectionPoints->next = (t_intersec *)malloc(sizeof(t_intersec));
-		intersectionPoints->next->t = (((-1 * vals[1]) + sqrt(vals[2])) / (2 * vals[0]));
-		intersectionPoints->next->obj = obj;
-		intersectionPoints->next->next = NULL;
-	}
-	return (intersectionPoints);
-}
-
-t_intersec	*plane_intersection(t_ray *base_ray, t_sphere *obj)
-{
-	t_intersec	*intersectionPoints = NULL;
-	t_ray *ray = ray_to_object_space(base_ray, obj->transform);
-	if (fabs(ray->direction->y) < EPSILON)
-		return NULL;
-	intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
-	intersectionPoints->t = (-1 *ray->origin->y) / ray->direction->y;
-	intersectionPoints->next = NULL;
-	return intersectionPoints;
-}
-
-t_sphere	*init_sphere(void)
-{
-	t_sphere	*sphere;
-
-	sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	sphere->center = create_vector(0, 0, 0, 0);
-	sphere->diameter = 4;
-	sphere->radius = sphere->diameter / 2;
-	sphere->material = (t_material *)malloc(sizeof(t_material));
-	sphere->material->color = create_vector(1, 0.2, 0.3, 0);
-	sphere->material->ambient = 0.1;
-	sphere->material->diffuse = 0.9;
-	sphere->material->specular = 0.4;
-	sphere->material->shininess = 100.0;
-	return (sphere);
-}
-
-t_coo	*reflect(t_coo *v, t_coo *n)
-{
-	t_coo	*var;
-	t_coo	*res;
-
-	var = vector_multipli_scalar(2.0*vector_abs(v,n),n);
-	res = vector_subtration(v, var);
-	free(var);
-	return(res);
-}
-
-t_coo	*normal_object_type(t_material *poly, t_coo *o_point)
-{
-	return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
-}
-
-t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly)
-{
-	t_coo	*o_point;
-	t_coo	*o_normal;
-	t_coo	*w_normal;
-	double	**inv_trans;
-	double	**transp_trans;
-
-	inv_trans = matrix_inverter(transform);
-	transp_trans = matrix_transpose(inv_trans);
-	o_point = mult_matrix_vector(inv_trans, w_point);
-	o_normal = normal_object_type(poly, o_point);
-	w_normal = mult_matrix_vector(transp_trans, o_normal);
-	w_normal->w = 0;
-	return (vector_normalize(w_normal));
-}
-
-static void		get_obj_props(t_sphere *sphere, t_comps *comps)
-{
-	comps->normal_vec = normal_at(sphere->transform,
-			comps->position, sphere->material);
-}
-
-t_coo	*ray_position(t_ray *ray, double t)
-{
-	return (vector_addition(ray->origin, vector_multipli_scalar(t, ray->direction)));
-}
-
-t_caster	*init_intersec_list(t_caster *list)
-{
-	list->cont = 0;
-	list->intersec = NULL;
-	return (list);
-}
-
-t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec	*intersec)
-{
-	int	i;
-	t_intersec	*aux;
-
-	i = 0;
-	aux = cast->intersec;
-	if (intersec)
-	{
-		while (i < cast->cont)
-		{
-			cast->intersec  = cast->intersec->next;
-			i++;
-		}
-		cast->intersec = intersec;
-		if (aux)
-			cast->intersec = aux;
-		cast->cont += 2;
-	}
-	return (cast);
-}
-
-void	all_intersec(t_caster *cast, t_ray *ray, t_sence *sence)
-{
-	int	i;
-
-	i = 0;
-	while (sence->obj[i])
-	{
-		cast = put_intersection_in_cast(cast, sphere_intersection(ray, sence->obj[i]));
-		i++;
-	}
-}
-
-t_intersec	*hiter_point(t_caster	*head)
-{
-	t_intersec	*hit;
-	t_intersec	*tmp_intersec;
-	t_intersec	*current;
-
-	if (head->intersec == NULL)
-		return (NULL);
-	current = head->intersec;
-	hit = NULL;
-	while (current != NULL)
-	{
-		tmp_intersec = current;
-		if (!hit && tmp_intersec->t >= 0)
-			hit = tmp_intersec;
-		else if (tmp_intersec->t >= 0 && tmp_intersec->t < hit->t)
-			hit = tmp_intersec;
-		current = current->next;
-	}
-	if (hit && hit == 0)
-		hit = NULL;
-	return (hit);
-}
-
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light)
-{
-	comps->light = light;
-	comps->t = hit->t;
-	comps->obj = hit->obj;
-	comps->position = ray_position(rt, comps->t);
-	comps->eye_vec = vector_multipli_scalar(-1, rt->direction);
-	get_obj_props(comps->obj, comps);
-	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
-	{
-		comps->inside = 1;
-		comps->normal_vec = vector_multipli_scalar(-1, comps->normal_vec);
-	}
-	else
-		comps->inside = 0;
-	comps->reflect_vec = reflect(rt->direction, comps->normal_vec);
-	comps->over_point = vector_addition(vector_multipli_scalar(EPSILON, comps->normal_vec), comps->position);
-}
-
-int	is_shadowed(t_comps *comps, t_light *light, t_sence *sence)
-{
-	t_coo	*path;
-	double	distance;
-	t_ray	*rc;
-	t_intersec	*hit;
-	t_caster	*intersec;
-	int	result;
-
-	path = vector_subtration(light->posi, comps->over_point);
-	distance = vector_abs(path, path);
-	rc = create_ray(comps->over_point, vector_normalize(path));
-	intersec = (t_caster *)malloc(sizeof(t_caster));
-	intersec = init_intersec_list(intersec);
-
-	all_intersec(intersec, rc, sence);
-	//intersec = plane_intersection(rc, comps->obj);
-	hit = hiter_point(intersec);
-	if (hit && hit->t < distance)
-		result = 0;
-	else
-		result = 1;
-	return (result);
-}
-
-static void	set_light_params(t_comps *args, t_ltparams *params, t_light *lt)
-{
-	params->effective_color = vector_multipli(args->obj->material->color,
-	lt->intensity);
-	params->light_v = vector_normalize(vector_subtration(args->over_point, lt->posi));
-	params->ambient = vector_multipli_scalar(args->obj->material->ambient, params->effective_color);
-	params->light_dot_normal = vector_abs(params->light_v, args->normal_vec);
-}
-
-
-t_coo	*lighting(t_comps args, t_light *current_light, int in_shadow)
-{
-	t_ltparams	params;
-
-	set_light_params(&args, &params, current_light);
-	if (params.light_dot_normal < 0 || in_shadow == 1)
-	{
-		params.diffuse = create_vector(0, 0, 0, 0);
-		params.specular = create_vector(0, 0, 0, 0);
-	}
-	else
-	{
-		params.diffuse = vector_multipli_scalar((args.obj->material->diffuse * params.light_dot_normal),
-			params.effective_color);
-		params.reflect_v = reflect(vector_multipli_scalar(-1, params.light_v),
-			args.normal_vec);
-		params.reflect_dot_eye = vector_abs(params.reflect_v, args.eye_vec);
-		if (params.reflect_dot_eye <= 0)
-			params.specular = create_vector(0, 0, 0, 0);
-		else
-			params.specular = vector_multipli_scalar(args.obj->material->specular *
-			(pow(params.reflect_dot_eye, args.obj->material->shininess)), current_light->intensity);
-	}
-	return (vector_addition(
-	vector_addition(params.diffuse, params.specular), params.ambient));
-}
-
-t_coo	*position(t_ray *ray, double t)
-{
-	t_coo	*aux = vector_multipli_scalar(t, ray->direction);
-	t_coo	*position = vector_addition(ray->origin, aux);
-	return (position);
-}
-
-
 int	render(t_data *img)
 {
 	t_cam	*cam;
@@ -445,10 +72,13 @@ int	render(t_data *img)
 	cam = init_cam();
 	spher = init_sphere();
 	sence = (t_sence *)malloc(sizeof(t_sence));
-	sence->obj = (t_sphere **)malloc(sizeof(t_sphere *) * 2);
+	sence->obj = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
 	sence->obj[0] = spher;
-	sence->obj[1] = NULL;
+	sence->obj[1] = init_sphere();
+	sence->obj[1]->center = create_vector(2, 1, 0, 0);
+	sence->obj[2] = NULL;
 	render_sphere_transform(spher);
+	render_sphere_transform(sence->obj[1]);
 	light = (t_light *)malloc(sizeof(t_light));
 	light->posi = create_vector(0, -8, 3, 0);
 	light->intensity = create_vector(0, 0 ,1 , 0);
@@ -466,11 +96,11 @@ int	render(t_data *img)
 			//printf("ray_origin : (%f, %f, %f)\t ray_direction : (%f, %f, %f)\n", ray->origin->x,ray->origin->y, ray->origin->z, ray->direction->x, ray->direction->y, ray->direction->z);
 
 			//intersec = plane_intersection(ray, spher);
-			all_intersec(intersec, ray, sence);
+			all_sphere_intersec(intersec, ray, sence);
 			t_intersec	*hit = hiter_point(intersec);
 			if (hit)
 			{
-				t_coo	*hitposition = position(ray, hit->t);
+				t_coo	*hitposition = ray_position(ray, hit->t);
 				prepare_computations(&comp, ray, hit, light);
 				rgb = lighting(comp, light, is_shadowed(&comp,light, sence));
 			}

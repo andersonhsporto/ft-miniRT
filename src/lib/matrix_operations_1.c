@@ -157,3 +157,33 @@ double	**matrix_inverter(double **a)
 	res = scalar_4x4_matrix(transp, 1 / abs);
 	return (res);
 }
+
+double	**identity(double x, double y, double z)
+{
+	double	**res;
+	int		i;
+
+	i = 0;
+	res = (double **)malloc(sizeof(double *) * 4);
+	while (i < 4)
+	{
+		res[i] = (double *)malloc(sizeof(double) * 4);
+		i++;
+	}
+	res[0][0] = (double)x;res[0][1] = 0.0;res[0][2] = 0.0;res[0][3] = 0.0;
+	res[1][0] = 0.0;res[1][1] = (double)y;res[1][2] = 0.0;res[1][3] = 0.0;
+	res[2][0] = 0.0;res[2][1] = 0.0;res[2][2] = (double)z;res[2][3] = 0.0;
+	res[3][0] = 0.0;res[3][1] = 0.0;res[3][2] = 0.0;res[3][3] = 1.0;
+	return (res);
+}
+
+double	**translation(double x, double y, double z)
+{
+	double	**res;
+
+	res = identity(1, 1, 1);
+	res[0][3] = x;
+	res[1][3] = y;
+	res[2][3] = z;
+	return (res);
+}
