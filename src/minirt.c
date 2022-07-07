@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 11:07:51 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 12:16:51 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ int	render(t_data *img)
 	poly->sphere[1] = init_sphere();
 	poly->sphere[1]->center = create_vector(2, 1, 0, 0);
 	poly->sphere[2] = NULL;
-	poly->plane = NULL;
+	poly->plane = (t_plane **)malloc(sizeof(t_plane *) * 2);
+	poly->plane[0] = init_plane();
+	poly->plane[1] = NULL;
+	render_plane_transform(poly->plane[0]);
 	render_sphere_transform(spher);
 	render_sphere_transform(poly->sphere[1]);
 	light = (t_light *)malloc(sizeof(t_light));
@@ -98,10 +101,10 @@ int	render(t_data *img)
 
 			//intersec = plane_intersection(ray, spher);
 			all_sphere_intersec(intersec, ray, poly);
+			all_plane_intersec(intersec, ray, poly);
 			t_intersec	*hit = hiter_point(intersec);
 			if (hit)
 			{
-				t_coo	*hitposition = ray_position(ray, hit->t);
 				prepare_computations(&comp, ray, hit, light, poly);
 				rgb = lighting(comp, light, is_shadowed(&comp,light, poly));
 			}

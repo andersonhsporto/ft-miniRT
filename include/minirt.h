@@ -62,7 +62,7 @@ double	**sub_matrix(double	**a, int index[2], int col, int row);
 
 double	**scalar_4x4_matrix(double **mat, double abs);
 
-t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj);
+t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj, int obj_pos);
 
 t_sphere	*init_sphere(void);
 
@@ -102,9 +102,15 @@ void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 
 t_intersec	*hiter_point(t_caster	*head);
 
-void	all_plane_intersec(t_caster *cast, t_ray *ray, t_sence *sence);
+void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 
 int	render(t_data *img);
 
 t_ray	*ray_to_object_space(t_ray *ray, double **matrix);
+
+t_plane	*init_plane(void);
+
+double	**normal_rotation_matrix(t_coo *normal);
+
+void	render_plane_transform(t_plane *plane);
 #endif

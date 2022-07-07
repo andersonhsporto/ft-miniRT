@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 11:05:05 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 11:27:02 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_coo	*normal_object_type(t_material *poly, t_coo *o_point, int obj_type)
 {
 	if (obj_type == SPHERE)
 		return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
+	else if (obj_type == PLANE)
+		return (create_vector(0, 1, 0, 0));
 }
 
 t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, int obj_type)
@@ -53,6 +55,12 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos)
 		comps->normal_vec = normal_at(comps->poly->sphere[obj_pos]->transform,
 				comps->position, comps->poly->sphere[obj_pos]->material, obj_type);
 		comps->material = comps->poly->sphere[obj_pos]->material;
+	}
+	if (obj_type == PLANE)
+	{
+		comps->normal_vec = normal_at(comps->poly->plane[obj_pos]->transform,
+				comps->position, comps->poly->plane[obj_pos]->material, obj_type);
+		comps->material = comps->poly->plane[obj_pos]->material;
 	}
 }
 
