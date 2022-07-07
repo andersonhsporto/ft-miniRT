@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 09:10:57 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 11:07:51 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,22 @@ int	render(t_data *img)
 	t_ray	*ray;
 	t_sphere	*spher;
 	t_light		*light;
-	t_sence		*sence;
+	t_poly		*poly;
 	int color;
 	t_comps	comp;
 
 	int	y = 0;
 	cam = init_cam();
 	spher = init_sphere();
-	sence = (t_sence *)malloc(sizeof(t_sence));
-	sence->obj = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
-	sence->obj[0] = spher;
-	sence->obj[1] = init_sphere();
-	sence->obj[1]->center = create_vector(2, 1, 0, 0);
-	sence->obj[2] = NULL;
+	poly = (t_poly *)malloc(sizeof(t_poly));
+	poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
+	poly->sphere[0] = spher;
+	poly->sphere[1] = init_sphere();
+	poly->sphere[1]->center = create_vector(2, 1, 0, 0);
+	poly->sphere[2] = NULL;
+	poly->plane = NULL;
 	render_sphere_transform(spher);
-	render_sphere_transform(sence->obj[1]);
+	render_sphere_transform(poly->sphere[1]);
 	light = (t_light *)malloc(sizeof(t_light));
 	light->posi = create_vector(0, -8, 3, 0);
 	light->intensity = create_vector(0, 0 ,1 , 0);
@@ -96,13 +97,13 @@ int	render(t_data *img)
 			//printf("ray_origin : (%f, %f, %f)\t ray_direction : (%f, %f, %f)\n", ray->origin->x,ray->origin->y, ray->origin->z, ray->direction->x, ray->direction->y, ray->direction->z);
 
 			//intersec = plane_intersection(ray, spher);
-			all_sphere_intersec(intersec, ray, sence);
+			all_sphere_intersec(intersec, ray, poly);
 			t_intersec	*hit = hiter_point(intersec);
 			if (hit)
 			{
 				t_coo	*hitposition = ray_position(ray, hit->t);
-				prepare_computations(&comp, ray, hit, light);
-				rgb = lighting(comp, light, is_shadowed(&comp,light, sence));
+				prepare_computations(&comp, ray, hit, light, poly);
+				rgb = lighting(comp, light, is_shadowed(&comp,light, poly));
 			}
 			else
 				rgb = create_vector(0, 0, 0, 0);

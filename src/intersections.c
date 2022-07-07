@@ -6,20 +6,20 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/06 19:51:31 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 10:16:40 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
-void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_sence *sence)
+void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 {
 	int	i;
 
 	i = 0;
-	while (sence->obj[i])
+	while (poly->sphere[i])
 	{
-		cast = put_intersection_in_cast(cast, sphere_intersection(ray, sence->obj[i]));
+		cast = put_intersection_in_cast(cast, sphere_intersection(ray, poly->sphere[i], i));
 		i++;
 	}
 }

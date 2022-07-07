@@ -63,6 +63,12 @@ typedef struct	s_plane
 	t_material	*material;
 }	t_plane;
 
+typedef struct s_objects
+{
+	t_sphere	**sphere;
+	t_plane		**plane;
+}	t_poly;
+
 typedef struct	s_cam {
 	t_coo	*view;
 	t_coo	*pos;
@@ -82,7 +88,8 @@ typedef struct	s_view {
 typedef struct intersect_list
 {
 	double	t;
-	t_sphere	*obj;
+	int		obj_type;
+	int		obj_pos;
 	struct intersect_list	*next;
 }	t_intersec;
 
@@ -110,7 +117,8 @@ typedef struct		s_comps
 	t_coo	*position;
 	t_light	*light;
 	t_coo	*eye_vec;
-	t_sphere	*obj;
+	t_poly	*poly;
+	t_material	*material;
 	t_coo	*normal_vec;
 	t_coo	*reflect_vec;
 	t_coo	*over_point;

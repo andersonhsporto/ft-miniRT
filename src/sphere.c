@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/06 18:51:59 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 10:15:38 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	render_sphere_transform(t_sphere *sphere)
 	sphere->transform = transform;
 }
 
-t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj)
+t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj, int obj_pos)
 {
 	t_intersec	*intersectionPoints = NULL;
 	t_ray *ray = ray_to_object_space(base_ray, obj->transform);
@@ -59,10 +59,10 @@ t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj)
 	{
 		intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
 		intersectionPoints->t = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
-		intersectionPoints->obj = obj;
+		intersectionPoints->obj_type = SPHERE;
+		intersectionPoints->obj_pos = obj_pos;
 		intersectionPoints->next = (t_intersec *)malloc(sizeof(t_intersec));
 		intersectionPoints->next->t = (((-1 * vals[1]) + sqrt(vals[2])) / (2 * vals[0]));
-		intersectionPoints->next->obj = obj;
 		intersectionPoints->next->next = NULL;
 	}
 	return (intersectionPoints);

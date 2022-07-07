@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/06 19:54:36 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 11:05:05 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ t_coo	*reflect(t_coo *v, t_coo *n)
 	return(res);
 }
 
-t_coo	*normal_object_type(t_material *poly, t_coo *o_point)
+t_coo	*normal_object_type(t_material *poly, t_coo *o_point, int obj_type)
 {
-	return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
+	if (obj_type == SPHERE)
+		return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
 }
 
-t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly)
+t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, int obj_type)
 {
 	t_coo	*o_point;
 	t_coo	*o_normal;
@@ -39,26 +40,30 @@ t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly)
 	inv_trans = matrix_inverter(transform);
 	transp_trans = matrix_transpose(inv_trans);
 	o_point = mult_matrix_vector(inv_trans, w_point);
-	o_normal = normal_object_type(poly, o_point);
+	o_normal = normal_object_type(poly, o_point, obj_type);
 	w_normal = mult_matrix_vector(transp_trans, o_normal);
 	w_normal->w = 0;
 	return (vector_normalize(w_normal));
 }
 
-static void		get_obj_props(t_sphere *sphere, t_comps *comps)
+static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos)
 {
-	comps->normal_vec = normal_at(sphere->transform,
-			comps->position, sphere->material);
+	if (obj_type == SPHERE)
+	{
+		comps->normal_vec = normal_at(comps->poly->sphere[obj_pos]->transform,
+				comps->position, comps->poly->sphere[obj_pos]->material, obj_type);
+		comps->material = comps->poly->sphere[obj_pos]->material;
+	}
 }
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light)
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light, t_poly	*poly)
 {
 	comps->light = light;
 	comps->t = hit->t;
-	comps->obj = hit->obj;
+	comps->poly = poly;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, rt->direction);
-	get_obj_props(comps->obj, comps);
+	get_obj_props(comps, hit->obj_type, hit->obj_pos);
 	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
 	{
 		comps->inside = 1;
@@ -75,7 +80,7 @@ t_coo	*ray_position(t_ray *ray, double t)
 	return (vector_addition(ray->origin, vector_multipli_scalar(t, ray->direction)));
 }
 
-t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec	*intersec)
+t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 {
 	int	i;
 	t_intersec	*aux;
