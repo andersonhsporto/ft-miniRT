@@ -55,6 +55,17 @@ typedef struct	s_sphere
 	t_material	*material;
 }	t_sphere;
 
+typedef struct	s_cylinder
+{
+	t_coo		*pos;
+	t_coo		*norm;
+	double		diameter;
+	double		radius;
+	double		height;
+	t_material	*material;
+	double		**transform;
+}		t_cylinder;
+
 typedef struct	s_plane
 {
 	t_coo	*pos;
@@ -67,6 +78,7 @@ typedef struct s_objects
 {
 	t_sphere	**sphere;
 	t_plane		**plane;
+	t_cylinder	**cylinder;
 }	t_poly;
 
 typedef struct	s_cam {

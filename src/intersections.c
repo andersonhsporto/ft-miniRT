@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 11:28:29 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:47:31 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 	while (poly->plane && poly->plane[i])
 	{
 		cast = put_intersection_in_cast(cast, plane_intersection(ray, poly->plane[i], i));
+		i++;
+	}
+}
+
+void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
+{
+	int	i;
+
+	i = 0;
+	while (poly->cylinder && poly->cylinder[i])
+	{
+		cast = put_intersection_in_cast(cast, cylinder_intersec(ray, poly->cylinder[i], i));
 		i++;
 	}
 }

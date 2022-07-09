@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 11:03:42 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 21:15:51 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	is_shadowed(t_comps *comps, t_light *light, t_poly *poly)
 	intersec = init_intersec_list(intersec);
 
 	all_sphere_intersec(intersec, rc, poly);
-	//intersec = plane_intersection(rc, comps->obj);
+	all_plane_intersec(intersec, rc, poly);
+	all_cylinder_intersec(intersec, rc, poly);
 	hit = hiter_point(intersec);
 	if (hit && hit->t < distance)
 		result = 0;

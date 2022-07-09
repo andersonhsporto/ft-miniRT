@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 12:16:51 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/07 21:18:59 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,21 @@ int	render(t_data *img)
 	cam = init_cam();
 	spher = init_sphere();
 	poly = (t_poly *)malloc(sizeof(t_poly));
-	poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
-	poly->sphere[0] = spher;
-	poly->sphere[1] = init_sphere();
-	poly->sphere[1]->center = create_vector(2, 1, 0, 0);
-	poly->sphere[2] = NULL;
-	poly->plane = (t_plane **)malloc(sizeof(t_plane *) * 2);
-	poly->plane[0] = init_plane();
-	poly->plane[1] = NULL;
-	render_plane_transform(poly->plane[0]);
-	render_sphere_transform(spher);
-	render_sphere_transform(poly->sphere[1]);
+	poly->cylinder = (t_cylinder **)malloc(sizeof(t_cylinder *) * 2);
+	poly->cylinder[0] = init_cylinder();
+	poly->cylinder[1] = NULL;
+	// poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
+	// poly->sphere[0] = spher;
+	// poly->sphere[1] = init_sphere();
+	// poly->sphere[1]->center = create_vector(2, 1, 0, 0);
+	// poly->sphere[2] = NULL;
+	// poly->plane = (t_plane **)malloc(sizeof(t_plane *) * 2);
+	// poly->plane[0] = init_plane();
+	// poly->plane[1] = NULL;
+	// render_plane_transform(poly->plane[0]);
+	// render_sphere_transform(spher);
+	// render_sphere_transform(poly->sphere[1]);
+	render_cylinder_transform(poly->cylinder[0]);
 	light = (t_light *)malloc(sizeof(t_light));
 	light->posi = create_vector(0, -8, 3, 0);
 	light->intensity = create_vector(0, 0 ,1 , 0);
@@ -102,6 +106,7 @@ int	render(t_data *img)
 			//intersec = plane_intersection(ray, spher);
 			all_sphere_intersec(intersec, ray, poly);
 			all_plane_intersec(intersec, ray, poly);
+			all_cylinder_intersec(intersec, ray, poly);
 			t_intersec	*hit = hiter_point(intersec);
 			if (hit)
 			{

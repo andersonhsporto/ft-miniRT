@@ -12,6 +12,7 @@
 #define NY 480
 #define SPHERE 1
 #define PLANE 2
+#define CYLINDER 3
 # define EPSILON 0.00001
 
 t_coo	*vector_addition(t_coo *a, t_coo *b);
@@ -82,9 +83,9 @@ t_cam	*init_cam(void);
 
 t_coo	*reflect(t_coo *v, t_coo *n);
 
-t_coo	*normal_object_type(t_material *poly, t_coo *o_point, int obj_type);
+t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_height);
 
-t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, int obj_type);
+t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *obj_type_height);
 
 void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light, t_poly	*poly);
 
@@ -113,4 +114,12 @@ t_plane	*init_plane(void);
 double	**normal_rotation_matrix(t_coo *normal);
 
 void	render_plane_transform(t_plane *plane);
+
+t_cylinder	*init_cylinder(void);
+
+void	render_cylinder_transform(t_cylinder *cylinder);
+
+t_intersec	*cylinder_intersec(t_ray *base_ray, t_cylinder *cylinder, int pos);
+
+void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 #endif
