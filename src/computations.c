@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 21:11:35 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/11 09:38:04 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *l
 	else
 		comps->inside = 0;
 	comps->reflect_vec = reflect(rt->direction, comps->normal_vec);
-	comps->over_point = vector_addition(vector_multipli_scalar(EPSILON, comps->normal_vec), comps->position);
+	comps->over_point = vector_addition(comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
 }
 
 t_coo	*ray_position(t_ray *ray, double t)

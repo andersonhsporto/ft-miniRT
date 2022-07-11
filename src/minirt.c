@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 21:18:59 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/11 09:39:52 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,17 @@ t_ray	*ray_to_object_space(t_ray *ray, double **matrix)
 	double	**inverse;
 
 	res = (t_ray *)malloc(sizeof(t_ray));
-
 	inverse = matrix_inverter(matrix);
 	res->direction = mult_matrix_vector(inverse, ray->direction);
 	res->origin = mult_matrix_vector(inverse, ray->origin);
 	return (res);
+}
+
+static t_coo	*position(t_ray *ray, double t)
+{
+	t_coo	*aux = vector_multipli_scalar(t, ray->direction);
+	t_coo	*position = vector_addition(ray->origin, aux);
+	return (position);
 }
 
 int	render(t_data *img)
@@ -72,24 +78,26 @@ int	render(t_data *img)
 	cam = init_cam();
 	spher = init_sphere();
 	poly = (t_poly *)malloc(sizeof(t_poly));
-	poly->cylinder = (t_cylinder **)malloc(sizeof(t_cylinder *) * 2);
-	poly->cylinder[0] = init_cylinder();
-	poly->cylinder[1] = NULL;
-	// poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
-	// poly->sphere[0] = spher;
-	// poly->sphere[1] = init_sphere();
-	// poly->sphere[1]->center = create_vector(2, 1, 0, 0);
-	// poly->sphere[2] = NULL;
+	// poly->cylinder = (t_cylinder **)malloc(sizeof(t_cylinder *) * 2);
+	// poly->cylinder[0] = init_cylinder();
+	// poly->cylinder[1] = NULL;
+	poly->cylinder = NULL;
+	poly->plane = NULL;
+	poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
+	//poly->sphere[0] = spher;
+	poly->sphere[0] = init_sphere();
+	poly->sphere[0]->center = create_vector(2, 1, 0, 0);
+	poly->sphere[1] = NULL;
 	// poly->plane = (t_plane **)malloc(sizeof(t_plane *) * 2);
 	// poly->plane[0] = init_plane();
 	// poly->plane[1] = NULL;
 	// render_plane_transform(poly->plane[0]);
-	// render_sphere_transform(spher);
-	// render_sphere_transform(poly->sphere[1]);
-	render_cylinder_transform(poly->cylinder[0]);
+	//render_sphere_transform(spher);
+	render_sphere_transform(poly->sphere[0]);
+	//render_cylinder_transform(poly->cylinder[0]);
 	light = (t_light *)malloc(sizeof(t_light));
-	light->posi = create_vector(0, -8, 3, 0);
-	light->intensity = create_vector(0, 0 ,1 , 0);
+	light->posi = create_vector(0, 8, -3, 0);
+	light->intensity = create_vector(1, 1 ,1 , 0);
 	t_coo	*rgb;
 
 	t_caster	*intersec;
@@ -99,6 +107,7 @@ int	render(t_data *img)
 		while (x < NX)
 		{
 			ray = ray_for_pixel(cam, x, y);
+			//printf("%f %f %f %f\n", ray->direction->x, ray->direction->y, ray->direction->z, ray->direction->w);
 			intersec = (t_caster *)malloc(sizeof(t_caster));
 			intersec = init_intersec_list(intersec);
 			//printf("ray_origin : (%f, %f, %f)\t ray_direction : (%f, %f, %f)\n", ray->origin->x,ray->origin->y, ray->origin->z, ray->direction->x, ray->direction->y, ray->direction->z);
@@ -111,7 +120,9 @@ int	render(t_data *img)
 			if (hit)
 			{
 				prepare_computations(&comp, ray, hit, light, poly);
-				rgb = lighting(comp, light, is_shadowed(&comp,light, poly));
+				//t_coo	*hitposition = position(ray, hit->t);
+				//rgb = slighting(hitposition, light, ray->direction, poly->sphere[0]->material, vector_normalize(hitposition), is_shadowed(&comp, light, poly));
+				rgb = lighting(comp, light, is_shadowed(&comp, light, poly));
 			}
 			else
 				rgb = create_vector(0, 0, 0, 0);
