@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/13 19:57:07 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:34:44 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_sphere	*init_sphere(void)
 	sphere->material->color = create_vector(1, 0.2, 0.3, 0);
 	sphere->material->ambient = 0.1;
 	sphere->material->diffuse = 0.9;
-	sphere->material->specular = 0.4;
-	sphere->material->shininess = 50.0;
+	sphere->material->specular = 0.9;
+	sphere->material->shininess = 200.0;
 	return (sphere);
 }
 
