@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/11 09:39:52 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:49:13 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_ray	*ray_to_object_space(t_ray *ray, double **matrix)
 
 	res = (t_ray *)malloc(sizeof(t_ray));
 	inverse = matrix_inverter(matrix);
-	res->direction = mult_matrix_vector(inverse, ray->direction);
 	res->origin = mult_matrix_vector(inverse, ray->origin);
+	res->direction = mult_matrix_vector(inverse, ray->direction);
 	return (res);
 }
 
@@ -64,6 +64,7 @@ static t_coo	*position(t_ray *ray, double t)
 	return (position);
 }
 
+// sort intersections
 int	render(t_data *img)
 {
 	t_cam	*cam;
@@ -117,6 +118,7 @@ int	render(t_data *img)
 			all_plane_intersec(intersec, ray, poly);
 			all_cylinder_intersec(intersec, ray, poly);
 			t_intersec	*hit = hiter_point(intersec);
+			// tem que dar hit quando o y == 78 ou mior
 			if (hit)
 			{
 				prepare_computations(&comp, ray, hit, light, poly);

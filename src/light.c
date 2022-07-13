@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/11 09:17:59 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/11 21:26:56 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,12 @@ static void	set_light_params(t_comps *args, t_ltparams *params, t_light *lt)
 	params->light_dot_normal = vector_abs(args->normal_vec, params->light_v);
 }
 
-
 t_coo	*lighting(t_comps args, t_light *current_light, int in_shadow)
 {
 	t_ltparams	params;
 
 	set_light_params(&args, &params, current_light);
-	if (params.light_dot_normal < 0 || in_shadow == 1)
+	if (params.light_dot_normal < 0)
 	{
 		params.diffuse = create_vector(0, 0, 0, 0);
 		params.specular = create_vector(0, 0, 0, 0);

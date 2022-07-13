@@ -6,11 +6,29 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/07 20:47:31 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 11:09:52 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
+
+static void	sort_intersection(t_caster *cast)
+{
+	double	aux;
+
+	if (cast->cont)
+	{
+		printf("primeiro %f\n", cast->intersec->t);
+		printf("segundo %f\n", cast->intersec->next->t);
+		if (cast->intersec->t > cast->intersec->next->t)
+		{
+			printf("hello\n");
+			aux = cast->intersec->t;
+			cast->intersec->t = cast->intersec->next->t;
+			cast->intersec->next->t = aux;
+		}
+	}
+}
 
 void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 {
@@ -20,6 +38,7 @@ void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 	while (poly->sphere && poly->sphere[i])
 	{
 		cast = put_intersection_in_cast(cast, sphere_intersection(ray, poly->sphere[i], i));
+		//sort_intersection(cast);
 		i++;
 	}
 }
@@ -51,24 +70,25 @@ void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 t_intersec	*hiter_point(t_caster	*head)
 {
 	t_intersec	*hit;
+	int	i;
 	t_intersec	*tmp_intersec;
 	t_intersec	*current;
 
-	if (head->intersec == NULL)
+	if (head->cont == 0)
 		return (NULL);
-	current = head->intersec;
 	hit = NULL;
-	while (current != NULL)
+	current = head->intersec;
+	i = 0;
+	while (i < head->cont)
 	{
 		tmp_intersec = current;
-		if (!hit && tmp_intersec->t >= 0)
+		if (hit == NULL && tmp_intersec->t >= 0)
 			hit = tmp_intersec;
 		else if (tmp_intersec->t >= 0 && tmp_intersec->t < hit->t)
 			hit = tmp_intersec;
 		current = current->next;
+		i++;
 	}
-	if (hit && hit == 0)
-		hit = NULL;
 	return (hit);
 }
 

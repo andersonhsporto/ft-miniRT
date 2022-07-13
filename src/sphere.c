@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/10 20:30:01 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:57:07 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj, int obj_pos)
 {
 	t_intersec	*intersectionPoints = NULL;
 	t_ray *ray = ray_to_object_space(base_ray, obj->transform);
-	// printf("%f %f %f %f\n", ray->direction->x, ray->direction->y, ray->direction->z, ray->direction->w);
-	// printf("%f %f %f %f\n", ray->origin->x, ray->origin->y, ray->origin->z, ray->origin->w);
+	// printf("ray direction : %f %f %f %f\n", ray->direction->x, ray->direction->y, ray->direction->z, ray->direction->w);
+	// printf("ray origin %f %f %f %f\n", ray->origin->x, ray->origin->y, ray->origin->z, ray->origin->w);
 	double		dot;
 	double		vals[3];
 

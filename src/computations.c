@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/11 09:38:04 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:16:01 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_height)
 {
 	if (obj_type_height[0] == SPHERE)
+	{
 		return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
+	}
 	else if (obj_type_height[0] == PLANE)
 		return (create_vector(0, 1, 0, 0));
 	else if (obj_type_height[0] == CYLINDER)
@@ -59,9 +61,9 @@ t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *o
 	double	**transp_trans;
 
 	inv_trans = matrix_inverter(transform);
-	transp_trans = matrix_transpose(inv_trans);
 	o_point = mult_matrix_vector(inv_trans, w_point);
 	o_normal = normal_object_type(poly, o_point, obj_type_height);
+	transp_trans = matrix_transpose(inv_trans);
 	w_normal = mult_matrix_vector(transp_trans, o_normal);
 	w_normal->w = 0;
 	return (vector_normalize(w_normal));

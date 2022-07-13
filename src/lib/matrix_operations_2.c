@@ -79,13 +79,14 @@ double	**matrix_multiply(double **a, double **b)
 
 t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
 {
+	t_coo	*new_t;
 	double		*new;
 	size_t		i;
 	size_t		j;
 	double		current[4];
 
 	i = 0;
-	new = (double *)malloc(sizeof(double) * 4);
+	new = (double *)calloc(4, sizeof(double));
 	current[0] = t1->x;
 	current[1] = t1->y;
 	current[2] = t1->z;
@@ -100,7 +101,9 @@ t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
 		}
 		i++;
 	}
-	return (create_vector(new[0], new[1], new[2], new[3]));
+	new_t = create_vector(new[0], new[1], new[2], new[3]);
+	free(new);
+	return (new_t);
 }
 
 double	**matrix_transpose(double **a)
