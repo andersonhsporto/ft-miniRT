@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/09 13:42:16 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:37:07 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_intersec	*create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 	if (vals[2] >= 0 && eof(vals[0], 0) == 0)
 	{
 		get_y0_y1(intersec, y_y1, ray);
-		if (min < y_y1[0] && y_y1[0] < max)
+		if (y_y1[0] > min && max > y_y1[0])
 		{
 			res = (t_intersec *)malloc(sizeof(t_intersec));
 			res->t = intersec[0];
@@ -59,7 +59,7 @@ static t_intersec	*create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 			res->obj_type = CYLINDER;
 			res->next = NULL;
 		}
-		if (min < y_y1[1] && y_y1[1] < max)
+		if (y_y1[1] > min && max > y_y1[1])
 		{
 			if (res == NULL)
 			{
@@ -128,7 +128,7 @@ t_cylinder	*init_cylinder(void)
 
 	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
 	cylinder->pos = create_vector(0, 0, 0, 0);
-	cylinder->norm = create_vector(0, 1, 0, 0);
+	cylinder->norm = create_vector(1, 0, 0, 0);
 	cylinder->height = 3;
 	cylinder->diameter = 4;
 	cylinder->radius = cylinder->diameter / 2.0;

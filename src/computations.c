@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/13 20:16:01 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:14:35 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,21 +122,29 @@ t_coo	*ray_position(t_ray *ray, double t)
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 {
 	int	i;
+	int	cont;
 	t_intersec	*aux;
 
 	i = 0;
 	aux = cast->intersec;
 	if (intersec)
 	{
-		while (i < cast->cont)
+		cont = cast->cont - 1;
+		while (i < cont)
 		{
 			cast->intersec  = cast->intersec->next;
 			i++;
 		}
-		cast->intersec = intersec;
+		if (intersec->next)
+			cast->cont++;
+		cast->cont++;
 		if (aux)
+		{
+			cast->intersec->next = intersec;
 			cast->intersec = aux;
-		cast->cont += 2;
+		}
+		else
+			cast->intersec = intersec;
 	}
 	return (cast);
 }

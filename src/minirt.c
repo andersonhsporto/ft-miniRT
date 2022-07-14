@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/13 19:49:13 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:18:25 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,19 @@ int	render(t_data *img)
 	// poly->cylinder[0] = init_cylinder();
 	// poly->cylinder[1] = NULL;
 	poly->cylinder = NULL;
-	poly->plane = NULL;
+	// poly->plane = NULL;
+	//poly->sphere = NULL;
 	poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
-	//poly->sphere[0] = spher;
-	poly->sphere[0] = init_sphere();
-	poly->sphere[0]->center = create_vector(2, 1, 0, 0);
+	poly->sphere[0] = spher;
+	//poly->sphere[0] = init_sphere();
+	//poly->sphere[0]->center = create_vector(2, 1, 0, 0);
 	poly->sphere[1] = NULL;
-	// poly->plane = (t_plane **)malloc(sizeof(t_plane *) * 2);
-	// poly->plane[0] = init_plane();
-	// poly->plane[1] = NULL;
-	// render_plane_transform(poly->plane[0]);
-	//render_sphere_transform(spher);
-	render_sphere_transform(poly->sphere[0]);
+	poly->plane = (t_plane **)malloc(sizeof(t_plane *) * 2);
+	poly->plane[0] = init_plane();
+	poly->plane[1] = NULL;
+	render_plane_transform(poly->plane[0]);
+	render_sphere_transform(spher);
+	//render_sphere_transform(poly->sphere[0]);
 	//render_cylinder_transform(poly->cylinder[0]);
 	light = (t_light *)malloc(sizeof(t_light));
 	light->posi = create_vector(0, 8, -3, 0);
