@@ -144,8 +144,8 @@ typedef struct s_sence
 }	t_sence;
 
 
-#define NX 640
-#define NY 480
+#define NX 600
+#define NY 600
 #define SPHERE 1
 #define PLANE 2
 #define CYLINDER 3
