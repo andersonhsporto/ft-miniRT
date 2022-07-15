@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/08 23:01:58 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:31:01 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ typedef	struct s_record {
 	t_vector	albedo;
 }				t_record;
 
-typedef	struct s_ray {
-	t_vector	origin;
-	t_vector	direction;
-}				t_ray;
-
 typedef struct s_image {
 	void	*ptr;
 	char	*data;
@@ -66,25 +61,25 @@ typedef struct s_mlx {
 	int		endian;
 }	t_mlx;
 
-typedef struct s_cylinder {
+typedef struct s_cylinder_d {
 	t_vector	coordinates;
 	t_vector	normalized;
 	double		radius;
 	double		height;
 	t_vector	color;
-}	t_cylinder;
+}	t_cylinder_d;
 
-typedef struct s_plane {
+typedef struct s_plane_d {
 	t_vector	coordinates;
 	t_vector	normalized;
 	t_vector	color;
-}	t_plane;
+}	t_plane_d;
 
-typedef struct s_sphere {
+typedef struct s_sphere_d {
 	t_vector	center;
 	double		diameter;
 	t_vector	color;
-}				t_sphere;
+}				t_sphere_d;
 
 typedef struct s_element {
 	int					type;
@@ -93,12 +88,12 @@ typedef struct s_element {
 	struct s_element	*next;
 }	t_element;
 
-typedef struct s_light {
+typedef struct s_light_d {
 	t_vector	point;
 	double		bright;
-}	t_light;
+}	t_light_d;
 
-typedef struct s_cam {
+typedef struct s_cam_d {
 	t_vector	view_point;
 	t_vector	orientation;
 	int			fov;
@@ -113,7 +108,7 @@ typedef struct s_cam {
 	t_vector	horizontal;
 	t_vector	vertical;
 	t_vector	lower_left_corner;
-}	t_cam;
+}	t_cam_d;
 
 typedef struct s_ambient {
 	double		ratio;
@@ -130,13 +125,12 @@ typedef struct s_mini {
 	char			**argv;
 	t_index			index;
 	t_ambient		*light_a;
-	t_cam			*cam;
-	t_light			*light;
+	t_cam_d			*cam;
+	t_light_d		*light;
 	t_element		*element;
 	t_mlx			*mlx;
 	t_image			*img;
 	t_record		hit_record;
-	t_ray			ray;
 }	t_mini;
 
 #endif

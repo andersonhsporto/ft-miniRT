@@ -32,7 +32,7 @@ void	print_element_lst(t_element *lst)
 		printf("Element Type ->%d\n", lst->type);
 		if (lst->type == sphere)
 		{
-			t_sphere *sphere_debug = (t_sphere *)lst->ptr;
+			t_sphere_d *sphere_debug = (t_sphere_d *)lst->ptr;
 			printf("Sphere Center ->x %f\n", sphere_debug->center.x);
 			printf("Sphere Center ->y %f\n", sphere_debug->center.y);
 			printf("Sphere Center ->z %f\n", sphere_debug->center.z);
@@ -43,7 +43,7 @@ void	print_element_lst(t_element *lst)
 		}
 		else if (lst->type == plane)
 		{
-			t_plane *plane_debug = (t_plane *)lst->ptr;
+			t_plane_d *plane_debug = (t_plane_d *)lst->ptr;
 			printf("Plane Normalized ->x %f\n", plane_debug->normalized.x);
 			printf("Plane Normalized ->y %f\n", plane_debug->normalized.y);
 			printf("Plane Normalized ->z %f\n", plane_debug->normalized.z);
@@ -53,7 +53,7 @@ void	print_element_lst(t_element *lst)
 		}
 		else if (lst->type == cylinder)
 		{
-			t_cylinder *cylinder_debug = (t_cylinder *)lst->ptr;
+			t_cylinder_d *cylinder_debug = (t_cylinder_d *)lst->ptr;
 			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates.x);
 			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates.y);
 			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates.z);

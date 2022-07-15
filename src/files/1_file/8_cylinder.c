@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:48:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/04 00:18:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:27:44 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	find_cylinder(char **string)
 	}
 }
 
-t_cylinder	*init_cylinder(char **string)
+t_cylinder_d	*init_cylinder(char **string)
 {
-	t_cylinder	*cylinder;
+	t_cylinder_d	*cylinder;
 
-	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
+	cylinder = (t_cylinder_d *)malloc(sizeof(t_cylinder_d));
 	cylinder->coordinates = str_to_double_vector(string[1], ERR_CYLINDER);
 	cylinder->normalized = str_to_double_vector(string[2], ERR_CYLINDER);
 	cylinder->radius = str_to_double(string[3]);
@@ -44,7 +44,7 @@ t_cylinder	*init_cylinder(char **string)
 
 void	lst_new_cylinder(t_mini *data, char **string)
 {
-	t_cylinder	*ptr;
+	t_cylinder_d	*ptr;
 
 	ptr = init_cylinder(string);
 	if (data->element == NULL)

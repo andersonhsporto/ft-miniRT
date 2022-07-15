@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/04 00:18:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:28:29 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	find_plane(char **string)
 	}
 }
 
-t_plane	*init_plane(char **string)
+t_plane_d	*init_plane(char **string)
 {
-	t_plane	*plane;
-	plane = (t_plane *)malloc(sizeof(t_plane));
+	t_plane_d	*plane;
+	plane = (t_plane_d *)malloc(sizeof(t_plane_d));
 	plane->coordinates = str_to_double_vector(string[1], ERR_PLANE);
 	plane->normalized = str_to_double_vector(string[2], ERR_PLANE);
 	plane->color = str_to_double_vector(string[3], ERR_PLANE);
@@ -41,7 +41,7 @@ t_plane	*init_plane(char **string)
 
 void	lst_new_plane(t_mini *data, char **string)
 {
-	t_plane	*ptr;
+	t_plane_d	*ptr;
 	ptr = init_plane(string);
 	if (data->element == NULL)
 	{

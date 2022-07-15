@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:09:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/11 00:02:26 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:48:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	print_image(t_mini *data)
 		y = -1;
 		while (++y < WIDTH)
 		{
-			rt_pixel_put_vector(data->img, x, y, get_colors(x, y, data));
-			// if (y = 4)
-			// 	exit(22);
+			rt_pixel_put_vector(data->img, x, y, vector_new(255, 0, 0));
 		}
 	}
 	mlx_put_image_to_window(data->mlx->mlx,

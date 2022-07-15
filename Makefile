@@ -25,12 +25,17 @@ UTILITY = $(addprefix 2_utility/, \
 )
 
 IMAGE	= $(addprefix 3_image/, \
-		0_image.c 1_mlx.c 2_color.c 3_hit.c 4_sphere.c \
-		5_lighting.c \
+		0_image.c 1_mlx.c \
+)
+
+REFACTOR	= $(addprefix 4_refactor/, \
+	0_matrix_operations_1.c 0_matrix_operations_2.c cam.c \
+	computations.c cylinder.c intersections.c light.c \
+	minirt.c plane.c sphere.c \
 )
 
 SRC		= $(addprefix ./src/files/, \
-		$(VECTOR) $(FILE) $(UTILITY) $(IMAGE) \
+		$(VECTOR) $(FILE) $(UTILITY) $(IMAGE) $(REFACTOR) \
 		minirt.c 1_init.c 2_error.c\
 )
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_camera.c                                         :+:      :+:    :+:   */
+/*   4_0_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:11:25 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/03 19:41:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:29:57 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	find_camera(t_mini *data, char	**string)
 	}
 }
 
-t_cam	*init_camera(char **string)
+t_cam_d	*init_camera(char **string)
 {
-	t_cam	*camera;
+	t_cam_d	*camera;
 
-	camera = (t_cam *)malloc(sizeof(t_cam));
+	camera = (t_cam_d *)malloc(sizeof(t_cam_d));
 	camera->view_point = str_to_double_vector(string[1], ERR_VIEWPOINT);
 	camera->orientation = str_to_double_vector(string[2], ERR_NORMALIZED);
 	if (out_range_double(camera->orientation, -1, 1))

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/04 00:18:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:26:49 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	find_sphere(char **string)
 	}
 }
 
-t_sphere	*init_sphere(char **string)
+t_sphere_d	*init_sphere(char **string)
 {
-	t_sphere	*sphere;
-	sphere = (t_sphere *)malloc(sizeof(t_sphere));
+	t_sphere_d	*sphere;
+	sphere = (t_sphere_d *)malloc(sizeof(t_sphere_d));
 	sphere->center = str_to_double_vector(string[1], ERR_SPHERE);
 	sphere->diameter = str_to_double(string[2]);
 	sphere->color = str_to_double_vector(string[3], ERR_SPHERE);
@@ -41,7 +41,7 @@ t_sphere	*init_sphere(char **string)
 
 void	lst_new_sphere(t_mini *data, char **string)
 {
-	t_sphere	*ptr;
+	t_sphere_d	*ptr;
 	ptr = init_sphere(string);
 	if (data->element == NULL)
 	{

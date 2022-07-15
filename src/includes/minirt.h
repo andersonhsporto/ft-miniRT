@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/11 00:02:46 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/15 20:30:43 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "file.h"
 # include "error_msg.h"
+# include "refactor.h"
 
 # include <stdio.h>
 # include <mlx.h>
@@ -51,17 +52,13 @@ int			out_range_double(t_vector vector, double min, double max);
 
 double		str_to_double(char *str);
 
-t_ray		ray_new(t_vector origin, t_vector direction);
-t_ray		ray_image(t_mini *data, double u, double v);
-t_vector	ray_in(t_ray ray, double t);
-
 void		print_image(t_mini *data);
 int			exit_esc(int keycode, t_mini *data);
 int			red_cross(t_mini *data);
 int			put_image(t_mini *data);
 void	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color);
 
-void		start_camera(t_cam *cam);
+void		start_camera(t_cam_d *cam);
 
 void	debug(t_mini *data);
 void	print_vector(char *vector, t_vector vec);

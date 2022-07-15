@@ -3,16 +3,14 @@
 static double	degrees_to_radians(const double degrees);
 static double	get_viewport_height(const double fov);
 static double	get_aspect_ratio(void);
-static t_vector	get_lower_left_corner(const t_cam *cam);
+static t_vector	get_lower_left_corner(const t_cam_d *cam);
 
-void	start_camera(t_cam *cam)
+void	start_camera(t_cam_d *cam)
 {
 	cam->viewport_height = 	get_viewport_height(cam->fov);
 	cam->viewport_width = cam->viewport_height * get_aspect_ratio();
 	cam->vup = vector_new(0, 1, 0);
 	cam->w = unit_vector(vector_mult(cam->orientation, -1));
-	cam->u = unit_vector(vector_cross(cam->vup, cam->w));
-	cam->v = unit_vector(vector_cross(cam->w, cam->u));
 	cam->horizontal = vector_mult(cam->u, cam->viewport_width);
 	cam->vertical = vector_mult(cam->v, cam->viewport_height);
 	cam->lower_left_corner = get_lower_left_corner(cam);
@@ -46,7 +44,7 @@ static double	get_aspect_ratio(void)
 	return (width / height);
 }
 
-static t_vector	get_lower_left_corner(const t_cam *cam)
+static t_vector	get_lower_left_corner(const t_cam_d *cam)
 {
 	const t_vector	temp = vector_sub(cam->view_point, \
 							vector_div(cam->horizontal, 2.0));
