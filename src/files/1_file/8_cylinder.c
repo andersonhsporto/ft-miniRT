@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:48:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:31:10 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/04 00:18:38 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_cylinder	*init_cylinder(char **string)
 	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
-	cylinder->coordinates = str_to_double_pointer(string[1], ERR_CYLINDER);
-	cylinder->normalized = str_to_double_pointer(string[2], ERR_CYLINDER);
-	cylinder->diameter = str_to_double(string[3]);
+	cylinder->coordinates = str_to_double_vector(string[1], ERR_CYLINDER);
+	cylinder->normalized = str_to_double_vector(string[2], ERR_CYLINDER);
+	cylinder->radius = str_to_double(string[3]);
 	cylinder->height = str_to_double(string[4]);
-	cylinder->color = str_to_double_pointer(string[5], ERR_CYLINDER);
-	if (out_of_range(cylinder->color, 0, 255))
+	cylinder->color = str_to_double_vector(string[5], ERR_CYLINDER);
+	if (out_range_int(cylinder->color, 0, 255))
 	{
 		print_error("miniRT: Invalid Cylinder Color");
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:49:30 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/11 00:02:46 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include "file.h"
 # include "error_msg.h"
 
-# include "tracer.h"
-
 # include <stdio.h>
 # include <mlx.h>
 # include <fcntl.h>
@@ -27,7 +25,6 @@
 
 # define WIDTH 600
 # define HEIGHT 600
-# define RESOLUTION 600
 
 # define KEY_RELEASE 3
 # define DESTROY_NOTIFY 17
@@ -51,38 +48,24 @@ int			matrix_len(char **matrix);
 void		matrix_free(char **matrix);
 char		*replace_string(char *string, char character);
 int			out_range_double(t_vector vector, double min, double max);
-void		swap_double(double *a, double *b);
 
 double		str_to_double(char *str);
 
-double		get_viewport_height(int fov);
-void		orienting_camera(t_mini *data);
+t_ray		ray_new(t_vector origin, t_vector direction);
+t_ray		ray_image(t_mini *data, double u, double v);
+t_vector	ray_in(t_ray ray, double t);
 
-
+void		print_image(t_mini *data);
 int			exit_esc(int keycode, t_mini *data);
 int			red_cross(t_mini *data);
 int			put_image(t_mini *data);
+void	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color);
 
-void	rt_pixel_put_vector(t_image *img, int x, int y, t_vector color);
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void		start_camera(t_cam *cam);
 
 void	debug(t_mini *data);
 void	print_vector(char *vector, t_vector vec);
-void	print_cam_data(t_datacam *data);
-void	render(t_mini *data, t_scene *scene, t_image *img);
 
-t_hit		*hit_scene_object(t_mini *data);
-t_ray		*ray_direction(t_mini *data, int x, int y);
-double		*there_is_light(t_mini *data);
-
-double		*slighting(double *position, t_mini *data, double *eye);
-
-void		*diffuse_specular_zero(t_utils	*utils);
-
-void	hit(t_mini *data, int x, int y);
-
-t_intersec	*sphere_intersection(t_ray *rayy, t_sphere *lst);
-t_intersec	*cylinder_intersection(t_ray *ray, t_cylinder *ptr);
-t_intersec	*plane_intersection(t_ray *ray, t_plane *ptr);
+t_vector	get_colors(int x, int y, t_mini *data);
 
 #endif

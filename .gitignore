@@ -63,5 +63,5 @@ a.out
 libft.a
 miniRT
 .vscode/
-.idea
+.idea/
 *.json

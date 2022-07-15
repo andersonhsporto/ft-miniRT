@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 13:43:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/03 18:57:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,11 @@ void	init_data(t_mini *data)
 	data->cam = NULL;
 	data->light = NULL;
 	data->element = NULL;
-	data->mlx.mlx = mlx_init();
-	data->mlx.win = mlx_new_window(data->mlx.mlx, WIDTH, WIDTH, "miniRT");
-
-	data->img.img = mlx_new_image(data->mlx.mlx, WIDTH, WIDTH);
-	data->img.addr = mlx_get_data_addr(data->img.img, \
-									&data->img.bits_per_pixel, \
-									&data->img.line_length,\
-									&data->img.endian);
-	data->scene = init_scene();
-
-	data->wall = create_vector(0, 0, 7.0);
-	data->wall_size = 7.0;
-	data->hit = NULL;
+	data->mlx = (t_mlx *)malloc(sizeof(t_mlx));
+	data->mlx->mlx = mlx_init();
+	data->mlx->win = mlx_new_window(data->mlx->mlx, WIDTH + 10, HEIGHT + 10, "miniRT");
+	data->img = (t_image *)malloc(sizeof(t_image));
+	data->img->ptr = mlx_new_image(data->mlx->mlx, WIDTH, HEIGHT);
+	data->img->data = mlx_get_data_addr(data->img->ptr, &data->img->bpp, \
+	&data->img->size_line, &data->img->endian);
 }

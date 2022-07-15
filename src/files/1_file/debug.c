@@ -1,22 +1,21 @@
 #include "minirt.h"
 
 void	print_element_lst(t_element *lst);
-void	print_cam_data(t_datacam *data);
 
 void	debug(t_mini *data)
 {
 	printf("DEBUG START\n");
 	printf("Ambient ->r %f\n", data->light_a->ratio);
-	printf("Ambient ->x %f\n", data->light_a->rgb[0]);
-	printf("Ambient ->y %f\n", data->light_a->rgb[1]);
-	printf("Ambient ->z %f\n\n", data->light_a->rgb[2]);
+	printf("Ambient ->x %f\n", data->light_a->rgb.x);
+	printf("Ambient ->y %f\n", data->light_a->rgb.y);
+	printf("Ambient ->z %f\n\n", data->light_a->rgb.z);
 	printf("Camera FOV ->%d\n", data->cam->fov);
 	printf("Camera View Point ->%f\n", data->cam->view_point.x);
 	printf("Camera View Point ->%f\n", data->cam->view_point.y);
 	printf("Camera View Point ->%f\n", data->cam->view_point.z);
-	printf("Camera Normalized ->%f\n", data->cam->normalized_vector.x);
-	printf("Camera Normalized ->%f\n", data->cam->normalized_vector.y);
-	printf("Camera Normalized ->%f\n\n", data->cam->normalized_vector.z);
+	printf("Camera Normalized ->%f\n", data->cam->orientation.x);
+	printf("Camera Normalized ->%f\n", data->cam->orientation.y);
+	printf("Camera Normalized ->%f\n\n", data->cam->orientation.z);
 	printf("Light Brightness ->%f\n", data->light->bright);
 	printf("Light Point ->x %f\n", data->light->point.x);
 	printf("Light Point ->y %f\n", data->light->point.y);
@@ -34,14 +33,13 @@ void	print_element_lst(t_element *lst)
 		if (lst->type == sphere)
 		{
 			t_sphere *sphere_debug = (t_sphere *)lst->ptr;
-			printf("Sphere Center ->x %f\n", sphere_debug->center[0]);
-			printf("Sphere Center ->y %f\n", sphere_debug->center[1]);
-			printf("Sphere Center ->z %f\n", sphere_debug->center[2]);
+			printf("Sphere Center ->x %f\n", sphere_debug->center.x);
+			printf("Sphere Center ->y %f\n", sphere_debug->center.y);
+			printf("Sphere Center ->z %f\n", sphere_debug->center.z);
 			printf("Sphere Diameter ->%f\n", sphere_debug->diameter);
-			printf("Sphere Color ->x %f\n", sphere_debug->color[0]);
-			printf("Sphere Color ->y %f\n", sphere_debug->color[1]);
-			printf("Sphere Color ->z %f\n", sphere_debug->color[2]);
-			ft_putchar_fd('\n', 1);
+			printf("Sphere Color ->x %f\n", sphere_debug->color.x);
+			printf("Sphere Color ->y %f\n", sphere_debug->color.y);
+			printf("Sphere Color ->z %f\n\n", sphere_debug->color.z);
 		}
 		else if (lst->type == plane)
 		{
@@ -56,17 +54,17 @@ void	print_element_lst(t_element *lst)
 		else if (lst->type == cylinder)
 		{
 			t_cylinder *cylinder_debug = (t_cylinder *)lst->ptr;
-			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates[0]);
-			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates[1]);
-			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates[2]);
-			printf("Cylinder Normalized ->x %f\n", cylinder_debug->normalized[0]);
-			printf("Cylinder Normalized ->y %f\n", cylinder_debug->normalized[1]);
-			printf("Cylinder Normalized ->z %f\n", cylinder_debug->normalized[2]);
-			printf("Cylinder Diameter ->%f\n", cylinder_debug->diameter);
+			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates.x);
+			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates.y);
+			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates.z);
+			printf("Cylinder Normalized ->x %f\n", cylinder_debug->normalized.x);
+			printf("Cylinder Normalized ->y %f\n", cylinder_debug->normalized.y);
+			printf("Cylinder Normalized ->z %f\n", cylinder_debug->normalized.z);
+			printf("Cylinder Diameter ->%f\n", cylinder_debug->radius);
 			printf("Cylinder Height ->%f\n", cylinder_debug->height);
-			printf("Cylinder Color ->x %f\n", cylinder_debug->color[0]);
-			printf("Cylinder Color ->y %f\n", cylinder_debug->color[1]);
-			printf("Cylinder Color ->z %f\n", cylinder_debug->color[2]);
+			printf("Cylinder Color ->x %f\n", cylinder_debug->color.x);
+			printf("Cylinder Color ->y %f\n", cylinder_debug->color.y);
+			printf("Cylinder Color ->z %f\n", cylinder_debug->color.z);
 		}
 		lst = lst->next;
 	}
@@ -79,72 +77,28 @@ void	print_vector(char *vector, t_vector vec)
 	return ;
 }
 
-void	print_cam_data(t_datacam *data)
-{
-	printf("\nDEBUG CAM DATA\n");
-	printf("View Height ->%f\n", data->viewport_height);
-	printf("View Width ->%f\n", data->viewport_width);
-	print_vector("view_up", data->view_up);
-	print_vector("w", data->w);
-	print_vector("u", data->u);
-	print_vector("v", data->v);
-	print_vector("horizontal", data->hori_dir);
-	print_vector("vertical", data->vert_dir);
-	print_vector("llcorner", data->lower_left_corner);
-	printf("DEBUG CAM DATA END\n");
-	return ;
-}
+	double		viewport_height;
+	double		viewport_width;
+	t_vector	view_up;
+	t_vector	w;
+	t_vector	u;
+	t_vector	v;
+	t_vector	hori_dir;
+	t_vector	vert_dir;
+	t_vector	lower_left_corner;
 
-t_sphere	*get_sphere_in_list(t_element *lst)
-{
-	t_sphere	*sp;
-	t_element	*temp;
-
-	temp = lst;
-	while (temp != NULL)
-	{
-		if (temp->type == sphere)
-		{
-			sp = temp->ptr;
-			return (sp);
-		}
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
-t_cylinder	*get_cy_in_list(t_element *lst)
-{
-	t_cylinder	*cy;
-	t_element	*temp;
-
-	temp = lst;
-	while (temp != NULL)
-	{
-		if (temp->type == cylinder)
-		{
-			cy = temp->ptr;
-			return (cy);
-		}
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
-t_plane	*get_plane_in_list(t_element *lst)
-{
-	t_plane		*ptr;
-	t_element	*temp;
-
-	temp = lst;
-	while (temp != NULL)
-	{
-		if (temp->type == plane)
-		{
-			ptr = temp->ptr;
-			return (ptr);
-		}
-		temp = temp->next;
-	}
-	return (NULL);
-}
+// void	print_cam_data(t_datacam *data)
+// {
+// 	printf("\nDEBUG CAM DATA\n");
+// 	printf("View Height ->%f\n", data->viewport_height);
+// 	printf("View Width ->%f\n", data->viewport_width);
+// 	print_vector("view_up", data->view_up);
+// 	print_vector("w", data->w);
+// 	print_vector("u", data->u);
+// 	print_vector("v", data->v);
+// 	print_vector("horizontal", data->hori_dir);
+// 	print_vector("vertical", data->vert_dir);
+// 	print_vector("llcorner", data->lower_left_corner);
+// 	printf("DEBUG CAM DATA END\n");
+// 	return ;
+// }

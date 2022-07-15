@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   6_conversion.c                                     :+:      :+:    :+:   */
+/*   1_mlx.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 00:04:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 00:04:29 by anhigo-s         ###   ########.fr       */
+/*   Created: 2022/06/06 22:44:42 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/07/11 00:02:33 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	*vector_to_double(t_vector vector)
+void	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color)
 {
-	double	*double_vector;
+	char	*dst;
 
-	double_vector = (double *)malloc(sizeof(double) * 3);
-	double_vector[0] = vector.x;
-	double_vector[1] = vector.y;
-	double_vector[2] = vector.z;
-	return (double_vector);
+	dst = img->data + (y * img->size_line + x * (img->bpp / 8));
+	*(unsigned int *)dst = (int)(color.x) << 16 | (int)(color.y) << 8 \
+	| (int)(color.z);
 }

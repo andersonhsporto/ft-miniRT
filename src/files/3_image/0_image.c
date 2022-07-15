@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2_matrix_co.c                                      :+:      :+:    :+:   */
+/*   0_image.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 02:18:51 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/21 02:18:51 by anhigo-s         ###   ########.fr       */
+/*   Created: 2022/06/06 22:09:50 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/07/11 00:02:26 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	matrix_cofactor(double a[3][3])
+void	print_image(t_mini *data)
 {
-	double	res;
-	double	signal;
-	double	matrix[2][2];
-	int		jboo;
-	int		size = 2;
-
-	res = 0.0;
-	for (int u = 0; u < 3; u++)
+	int x;
+	int y;
+	x = HEIGHT;
+	while (--x >= 0)
 	{
-		signal = 1.0;
-		if (u % 2 == 1)
-			signal = -1.0;
-		for (int i = 0; i < 2; i++)
+		y = -1;
+		while (++y < WIDTH)
 		{
-			jboo = 0;
-			for (int j = 0; j < size; j++)
-			{
-				if (j == u)
-					jboo = 1;
-				matrix[i][j] = a[i + 1][j + jboo];
-			}
+			rt_pixel_put_vector(data->img, x, y, get_colors(x, y, data));
+			// if (y = 4)
+			// 	exit(22);
 		}
-		res += (signal * a[0][u]) * matrix_x_multiply(matrix);
 	}
-	return (res);
+	mlx_put_image_to_window(data->mlx->mlx,
+							data->mlx->win,
+							data->img->ptr,
+							5, 5);
 }

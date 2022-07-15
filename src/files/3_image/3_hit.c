@@ -1,26 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2_plane.c                                          :+:      :+:    :+:   */
+/*   3_hit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/19 23:36:37 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/27 01:53:16 by anhigo-s         ###   ########.fr       */
+/*   Created: 2022/07/08 22:50:44 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/07/08 23:39:52 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_intersec	*plane_intersection(t_ray *ray, t_plane *ptr)
-{
-	t_intersec	*intersection_points;
+int	hit_sphere(t_mini *data, t_sphere *ptr);
 
-	if (ray->direction[1] < 0.001)
-		return (NULL);
-	intersection_points = (t_intersec *)malloc(sizeof(t_intersec));
-	intersection_points->t1 = -ray->origin[1] / ray->direction[1];
-	intersection_points->cont = 2;
-	intersection_points->color = ptr->color;
-	return (intersection_points);
+int hit_element(t_mini *data, t_element *node)
+{
+	int	i;
+
+	i = 0;
+	if (node->type == sphere)
+	{
+		i = hit_sphere(data, (t_sphere *)node->ptr);
+	}
+
+	return (i);
+}
+
+int	hit(t_mini *data)
+{
+	t_element	*tmp;
+	int 		i;
+
+
+	tmp = data->element;
+	i = 0;
+	while (tmp != NULL)
+	{
+		if (hit_element(data, tmp))
+		{
+			printf("hit element\n");
+			i = 1;
+		}
+		tmp = tmp->next;
+	}
+	return (i);
 }

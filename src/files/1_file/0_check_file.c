@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:28:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/23 23:19:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/09 00:02:24 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	check_file(t_mini *data, char *file)
 	if (fd < 0)
 	{
 		print_error("miniRT: Open Error");
+		exit (1);
 	}
 	while (fd)
 	{
@@ -32,10 +33,8 @@ void	check_file(t_mini *data, char *file)
 			break ;
 		temp = replace_string(map_line, '+');
 		get_line_scene(data, temp);
-
 	}
 	debug(data);
-	close(fd);
 	return ;
 }
 
@@ -56,3 +55,4 @@ static int	check_line(char *line)
 	}
 	return (0);
 }
+

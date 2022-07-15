@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 02:33:04 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/04 00:18:38 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ t_sphere	*init_sphere(char **string)
 {
 	t_sphere	*sphere;
 	sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	sphere->center = str_to_double_pointer(string[1], ERR_SPHERE);
+	sphere->center = str_to_double_vector(string[1], ERR_SPHERE);
 	sphere->diameter = str_to_double(string[2]);
-	sphere->color = str_to_double_pointer(string[3], ERR_SPHERE);
-	if (out_of_range(sphere->color, 0, 255))
+	sphere->color = str_to_double_vector(string[3], ERR_SPHERE);
+	if (out_range_int(sphere->color, 0, 255))
 	{
 		print_error("miniRT: Invalid Sphere Color");
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:32:01 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/24 13:43:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:29:34 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,4 @@ t_vector	str_to_double_vector(char	*string, char *error_message)
 	view_point.z = str_to_double(split[2]);
 	matrix_free(split);
 	return (view_point);
-}
-
-double	*str_to_double_pointer(char	*string, char *error_message)
-{
-	double		*ptr;
-	char		**split;
-
-	split = ft_split(string, ',');
-	if (matrix_len(split) != 3)
-	{
-		print_error(error_message);
-		exit(1);
-	}
-	ptr = create_vector(str_to_double(split[0]), str_to_double(split[1]), str_to_double(split[2]));
-    printf("STRING: %s split: %s double: %f\n", string, split[1], ptr[1]);
-	matrix_free(split);
-	return (ptr);
 }

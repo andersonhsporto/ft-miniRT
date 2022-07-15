@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:59:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/06/26 23:10:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/03 19:15:34 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,4 @@ int	out_range_int(t_vector vector, int min, int max)
 	{
 		return (0);
 	}
-}
-
-int	out_of_range(double *vector, int min, int max)
-{
-	if (vector[0] < min || vector[0] > max)
-	{
-		return (1);
-	}
-	else if (vector[1] < min || vector[1] > max)
-	{
-		return (1);
-	}
-	else if (vector[2] < min || vector[2] > max)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
-
-void	swap_double(double *a, double *b)
-{
-	double	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }
