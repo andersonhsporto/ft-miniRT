@@ -241,7 +241,7 @@ t_intersec	*hiter_point(t_caster	*head);
 
 void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 
-int	render(t_data *img);
+int 	render(t_image *img);
 
 t_ray	*ray_to_object_space(t_ray *ray, double **matrix);
 

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/15 20:31:01 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 00:59:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef	struct s_record {
 }				t_record;
 
 typedef struct s_image {
-	void	*ptr;
-	char	*data;
-	int		bpp;
-	int		size_line;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
 	int		endian;
 }	t_image;
 
@@ -129,7 +129,7 @@ typedef struct s_mini {
 	t_light_d		*light;
 	t_element		*element;
 	t_mlx			*mlx;
-	t_image			*img;
+	t_image			img;
 	t_record		hit_record;
 }	t_mini;
 

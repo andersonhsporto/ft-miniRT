@@ -135,8 +135,8 @@ double	**matrix_inverter(double **a)
 {
 	double	**res;
 	double	**transp;
-	int		index[2];
 	double	abs;
+	int		index[2];
 
 	res = create_matrix(4, 4);
 	abs = matrix_determinant(a);

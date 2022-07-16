@@ -86,7 +86,7 @@ t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
 	double		current[4];
 
 	i = 0;
-	new = (double *)calloc(4, sizeof(double));
+	new = (double *)ft_calloc(4, sizeof(double));
 	current[0] = t1->x;
 	current[1] = t1->y;
 	current[2] = t1->z;
