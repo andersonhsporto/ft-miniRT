@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:59:00 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/15 20:36:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 03:36:36 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ t_plane *init_plane_re(void)
 	plane->pos = create_vector(0, 0, -10, 0);
 	plane->norm = create_vector(0, 1, 0, 0);
 	plane->material = (t_material *)malloc(sizeof(t_material));
-	plane->material->color = create_vector(1, 0.2, 0.3, 0);
+	plane->material->color = create_vector(1, 1, 1, 0);
 	plane->material->ambient = 0.1;
-	plane->material->diffuse = 0.9;
+	plane->material->diffuse = 0.2; // intensidade da luz
 	plane->material->specular = 0.4;
-	plane->material->shininess = 100.0;
+	plane->material->shininess = 10.0;
 	return (plane);
 }
 

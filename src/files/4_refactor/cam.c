@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:40:12 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/16 01:22:14 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 03:08:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_coo *from)
+double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_coo *from)
 {
 	double	**matrix;
 	double	**translate;
@@ -36,15 +36,15 @@ static double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forwar
 
 double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
 {
-	t_coo		*forward;
-	t_coo		*up_normal;
-	t_coo		*left;
-	t_coo		*true_up;
+	const t_coo		*forward = vector_normalize(vector_subtration(to, from));
+	const t_coo		*up_normal = vector_normalize(up);
+	const t_coo		*left = vector_cross(forward, up_normal);
+	const t_coo		*true_up = vector_cross(left, forward);
 
-	forward = vector_normalize(vector_subtration(to, from));
-	up_normal = vector_normalize(up);
-	left = vector_cross(forward, up_normal);
-	true_up = vector_cross(left, forward);
+	// free((t_coo *)forward);
+	// free((t_coo *)up_normal);
+	// free((t_coo *)left);
+	// // free((t_coo *)true_up);
 	return (calculate_orientation(left, true_up, forward, from));
 }
 
@@ -65,20 +65,4 @@ void	camera_pixel_size(int width, int height, t_cam *cam)
 		cam->half_height = half_view;
 	}
 	cam->pixel_size = (cam->half_width * 2) / width;
-}
-
-t_cam	*init_cam(void)
-{
-	t_cam	*cam;
-
-	cam = (t_cam *)malloc(sizeof(t_cam));
-	cam->fov = 85;
-	cam->view = create_vector(0, 0.5, -8, 0);
-	cam->pos = create_vector(0, 0, 1, 0);
-	cam->transform = view_transform(cam->view, vector_addition(cam->view, cam->pos),
-		vector_cross(vector_cross(cam->pos, create_vector(0, 1, 0, 0)), cam->pos));
-	cam->transform = matrix_inverter(cam->transform);
-	camera_pixel_size(WIDTH, HEIGHT, cam);
-	cam->origin = mult_matrix_vector(cam->transform, create_vector(0, 0, 0, 1));
-	return(cam);
 }

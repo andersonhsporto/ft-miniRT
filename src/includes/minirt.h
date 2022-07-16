@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 01:11:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 03:08:03 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 #include "file.h"
 #include "error_msg.h"
-#include "refactor.h"
 
 #include <stdio.h>
 #include <mlx.h>
@@ -56,13 +55,20 @@ void print_image(t_mini *data);
 int exit_esc(int keycode, t_mini *data);
 int red_cross(t_mini *data);
 void print_image(t_mini *data);
-void rt_pixel_put_vector(t_image *img, int y, int x, t_vector color);
+
+void 	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color); //TODO: remove this
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 
 void start_camera(t_cam_d *cam);
 
 void debug(t_mini *data);
 void print_vector(char *vector, t_vector vec);
-
+void	print_vector_coo(char *vector, t_coo *vec);
 t_vector get_colors(int x, int y, t_mini *data);
 
+
+
+// Refactor // TODO: remove this
+int 	render(t_mini *img);
+t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y);
 #endif

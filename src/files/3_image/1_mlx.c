@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:44:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 00:51:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 01:32:53 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color)
 	| (int)(color.z);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 

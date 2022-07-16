@@ -1,7 +1,7 @@
 NAME	= miniRT
 
 CC		=	clang #trocar para clang ao final
-CFLAGS	=	-O2 -Wall -Wextra -g #-Werror
+CFLAGS	=	-O2 -ffast-math -Wall -Wextra -g #-Werror
 INCLUDE =	-I ./src/includes -I ./libs/libft
 LIBFT	=	-L ./libs/libft -lft
 MLX		=   -lmlx -lXext -lX11

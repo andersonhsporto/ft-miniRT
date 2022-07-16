@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/15 20:36:41 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 03:21:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_sphere *init_sphere_re(void)
 	sphere->diameter = 4;
 	sphere->radius = sphere->diameter / 2;
 	sphere->material = (t_material *)malloc(sizeof(t_material));
-	sphere->material->color = create_vector(1, 0.2, 0.3, 0);
+	sphere->material->color = create_vector(0.2, 0.2, 1, 0);
 	sphere->material->ambient = 0.1;
 	sphere->material->diffuse = 0.9;
 	sphere->material->specular = 0.9;

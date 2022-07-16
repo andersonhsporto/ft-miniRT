@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 00:59:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 03:00:21 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCT_H
 
 # include "vector.h"
+# include "refactor.h" //TODO: remove this
 
 enum e_type
 {
@@ -94,20 +95,15 @@ typedef struct s_light_d {
 }	t_light_d;
 
 typedef struct s_cam_d {
-	t_vector	view_point;
-	t_vector	orientation;
-	int			fov;
+	t_coo		*view_point;
+	t_coo		*orientation;
+	double		fov;
 
-	double		viewport_height;
-	double		viewport_width;
-
-	t_vector	vup;
-	t_vector	w;
-	t_vector	u;
-	t_vector	v;
-	t_vector	horizontal;
-	t_vector	vertical;
-	t_vector	lower_left_corner;
+	double		**transform;
+	t_coo		*origin;
+	double		pixel_size;
+	double		half_height;
+	double		half_width;
 }	t_cam_d;
 
 typedef struct s_ambient {

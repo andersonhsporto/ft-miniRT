@@ -189,9 +189,7 @@ double	matrix_x_multiply(double a[2][2]);
 
 t_coo	*mult_matrix_vector(double **m1, t_coo *t1);
 
-static double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_coo *from);
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_coo *from);
 
 double	cofator_4x4(double **a, int index[2]);
 
@@ -206,8 +204,6 @@ t_sphere	*init_sphere_re(void);
 void	render_sphere_transform(t_sphere *sphere);
 
 t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj, int obj_pos);
-
-t_ray	*ray_for_pixel(t_cam *cam, int x, int y);
 
 t_ray	*create_ray(t_coo *origin, t_coo *direction);
 
@@ -240,8 +236,6 @@ void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 t_intersec	*hiter_point(t_caster	*head);
 
 void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
-
-int 	render(t_image *img);
 
 t_ray	*ray_to_object_space(t_ray *ray, double **matrix);
 

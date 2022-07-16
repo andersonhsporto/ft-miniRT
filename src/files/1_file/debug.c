@@ -9,13 +9,13 @@ void	debug(t_mini *data)
 	printf("Ambient ->x %f\n", data->light_a->rgb.x);
 	printf("Ambient ->y %f\n", data->light_a->rgb.y);
 	printf("Ambient ->z %f\n\n", data->light_a->rgb.z);
-	printf("Camera FOV ->%d\n", data->cam->fov);
-	printf("Camera View Point ->%f\n", data->cam->view_point.x);
-	printf("Camera View Point ->%f\n", data->cam->view_point.y);
-	printf("Camera View Point ->%f\n", data->cam->view_point.z);
-	printf("Camera Normalized ->%f\n", data->cam->orientation.x);
-	printf("Camera Normalized ->%f\n", data->cam->orientation.y);
-	printf("Camera Normalized ->%f\n\n", data->cam->orientation.z);
+	printf("Camera FOV ->%f\n", data->cam->fov);
+	printf("Camera View Point ->%f\n", data->cam->view_point->x);
+	printf("Camera View Point ->%f\n", data->cam->view_point->y);
+	printf("Camera View Point ->%f\n", data->cam->view_point->z);
+	printf("Camera Normalized ->%f\n", data->cam->orientation->x);
+	printf("Camera Normalized ->%f\n", data->cam->orientation->y);
+	printf("Camera Normalized ->%f\n\n", data->cam->orientation->z);
 	printf("Light Brightness ->%f\n", data->light->bright);
 	printf("Light Point ->x %f\n", data->light->point.x);
 	printf("Light Point ->y %f\n", data->light->point.y);
@@ -102,3 +102,10 @@ void	print_vector(char *vector, t_vector vec)
 // 	printf("DEBUG CAM DATA END\n");
 // 	return ;
 // }
+
+
+void	print_vector_coo(char *vector, t_coo *vec)
+{
+	printf("Vector %s: %f, %f, %f \n", vector, vec->x, vec->y, vec->z);
+	return ;
+}
