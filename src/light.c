@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/13 20:30:41 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/16 18:11:35 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_coo	*lighting(t_comps args, t_light *current_light, int in_shadow)
 			(pow(params.reflect_dot_eye, args.material->shininess)), current_light->intensity);
 	}
 	return (vector_addition(
-	vector_addition(params.diffuse, params.specular), params.ambient));
+	vector_addition(params.diffuse, params.ambient), params.specular));
 }
 
 t_coo	*slighting(t_coo *position, t_light *light, t_coo *eye, t_material *material, t_coo *normal, int is_shadow)
@@ -103,5 +103,5 @@ t_coo	*slighting(t_coo *position, t_light *light, t_coo *eye, t_material *materi
 			specularcolor = vector_multipli_scalar(material->specular * factor, light->intensity);
 		}
 	}
-	return vector_addition(vector_addition(ambienteColor, difusecolor), specularcolor);
+	return vector_addition(vector_addition(ambienteColor, specularcolor), difusecolor);
 }

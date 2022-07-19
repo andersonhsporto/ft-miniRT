@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/13 22:09:03 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/18 23:21:43 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_sphere	*init_sphere(void)
 	sphere->diameter = 4;
 	sphere->radius = sphere->diameter / 2;
 	sphere->material = (t_material *)malloc(sizeof(t_material));
-	sphere->material->color = create_vector(1, 0.2, 0.3, 0);
-	sphere->material->ambient = 0.1;
+	sphere->material->color = create_vector(1, 1, 1, 0);
+	sphere->material->ambient = 0.9;
 	sphere->material->diffuse = 0.9;
 	sphere->material->specular = 0.9;
 	sphere->material->shininess = 200.0;
