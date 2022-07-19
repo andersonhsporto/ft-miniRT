@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:59:00 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/16 03:36:36 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/16 03:38:20 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double **normal_rotation_matrix(t_coo *normal)
 {
-	double angle;
-	double vals[3];
-	t_coo *axis;
-	double **rotation;
+	double	angle;
+	double	vals[3];
+	double	**rotation;
+	t_coo	*axis;
 
 	rotation = create_matrix(4, 4);
 	angle = acos(vector_abs(normal, create_vector(0, 1, 0, 0)));
@@ -56,9 +56,9 @@ t_plane *init_plane_re(void)
 
 void render_plane_transform(t_plane *plane)
 {
-	double **translate;
-	double **rotate;
-	double **transform;
+	double	**translate;
+	double	**rotate;
+	double	**transform;
 
 	translate = translation(plane->pos->x,
 							plane->pos->y, plane->pos->z);
@@ -67,10 +67,11 @@ void render_plane_transform(t_plane *plane)
 	plane->transform = transform;
 }
 
-t_intersec *plane_intersection(t_ray *base_ray, t_plane *obj, int obj_pos)
+t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj, int obj_pos)
 {
-	t_intersec *intersectionPoints = NULL;
-	t_ray *ray = ray_to_object_space(base_ray, obj->transform);
+	t_intersec	*intersectionPoints = NULL;
+	t_ray		*ray = ray_to_object_space(base_ray, obj->transform);
+
 	if (fabs(ray->direction->y) < EPSILON)
 		return NULL;
 	intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));

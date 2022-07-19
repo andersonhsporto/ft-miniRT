@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 		init_data(&data);
 		check_file(&data, argv[1]);
 		render(&data);
+
 		print_image(&data);
 		mlx_hook(data.mlx->win, KEY_RELEASE, BUTTON_RELEASE, exit_esc, &data);
 		mlx_hook(data.mlx->win, EXPOSE, EXPOSURE_MASK, print_image, &data);
