@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/16 03:21:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:24:43 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_sphere *init_sphere_re(void)
+t_sphere	*init_sphere_re(void)
 {
 	t_sphere *sphere;
 
@@ -23,8 +23,8 @@ t_sphere *init_sphere_re(void)
 	sphere->material = (t_material *)malloc(sizeof(t_material));
 	sphere->material->color = create_vector(0.2, 0.2, 1, 0);
 	sphere->material->ambient = 0.1;
-	sphere->material->diffuse = 0.9;
-	sphere->material->specular = 0.9;
+	sphere->material->diffuse = 0.9; // randomico
+	sphere->material->specular = 0.9; // randomico
 	sphere->material->shininess = 200.0;
 	return (sphere);
 }
@@ -46,8 +46,6 @@ t_intersec *sphere_intersection(t_ray *base_ray, t_sphere *obj, int obj_pos)
 {
 	t_intersec *intersectionPoints = NULL;
 	t_ray *ray = ray_to_object_space(base_ray, obj->transform);
-	// printf("ray direction : %f %f %f %f\n", ray->direction->x, ray->direction->y, ray->direction->z, ray->direction->w);
-	// printf("ray origin %f %f %f %f\n", ray->origin->x, ray->origin->y, ray->origin->z, ray->origin->w);
 	double dot;
 	double vals[3];
 

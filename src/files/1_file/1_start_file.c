@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:29:10 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/05/19 22:10:32 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/19 23:28:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,11 @@ int	legal_char(char character)
 	{
 		return (0);
 	}
+}
+
+void	divide_coo(t_coo *coo, int nbr)
+{
+	coo->x = coo->x / nbr;
+	coo->y = coo->y / nbr;
+	coo->z = coo->z / nbr;
 }

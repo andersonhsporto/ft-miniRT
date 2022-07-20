@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 03:00:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:27:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ typedef struct s_element {
 }	t_element;
 
 typedef struct s_light_d {
-	t_vector	point;
+	t_coo		*point;
 	double		bright;
+	t_coo		*intensity;
 }	t_light_d;
 
 typedef struct s_cam_d {
@@ -108,7 +109,7 @@ typedef struct s_cam_d {
 
 typedef struct s_ambient {
 	double		ratio;
-	t_vector	rgb;
+	t_coo		*rgb;
 }	t_ambient;
 
 typedef struct s_index {
@@ -127,6 +128,7 @@ typedef struct s_mini {
 	t_mlx			*mlx;
 	t_image			img;
 	t_record		hit_record;
+	t_ray			*ray;
 }	t_mini;
 
 #endif

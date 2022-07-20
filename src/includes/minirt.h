@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 03:08:03 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:44:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ int exit_esc(int keycode, t_mini *data);
 int red_cross(t_mini *data);
 void print_image(t_mini *data);
 
+void	divide_coo(t_coo *coo, int nbr);
+
 void 	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color); //TODO: remove this
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void	coo_pixel_put_vector(t_image *img, int y, int x, t_coo *color);
 
 void start_camera(t_cam_d *cam);
 
@@ -69,6 +72,11 @@ t_vector get_colors(int x, int y, t_mini *data);
 
 
 // Refactor // TODO: remove this
+
+int		is_shadowed(t_comps *comps, t_poly *poly, t_mini *data);
+t_coo	*lighting(t_comps args, int in_shadow, t_mini *data);
+t_coo	*init_light_intensity(t_coo *rgb, double temp_data);
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_poly	*poly);
 int 	render(t_mini *img);
 t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y);
 #endif

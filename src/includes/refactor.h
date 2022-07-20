@@ -219,17 +219,11 @@ t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_hei
 
 t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *obj_type_height);
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light, t_poly	*poly);
-
 t_coo	*ray_position(t_ray *ray, double t);
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec);
 
 t_caster	*init_intersec_list(t_caster *list);
-
-int	is_shadowed(t_comps *comps, t_light *light, t_poly *poly);
-
-t_coo	*lighting(t_comps args, t_light *current_light, int in_shadow);
 
 void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 

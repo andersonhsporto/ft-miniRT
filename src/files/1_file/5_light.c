@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:58:53 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/15 20:25:51 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:34:56 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_light_d	*init_light(char **string)
 	t_light_d	*light;
 
 	light = (t_light_d *)malloc(sizeof(t_light_d));
-	light->point = str_to_double_vector(string[1], ERR_LIGHT);
+	light->point = str_to_coo_vector(string[1], ERR_LIGHT);
 	light->bright = str_to_double(string[2]);
 	if (light->bright < 0 || light->bright > 1)
 	{

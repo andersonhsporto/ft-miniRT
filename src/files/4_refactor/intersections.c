@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/15 20:36:33 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/19 23:07:24 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 	}
 }
 
-t_intersec	*hiter_point(t_caster	*head)
+t_intersec	*hiter_point(t_caster *head)
 {
 	t_intersec	*hit;
-	int	i;
 	t_intersec	*tmp_intersec;
 	t_intersec	*current;
+	int	i;
 
 	if (head->cont == 0)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/15 20:36:28 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:42:31 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,8 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos)
 	}
 }
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_light *light, t_poly	*poly)
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_poly	*poly)
 {
-	comps->light = light;
 	comps->t = hit->t;
 	comps->poly = poly;
 	comps->position = ray_position(rt, comps->t);

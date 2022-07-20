@@ -6,11 +6,28 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/05/30 20:56:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:37:42 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_coo	*init_light_intensity(t_coo *rgb, double temp_data)
+{
+	t_coo	*light_intensity;
+	t_coo	*temp0;
+	t_coo	*temp1;
+	t_coo	*temp2;
+
+	temp0 = create_vector(1, 1, 1, 0);
+	temp1 = vector_normalize(rgb);
+	temp2 = vector_multipli_scalar(temp_data, temp1);
+	light_intensity = vector_addition(temp0, temp2);
+	free(temp0);
+	free(temp1);
+	free(temp2);
+	return (light_intensity);
+}
 
 void	get_line_scene(t_mini *data, char *line)
 {
@@ -41,4 +58,5 @@ void	get_line_scene(t_mini *data, char *line)
 	else if (find_cylinder(split))
 		lst_new_cylinder(data, split);
 	matrix_free(split);
+
 }
