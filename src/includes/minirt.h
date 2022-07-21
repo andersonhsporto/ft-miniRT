@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/20 00:44:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/21 00:10:22 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,16 @@ t_vector get_colors(int x, int y, t_mini *data);
 
 // Refactor // TODO: remove this
 
+t_intersec	*get_hit(int x, int y, t_mini *data, t_poly *poly);
+t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_poly *poly, t_mini *data);
+
 int		is_shadowed(t_comps *comps, t_poly *poly, t_mini *data);
 t_coo	*lighting(t_comps args, int in_shadow, t_mini *data);
 t_coo	*init_light_intensity(t_coo *rgb, double temp_data);
 void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_poly	*poly);
 int 	render(t_mini *img);
 t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y);
+
+void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
+void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 #endif

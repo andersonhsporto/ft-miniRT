@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/20 00:42:31 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 23:01:59 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,11 @@ t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 	return (cast);
 }
 
-t_caster	*init_intersec_list(t_caster *list)
+t_caster	*init_intersec_list(void)
 {
+	t_caster *list;
+
+	list = (t_caster *)malloc(sizeof(t_caster) * 1);
 	list->cont = 0;
 	list->intersec = NULL;
 	return (list);

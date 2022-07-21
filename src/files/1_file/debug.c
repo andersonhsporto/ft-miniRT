@@ -36,13 +36,14 @@ void	print_element_lst(t_element *lst)
 		if (lst->type == sphere)
 		{
 			t_sphere_d *sphere_debug = (t_sphere_d *)lst->ptr;
-			printf("Sphere Center ->x %f\n", sphere_debug->center.x);
-			printf("Sphere Center ->y %f\n", sphere_debug->center.y);
-			printf("Sphere Center ->z %f\n", sphere_debug->center.z);
-			printf("Sphere Diameter ->%f\n", sphere_debug->diameter);
-			printf("Sphere Color ->x %f\n", sphere_debug->color.x);
-			printf("Sphere Color ->y %f\n", sphere_debug->color.y);
-			printf("Sphere Color ->z %f\n\n", sphere_debug->color.z);
+			printf("Sphere Center ->x %f\n", sphere_debug->center->x);
+			printf("Sphere Center ->y %f\n", sphere_debug->center->y);
+			printf("Sphere Center ->z %f\n", sphere_debug->center->z);
+			printf("Sphere Color ->x %f\n", sphere_debug->color->x);
+			printf("Sphere Color ->y %f\n", sphere_debug->color->y);
+			printf("Sphere Color ->z %f\n", sphere_debug->color->z);
+			printf("Sphere Radius -->%f\n", sphere_debug->radius);
+			printf("\n");
 		}
 		else if (lst->type == plane)
 		{

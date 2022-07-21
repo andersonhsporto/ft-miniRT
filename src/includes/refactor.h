@@ -97,31 +97,31 @@ typedef struct	s_view {
 	t_cam	*cam;
 }				t_view;
 
-typedef struct intersect_list
+typedef struct s_intersect_list
 {
-	double	t;
-	int		obj_type;
-	int		obj_pos;
-	struct intersect_list	*next;
+	double					t;
+	int						obj_type;
+	int						obj_pos;
+	struct s_intersect_list	*next;
 }	t_intersec;
 
 typedef struct s_caster
 {
-	int	cont;
+	int			cont;
 	t_intersec	*intersec;
 }	t_caster;
 
-typedef struct			s_ltparams
+typedef struct	s_ltparams
 {
 	double		light_dot_normal;
 	double		reflect_dot_eye;
-	t_coo	*effective_color;
-	t_coo	*light_v;
-	t_coo	*ambient;
-	t_coo	*diffuse;
-	t_coo	*specular;
-	t_coo	*reflect_v;
-}						t_ltparams;
+	t_coo		*effective_color;
+	t_coo		*light_v;
+	t_coo		*ambient;
+	t_coo		*diffuse;
+	t_coo		*specular;
+	t_coo		*reflect_v;
+}				t_ltparams;
 
 typedef struct		s_comps
 {
@@ -223,13 +223,11 @@ t_coo	*ray_position(t_ray *ray, double t);
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec);
 
-t_caster	*init_intersec_list(t_caster *list);
+t_caster	*init_intersec_list(void);
 
-void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
+void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 
 t_intersec	*hiter_point(t_caster	*head);
-
-void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 
 t_ray	*ray_to_object_space(t_ray *ray, double **matrix);
 
@@ -244,8 +242,6 @@ t_cylinder	*init_cylinder_re(void);
 void	render_cylinder_transform(t_cylinder *cylinder);
 
 t_intersec	*cylinder_intersec(t_ray *base_ray, t_cylinder *cylinder, int pos);
-
-void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly);
 
 t_coo	*slighting(t_coo *position, t_light *light, t_coo *eye, t_material *material, t_coo *normal, int is_shadow);
 

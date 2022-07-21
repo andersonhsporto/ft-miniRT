@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/20 00:44:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/21 00:11:12 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 int	is_shadowed(t_comps *comps, t_poly *poly, t_mini *data)
 {
-	t_coo	*path;
-	double	distance;
-	t_ray	*rc;
+	t_coo		*path;
+	double		distance;
+	int			result;
 	t_intersec	*hit;
-	t_caster	*intersec;
-	int	result;
 
 	path = vector_subtration(data->light->point, comps->over_point); //data
 	distance = vector_abs(path, path);
-	rc = create_ray(comps->over_point, vector_normalize(path));
-	intersec = (t_caster *)malloc(sizeof(t_caster));
-	intersec = init_intersec_list(intersec);
-
-	all_sphere_intersec(intersec, rc, poly);
-	all_plane_intersec(intersec, rc, poly);
-	all_cylinder_intersec(intersec, rc, poly);
-	hit = hiter_point(intersec);
+	hit = get_shadow_hit(comps->over_point, path, poly, data);
 	if (hit && hit->t < distance)
 		result = 1;
 	else

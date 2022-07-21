@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 03:07:55 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:42:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ t_ray	*ray_to_object_space(t_ray *ray, double **matrix)
 	res->direction = mult_matrix_vector(inverse, ray->direction);
 	return (res);
 }
-

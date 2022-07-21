@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/19 23:07:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/21 00:03:03 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	sort_intersection(t_caster *cast)
 	}
 }
 
-void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
+void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 	}
 }
 
-void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
+void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
 	}
 }
 
-void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly)
+void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list)
 {
 	int	i;
 
@@ -72,7 +72,7 @@ t_intersec	*hiter_point(t_caster *head)
 	t_intersec	*hit;
 	t_intersec	*tmp_intersec;
 	t_intersec	*current;
-	int	i;
+	int			i;
 
 	if (head->cont == 0)
 		return (NULL);

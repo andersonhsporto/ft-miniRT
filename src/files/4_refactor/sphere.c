@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/20 00:24:43 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/20 23:24:57 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_sphere	*init_sphere_re(void)
 	t_sphere *sphere;
 
 	sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	sphere->center = create_vector(0, 0, 0, 0);
+	sphere->center = create_vector(2, 1, 0, 0);
 	sphere->diameter = 4;
 	sphere->radius = sphere->diameter / 2;
 	sphere->material = (t_material *)malloc(sizeof(t_material));
@@ -29,11 +29,11 @@ t_sphere	*init_sphere_re(void)
 	return (sphere);
 }
 
-void render_sphere_transform(t_sphere *sphere)
+void	render_sphere_transform(t_sphere *sphere)
 {
-	double **translate;
-	double **scale;
-	double **transform;
+	double	**translate;
+	double	**scale;
+	double	**transform;
 
 	translate = translation(sphere->center->x,
 							sphere->center->y, sphere->center->z);
@@ -42,7 +42,7 @@ void render_sphere_transform(t_sphere *sphere)
 	sphere->transform = transform;
 }
 
-t_intersec *sphere_intersection(t_ray *base_ray, t_sphere *obj, int obj_pos)
+t_intersec	*sphere_intersection(t_ray *base_ray, t_sphere *obj, int obj_pos)
 {
 	t_intersec *intersectionPoints = NULL;
 	t_ray *ray = ray_to_object_space(base_ray, obj->transform);

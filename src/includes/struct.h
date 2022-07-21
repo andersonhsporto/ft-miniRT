@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/20 00:27:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/21 00:20:20 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ enum e_type
 {
 	sphere,
 	plane,
-	square,
 	cylinder,
 	light,
 	camera,
@@ -77,9 +76,9 @@ typedef struct s_plane_d {
 }	t_plane_d;
 
 typedef struct s_sphere_d {
-	t_vector	center;
-	double		diameter;
-	t_vector	color;
+	t_coo		*center;
+	t_coo		*color;
+	double		radius;
 }				t_sphere_d;
 
 typedef struct s_element {
