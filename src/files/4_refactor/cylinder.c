@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/15 20:36:30 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/21 01:02:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int eof(double a, double b)
 		return (0);
 }
 
-static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ray, int pos)
+static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ray)
 {
 	t_intersec *res;
 	double intersec[2];
@@ -54,7 +54,6 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 		{
 			res = (t_intersec *)malloc(sizeof(t_intersec));
 			res->t = intersec[0];
-			res->obj_pos = pos;
 			res->obj_type = CYLINDER;
 			res->next = NULL;
 		}
@@ -64,7 +63,6 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 			{
 				res = (t_intersec *)malloc(sizeof(t_intersec));
 				res->t = intersec[1];
-				res->obj_pos = pos;
 				res->obj_type = CYLINDER;
 				res->next = NULL;
 			}
@@ -72,7 +70,6 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 			{
 				res->next = (t_intersec *)malloc(sizeof(t_intersec));
 				res->next->t = intersec[1];
-				res->next->obj_pos = pos;
 				res->next->obj_type = CYLINDER;
 				res->next->next = NULL;
 			}
@@ -81,14 +78,15 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 	return (res);
 }
 
-t_intersec *cylinder_intersec(t_ray *base_ray, t_cylinder *cylinder, int pos)
+t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr)
 {
-	t_ray *ray;
-	double a;
-	double b;
-	double c;
-	double disc;
-	double vals[3];
+	t_cylinder	*cylinder = (t_cylinder *)ptr;
+	t_ray		*ray;
+	double		a;
+	double		b;
+	double		c;
+	double		disc;
+	double		vals[3];
 
 	ray = ray_to_object_space(base_ray, cylinder->transform);
 	a = pow(ray->direction->x, 2) + pow(ray->direction->z, 2);
@@ -99,7 +97,7 @@ t_intersec *cylinder_intersec(t_ray *base_ray, t_cylinder *cylinder, int pos)
 	vals[0] = a;
 	vals[1] = b;
 	vals[2] = disc;
-	return (create_intersec(vals, cylinder, ray, pos));
+	return (create_intersec(vals, cylinder, ray));
 }
 
 void render_cylinder_transform(t_cylinder *cylinder)

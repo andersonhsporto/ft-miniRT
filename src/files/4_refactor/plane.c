@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:59:00 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/19 23:23:07 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/21 01:07:28 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void render_plane_transform(t_plane *plane)
 	plane->transform = transform;
 }
 
-t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj, int obj_pos)
+t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj)
 {
 	t_intersec	*intersectionPoints = NULL;
 	t_ray		*ray = ray_to_object_space(base_ray, obj->transform);
@@ -76,7 +76,6 @@ t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj, int obj_pos)
 		return (NULL);
 	intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
 	intersectionPoints->t = (-1 * ray->origin->y) / ray->direction->y;
-	intersectionPoints->obj_pos = obj_pos;
 	intersectionPoints->obj_type = PLANE;
 	intersectionPoints->next = NULL;
 	return intersectionPoints;
