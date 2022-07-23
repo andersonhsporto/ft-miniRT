@@ -1,7 +1,7 @@
 NAME	= miniRT
 
 CC		=	clang #trocar para clang ao final
-CFLAGS	=	-O2 -ffast-math -Wall -Wextra -g #-Werror
+CFLAGS	=	-O2 -Wall -Wextra -g #-Werror
 INCLUDE =	-I ./src/includes -I ./libs/libft
 LIBFT	=	-L ./libs/libft -lft
 MLX		=   -lmlx -lXext -lX11
@@ -31,7 +31,7 @@ IMAGE	= $(addprefix 3_image/, \
 REFACTOR	= $(addprefix 4_refactor/, \
 		0_matrix_operations_1.c 0_matrix_operations_2.c cam.c \
 		computations.c cylinder.c intersections.c light.c \
-		minirt.c plane.c sphere.c \
+		render.c plane.c sphere.c \
 )
 
 SRC		= $(addprefix ./src/files/, \

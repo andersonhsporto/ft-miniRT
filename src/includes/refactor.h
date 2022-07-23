@@ -144,11 +144,6 @@ typedef struct s_sence
 	t_plane		**plane;
 }	t_sence;
 
-
-#define NX 600
-#define NY 600
-# define EPSILON 0.00001
-
 t_coo	*vector_addition(t_coo *a, t_coo *b);
 
 t_coo	*vector_subtration(t_coo *a, t_coo *b);

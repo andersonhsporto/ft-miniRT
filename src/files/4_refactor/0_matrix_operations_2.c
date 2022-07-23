@@ -79,7 +79,7 @@ double	**matrix_multiply(double **a, double **b)
 
 t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
 {
-	t_coo	*new_t;
+	t_coo		*new_t;
 	double		*new;
 	size_t		i;
 	size_t		j;

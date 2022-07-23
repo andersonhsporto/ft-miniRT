@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/23 02:18:49 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 02:53:21 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@
 #include <math.h>
 #include <string.h> // check in end
 
-#define WIDTH 600
-#define HEIGHT 600
+# define WIDTH 600
+# define HEIGHT 600
 
-#define KEY_RELEASE 3
-#define DESTROY_NOTIFY 17
-#define EXPOSE 2
-#define ESC 65307
-#define BUTTON_RELEASE (1L << 1)
-#define EXPOSURE_MASK (1L << 15)
-#define NO_EVENT 0L
+# define EPSILON 0.00001
+
+# define KEY_RELEASE 3
+# define DESTROY_NOTIFY 17
+# define EXPOSE 2
+# define ESC 65307
+# define BUTTON_RELEASE (1L << 1)
+# define EXPOSURE_MASK (1L << 15)
+# define NO_EVENT 0L
 
 int check_args(int argc, char **argv);
 int check_extension(char *file);
@@ -85,4 +87,8 @@ t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y);
 
 void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
+
+void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb);
+
+void	free_data(t_mini *data);
 #endif

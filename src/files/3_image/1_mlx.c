@@ -6,19 +6,23 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:44:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/19 00:04:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 02:44:55 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color)
+void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb)
 {
-	char	*dst;
+	const int	color = ((int)(255.99 * rgb->x) << 16) + \
+						((int)(255.99 * rgb->y) << 8) + \
+						((int)(255.99 * rgb->z));
+	char		*dst;
 
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = (int)(color.x) << 16 | (int)(color.y) << 8 \
-	| (int)(color.z);
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+	free(rgb);
+	rgb = NULL;
 }
 
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
@@ -27,13 +31,4 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	coo_pixel_put_vector(t_image *img, int y, int x, t_coo *color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = (int)(color->x) << 16 | (int)(color->y) << 8 \
-	| (int)(color->z);
 }
