@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 22:45:34 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:46:58 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int eof(double a, double b)
 		return (0);
 }
 
-static t_intersec *create_intersec(double *vals, t_cylinder *cy, t_ray *ray)
+static t_intersec *create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 {
 	t_intersec *res;
 	double intersec[2];
@@ -42,7 +42,7 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cy, t_ray *ray)
 	double min;
 	double max;
 
-	max = cy->height / 2.0;
+	max = cyd->height / 2.0;
 	min = -1.0 * max;
 	res = NULL;
 	intersec[0] = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
@@ -78,12 +78,9 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cy, t_ray *ray)
 	return (res);
 }
 
-t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr, void *ptr0)
+t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr)
 {
-	t_cylinder		*cylinder = (t_cylinder *)ptr;
-	t_cylinder_d	*cyd = (t_cylinder_d *)ptr0;
-	// printf("o>>>%f\n", cylinder->transform[0][0]);
-	// printf("n>>>%f\n", cyd->transform[0][0]);
+	t_cylinder_d	*cyd = (t_cylinder_d *)ptr;
 	t_ray		*ray;
 	double		a;
 	double		b;
@@ -100,7 +97,7 @@ t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr, void *ptr0)
 	vals[0] = a;
 	vals[1] = b;
 	vals[2] = disc;
-	return (create_intersec(vals, cylinder, ray));
+	return (create_intersec(vals, ray, cyd));
 }
 
 void	render_cylinder_transform(t_cylinder *cylinder)

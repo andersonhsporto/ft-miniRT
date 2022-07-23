@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:59:00 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 23:08:37 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:47:09 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,11 @@ void render_plane_transform(t_plane *plane)
 	plane->transform = transform;
 }
 
-t_intersec	*plane_intersection(t_ray *base_ray, void *ptr, void *ptr0)
+t_intersec	*plane_intersection(t_ray *base_ray, void *ptr)
 {
-	t_plane		*obj = (t_plane *)ptr;
-	t_plane_d	*obj2 = (t_plane_d *)ptr0;
-	t_intersec	*intersectionPoints = NULL;
-	t_ray		*ray = ray_to_object_space(base_ray, obj->transform);
+	const t_plane_d	*obj2 = (t_plane_d *)ptr;
+	const t_ray		*ray = ray_to_object_space(base_ray, obj2->transform);
+	t_intersec		*intersectionPoints;
 
 	if (fabs(ray->direction->y) < EPSILON)
 		return (NULL);
@@ -80,5 +79,6 @@ t_intersec	*plane_intersection(t_ray *base_ray, void *ptr, void *ptr0)
 	intersectionPoints->t = (-1 * ray->origin->y) / ray->direction->y;
 	intersectionPoints->obj_type = PLANE;
 	intersectionPoints->next = NULL;
-	return intersectionPoints;
+	free((t_ray *)ray);
+	return (intersectionPoints);
 }

@@ -12,11 +12,11 @@ t_intersec	*get_hit(int x, int y, t_mini *data, t_poly *poly)
 	while (tmp != NULL)
 	{
 		if (tmp->type == sphere)
-			all_intersec(intersec, data->ray, poly->sphere[0], tmp->ptr, sphere_intersection);
+			all_intersec(intersec, data->ray, tmp->ptr, sphere_intersection);
 		else if (tmp->type == cylinder)
-			all_intersec(intersec, data->ray, poly->cylinder[0], tmp->ptr, cylinder_intersec);
+			all_intersec(intersec, data->ray, tmp->ptr, cylinder_intersec);
 		else if (tmp->type == plane)
-			all_intersec(intersec, data->ray, poly->plane[0], tmp->ptr, plane_intersection);
+			all_intersec(intersec, data->ray, tmp->ptr, plane_intersection);
 		tmp = tmp->next;
 	}
 	hit = hiter_point(intersec);
@@ -37,11 +37,11 @@ t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_poly *poly, t_mini 
 	while (tmp != NULL)
 	{
 		if (tmp->type == sphere)
-			all_intersec(intersec, ray, poly->sphere[0], tmp->ptr, sphere_intersection);
+			all_intersec(intersec, ray, tmp->ptr, sphere_intersection);
 		else if (tmp->type == cylinder)
-			all_intersec(intersec, ray, poly->cylinder[0], tmp->ptr, cylinder_intersec);
+			all_intersec(intersec, ray, tmp->ptr, cylinder_intersec);
 		else if (tmp->type == plane)
-			all_intersec(intersec, ray, poly->plane[0], tmp->ptr, plane_intersection);
+			all_intersec(intersec, ray, tmp->ptr, plane_intersection);
 		tmp = tmp->next;
 	}
 	hit = hiter_point(intersec);
