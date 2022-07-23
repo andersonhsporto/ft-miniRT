@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/21 01:02:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:45:34 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int eof(double a, double b)
 		return (0);
 }
 
-static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ray)
+static t_intersec *create_intersec(double *vals, t_cylinder *cy, t_ray *ray)
 {
 	t_intersec *res;
 	double intersec[2];
@@ -42,7 +42,7 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 	double min;
 	double max;
 
-	max = cylinder->height / 2.0;
+	max = cy->height / 2.0;
 	min = -1.0 * max;
 	res = NULL;
 	intersec[0] = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
@@ -78,9 +78,12 @@ static t_intersec *create_intersec(double *vals, t_cylinder *cylinder, t_ray *ra
 	return (res);
 }
 
-t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr)
+t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr, void *ptr0)
 {
-	t_cylinder	*cylinder = (t_cylinder *)ptr;
+	t_cylinder		*cylinder = (t_cylinder *)ptr;
+	t_cylinder_d	*cyd = (t_cylinder_d *)ptr0;
+	// printf("o>>>%f\n", cylinder->transform[0][0]);
+	// printf("n>>>%f\n", cyd->transform[0][0]);
 	t_ray		*ray;
 	double		a;
 	double		b;
@@ -88,7 +91,7 @@ t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr)
 	double		disc;
 	double		vals[3];
 
-	ray = ray_to_object_space(base_ray, cylinder->transform);
+	ray = ray_to_object_space(base_ray, cyd->transform);
 	a = pow(ray->direction->x, 2) + pow(ray->direction->z, 2);
 	b = (2 * ray->origin->x * ray->direction->x) +
 		(2 * ray->origin->z * ray->direction->z);
@@ -100,7 +103,7 @@ t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr)
 	return (create_intersec(vals, cylinder, ray));
 }
 
-void render_cylinder_transform(t_cylinder *cylinder)
+void	render_cylinder_transform(t_cylinder *cylinder)
 {
 	double **translate;
 	double **rotate;
@@ -116,14 +119,21 @@ void render_cylinder_transform(t_cylinder *cylinder)
 	rotate = normal_rotation_matrix(cylinder->norm);
 	translate = matrix_multiply(rotate, transform);
 	cylinder->transform = translate;
+	// printf("<<<<<<<<<\n");
+	// printf("height: %f\n", cylinder->height);
+	// printf("radius: %f\n", radius);
+	// print_vector_coo("pos\n", cylinder->pos);
+	// print_vector_coo("norm\n", cylinder->norm);
+	// printf("transform: %f\n", cylinder->transform[0][0]);
+	// printf("<<<<<<<<<\n");
 }
 
-t_cylinder *init_cylinder_re(void)
+t_cylinder	*init_cylinder_re(void)
 {
 	t_cylinder *cylinder;
 
 	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
-	cylinder->pos = create_vector(0, 0, 0, 0);
+	cylinder->pos = create_vector(2, 1, 0, 0);
 	cylinder->norm = create_vector(1, 0, 0, 0);
 	cylinder->height = 3;
 	cylinder->diameter = 4;

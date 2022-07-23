@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/21 01:09:36 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:44:56 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	sort_intersection(t_caster *cast)
 	}
 }
 
-void	all_intersec(t_caster *cast, t_ray *ray, void *ptr, void *list, t_intersec* (f)(t_ray*, t_sphere*))
+void	all_intersec(t_caster *cast, t_ray *ray, void *ptr, void *list, t_intersec* (f)(t_ray*, void*, void*))
 {
 	// t_intersec *tmp = f(ray, list);
 	if (ptr != NULL) // TODO REMOVER ESSE IF
-		cast = put_intersection_in_cast(cast, f(ray, ptr));
+		cast = put_intersection_in_cast(cast, f(ray, ptr, list));
 	// if (tmp != NULL)
 	// 	free(tmp);
 }

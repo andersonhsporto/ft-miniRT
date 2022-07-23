@@ -36,6 +36,7 @@ void	print_element_lst(t_element *lst)
 		if (lst->type == sphere)
 		{
 			t_sphere_d *sphere_debug = (t_sphere_d *)lst->ptr;
+			printf("Sphere Id ->%d\n", sphere_debug->id);
 			printf("Sphere Center ->x %f\n", sphere_debug->center->x);
 			printf("Sphere Center ->y %f\n", sphere_debug->center->y);
 			printf("Sphere Center ->z %f\n", sphere_debug->center->z);
@@ -48,27 +49,28 @@ void	print_element_lst(t_element *lst)
 		else if (lst->type == plane)
 		{
 			t_plane_d *plane_debug = (t_plane_d *)lst->ptr;
-			printf("Plane Normalized ->x %f\n", plane_debug->normalized.x);
-			printf("Plane Normalized ->y %f\n", plane_debug->normalized.y);
-			printf("Plane Normalized ->z %f\n", plane_debug->normalized.z);
-			printf("Plane Color ->x %f\n", plane_debug->color.x);
-			printf("Plane Color ->y %f\n", plane_debug->color.y);
-			printf("Plane Color ->z %f\n\n", plane_debug->color.z);
+			printf("Plane Normalized ->x %f\n", plane_debug->normalized->x);
+			printf("Plane Normalized ->y %f\n", plane_debug->normalized->y);
+			printf("Plane Normalized ->z %f\n", plane_debug->normalized->z);
+			printf("Plane Color ->x %f\n", plane_debug->color->x);
+			printf("Plane Color ->y %f\n", plane_debug->color->y);
+			printf("Plane Color ->z %f\n", plane_debug->color->z);
+			printf("\n");
 		}
 		else if (lst->type == cylinder)
 		{
 			t_cylinder_d *cylinder_debug = (t_cylinder_d *)lst->ptr;
-			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates.x);
-			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates.y);
-			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates.z);
-			printf("Cylinder Normalized ->x %f\n", cylinder_debug->normalized.x);
-			printf("Cylinder Normalized ->y %f\n", cylinder_debug->normalized.y);
-			printf("Cylinder Normalized ->z %f\n", cylinder_debug->normalized.z);
+			printf("Cylinder Center ->x %f\n", cylinder_debug->coordinates->x);
+			printf("Cylinder Center ->y %f\n", cylinder_debug->coordinates->y);
+			printf("Cylinder Center ->z %f\n", cylinder_debug->coordinates->z);
+			printf("Cylinder Normalized ->x %f\n", cylinder_debug->normalized->x);
+			printf("Cylinder Normalized ->y %f\n", cylinder_debug->normalized->y);
+			printf("Cylinder Normalized ->z %f\n", cylinder_debug->normalized->z);
 			printf("Cylinder Diameter ->%f\n", cylinder_debug->radius);
 			printf("Cylinder Height ->%f\n", cylinder_debug->height);
-			printf("Cylinder Color ->x %f\n", cylinder_debug->color.x);
-			printf("Cylinder Color ->y %f\n", cylinder_debug->color.y);
-			printf("Cylinder Color ->z %f\n", cylinder_debug->color.z);
+			printf("Cylinder Color ->x %f\n", cylinder_debug->color->x);
+			printf("Cylinder Color ->y %f\n", cylinder_debug->color->y);
+			printf("Cylinder Color ->z %f\n", cylinder_debug->color->z);
 		}
 		lst = lst->next;
 	}

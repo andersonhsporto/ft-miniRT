@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/21 00:54:58 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:46:54 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	render_sphere_transform(t_sphere *sphere)
 	sphere->transform = transform;
 }
 
-t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr)
+t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr, void *ptr0)
 {
 	t_sphere	*obj = (t_sphere *)ptr;
 	t_intersec	*intersectionPoints = NULL;

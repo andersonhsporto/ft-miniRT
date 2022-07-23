@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/21 01:04:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:03:26 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ int	render(t_mini *data)
 	int			x;
 
 	// spher = init_sphere_re();
-	poly = (t_poly *)ft_calloc(sizeof(t_poly), 1);
-	// poly->cylinder = (t_cylinder **)malloc(sizeof(t_cylinder *) * 2);
-	// poly->cylinder[0] = init_cylinder_re();
-	// poly->cylinder[1] = NULL;
+	poly = (t_poly *)malloc(sizeof(t_poly));
+	poly->cylinder = (t_cylinder **)malloc(sizeof(t_cylinder *) * 2);
+	poly->cylinder[0] = init_cylinder_re();
+	poly->cylinder[1] = NULL;
 	// poly->plane = NULL;
-	poly->cylinder = NULL;
 	poly->sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
 	poly->sphere[0] = init_sphere_re();
 	// poly->sphere[1] = NULL;
@@ -37,7 +36,8 @@ int	render(t_mini *data)
 	render_plane_transform(poly->plane[0]);
 	render_sphere_transform(poly->sphere[0]);
 	render_sphere_transform(poly->sphere[0]);
-	// render_cylinder_transform(poly->cylinder[0]);
+	render_cylinder_transform(poly->cylinder[0]);
+
 
 	y = 0;
 	while (y < NY)

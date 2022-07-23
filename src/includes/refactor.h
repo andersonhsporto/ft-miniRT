@@ -197,13 +197,13 @@ double	**sub_matrix(double	**a, int index[2], int col, int row);
 
 double	**scalar_4x4_matrix(double **mat, double abs);
 
-t_intersec	*plane_intersection(t_ray *base_ray, t_plane *obj);
+t_intersec	*plane_intersection(t_ray *base_ray, void *ptr, void *ptr0);
 
 t_sphere	*init_sphere_re(void);
 
 void	render_sphere_transform(t_sphere *sphere);
 
-t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr);
+t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr, void *ptr0);
 
 t_ray	*create_ray(t_coo *origin, t_coo *direction);
 
@@ -241,7 +241,7 @@ t_cylinder	*init_cylinder_re(void);
 
 void	render_cylinder_transform(t_cylinder *cylinder);
 
-t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr);
+t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr, void *ptr0);
 
 t_coo	*slighting(t_coo *position, t_light *light, t_coo *eye, t_material *material, t_coo *normal, int is_shadow);
 

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/21 00:20:20 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:16:43 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,29 @@ typedef struct s_mlx {
 }	t_mlx;
 
 typedef struct s_cylinder_d {
-	t_vector	coordinates;
-	t_vector	normalized;
+	int			id;
+	t_coo		*coordinates;
+	t_coo		*normalized;
 	double		radius;
 	double		height;
-	t_vector	color;
+	t_coo		*color;
+	double		**transform;
 }	t_cylinder_d;
 
 typedef struct s_plane_d {
-	t_vector	coordinates;
-	t_vector	normalized;
-	t_vector	color;
+	int			id;
+	t_coo		*coordinates;
+	t_coo		*normalized;
+	t_coo		*color;
+	double		**transform;
 }	t_plane_d;
 
 typedef struct s_sphere_d {
+	int			id;
 	t_coo		*center;
 	t_coo		*color;
 	double		radius;
+	double		**transform;
 }				t_sphere_d;
 
 typedef struct s_element {
@@ -114,6 +120,9 @@ typedef struct s_ambient {
 typedef struct s_index {
 	int		ambient;
 	int		camera;
+	int		sphere;
+	int		plane;
+	int		cylinder;
 }	t_index;
 
 typedef struct s_mini {

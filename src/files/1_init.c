@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 01:03:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:14:11 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	init_data(t_mini *data)
 {
 	data->index.ambient = 0;
 	data->index.camera = 0;
+	data->index.sphere = -1;
+	data->index.plane = -1;
+	data->index.cylinder = -1;
 	data->cam = NULL;
 	data->light = NULL;
 	data->element = NULL;

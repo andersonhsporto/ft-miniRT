@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 02:55:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:22:06 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,12 @@ t_element	*get_last_node(t_element *lst);
 void		element_add_back(t_element **lst, t_element *new);
 
 int			find_sphere(char **string);
-t_sphere_d	*init_sphere(char **string);
 void		lst_new_sphere(t_mini *data, char **string);
 
 int			find_plane(char **string);
-t_plane_d		*init_plane(char **string);
 void		lst_new_plane(t_mini *data, char **string);
 
 int			find_cylinder(char **string);
-t_cylinder_d	*init_cylinder(char **string);
 void		lst_new_cylinder(t_mini *data, char **string);
 
 #endif
