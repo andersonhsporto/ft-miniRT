@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:58:53 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/20 00:34:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:56:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ t_light_d	*init_light(char **string)
 		print_error("miniRT: Invalid Light Intensity");
 		exit(1);
 	}
+	light->ambient = 0.1;
+	light->diffuse = 0.9;
+	light->specular = 0.4;
+	light->shininess = 40.0;
 	return (light);
 }

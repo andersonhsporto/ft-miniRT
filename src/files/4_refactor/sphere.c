@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 23:47:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:48:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr)
 	{
 		intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
 		intersectionPoints->t = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
-		intersectionPoints->obj_type = SPHERE;
+		intersectionPoints->obj_type = sphere;
 		intersectionPoints->next = (t_intersec *)malloc(sizeof(t_intersec));
 		intersectionPoints->next->t = (((-1 * vals[1]) + sqrt(vals[2])) / (2 * vals[0]));
 		intersectionPoints->next->next = NULL;

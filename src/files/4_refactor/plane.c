@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:59:00 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 23:47:09 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:48:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_intersec	*plane_intersection(t_ray *base_ray, void *ptr)
 		return (NULL);
 	intersectionPoints = (t_intersec *)malloc(sizeof(t_intersec));
 	intersectionPoints->t = (-1 * ray->origin->y) / ray->direction->y;
-	intersectionPoints->obj_type = PLANE;
+	intersectionPoints->obj_type = plane;
 	intersectionPoints->next = NULL;
 	free((t_ray *)ray);
 	return (intersectionPoints);

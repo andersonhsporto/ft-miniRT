@@ -126,15 +126,16 @@ typedef struct	s_ltparams
 typedef struct		s_comps
 {
 	double		t;
-	t_coo	*position;
-	t_light	*light;
-	t_coo	*eye_vec;
-	t_poly	*poly;
+	t_coo		*position;
+	t_light		*light;
+	t_coo		*eye_vec;
+	t_poly		*poly;
 	t_material	*material;
-	t_coo	*normal_vec;
-	t_coo	*reflect_vec;
-	t_coo	*over_point;
-	int		inside;
+	t_coo		*normal_vec;
+	t_coo		*reflect_vec;
+	t_coo		*over_point;
+	t_coo		*color;
+	int			inside;
 }		t_comps;
 
 typedef struct s_sence
@@ -212,9 +213,9 @@ t_cam	*init_cam(void);
 
 t_coo	*reflect(t_coo *v, t_coo *n);
 
-t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_height);
+t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height);
 
-t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *obj_type_height);
+t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height);
 
 t_coo	*ray_position(t_ray *ray, double t);
 

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/23 01:40:12 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:55:29 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ t_cylinder	*init_cylinder_re(void)
 	cylinder->material->ambient = 0.1;
 	cylinder->material->diffuse = 0.9;
 	cylinder->material->specular = 0.4;
-	cylinder->material->shininess = 100.0;
+	cylinder->material->shininess = 40.0;
 	return (cylinder);
 }

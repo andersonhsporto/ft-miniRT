@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/23 01:44:53 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 02:18:32 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 		return (create_vector(o_point->x, 0, o_point->z, 0));
 }
 
-t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_height)
+t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 {
 	if (obj_type_height[0] == sphere)
 	{
@@ -52,7 +52,7 @@ t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_hei
 		return (get_cylinder_normal(obj_type_height[1], o_point));
 }
 
-t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *obj_type_height)
+t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 {
 	t_coo	*o_point;
 	t_coo	*o_normal;
@@ -62,7 +62,7 @@ t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *o
 
 	inv_trans = matrix_inverter(transform);
 	o_point = mult_matrix_vector(inv_trans, w_point);
-	o_normal = normal_object_type(poly, o_point, obj_type_height);
+	o_normal = normal_object_type(o_point, obj_type_height);
 	transp_trans = matrix_transpose(inv_trans);
 	w_normal = mult_matrix_vector(transp_trans, o_normal);
 	w_normal->w = 0;
@@ -72,14 +72,27 @@ t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *o
 void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 {
 	t_cylinder_d	*cy_ptr;
+	t_sphere_d		*sp_ptr;
+	t_plane_d		*pl_ptr;
 
 	if (node->type == cylinder)
 	{
 		cy_ptr = (t_cylinder_d *)node->ptr;
 		ch[1] = cy_ptr->height;
-		comps->normal_vec = normal_at(cy_ptr->transform, comps->position, \
-		comps->poly->cylinder[obj_pos]->material, ch);
-		comps->material = comps->poly->cylinder[obj_pos]->material;
+		comps->color = cy_ptr->color;
+		comps->normal_vec = normal_at(cy_ptr->transform, comps->position, ch);
+	}
+	else if (node->type == sphere)
+	{
+		sp_ptr = (t_sphere_d *)node->ptr;
+		comps->normal_vec = normal_at(sp_ptr->transform, comps->position, ch);
+		comps->color = sp_ptr->color;
+	}
+	else if (node->type == plane)
+	{
+		pl_ptr = (t_plane_d *)node->ptr;
+		comps->normal_vec = normal_at(pl_ptr->transform, comps->position, ch);
+		comps->color = pl_ptr->color;
 	}
 }
 
@@ -99,31 +112,11 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 		}
 		tmp = tmp->next;
 	}
-	// if (obj_type == cylinder)
-	// {
-	// 	obj_type_cylinder_height[1] = comps->poly->cylinder[obj_pos]->height;
-	// 	comps->normal_vec = normal_at(comps->poly->cylinder[obj_pos]->transform,
-	// 			comps->position, comps->poly->cylinder[obj_pos]->material, obj_type_cylinder_height);
-	// 	comps->material = comps->poly->cylinder[obj_pos]->material;
-	// }
-	// if (obj_type == SPHERE)
-	// {
-	// 	comps->normal_vec = normal_at(comps->poly->sphere[obj_pos]->transform,
-	// 			comps->position, comps->poly->sphere[obj_pos]->material, obj_type_cylinder_height);
-	// 	comps->material = comps->poly->sphere[obj_pos]->material;
-	// }
-	// if (obj_type == PLANE)
-	// {
-	// 	comps->normal_vec = normal_at(comps->poly->plane[obj_pos]->transform,
-	// 			comps->position, comps->poly->plane[obj_pos]->material, obj_type_cylinder_height);
-	// 	comps->material = comps->poly->plane[obj_pos]->material;
-	// }
 }
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_poly	*poly, t_mini *data)
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_mini *data)
 {
 	comps->t = hit->t;
-	comps->poly = poly;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, rt->direction);
 	get_obj_props(comps, hit->obj_type, hit->obj_pos, data);

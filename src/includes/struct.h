@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/23 01:28:31 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:56:04 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ typedef struct s_light_d {
 	t_coo		*point;
 	double		bright;
 	t_coo		*intensity;
+	double		diffuse;
+	double		ambient;
+	double		specular;
+	double		shininess;
+	double		reflect;
 }	t_light_d;
 
 typedef struct s_cam_d {
