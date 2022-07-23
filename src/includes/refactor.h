@@ -146,9 +146,6 @@ typedef struct s_sence
 
 #define NX 600
 #define NY 600
-#define SPHERE 1
-#define PLANE 2
-#define CYLINDER 3
 # define EPSILON 0.00001
 
 t_coo	*vector_addition(t_coo *a, t_coo *b);

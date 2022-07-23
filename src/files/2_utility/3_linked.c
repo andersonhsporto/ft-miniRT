@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 03:02:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/05/30 21:07:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:30:06 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_element	*element_new(int type, void *element)
+t_element	*element_new(int type, int id, void *element)
 {
 	t_element	*list;
 
@@ -20,6 +20,7 @@ t_element	*element_new(int type, void *element)
 	if (list)
 	{
 		list->type = type;
+		list->id = id;
 		list->ptr = element;
 		list->next = (0);
 		return (list);

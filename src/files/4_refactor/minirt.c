@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 23:03:26 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:08:42 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	render(t_mini *data)
 		x = 0;
 		while (x < NX)
 		{
-			t_intersec *hit = get_hit(x, y, data, poly);
+			t_intersec *hit = get_hit(x, y, data);
 			if (hit)
 			{
-				prepare_computations(&comp, data->ray, hit, poly);
-				rgb = lighting(comp, is_shadowed(&comp, poly, data), data);
+				prepare_computations(&comp, data->ray, hit, poly, data);
+				rgb = lighting(comp, is_shadowed(&comp, data), data);
 				if (rgb->x > 1)
 					rgb->x = 1;
 				if (rgb->y > 1)

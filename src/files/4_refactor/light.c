@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/21 00:11:12 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 00:28:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	is_shadowed(t_comps *comps, t_poly *poly, t_mini *data)
+int	is_shadowed(t_comps *comps, t_mini *data)
 {
 	t_coo		*path;
 	double		distance;
@@ -21,7 +21,7 @@ int	is_shadowed(t_comps *comps, t_poly *poly, t_mini *data)
 
 	path = vector_subtration(data->light->point, comps->over_point); //data
 	distance = vector_abs(path, path);
-	hit = get_shadow_hit(comps->over_point, path, poly, data);
+	hit = get_shadow_hit(comps->over_point, path, data);
 	if (hit && hit->t < distance)
 		result = 1;
 	else

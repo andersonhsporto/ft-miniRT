@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/22 23:21:06 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:32:15 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ t_plane_d	*init_plane(t_mini *data, char **string)
 void	lst_new_plane(t_mini *data, char **string)
 {
 	t_plane_d	*ptr;
+	t_element	*new_node;
+
 	ptr = init_plane(data, string);
 	if (data->element == NULL)
 	{
-		data->element = element_new(plane, (void *)ptr);
+		data->element = element_new(plane, data->index.plane, (void *)ptr);
 	}
 	else
 	{
-		t_element	*new_node = element_new(plane, (void *)ptr);
+		new_node = element_new(plane, data->index.plane, (void *)ptr);
 		element_add_back(&data->element, new_node);
 	}
 }

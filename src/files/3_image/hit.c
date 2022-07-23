@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_intersec	*get_hit(int x, int y, t_mini *data, t_poly *poly)
+t_intersec	*get_hit(int x, int y, t_mini *data)
 {
 	t_caster	*intersec;
 	t_intersec	*hit;
@@ -24,7 +24,7 @@ t_intersec	*get_hit(int x, int y, t_mini *data, t_poly *poly)
 	return(hit);
 }
 
-t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_poly *poly, t_mini *data)
+t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)
 {
 	t_caster	*intersec;
 	t_intersec	*hit;

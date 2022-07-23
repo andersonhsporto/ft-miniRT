@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/22 23:18:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:33:58 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ double	**get_sphere_transform(double radius, t_coo *center)
 t_sphere_d	*init_sphere(t_mini *data, char **string)
 {
 	t_sphere_d	*sphere;
+
 	sphere = (t_sphere_d *)malloc(sizeof(t_sphere_d));
 	sphere->center = str_to_coo_vector(string[1], ERR_SPHERE);
 	sphere->radius = str_to_double(string[2]) / 2;
@@ -57,14 +58,16 @@ t_sphere_d	*init_sphere(t_mini *data, char **string)
 void	lst_new_sphere(t_mini *data, char **string)
 {
 	t_sphere_d	*ptr;
+	t_element	*new_node;
+
 	ptr = init_sphere(data, string);
 	if (data->element == NULL)
 	{
-		data->element = element_new(sphere, (void *)ptr);
+		data->element = element_new(sphere, data->index.sphere, (void *)ptr);
 	}
 	else
 	{
-		t_element	*new_node = element_new(sphere, (void *)ptr);
+		new_node = element_new(sphere, data->index.sphere, (void *)ptr);
 		element_add_back(&data->element, new_node);
 	}
 }

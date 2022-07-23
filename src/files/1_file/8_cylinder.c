@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:48:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/22 23:23:06 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:31:09 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,16 @@ t_cylinder_d	*init_cylinder(t_mini *data, char **string)
 void	lst_new_cylinder(t_mini *data, char **string)
 {
 	t_cylinder_d	*ptr;
+	t_element		*new_node;
 
 	ptr = init_cylinder(data, string);
 	if (data->element == NULL)
 	{
-		data->element = element_new(cylinder, (void *)ptr);
+		data->element = element_new(cylinder, data->index.cylinder, (void *)ptr);
 	}
 	else
 	{
-		t_element	*new_node = element_new(cylinder, (void *)ptr);
+		new_node = element_new(cylinder, data->index.cylinder, (void *)ptr);
 		element_add_back(&data->element, new_node);
 	}
 }

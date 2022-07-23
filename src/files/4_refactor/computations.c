@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/20 23:01:59 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:44:53 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 
 t_coo	*normal_object_type(t_material *poly, t_coo *o_point, double *obj_type_height)
 {
-	if (obj_type_height[0] == SPHERE)
+	if (obj_type_height[0] == sphere)
 	{
 		return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
 	}
-	else if (obj_type_height[0] == PLANE)
+	else if (obj_type_height[0] == plane)
 		return (create_vector(0, 1, 0, 0));
-	else if (obj_type_height[0] == CYLINDER)
+	else if (obj_type_height[0] == cylinder)
 		return (get_cylinder_normal(obj_type_height[1], o_point));
 }
 
@@ -69,39 +69,64 @@ t_coo	*normal_at(double **transform, t_coo *w_point, t_material *poly, double *o
 	return (vector_normalize(w_normal));
 }
 
-static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos)
+void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 {
-	double	obj_type_cylinder_height[2];
+	t_cylinder_d	*cy_ptr;
 
-	obj_type_cylinder_height[0] = obj_type;
-	if (obj_type == SPHERE)
+	if (node->type == cylinder)
 	{
-		comps->normal_vec = normal_at(comps->poly->sphere[obj_pos]->transform,
-				comps->position, comps->poly->sphere[obj_pos]->material, obj_type_cylinder_height);
-		comps->material = comps->poly->sphere[obj_pos]->material;
-	}
-	if (obj_type == PLANE)
-	{
-		comps->normal_vec = normal_at(comps->poly->plane[obj_pos]->transform,
-				comps->position, comps->poly->plane[obj_pos]->material, obj_type_cylinder_height);
-		comps->material = comps->poly->plane[obj_pos]->material;
-	}
-	if (obj_type == CYLINDER)
-	{
-		obj_type_cylinder_height[1] = comps->poly->cylinder[obj_pos]->height;
-		comps->normal_vec = normal_at(comps->poly->cylinder[obj_pos]->transform,
-				comps->position, comps->poly->cylinder[obj_pos]->material, obj_type_cylinder_height);
+		cy_ptr = (t_cylinder_d *)node->ptr;
+		ch[1] = cy_ptr->height;
+		comps->normal_vec = normal_at(cy_ptr->transform, comps->position, \
+		comps->poly->cylinder[obj_pos]->material, ch);
 		comps->material = comps->poly->cylinder[obj_pos]->material;
 	}
 }
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_poly	*poly)
+static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
+{
+	double		obj_type_cylinder_height[2];
+	t_element	*tmp;
+
+	obj_type_cylinder_height[0] = obj_type;
+	tmp = data->element;
+	while (tmp != NULL)
+	{
+		if (tmp->type == obj_type && tmp->id == obj_pos)
+		{
+			get_normal_vec(tmp, obj_type_cylinder_height, comps, obj_pos);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	// if (obj_type == cylinder)
+	// {
+	// 	obj_type_cylinder_height[1] = comps->poly->cylinder[obj_pos]->height;
+	// 	comps->normal_vec = normal_at(comps->poly->cylinder[obj_pos]->transform,
+	// 			comps->position, comps->poly->cylinder[obj_pos]->material, obj_type_cylinder_height);
+	// 	comps->material = comps->poly->cylinder[obj_pos]->material;
+	// }
+	// if (obj_type == SPHERE)
+	// {
+	// 	comps->normal_vec = normal_at(comps->poly->sphere[obj_pos]->transform,
+	// 			comps->position, comps->poly->sphere[obj_pos]->material, obj_type_cylinder_height);
+	// 	comps->material = comps->poly->sphere[obj_pos]->material;
+	// }
+	// if (obj_type == PLANE)
+	// {
+	// 	comps->normal_vec = normal_at(comps->poly->plane[obj_pos]->transform,
+	// 			comps->position, comps->poly->plane[obj_pos]->material, obj_type_cylinder_height);
+	// 	comps->material = comps->poly->plane[obj_pos]->material;
+	// }
+}
+
+void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_poly	*poly, t_mini *data)
 {
 	comps->t = hit->t;
 	comps->poly = poly;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, rt->direction);
-	get_obj_props(comps, hit->obj_type, hit->obj_pos);
+	get_obj_props(comps, hit->obj_type, hit->obj_pos, data);
 	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
 	{
 		comps->inside = 1;

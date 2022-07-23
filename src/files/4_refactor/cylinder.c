@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 23:46:58 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 01:40:12 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_intersec *create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 		{
 			res = (t_intersec *)malloc(sizeof(t_intersec));
 			res->t = intersec[0];
-			res->obj_type = CYLINDER;
+			res->obj_type = cylinder;
 			res->next = NULL;
 		}
 		if (y_y1[1] > min && max > y_y1[1])
@@ -63,14 +63,14 @@ static t_intersec *create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 			{
 				res = (t_intersec *)malloc(sizeof(t_intersec));
 				res->t = intersec[1];
-				res->obj_type = CYLINDER;
+				res->obj_type = cylinder;
 				res->next = NULL;
 			}
 			else
 			{
 				res->next = (t_intersec *)malloc(sizeof(t_intersec));
 				res->next->t = intersec[1];
-				res->next->obj_type = CYLINDER;
+				res->next->obj_type = cylinder;
 				res->next->next = NULL;
 			}
 		}

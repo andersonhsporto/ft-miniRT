@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/22 23:14:11 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/23 00:02:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_data(t_mini *data)
 	data->mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	data->mlx->mlx = mlx_init();
 	data->mlx->win = mlx_new_window(data->mlx->mlx, WIDTH + 10, HEIGHT + 10, "miniRT");
-	data->img.img = mlx_new_image(data->mlx->mlx, NX, NY);
+	data->img.img = mlx_new_image(data->mlx->mlx, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img, \
 								&data->img.bits_per_pixel,\
 								&data->img.line_length,
