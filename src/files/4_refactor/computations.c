@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/25 23:10:36 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:56:11 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 {
 	comps->t = data->hit->t;
 	comps->position = ray_position(rt, comps->t);
-	comps->eye_vec = vector_multipli_scalar(-1, rt->direction);
+	comps->eye_vec = vector_multipli_scalar(-1, &rt->direction);
 	get_obj_props(comps, data->hit->obj_type, data->hit->obj_pos, data);
 	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
 	{
@@ -127,20 +127,20 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	}
 	else
 		comps->inside = 0;
-	comps->reflect_vec = reflect(rt->direction, comps->normal_vec);
+	comps->reflect_vec = reflect(&rt->direction, comps->normal_vec);
 	comps->over_point = vector_addition(comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
 }
 
 t_coo	*ray_position(t_ray *ray, double t)
 {
-	return (vector_addition(ray->origin, vector_multipli_scalar(t, ray->direction)));
+	return (vector_addition(&ray->origin, vector_multipli_scalar(t, &ray->direction)));
 }
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 {
-	int	i;
-	int	cont;
 	t_intersec	*aux;
+	int			cont;
+	int			i;
 
 	i = 0;
 	aux = cast->intersec;

@@ -6,23 +6,28 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/20 22:42:13 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:54:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	*create_ray(t_coo *origin, t_coo *direction)
+t_ray	create_ray(t_coo *origin, t_coo *direction)
 {
-	t_ray	*new;
+	t_ray	new;
 
-	new = (t_ray *)malloc(sizeof(t_ray));
-	new->origin = origin;
-	new->direction = direction;
+	new.origin.x = origin->x;
+	new.origin.y = origin->y;
+	new.origin.z = origin->z;
+	new.origin.w = origin->w;
+	new.direction.x = direction->x;
+	new.direction.y = direction->y;
+	new.direction.z = direction->z;
+	new.direction.w = direction->w;
 	return (new);
 }
 
-t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y)
+t_ray	ray_for_pixel(t_cam_d *temp, int x, int y)
 {
 	const double	x_offset = (x + 0.5) * temp->pixel_size;
 	const double	y_offset = (y + 0.5) * temp->pixel_size;
@@ -37,14 +42,14 @@ t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y)
 	return (create_ray(temp->origin, direction));
 }
 
-t_ray	*ray_to_object_space(t_ray *ray, double **matrix)
+t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1); // add to header
+t_ray	ray_to_object_space(t_ray *ray, double **matrix)
 {
-	t_ray	*res;
+	t_ray	res;
 	double	**inverse;
 
-	res = (t_ray *)malloc(sizeof(t_ray));
 	inverse = matrix_inverter(matrix);
-	res->origin = mult_matrix_vector(inverse, ray->origin);
-	res->direction = mult_matrix_vector(inverse, ray->direction);
+	res.origin = mult_matrix_vector_temp(inverse, &ray->origin);
+	res.direction = mult_matrix_vector_temp(inverse, &ray->direction);
 	return (res);
 }

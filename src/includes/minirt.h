@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/25 22:21:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:51:45 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void		get_hit(int x, int y, t_mini *data);
 t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data);
 
 int		is_shadowed(t_comps *comps, t_mini *data);
-t_coo	*lighting(t_comps args, int in_shadow, t_mini *data);
+t_coo	lighting(t_comps args, int in_shadow, t_mini *data);
 t_coo	*init_light_intensity(t_coo *rgb, double temp_data);
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data);
 int 	render(t_mini *img);
-t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y);
+t_ray	ray_for_pixel(t_cam_d *temp, int x, int y);
 
 void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
@@ -87,4 +87,6 @@ void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list
 void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb);
 
 void	free_data(t_mini *data);
+
+void	all_intersec(t_caster *cast, t_ray *ray, void *list, t_intersec* (f)(t_ray*, void*));
 #endif

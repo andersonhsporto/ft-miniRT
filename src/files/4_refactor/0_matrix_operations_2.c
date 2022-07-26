@@ -79,6 +79,37 @@ double	**matrix_multiply(double **a, double **b)
 	return (res);
 }
 
+t_coo	create_vector_temp(double x, double y, double z, double w); //add to header
+t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1)
+{
+	t_coo		new_t;
+	double		*new;
+	size_t		i;
+	size_t		j;
+	double		current[4];
+
+	i = 0;
+	new = (double *)ft_calloc(4, sizeof(double));
+	current[0] = t1->x;
+	current[1] = t1->y;
+	current[2] = t1->z;
+	current[3] = t1->w;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			new[i] += (m1[i][j] * current[j]);
+			j++;
+		}
+		i++;
+	}
+	new_t = create_vector_temp(new[0], new[1], new[2], new[3]);
+	free(new);
+	return (new_t);
+}
+
+
 t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
 {
 	t_coo		*new_t;
