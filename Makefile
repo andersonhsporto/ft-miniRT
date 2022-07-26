@@ -1,7 +1,7 @@
 NAME	= miniRT
 
 CC		=	gcc
-CFLAGS	=	-O2 -Wall -Wextra -g #-Werror
+CFLAGS	=	-Wall -Wextra -g #-Werror
 INCLUDE =	-I ./src/includes -I ./libs/libft
 LIBFT	=	-L ./libs/libft -lft
 MLX		=   -lmlx -lXext -lX11

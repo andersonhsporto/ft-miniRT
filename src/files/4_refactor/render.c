@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/25 22:22:30 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/25 23:08:09 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	render(t_mini *data)
 			{
 				prepare_computations(&comp, data->ray, data);
 				rgb = lighting(comp, is_shadowed(&comp, data), data);
-				free(data->hit);
+				// free(data->hit);
 			}
 			else
 				rgb = create_vector(0, 0, 0, 0);

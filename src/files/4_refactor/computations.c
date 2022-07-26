@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/25 22:21:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/25 23:10:36 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_coo	*reflect(t_coo *v, t_coo *n)
 	t_coo	*var;
 	t_coo	*res;
 
-	var = vector_multipli_scalar(2.0*vector_abs(v,n),n);
+	var = vector_multipli_scalar(2.0 * vector_abs(v, n), n);
 	res = vector_subtration(v, var);
 	free(var);
 	return(res);
