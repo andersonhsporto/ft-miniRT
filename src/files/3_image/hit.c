@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_intersec	*get_hit(int x, int y, t_mini *data)
+void	get_hit(int x, int y, t_mini *data)
 {
 	t_caster	*intersec;
 	t_intersec	*hit;
@@ -19,9 +19,8 @@ t_intersec	*get_hit(int x, int y, t_mini *data)
 			all_intersec(intersec, data->ray, tmp->ptr, plane_intersection);
 		tmp = tmp->next;
 	}
-	hit = hiter_point(intersec);
+	data->hit = hiter_point(intersec);
 	free(intersec);
-	return(hit);
 }
 
 t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)

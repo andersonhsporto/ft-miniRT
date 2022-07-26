@@ -1,6 +1,6 @@
 NAME	= miniRT
 
-CC		=	clang #trocar para clang ao final
+CC		=	gcc
 CFLAGS	=	-O2 -Wall -Wextra -g #-Werror
 INCLUDE =	-I ./src/includes -I ./libs/libft
 LIBFT	=	-L ./libs/libft -lft
@@ -64,6 +64,6 @@ test:
 	make
 	./miniRT teste.rt
 
-valgrind:
+leak:
 	make
 	valgrind ./miniRT teste.rt
