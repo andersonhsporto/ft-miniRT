@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/23 02:59:30 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/25 22:21:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	}
 }
 
-void	prepare_computations(t_comps *comps, t_ray *rt, t_intersec *hit, t_mini *data)
+void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 {
-	comps->t = hit->t;
+	comps->t = data->hit->t;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, rt->direction);
-	get_obj_props(comps, hit->obj_type, hit->obj_pos, data);
+	get_obj_props(comps, data->hit->obj_type, data->hit->obj_pos, data);
 	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
 	{
 		comps->inside = 1;
