@@ -77,21 +77,6 @@ void	print_element_lst(t_element *lst)
 	return ;
 }
 
-void	print_vector(char *vector, t_vector vec)
-{
-	printf("Vector %s: %f, %f, %f \n", vector, vec.x, vec.y, vec.z);
-	return ;
-}
-
-	double		viewport_height;
-	double		viewport_width;
-	t_vector	view_up;
-	t_vector	w;
-	t_vector	u;
-	t_vector	v;
-	t_vector	hori_dir;
-	t_vector	vert_dir;
-	t_vector	lower_left_corner;
 
 // void	print_cam_data(t_datacam *data)
 // {

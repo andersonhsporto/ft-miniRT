@@ -6,14 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/23 01:56:04 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/25 22:07:41 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "vector.h"
 # include "refactor.h" //TODO: remove this
 
 enum e_type
@@ -34,15 +33,6 @@ typedef struct s_utils {
 	double	discriminant;
 	double	root;
 }	t_utils;
-
-typedef	struct s_record {
-	double		t;
-	double		max;
-	double		min;
-	t_vector	p;
-	t_vector	normal;
-	t_vector	albedo;
-}				t_record;
 
 typedef struct s_image {
 	void	*img;
@@ -91,7 +81,6 @@ typedef struct s_element {
 	int					type;
 	int					id;
 	void				*ptr;
-	t_vector			color;
 	struct s_element	*next;
 }	t_element;
 
@@ -141,7 +130,6 @@ typedef struct s_mini {
 	t_element		*element;
 	t_mlx			*mlx;
 	t_image			img;
-	t_record		hit_record;
 	t_ray			*ray;
 }	t_mini;
 

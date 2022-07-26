@@ -7,10 +7,6 @@ LIBFT	=	-L ./libs/libft -lft
 MLX		=   -lmlx -lXext -lX11
 HEADER	= 	./src/includes/minirt.h
 
-VECTOR	= $(addprefix 0_vector/, \
-		0_operations.c 1_operations.c 2_operations.c 3_unit.c \
-)
-
 FILE	= $(addprefix 1_file/, \
 		0_check_file.c 1_start_file.c 2_init_file.c \
 		3_ambient.c 4_0_camera.c 4_1_cam_utils.c \
@@ -21,11 +17,11 @@ FILE	= $(addprefix 1_file/, \
 
 UTILITY = $(addprefix 2_utility/, \
 		0_aid.c 1_char_double.c 2_strparser.c 3_linked.c \
-		4_color.c 5_hooks.c \
+		4_hooks.c \
 )
 
 IMAGE	= $(addprefix 3_image/, \
-		0_image.c 1_mlx.c ray.c 42_free.c hit.c \
+		0_mlx.c ray.c 42_free.c hit.c \
 )
 
 REFACTOR	= $(addprefix 4_refactor/, \
@@ -35,7 +31,7 @@ REFACTOR	= $(addprefix 4_refactor/, \
 )
 
 SRC		= $(addprefix ./src/files/, \
-		$(VECTOR) $(FILE) $(UTILITY) $(IMAGE) $(REFACTOR) \
+		$(FILE) $(UTILITY) $(IMAGE) $(REFACTOR) \
 		minirt.c 1_init.c 2_error.c\
 )
 

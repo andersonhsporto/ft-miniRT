@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:59:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 02:55:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/25 22:08:55 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,6 @@ int	out_range_coo(t_coo *vector, double min, double max)
 {
 	if (vector->x < min || vector->x > max || \
 	vector->y < min || vector->y > max)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
-
-
-int	out_range_double(t_vector vector, double min, double max)
-{
-	if (vector.x < min || vector.x > max || \
-	vector.y < min || vector.y > max)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
-
-int	out_range_int(t_vector vector, int min, int max)
-{
-	if (vector.x < min || vector.x > max || \
-	vector.y < min || vector.y > max)
 	{
 		return (1);
 	}

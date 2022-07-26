@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/23 02:53:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/25 22:13:16 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <mlx.h>
 #include <fcntl.h>
 #include <math.h>
-#include <string.h> // check in end
+#include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
 # define WIDTH 600
 # define HEIGHT 600
@@ -49,7 +49,6 @@ int allowed_symbol(char character);
 int matrix_len(char **matrix);
 void matrix_free(char **matrix);
 char *replace_string(char *string, char character);
-int out_range_double(t_vector vector, double min, double max);
 
 double str_to_double(char *str);
 
@@ -60,16 +59,13 @@ void print_image(t_mini *data);
 
 void	divide_coo(t_coo *coo, int nbr);
 
-void 	rt_pixel_put_vector(t_image *img, int y, int x, t_vector color); //TODO: remove this
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	coo_pixel_put_vector(t_image *img, int y, int x, t_coo *color);
 
 void start_camera(t_cam_d *cam);
 
-void debug(t_mini *data);
-void print_vector(char *vector, t_vector vec);
+void 	debug(t_mini *data); // TODO REMOVER
 void	print_vector_coo(char *vector, t_coo *vec);
-t_vector get_colors(int x, int y, t_mini *data);
 
 
 

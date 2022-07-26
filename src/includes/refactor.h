@@ -236,6 +236,4 @@ void	render_cylinder_transform(t_cylinder *cylinder);
 
 t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr);
 
-t_coo	*slighting(t_coo *position, t_light *light, t_coo *eye, t_material *material, t_coo *normal, int is_shadow);
-
 #endif
