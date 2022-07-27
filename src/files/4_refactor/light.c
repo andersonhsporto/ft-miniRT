@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 23:01:40 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:46:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_shadowed(t_comps *comps, t_mini *data)
 {
-	const t_coo			path = vector_subtration_temp(data->light->point, \
+	t_coo			path = vector_subtration_temp(data->light->point, \
 													comps->over_point); //data
 	const double		distance = vector_abs(&path, &path);
 	const t_intersec	*hit = get_shadow_hit(comps->over_point, &path, data);
@@ -41,7 +41,7 @@ static void	set_light_params(t_comps *args, t_ltparams *params, t_mini *data)
 
 t_coo	norm_light(t_coo *diffuse, t_coo *specular, t_coo *ambient)
 {
-	const t_coo tmp = vector_addition_temp(diffuse, specular);
+	t_coo 		tmp = vector_addition_temp(diffuse, specular);
 	t_coo		rgb;
 
 	rgb = vector_addition_temp(&tmp, ambient);

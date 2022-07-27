@@ -3,7 +3,6 @@
 void	get_hit(int x, int y, t_mini *data)
 {
 	t_caster	*intersec;
-	t_intersec	*hit;
 	t_element	*tmp;
 
 	data->ray = ray_for_pixel(data->cam, x, y);

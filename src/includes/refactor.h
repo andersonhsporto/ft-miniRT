@@ -202,8 +202,6 @@ t_ray	create_ray(t_coo *origin, t_coo *direction);
 
 double	**view_transform(t_coo *from, t_coo *to, t_coo *up);
 
-void	camera_pixel_size(int width, int height, t_cam *cam);
-
 t_cam	*init_cam(void);
 
 t_coo	*reflect(t_coo *v, t_coo *n);

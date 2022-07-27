@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 22:35:59 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:48:01 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rt_mlx_pixel_put_teste(t_image *data, int x, int y, t_coo rgb)
 	*(unsigned int *)dst = color;
 }
 
-int	render(t_mini *data)
+void	render(t_mini *data)
 {
 	t_comps		comp;
 	t_coo		rgb;
