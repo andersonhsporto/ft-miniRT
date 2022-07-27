@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/27 00:16:03 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:20:53 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 		cy_ptr = (t_cylinder_d *)node->ptr;
 		ch[1] = cy_ptr->height;
 		comps->normal_vec = normal_at(cy_ptr->transform, &comps->position, ch);
-		comps->color = cy_ptr->color;
+		comps->color = &cy_ptr->color;
 	}
 	else if (node->type == sphere)
 	{

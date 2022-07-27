@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:17:22 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:20:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ typedef struct s_mlx {
 
 typedef struct s_cylinder_d {
 	int			id;
-	t_coo		*coordinates;
-	t_coo		*normalized;
+	t_coo		coordinates;
+	t_coo		normalized;
 	double		radius;
 	double		height;
-	t_coo		*color;
+	t_coo		color;
 	double		**transform;
 }	t_cylinder_d;
 
