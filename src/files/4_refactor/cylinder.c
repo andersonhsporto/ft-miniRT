@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 11:48:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:37:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static int eof(double a, double b)
 
 static t_intersec *create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 {
-	t_intersec *res;
-	double intersec[2];
-	double y_y1[2];
-	double min;
-	double max;
+	t_intersec	*res;
+	double		intersec[2];
+	double		y_y1[2];
+	double		min;
+	double		max;
 
 	max = cyd->height / 2.0;
 	min = -1.0 * max;
@@ -116,30 +116,4 @@ void	render_cylinder_transform(t_cylinder *cylinder)
 	rotate = normal_rotation_matrix(cylinder->norm);
 	translate = matrix_multiply(rotate, transform);
 	cylinder->transform = translate;
-	// printf("<<<<<<<<<\n");
-	// printf("height: %f\n", cylinder->height);
-	// printf("radius: %f\n", radius);
-	// print_vector_coo("pos\n", cylinder->pos);
-	// print_vector_coo("norm\n", cylinder->norm);
-	// printf("transform: %f\n", cylinder->transform[0][0]);
-	// printf("<<<<<<<<<\n");
-}
-
-t_cylinder	*init_cylinder_re(void)
-{
-	t_cylinder *cylinder;
-
-	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
-	cylinder->pos = create_vector(2, 1, 0, 0);
-	cylinder->norm = create_vector(1, 0, 0, 0);
-	cylinder->height = 3;
-	cylinder->diameter = 4;
-	cylinder->radius = cylinder->diameter / 2.0;
-	cylinder->material = (t_material *)malloc(sizeof(t_material));
-	cylinder->material->color = create_vector(1, 0.2, 0.3, 0);
-	cylinder->material->ambient = 0.1;
-	cylinder->material->diffuse = 0.9;
-	cylinder->material->specular = 0.4;
-	cylinder->material->shininess = 40.0;
-	return (cylinder);
 }

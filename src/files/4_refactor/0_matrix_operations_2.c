@@ -79,7 +79,6 @@ double	**matrix_multiply(double **a, double **b)
 	return (res);
 }
 
-t_coo	create_vector_temp(double x, double y, double z, double w); //add to header
 t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1)
 {
 	t_coo		new_t;

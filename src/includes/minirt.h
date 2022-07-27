@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/26 11:51:45 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:58:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,15 @@ void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb);
 void	free_data(t_mini *data);
 
 void	all_intersec(t_caster *cast, t_ray *ray, void *list, t_intersec* (f)(t_ray*, void*));
+
+t_coo	create_vector_temp(double x, double y, double z, double w); //add to header
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+t_coo	vector_subtration_temp(t_coo *a, t_coo *b);
+t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1);
+t_coo	normal_object_type_temp(t_coo o_point, double *obj_type_height);
+t_coo	normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height);
+t_coo	vector_multipli_scalar_temp(double scalar, t_coo *a);
+t_coo	vector_addition_temp(t_coo *a, t_coo *b);
 #endif

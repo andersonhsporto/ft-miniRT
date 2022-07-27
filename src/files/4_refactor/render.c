@@ -6,22 +6,11 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 11:48:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:35:59 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_coo	create_vector_temp(double x, double y, double z, double w)
-{
-	t_coo	res;
-
-	res.x = x;
-	res.y = y;
-	res.z = z;
-	res.w = w;
-	return (res);
-}
 
 void	rt_mlx_pixel_put_teste(t_image *data, int x, int y, t_coo rgb)
 {

@@ -126,7 +126,7 @@ typedef struct	s_ltparams
 typedef struct		s_comps
 {
 	double		t;
-	t_coo		*position;
+	t_coo		position;
 	t_light		*light;
 	t_coo		*eye_vec;
 	t_poly		*poly;
@@ -212,7 +212,7 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height);
 
 t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height);
 
-t_coo	*ray_position(t_ray *ray, double t);
+t_coo	ray_position(t_ray *ray, double t);
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec);
 

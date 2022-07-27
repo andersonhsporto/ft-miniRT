@@ -6,29 +6,11 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/22 23:46:02 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:35:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static void	sort_intersection(t_caster *cast)
-{
-	double	aux;
-
-	if (cast->cont)
-	{
-		printf("primeiro %f\n", cast->intersec->t);
-		printf("segundo %f\n", cast->intersec->next->t);
-		if (cast->intersec->t > cast->intersec->next->t)
-		{
-			printf("hello\n");
-			aux = cast->intersec->t;
-			cast->intersec->t = cast->intersec->next->t;
-			cast->intersec->next->t = aux;
-		}
-	}
-}
 
 void	all_intersec(t_caster *cast, t_ray *ray, void *list, t_intersec* (f)(t_ray*, void*))
 {

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 11:56:11 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:58:28 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,19 @@ void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 	{
 		cy_ptr = (t_cylinder_d *)node->ptr;
 		ch[1] = cy_ptr->height;
-		comps->normal_vec = normal_at(cy_ptr->transform, comps->position, ch);
+		comps->normal_vec = normal_at(cy_ptr->transform, &comps->position, ch);
 		comps->color = cy_ptr->color;
 	}
 	else if (node->type == sphere)
 	{
 		sp_ptr = (t_sphere_d *)node->ptr;
-		comps->normal_vec = normal_at(sp_ptr->transform, comps->position, ch);
+		comps->normal_vec = normal_at(sp_ptr->transform, &comps->position, ch);
 		comps->color = sp_ptr->color;
 	}
 	else if (node->type == plane)
 	{
 		pl_ptr = (t_plane_d *)node->ptr;
-		comps->normal_vec = normal_at(pl_ptr->transform, comps->position, ch);
+		comps->normal_vec = normal_at(pl_ptr->transform, &comps->position, ch);
 		comps->color = pl_ptr->color;
 	}
 }
@@ -114,6 +114,12 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	}
 }
 
+t_coo	ray_position(t_ray *ray, double t)
+{
+	const t_coo	temp = vector_multipli_scalar_temp(t, &ray->direction);
+	return (vector_addition_temp(&ray->origin, &temp));
+}
+
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 {
 	comps->t = data->hit->t;
@@ -128,12 +134,7 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	else
 		comps->inside = 0;
 	comps->reflect_vec = reflect(&rt->direction, comps->normal_vec);
-	comps->over_point = vector_addition(comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
-}
-
-t_coo	*ray_position(t_ray *ray, double t)
-{
-	return (vector_addition(&ray->origin, vector_multipli_scalar(t, &ray->direction)));
+	comps->over_point = vector_addition(&comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
 }
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)

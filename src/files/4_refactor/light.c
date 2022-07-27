@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 11:25:41 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:59:16 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,6 @@ static void	set_light_params(t_comps *args, t_ltparams *params, t_mini *data)
 	params->light_v = vector_normalize(vector_subtration(data->light->point, args->over_point));
 	params->ambient = vector_multipli_scalar(data->light->ambient, params->effective_color);
 	params->light_dot_normal = vector_abs(args->normal_vec, params->light_v);
-}
-
-t_coo	vector_addition_temp(t_coo *a, t_coo *b)
-{
-	t_coo res;
-
-	res.x = a->x + b->x;
-	res.y = a->y + b->y;
-	res.z = a->z + b->z;
-	res.w = a->w + b->w;
-	return (res);
 }
 
 t_coo	norm_light(t_coo *diffuse, t_coo *specular, t_coo *ambient)
