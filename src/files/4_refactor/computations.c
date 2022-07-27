@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 23:02:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:12:21 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 	{
 		sp_ptr = (t_sphere_d *)node->ptr;
 		comps->normal_vec = normal_at(sp_ptr->transform, &comps->position, ch);
-		comps->color = sp_ptr->color;
+		comps->color = &sp_ptr->color;
 	}
 	else if (node->type == plane)
 	{

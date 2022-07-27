@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:07:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:11:41 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_plane_d {
 
 typedef struct s_sphere_d {
 	int			id;
-	t_coo		*center;
-	t_coo		*color;
+	t_coo		center;
+	t_coo		color;
 	double		radius;
 	double		**transform;
 }				t_sphere_d;
