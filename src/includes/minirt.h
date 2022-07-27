@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/26 23:48:06 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:59:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data);
 
 int		is_shadowed(t_comps *comps, t_mini *data);
 t_coo	lighting(t_comps args, int in_shadow, t_mini *data);
-t_coo	*init_light_intensity(t_coo *rgb, double temp_data);
+t_coo	init_light_intensity(t_coo *rgb, double temp_data);
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data);
 void	render(t_mini *img);
 t_ray	ray_for_pixel(t_cam_d *temp, int x, int y);
@@ -104,4 +104,6 @@ t_coo	vector_addition_temp(t_coo *a, t_coo *b);
 t_coo	str_to_coo_vector_temp(char	*string, char *error_message);
 
 void	camera_pixel_size(int width, int height, t_cam_d *cam);
+
+t_coo	vector_normalize_temp(t_coo *a);
 #endif

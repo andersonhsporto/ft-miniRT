@@ -1,5 +1,17 @@
 #include "minirt.h"
 
+t_coo	vector_normalize_temp(t_coo *a)
+{
+	t_coo	res;
+	double	length;
+
+	length = vector_lenght(a);
+	res.x = a->x / length;
+	res.y = a->y / length;
+	res.z = a->z / length;
+	return (res);
+}
+
 t_coo	vector_multipli_scalar_temp(double scalar, t_coo *a)
 {
 	t_coo	res;
@@ -41,18 +53,6 @@ t_coo	create_vector_temp(double x, double y, double z, double w)
 	res.y = y;
 	res.z = z;
 	res.w = w;
-	return (res);
-}
-
-t_coo	vector_normalize_temp(t_coo *a)
-{
-	t_coo	res;
-	double	lenght;
-
-	lenght = vector_lenght(a);
-	res.x = a->x / lenght;
-	res.y = a->y / lenght;
-	res.z = a->z / lenght;
 	return (res);
 }
 
