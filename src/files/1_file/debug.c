@@ -6,9 +6,9 @@ void	debug(t_mini *data)
 {
 	printf("DEBUG START\n");
 	printf("Ambient ->r %f\n", data->light_a->ratio);
-	printf("Ambient ->x %f\n", data->light_a->rgb->x);
-	printf("Ambient ->y %f\n", data->light_a->rgb->y);
-	printf("Ambient ->z %f\n", data->light_a->rgb->z);
+	printf("Ambient ->x %f\n", data->light_a->rgb.x);
+	printf("Ambient ->y %f\n", data->light_a->rgb.y);
+	printf("Ambient ->z %f\n", data->light_a->rgb.z);
 	printf("\n");
 	printf("Camera FOV ->%f\n", data->cam->fov);
 	printf("Camera View Point ->%f\n", data->cam->view_point->x);

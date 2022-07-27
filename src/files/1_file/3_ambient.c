@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 23:37:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/19 23:29:00 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:30:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ t_ambient	*init_ambient(char **string)
 	t_ambient	*ligth;
 
 	ligth = (t_ambient *)malloc(sizeof(t_ambient));
-	ligth->rgb = str_to_coo_vector(string[2], "miniRT: Invalid RGB");
-	if (ligth->rgb->x < 0 || ligth->rgb->x > 255 || ligth->rgb->y < 0 || \
-	ligth->rgb->y > 255 || ligth->rgb->z < 0 || ligth->rgb->z > 255)
+	ligth->rgb = str_to_coo_vector_temp(string[2], "miniRT: Invalid RGB");
+	if (ligth->rgb.x < 0 || ligth->rgb.x > 255 || ligth->rgb.y < 0 || \
+	ligth->rgb.y > 255 || ligth->rgb.z < 0 || ligth->rgb.z > 255)
 	{
 		print_error("miniRT: Invalid Ambient Color"); //free !!!!
 		exit(1);
 	}
-	divide_coo(ligth->rgb, 255);
+	divide_coo(&ligth->rgb, 255);
 	ligth->ratio = str_to_double(string[1]);
 	if (ligth->ratio < 0 || ligth->ratio > 1)
 	{
