@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 22:59:16 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:01:40 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 int	is_shadowed(t_comps *comps, t_mini *data)
 {
-	const t_coo			*path = vector_subtration(data->light->point, \
+	const t_coo			path = vector_subtration_temp(data->light->point, \
 													comps->over_point); //data
-	const double		distance = vector_abs(path, path);
-	const t_intersec	*hit = get_shadow_hit(comps->over_point, path, data);
+	const double		distance = vector_abs(&path, &path);
+	const t_intersec	*hit = get_shadow_hit(comps->over_point, &path, data);
 
 	if (hit && (hit->t < distance))
 	{
 		free((t_intersec*)hit);
-		free((t_coo*)path);
 		return (1);
 	}
 	else
 	{
 		free((t_intersec*)hit);
-		free((t_coo*)path);
 		return (0);
 	}
 }
