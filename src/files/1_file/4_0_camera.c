@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:11:25 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:03:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:27:11 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_cam_d	*init_camera(char **string)
 
 	camera = (t_cam_d *)malloc(sizeof(t_cam_d));
 	camera->view_point = str_to_coo_vector(string[1], ERR_VIEWPOINT);
-	camera->orientation = str_to_coo_vector(string[2], ERR_NORMALIZED);
-	if (out_range_coo(camera->orientation, -1, 1))
+	camera->orientation = str_to_coo_vector_temp(string[2], ERR_NORMALIZED);
+	if (out_range_coo(&camera->orientation, -1, 1))
 	{
 		print_error("miniRT: Invalid Camera Normalized Vector");
 		exit(1);

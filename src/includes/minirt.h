@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/26 23:59:08 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:24:39 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ char *replace_string(char *string, char character);
 
 double str_to_double(char *str);
 
-void print_image(t_mini *data);
+int	print_image(t_mini *data);
 int exit_esc(int keycode, t_mini *data);
 int red_cross(t_mini *data);
-void print_image(t_mini *data);
 
 void	divide_coo(t_coo *coo, int nbr);
 

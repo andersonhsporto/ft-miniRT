@@ -21,7 +21,7 @@ UTILITY = $(addprefix 2_utility/, \
 )
 
 IMAGE	= $(addprefix 3_image/, \
-		0_mlx.c ray.c 42_free.c hit.c \
+		0_mlx.c ray.c hit.c \
 )
 
 REFACTOR	= $(addprefix 4_refactor/, \
