@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:04:47 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:41:14 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,22 @@ t_ray	create_ray(t_coo *origin, t_coo *direction)
 	return (new);
 }
 
-t_ray	ray_for_pixel(t_cam_d *temp, int x, int y)
+t_ray	ray_for_pixel(t_cam_d *cam, int x, int y)
 {
-	const double	x_offset = (x + 0.5) * temp->pixel_size;
-	const double	y_offset = (y + 0.5) * temp->pixel_size;
-	t_coo			*direction;
-	t_coo			*test;
+	const double	x_offset = (x + 0.5) * cam->pixel_size;
+	const double	y_offset = (y + 0.5) * cam->pixel_size;
+	t_coo			direction;
+	t_coo			test;
+	t_coo			temp;
+	t_coo			matrix;
 
-	test = create_vector(temp->half_width - x_offset, \
-						temp->half_height - y_offset, -1, 1);
-	direction = vector_normalize(\
-				vector_subtration(\
-				mult_matrix_vector(temp->transform, test), &temp->origin));
-	return (create_ray(&temp->origin, direction));
+
+	test = create_vector_temp(cam->half_width - x_offset, \
+						cam->half_height - y_offset, -1, 1);
+	matrix = mult_matrix_vector_temp(cam->transform, &test);
+	temp = vector_subtration_temp(&matrix, &cam->origin);
+	direction = vector_normalize_temp(&temp);
+	return (create_ray(&cam->origin, &direction));
 }
 
 t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1); // add to header
