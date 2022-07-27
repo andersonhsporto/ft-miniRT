@@ -11,9 +11,9 @@ void	debug(t_mini *data)
 	printf("Ambient ->z %f\n", data->light_a->rgb.z);
 	printf("\n");
 	printf("Camera FOV ->%f\n", data->cam->fov);
-	printf("Camera View Point ->%f\n", data->cam->view_point->x);
-	printf("Camera View Point ->%f\n", data->cam->view_point->y);
-	printf("Camera View Point ->%f\n", data->cam->view_point->z);
+	printf("Camera View Point ->%f\n", data->cam->view_point.x);
+	printf("Camera View Point ->%f\n", data->cam->view_point.y);
+	printf("Camera View Point ->%f\n", data->cam->view_point.z);
 	printf("Camera Normalized ->%f\n", data->cam->orientation.x);
 	printf("Camera Normalized ->%f\n", data->cam->orientation.y);
 	printf("Camera Normalized ->%f\n", data->cam->orientation.z);

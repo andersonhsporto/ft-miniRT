@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:24:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:31:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list
 
 void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb);
 
-void	free_data(t_mini *data);
-
 void	all_intersec(t_caster *cast, t_ray *ray, void *list, t_intersec* (f)(t_ray*, void*));
 
 t_coo	create_vector_temp(double x, double y, double z, double w); //add to header
@@ -105,4 +103,5 @@ t_coo	str_to_coo_vector_temp(char	*string, char *error_message);
 void	camera_pixel_size(int width, int height, t_cam_d *cam);
 
 t_coo	vector_normalize_temp(t_coo *a);
+void	free_mini(t_mini *data);
 #endif

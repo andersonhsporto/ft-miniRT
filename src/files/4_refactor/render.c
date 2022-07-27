@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 23:48:01 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:30:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	render(t_mini *data)
 			rt_mlx_pixel_put_teste(&data->img, x, y, rgb);
 		}
 	}
-	free_data(data);
+	free_mini(data);
 }

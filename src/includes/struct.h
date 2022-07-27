@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:27:03 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:29:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_light_d {
 }	t_light_d;
 
 typedef struct s_cam_d {
-	t_coo		*view_point;
+	t_coo		view_point;
 	t_coo		orientation;
 	double		fov;
 
