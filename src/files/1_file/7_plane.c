@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:07:14 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:17:29 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ t_plane_d	*init_plane(t_mini *data, char **string)
 	t_plane_d	*plane;
 
 	plane = (t_plane_d *)malloc(sizeof(t_plane_d));
-	plane->coordinates = str_to_coo_vector(string[1], ERR_PLANE);
-	plane->normalized = str_to_coo_vector(string[2], ERR_PLANE);
-	plane->color = str_to_coo_vector(string[3], ERR_PLANE);
-	if (out_range_coo(plane->color, 0, 255))
+	plane->coordinates = str_to_coo_vector_temp(string[1], ERR_PLANE);
+	plane->normalized = str_to_coo_vector_temp(string[2], ERR_PLANE);
+	plane->color = str_to_coo_vector_temp(string[3], ERR_PLANE);
+	if (out_range_coo(&plane->color, 0, 255))
 	{
 		print_error("miniRT: Invalid Plane Color");
 		exit(1);
 	}
-	divide_coo(plane->color, 255);
-	plane->transform = get_plane_transform(plane->coordinates, plane->normalized);
+	divide_coo(&plane->color, 255);
+	plane->transform = get_plane_transform(&plane->coordinates, &plane->normalized);
 	plane->id = ++data->index.plane;
 	return (plane);
 }

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/27 00:12:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:16:03 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 	{
 		pl_ptr = (t_plane_d *)node->ptr;
 		comps->normal_vec = normal_at(pl_ptr->transform, &comps->position, ch);
-		comps->color = pl_ptr->color;
+		comps->color = &pl_ptr->color;
 	}
 }
 

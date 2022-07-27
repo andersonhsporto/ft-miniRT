@@ -49,12 +49,12 @@ void	print_element_lst(t_element *lst)
 		else if (lst->type == plane)
 		{
 			t_plane_d *plane_debug = (t_plane_d *)lst->ptr;
-			printf("Plane Normalized ->x %f\n", plane_debug->normalized->x);
-			printf("Plane Normalized ->y %f\n", plane_debug->normalized->y);
-			printf("Plane Normalized ->z %f\n", plane_debug->normalized->z);
-			printf("Plane Color ->x %f\n", plane_debug->color->x);
-			printf("Plane Color ->y %f\n", plane_debug->color->y);
-			printf("Plane Color ->z %f\n", plane_debug->color->z);
+			printf("Plane Normalized ->x %f\n", plane_debug->normalized.x);
+			printf("Plane Normalized ->y %f\n", plane_debug->normalized.y);
+			printf("Plane Normalized ->z %f\n", plane_debug->normalized.z);
+			printf("Plane Color ->x %f\n", plane_debug->color.x);
+			printf("Plane Color ->y %f\n", plane_debug->color.y);
+			printf("Plane Color ->z %f\n", plane_debug->color.z);
 			printf("\n");
 		}
 		else if (lst->type == cylinder)
