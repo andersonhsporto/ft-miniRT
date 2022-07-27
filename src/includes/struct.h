@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/26 23:56:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:07:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_element {
 }	t_element;
 
 typedef struct s_light_d {
-	t_coo		*point;
+	t_coo		point;
 	double		bright;
 	t_coo		intensity;
 	double		diffuse;
@@ -101,7 +101,7 @@ typedef struct s_cam_d {
 	double		fov;
 
 	double		**transform;
-	t_coo		*origin;
+	t_coo		origin;
 	double		pixel_size;
 	double		half_height;
 	double		half_width;

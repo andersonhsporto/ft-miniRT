@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/26 11:54:13 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:04:47 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_ray	ray_for_pixel(t_cam_d *temp, int x, int y)
 						temp->half_height - y_offset, -1, 1);
 	direction = vector_normalize(\
 				vector_subtration(\
-				mult_matrix_vector(temp->transform, test), temp->origin));
-	return (create_ray(temp->origin, direction));
+				mult_matrix_vector(temp->transform, test), &temp->origin));
+	return (create_ray(&temp->origin, direction));
 }
 
 t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1); // add to header

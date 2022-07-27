@@ -19,9 +19,9 @@ void	debug(t_mini *data)
 	printf("Camera Normalized ->%f\n", data->cam->orientation->z);
 	printf("\n");
 	printf("Light Brightness ->%f\n", data->light->bright);
-	printf("Light Point ->x %f\n", data->light->point->x);
-	printf("Light Point ->y %f\n", data->light->point->y);
-	printf("Light Point ->z %f\n", data->light->point->z);
+	printf("Light Point ->x %f\n", data->light->point.x);
+	printf("Light Point ->y %f\n", data->light->point.y);
+	printf("Light Point ->z %f\n", data->light->point.z);
 	printf("\n");
 	print_element_lst(data->element);
 	printf("DEBUG END\n");
@@ -52,9 +52,9 @@ void	print_element_lst(t_element *lst)
 			printf("Plane Normalized ->x %f\n", plane_debug->normalized->x);
 			printf("Plane Normalized ->y %f\n", plane_debug->normalized->y);
 			printf("Plane Normalized ->z %f\n", plane_debug->normalized->z);
-			printf("Plane Color ->x %f\n", plane_debug->color->x);
-			printf("Plane Color ->y %f\n", plane_debug->color->y);
-			printf("Plane Color ->z %f\n", plane_debug->color->z);
+			printf("Plane Color ->x %f\n", plane_debug->color.x);
+			printf("Plane Color ->y %f\n", plane_debug->color.y);
+			printf("Plane Color ->z %f\n", plane_debug->color.z);
 			printf("\n");
 		}
 		else if (lst->type == cylinder)
