@@ -23,8 +23,8 @@ typedef struct s_light
 }	t_light;
 
 typedef struct	s_ray {
-	t_coo	*origin;
-	t_coo	*direction;
+	t_coo	origin;
+	t_coo	direction;
 }				t_ray;
 
 typedef struct	s_scenes {
@@ -126,7 +126,7 @@ typedef struct	s_ltparams
 typedef struct		s_comps
 {
 	double		t;
-	t_coo		*position;
+	t_coo		position;
 	t_light		*light;
 	t_coo		*eye_vec;
 	t_poly		*poly;
@@ -198,11 +198,9 @@ void	render_sphere_transform(t_sphere *sphere);
 
 t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr);
 
-t_ray	*create_ray(t_coo *origin, t_coo *direction);
+t_ray	create_ray(t_coo *origin, t_coo *direction);
 
 double	**view_transform(t_coo *from, t_coo *to, t_coo *up);
-
-void	camera_pixel_size(int width, int height, t_cam *cam);
 
 t_cam	*init_cam(void);
 
@@ -212,7 +210,7 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height);
 
 t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height);
 
-t_coo	*ray_position(t_ray *ray, double t);
+t_coo	ray_position(t_ray *ray, double t);
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec);
 
@@ -222,7 +220,7 @@ void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *lis
 
 t_intersec	*hiter_point(t_caster	*head);
 
-t_ray	*ray_to_object_space(t_ray *ray, double **matrix);
+t_ray	ray_to_object_space(t_ray *ray, double **matrix);
 
 t_plane	*init_plane_re(void);
 

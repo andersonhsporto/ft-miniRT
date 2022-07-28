@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/25 22:18:19 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:29:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,26 @@ typedef struct s_mlx {
 
 typedef struct s_cylinder_d {
 	int			id;
-	t_coo		*coordinates;
-	t_coo		*normalized;
+	t_coo		coordinates;
+	t_coo		normalized;
 	double		radius;
 	double		height;
-	t_coo		*color;
+	t_coo		color;
 	double		**transform;
 }	t_cylinder_d;
 
 typedef struct s_plane_d {
 	int			id;
-	t_coo		*coordinates;
-	t_coo		*normalized;
-	t_coo		*color;
+	t_coo		coordinates;
+	t_coo		normalized;
+	t_coo		color;
 	double		**transform;
 }	t_plane_d;
 
 typedef struct s_sphere_d {
 	int			id;
-	t_coo		*center;
-	t_coo		*color;
+	t_coo		center;
+	t_coo		color;
 	double		radius;
 	double		**transform;
 }				t_sphere_d;
@@ -85,9 +85,9 @@ typedef struct s_element {
 }	t_element;
 
 typedef struct s_light_d {
-	t_coo		*point;
+	t_coo		point;
 	double		bright;
-	t_coo		*intensity;
+	t_coo		intensity;
 	double		diffuse;
 	double		ambient;
 	double		specular;
@@ -96,12 +96,12 @@ typedef struct s_light_d {
 }	t_light_d;
 
 typedef struct s_cam_d {
-	t_coo		*view_point;
-	t_coo		*orientation;
+	t_coo		view_point;
+	t_coo		orientation;
 	double		fov;
 
 	double		**transform;
-	t_coo		*origin;
+	t_coo		origin;
 	double		pixel_size;
 	double		half_height;
 	double		half_width;
@@ -109,7 +109,7 @@ typedef struct s_cam_d {
 
 typedef struct s_ambient {
 	double		ratio;
-	t_coo		*rgb;
+	t_coo		rgb;
 }	t_ambient;
 
 typedef struct s_index {
@@ -130,7 +130,7 @@ typedef struct s_mini {
 	t_element		*element;
 	t_mlx			*mlx;
 	t_image			img;
-	t_ray			*ray;
+	t_ray			ray;
 	t_intersec		*hit;
 }	t_mini;
 

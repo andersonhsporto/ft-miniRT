@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/25 22:21:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 03:04:28 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ char *replace_string(char *string, char character);
 
 double str_to_double(char *str);
 
-void print_image(t_mini *data);
+int	print_image(t_mini *data);
 int exit_esc(int keycode, t_mini *data);
 int red_cross(t_mini *data);
-void print_image(t_mini *data);
 
 void	divide_coo(t_coo *coo, int nbr);
 
@@ -75,16 +74,36 @@ void		get_hit(int x, int y, t_mini *data);
 t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data);
 
 int		is_shadowed(t_comps *comps, t_mini *data);
-t_coo	*lighting(t_comps args, int in_shadow, t_mini *data);
-t_coo	*init_light_intensity(t_coo *rgb, double temp_data);
+t_coo	lighting(t_comps args, int in_shadow, t_mini *data);
+t_coo	init_light_intensity(t_coo *rgb, double temp_data);
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data);
-int 	render(t_mini *img);
-t_ray	*ray_for_pixel(t_cam_d *temp, int x, int y);
+void	render(t_mini *img);
+t_ray	ray_for_pixel(t_cam_d *cam, int x, int y);
 
 void	all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 void	all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 
 void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb);
 
-void	free_data(t_mini *data);
+void	all_intersec(t_caster *cast, t_ray *ray, void *list, t_intersec* (f)(t_ray*, void*));
+
+t_coo	create_vector_temp(double x, double y, double z, double w); //add to header
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+t_coo	vector_subtration_temp(t_coo *a, t_coo *b);
+t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1);
+t_coo	normal_object_type_temp(t_coo o_point, double *obj_type_height);
+t_coo	normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height);
+t_coo	vector_multipli_scalar_temp(double scalar, t_coo *a);
+t_coo	vector_addition_temp(t_coo *a, t_coo *b);
+
+t_coo	str_to_coo_vector_temp(char	*string, char *error_message);
+
+void	camera_pixel_size(int width, int height, t_cam_d *cam);
+
+t_coo	vector_normalize_temp(t_coo *a);
+void	free_mini(t_mini *data);
+
+void	free_matrix(double **matrix, int line);
 #endif

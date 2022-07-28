@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   5_hooks.c                                          :+:      :+:    :+:   */
+/*   4_hooks.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:58:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/16 03:46:13 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:30:32 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	free_mini(t_mini *data)
+{
+	free(data->light_a);
+	free(data->cam);
+	free(data->light);
+}
 
 int exit_esc(int keycode, t_mini *data)
 {
@@ -29,9 +36,9 @@ int red_cross(t_mini *data)
 	return (0);
 }
 
-void print_image(t_mini *data)
+int	print_image(t_mini *data)
 {
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win,
 							data->img.img, 5, 5);
-	return;
+	return (1);
 }

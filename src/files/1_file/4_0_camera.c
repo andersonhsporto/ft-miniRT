@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:11:25 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/19 23:31:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:29:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ t_cam_d	*init_camera(char **string)
 	t_cam_d	*camera;
 
 	camera = (t_cam_d *)malloc(sizeof(t_cam_d));
-	camera->view_point = str_to_coo_vector(string[1], ERR_VIEWPOINT);
-	camera->orientation = str_to_coo_vector(string[2], ERR_NORMALIZED);
-	if (out_range_coo(camera->orientation, -1, 1))
+	camera->view_point = str_to_coo_vector_temp(string[1], ERR_VIEWPOINT);
+	camera->orientation = str_to_coo_vector_temp(string[2], ERR_NORMALIZED);
+	if (out_range_coo(&camera->orientation, -1, 1))
 	{
 		print_error("miniRT: Invalid Camera Normalized Vector");
 		exit(1);
@@ -50,7 +50,7 @@ t_cam_d	*init_camera(char **string)
 		print_error("miniRT: Invalid Camera FOV");
 		exit(1);
 	}
-	print_vector_coo("Camera View Point: ", camera->view_point);
+	print_vector_coo("Camera View Point: ", &camera->view_point);
 	start_camera(camera);
 	return (camera);
 }

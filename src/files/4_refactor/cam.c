@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:40:12 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/16 03:08:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:46:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_co
 
 double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
 {
-	const t_coo		*forward = vector_normalize(vector_subtration(to, from));
-	const t_coo		*up_normal = vector_normalize(up);
-	const t_coo		*left = vector_cross(forward, up_normal);
-	const t_coo		*true_up = vector_cross(left, forward);
+	t_coo		*forward = vector_normalize(vector_subtration(to, from));
+	t_coo		*up_normal = vector_normalize(up);
+	t_coo		*left = vector_cross(forward, up_normal);
+	t_coo		*true_up = vector_cross(left, forward);
 
 	// free((t_coo *)forward);
 	// free((t_coo *)up_normal);
@@ -48,7 +48,7 @@ double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
 	return (calculate_orientation(left, true_up, forward, from));
 }
 
-void	camera_pixel_size(int width, int height, t_cam *cam)
+void	camera_pixel_size(int width, int height, t_cam_d *cam)
 {
 	const double	rad = (cam->fov * M_PI) / 180;
 	const double	half_view = tan(rad / 2);

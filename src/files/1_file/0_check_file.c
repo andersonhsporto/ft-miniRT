@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:28:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/23 02:53:47 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:30:30 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_file(t_mini *data, char *file)
 	}
 	close(fd);
 	debug(data);
-	data->light->intensity = init_light_intensity(data->light_a->rgb, data->light_a->ratio);
+	data->light->intensity = init_light_intensity(&data->light_a->rgb, data->light_a->ratio);
 	return ;
 }
 
