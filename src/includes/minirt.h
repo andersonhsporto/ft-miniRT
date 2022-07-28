@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:38:31 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 03:04:28 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,6 @@ void	camera_pixel_size(int width, int height, t_cam_d *cam);
 
 t_coo	vector_normalize_temp(t_coo *a);
 void	free_mini(t_mini *data);
+
+void	free_matrix(double **matrix, int line);
 #endif

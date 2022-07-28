@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/27 00:02:41 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 02:44:16 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ t_coo	norm_light(t_coo *diffuse, t_coo *specular, t_coo *ambient)
 	t_coo		rgb;
 
 	rgb = vector_addition_temp(&tmp, ambient);
+	free(diffuse);
+	free(specular);
+	free(ambient);
 	if (rgb.x > 1)
 		rgb.x = 1;
 	if (rgb.y > 1)
@@ -71,6 +74,8 @@ t_coo	lighting(t_comps args, int in_shadow, t_mini *data)
 		params.reflect_v = reflect(vector_multipli_scalar(-1, params.light_v),
 			args.normal_vec);
 		params.reflect_dot_eye = vector_abs(params.reflect_v, args.eye_vec);
+		free(args.eye_vec);
+		free(params.reflect_v);
 		if (params.reflect_dot_eye <= 0)
 			params.specular = create_vector(0, 0, 0, 0);
 		else

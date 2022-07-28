@@ -104,9 +104,14 @@ double	cofator_4x4(double **a, int index[2])
 
 	sub = sub_matrix(a, index, 3, 3);
 	if ((index[0] + index[1]) % 2 == 0)
+	{
 		cofator = det_3x3(sub);
+	}
 	else
+	{
 		cofator = -1 * det_3x3(sub);
+	}
+	free_matrix(sub, 3);
 	return (cofator);
 }
 

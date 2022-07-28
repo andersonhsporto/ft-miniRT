@@ -176,6 +176,8 @@ double	matrix_determinant(double **a)
 	}
 	res = a[0][0] * sub[0] + a[0][1] * sub[1]
 		+ a[0][2] * sub[2] + a[0][3] * sub[3];
+	free(sub);
+	sub = NULL;
 	return (res);
 }
 

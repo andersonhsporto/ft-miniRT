@@ -66,4 +66,4 @@ test:
 
 leak:
 	make
-	valgrind ./miniRT teste.rt
+	valgrind --leak-check=full ./miniRT teste.rt
