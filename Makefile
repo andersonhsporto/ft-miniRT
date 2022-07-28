@@ -12,6 +12,7 @@ FILE	= $(addprefix 1_file/, \
 		3_ambient.c 4_0_camera.c 4_1_cam_utils.c \
 		5_light.c 6_sphere.c \
 		7_plane.c 8_cylinder.c \
+		
 		debug.c \
 )
 
