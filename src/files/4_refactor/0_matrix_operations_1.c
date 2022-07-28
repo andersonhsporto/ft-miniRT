@@ -139,11 +139,12 @@ double	**scalar_4x4_matrix(double **mat, double abs)
 double	**matrix_inverter(double **a)
 {
 	double	**res;
+	double	**tmp;
 	double	**transp;
 	double	abs;
 	int		index[2];
 
-	res = create_matrix(4, 4);
+	tmp = create_matrix(4, 4);
 	abs = matrix_determinant(a);
 	if (abs == 0)
 		return (NULL);
@@ -153,13 +154,14 @@ double	**matrix_inverter(double **a)
 		index[1] = 0;
 		while (index[1] < 4)
 		{
-			res[index[0]][index[1]] = cofator_4x4(a, index);
+			tmp[index[0]][index[1]] = cofator_4x4(a, index);
 			index[1]++;
 		}
 		index[0]++;
 	}
-	transp = matrix_transpose(res);
+	transp = matrix_transpose(tmp);
 	res = scalar_4x4_matrix(transp, 1 / abs);
+	free_matrix(tmp, 4);
 	return (res);
 }
 
