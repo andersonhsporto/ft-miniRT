@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/27 00:20:53 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 04:16:54 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,9 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 
 t_coo	ray_position(t_ray *ray, double t)
 {
-	const t_coo	temp = vector_multipli_scalar_temp(t, &ray->direction);
+	t_coo	temp;
 
+	temp = vector_multipli_scalar_temp(t, &ray->direction);
 	return (vector_addition_temp(&ray->origin, &temp));
 }
 
