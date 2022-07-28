@@ -141,6 +141,7 @@ double	**matrix_inverter(double **a)
 	double	**res;
 	double	**tmp;
 	double	**transp;
+	double	**temp;
 	double	abs;
 	int		index[2];
 
