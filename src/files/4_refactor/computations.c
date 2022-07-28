@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/27 00:20:53 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 03:50:30 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 	o_normal = normal_object_type(o_point, obj_type_height);
 	transp_trans = matrix_transpose(inv_trans);
 	w_normal = mult_matrix_vector(transp_trans, o_normal);
+	free_matrix(inv_trans, 4);
 	w_normal->w = 0;
 	return (vector_normalize(w_normal));
 }
@@ -116,8 +117,9 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 
 t_coo	ray_position(t_ray *ray, double t)
 {
-	const t_coo	temp = vector_multipli_scalar_temp(t, &ray->direction);
+	t_coo	temp;
 
+	temp = vector_multipli_scalar_temp(t, &ray->direction);
 	return (vector_addition_temp(&ray->origin, &temp));
 }
 
@@ -134,7 +136,7 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	}
 	else
 		comps->inside = 0;
-	comps->reflect_vec = reflect(&rt->direction, comps->normal_vec);
+	// comps->reflect_vec = reflect(&rt->direction, comps->normal_vec);
 	comps->over_point = vector_addition(&comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
 }
 
