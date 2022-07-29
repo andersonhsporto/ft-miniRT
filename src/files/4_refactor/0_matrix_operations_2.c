@@ -190,7 +190,7 @@ double	**create_matrix(int col, int line)
 	res = (double **)malloc(sizeof(double *) * line);
 	while (i < line)
 	{
-		res[i] = (double *)malloc(sizeof(double) * col);
+		res[i] = (double *)ft_calloc(sizeof(double), col);
 		i++;
 	}
 	return (res);

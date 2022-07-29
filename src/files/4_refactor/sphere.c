@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 22:33:21 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 22:16:07 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr)
 	vals[0] = vector_abs(&ray.direction, &ray.direction);
 	vals[1] = 2 * vector_abs(&ray.direction, &sphere_to_ray);
 	dot = vector_abs(&sphere_to_ray, &sphere_to_ray) - 1;
+	free_matrix(ray.inverse, 4);
 	vals[2] = ((vals[1] * vals[1]) - (4 * vals[0] * dot));
 	if (vals[2] >= 0)
 	{

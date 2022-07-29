@@ -25,6 +25,7 @@ typedef struct s_light
 typedef struct	s_ray {
 	t_coo	origin;
 	t_coo	direction;
+	double	**inverse;
 }				t_ray;
 
 typedef struct	s_scenes {

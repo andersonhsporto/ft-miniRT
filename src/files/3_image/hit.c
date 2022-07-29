@@ -42,6 +42,7 @@ t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)
 			all_intersec(intersec, &ray, tmp->ptr, plane_intersection);
 		tmp = tmp->next;
 	}
+	// free_matrix(ray.inverse, 4);
 	hit = hiter_point(intersec);
 	free(intersec);
 	return(hit);
