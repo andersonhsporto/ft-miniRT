@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/28 23:16:51 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 01:26:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	is_shadowed(t_comps *comps, t_mini *data)
 
 	if (hit && (hit->t < distance))
 	{
-		free((t_intersec*)hit);
+		free((t_intersec *)hit);
 		return (1);
 	}
 	else
 	{
-		free((t_intersec*)hit);
+		free((t_intersec *)hit);
 		return (0);
 	}
 }
@@ -46,9 +46,10 @@ static void	set_light_params(t_comps *args, t_ltparams *params, t_mini *data)
 
 t_coo	norm_light(t_coo *diffuse, t_coo *specular, t_coo *ambient)
 {
-	t_coo 		tmp = vector_addition_temp(diffuse, specular);
-	t_coo		rgb;
+	t_coo	tmp;
+	t_coo	rgb;
 
+	tmp = vector_addition_temp(diffuse, specular);
 	rgb = vector_addition_temp(&tmp, ambient);
 	free(diffuse);
 	free(specular);
@@ -65,6 +66,7 @@ t_coo	norm_light(t_coo *diffuse, t_coo *specular, t_coo *ambient)
 t_coo	lighting(t_comps args, int in_shadow, t_mini *data)
 {
 	t_ltparams	params;
+	t_coo		*temp;
 
 	set_light_params(&args, &params, data);
 	if (params.light_dot_normal < 0 || in_shadow == 1)
@@ -76,8 +78,9 @@ t_coo	lighting(t_comps args, int in_shadow, t_mini *data)
 	{
 		params.diffuse = vector_multipli_scalar(data->light->diffuse * params.light_dot_normal,
 			params.effective_color);
-		params.reflect_v = reflect(vector_multipli_scalar(-1, params.light_v),
-			args.normal_vec);
+		temp = vector_multipli_scalar(-1, params.light_v);
+		params.reflect_v = reflect(temp, args.normal_vec);
+		free(temp);
 		params.reflect_dot_eye = vector_abs(params.reflect_v, args.eye_vec);
 		if (params.reflect_dot_eye <= 0)
 			params.specular = create_vector(0, 0, 0, 0);
