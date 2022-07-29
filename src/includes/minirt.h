@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/28 23:26:41 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:39:37 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # define KEY_RELEASE 3
 # define DESTROY_NOTIFY 17
-# define EXPOSE 2
+# define EXPOSE 12
 # define ESC 65307
 # define BUTTON_RELEASE (1L << 1)
 # define EXPOSURE_MASK (1L << 15)
