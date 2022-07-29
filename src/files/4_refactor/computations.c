@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 12:27:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:35:23 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,22 @@ t_coo	*reflect(t_coo *v, t_coo *n)
 
 static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 {
-	double		dist;
-	double		min;
-	double		max;
+	const double	dist = (pow(o_point->x, 2) + pow(o_point->z, 2));
+	const double	max = (height / 2.0);
+	const double	min = (-1.0 * max);
 
-	max = height / 2.0;
-	min = -1.0 * max;
-	dist = pow(o_point->x, 2) + pow(o_point->z, 2);
 	if (dist < 1 && (o_point->y >= max - EPSILON))
+	{
 		return (create_vector(0, 1, 0, 0));
+	}
 	else if (dist < 1 && (o_point->y <= min + EPSILON))
+	{
 		return (create_vector(0, -1, 0, 0));
+	}
 	else
+	{
 		return (create_vector(o_point->x, 0, o_point->z, 0));
+	}
 }
 
 t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
@@ -50,10 +53,17 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 		return (vector_subtration(o_point, &temp));
 	}
 	else if (obj_type_height[0] == plane)
+	{
 		return (create_vector(0, 1, 0, 0));
+	}
 	else if (obj_type_height[0] == cylinder)
+	{
 		return (get_cylinder_normal(obj_type_height[1], o_point));
-	return(create_vector(0, 0, 0, 0));
+	}
+	else
+	{
+		return (NULL);
+	}
 }
 
 t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
@@ -182,7 +192,7 @@ t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 
 t_caster	*init_intersec_list(void)
 {
-	t_caster *list;
+	t_caster	*list;
 
 	list = (t_caster *)malloc(sizeof(t_caster) * 1);
 	list->cont = 0;
