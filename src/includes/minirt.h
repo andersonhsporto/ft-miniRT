@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/29 01:20:58 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 01:31:55 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include <math.h>
 #include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
-# define WIDTH 10
-# define HEIGHT 10
+# define WIDTH 500
+# define HEIGHT 500
 
 # define EPSILON 0.00001
 
