@@ -76,12 +76,14 @@ static t_coo	get_cylinder_normal_temp(double height, t_coo *o_point)
 t_coo	normal_object_type_temp(t_coo o_point, double *obj_type_height)
 {
 	t_coo	temp = create_vector_temp(0, 0, 0, 1);
+
 	if (obj_type_height[0] == sphere)
 		return (vector_subtration_temp(&o_point, &temp));
 	else if (obj_type_height[0] == plane)
 		return (create_vector_temp(0, 1, 0, 0));
 	else if (obj_type_height[0] == cylinder)
 		return (get_cylinder_normal_temp(obj_type_height[1], &o_point));
+	return(create_vector_temp(0, 0, 0, 0));
 }
 
 t_coo	normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height)

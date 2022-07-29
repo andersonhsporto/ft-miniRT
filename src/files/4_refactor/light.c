@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/28 23:01:49 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:16:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	set_light_params(t_comps *args, t_ltparams *params, t_mini *data)
 
 	params->effective_color = vector_multipli(args->color, &data->light->intensity);
 	temp = vector_subtration(&data->light->point, args->over_point);
+	free(args->over_point);
 	params->light_v = vector_normalize(temp);
 	free(temp);
 	params->ambient = vector_multipli_scalar(data->light->ambient, params->effective_color);
@@ -84,8 +85,8 @@ t_coo	lighting(t_comps args, int in_shadow, t_mini *data)
 			params.specular = vector_multipli_scalar(data->light->specular *
 			(pow(params.reflect_dot_eye, data->light->shininess)), &data->light->intensity);
 	}
-	// free(params.light_v);
-	// free(args.eye_vec);
-	// free(params.reflect_v);
+	free(params.light_v);
+	free(args.eye_vec);
+	free(params.effective_color);
 	return (norm_light(params.diffuse, params.specular, params.ambient));
 }

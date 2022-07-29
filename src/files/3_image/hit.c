@@ -28,8 +28,10 @@ t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)
 	t_intersec	*hit;
 	t_element	*tmp;
 	t_ray		ray;
+	t_coo		tmp_normalize;
 
-	ray = create_ray(over_point, vector_normalize(path));
+	tmp_normalize = vector_normalize_temp(path);
+	ray = create_ray(over_point, &tmp_normalize);
 	intersec = init_intersec_list();
 	tmp = data->element;
 	while (tmp != NULL)

@@ -160,7 +160,7 @@ double	**matrix_inverter(double **a)
 		index[0]++;
 	}
 	transp = matrix_transpose(temp);
-	res = scalar_4x4_matrix(temp, 1 / abs);
+	res = scalar_4x4_matrix(transp, 1 / abs);
 	// free_matrix(temp, 4); ///why ?????
 	return (res);
 }

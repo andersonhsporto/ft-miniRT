@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:00:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:13:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,4 @@ void	get_line_scene(t_mini *data, char *line)
 	else if (find_cylinder(split))
 		lst_new_cylinder(data, split);
 	matrix_free(split);
-
 }

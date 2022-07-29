@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/28 23:01:19 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:31:32 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 		return (create_vector(0, 1, 0, 0));
 	else if (obj_type_height[0] == cylinder)
 		return (get_cylinder_normal(obj_type_height[1], o_point));
+	return(create_vector(0, 0, 0, 0));
 }
 
 t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)

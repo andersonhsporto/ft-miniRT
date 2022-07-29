@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/28 22:27:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:24:56 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static t_intersec *create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 			}
 		}
 	}
+	free_matrix(ray->inverse, 4);
 	return (res);
 }
 
