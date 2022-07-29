@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:41:14 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:44:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ t_ray	ray_to_object_space(t_ray *ray, double **matrix)
 	inverse = matrix_inverter(matrix);
 	res.origin = mult_matrix_vector_temp(inverse, &ray->origin);
 	res.direction = mult_matrix_vector_temp(inverse, &ray->direction);
+	free_matrix(inverse, 4);
 	return (res);
 }
