@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:17:29 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:21:45 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ double	**get_plane_transform(t_coo *pos, t_coo *norm)
 	translate = translation(pos->x,	pos->y, pos->z);
 	rotate = normal_rotation_matrix(norm);
 	transform = matrix_multiply(translate, rotate);
+	free_matrix(translate, 4);
+	free_matrix(rotate, 4);
 	return (transform);
 }
 

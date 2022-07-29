@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 01:36:10 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:27:39 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 	return (vector_normalize(&w_normal));
 }
 
-void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
+void	get_normal_vec(t_element *node, double *ch, t_comps *comps)
 {
 	t_cylinder_d	*cy_ptr;
 	t_sphere_d		*sp_ptr;
@@ -103,7 +103,7 @@ void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 	}
 }
 
-static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
+void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
 {
 	double		obj_type_cylinder_height[2];
 	t_element	*tmp;
@@ -114,7 +114,7 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	{
 		if (tmp->type == obj_type && tmp->id == obj_pos)
 		{
-			get_normal_vec(tmp, obj_type_cylinder_height, comps, obj_pos);
+			get_normal_vec(tmp, obj_type_cylinder_height, comps);
 			return ;
 		}
 		tmp = tmp->next;

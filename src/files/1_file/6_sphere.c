@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:11:55 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:21:01 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ double	**get_sphere_transform(double radius, t_coo *center)
 	translate = translation(center->x, center->y, center->z);
 	scale = identity(radius, radius, radius);
 	transform = matrix_multiply(scale, translate);
+	free_matrix(scale, 4);
+	free_matrix(translate, 4);
 	return (transform);
 }
 
