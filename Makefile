@@ -1,4 +1,4 @@
-NAME	= miniRT
+NAME	=	miniRT
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -g #-Werror
@@ -6,6 +6,12 @@ INCLUDE =	-I ./src/includes -I ./libs/libft
 LIBFT	=	-L ./libs/libft -lft
 MLX		=   -lmlx -lXext -lX11
 HEADER	= 	./src/includes/minirt.h
+
+MATRIX	= $(addprefix 0_matrix/, \
+		0_calculate_orientation.c \
+		0_matrix_operations_1.c 0_matrix_operations_2.c \
+		0_normal_rotation.c 0_transform.c \
+)
 
 FILE	= $(addprefix 1_file/, \
 		0_check_file.c 1_start_file.c 2_init_file.c \
@@ -25,15 +31,13 @@ IMAGE	= $(addprefix 3_image/, \
 )
 
 REFACTOR	= $(addprefix 4_refactor/, \
-		0_matrix_operations_1.c 0_matrix_operations_2.c 0_transform.c \
-		0_normal_rotation.c 0_calculate_orientation.c \
 		matrix_inverter.c cam.c \
 		computations.c cylinder.c intersections.c light.c \
 		render.c plane.c sphere.c vector.c \
 )
 
 SRC		= $(addprefix ./src/files/, \
-		$(FILE) $(UTILITY) $(IMAGE) $(REFACTOR) \
+		$(MATRIX) $(FILE) $(UTILITY) $(IMAGE) $(REFACTOR) \
 		minirt.c 1_init.c 2_error.c\
 )
 
