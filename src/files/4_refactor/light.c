@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 23:38:54 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:23:45 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ t_coo lighting(t_comps args, int in_shadow, t_mini *data)
 												params.effective_color);
 		t_coo *temp = vector_multipli_scalar(-1, params.light_v);
 		params.reflect_v = reflect(temp, args.normal_vec);
+		free(temp);
 		params.reflect_dot_eye = vector_abs(params.reflect_v, args.eye_vec);
+		free(params.reflect_v);
 		if (params.reflect_dot_eye <= 0)
 			params.specular = create_vector(0, 0, 0, 0);
 		else

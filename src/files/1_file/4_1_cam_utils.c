@@ -1,6 +1,5 @@
 #include "minirt.h"
 
-//vector_cross(vector_cross(&cam->orientation, create_vector(0, 1, 0, 0)), &cam->orientation))
 t_coo	*double_cross(t_cam_d *cam)
 {
 	const t_coo	*new = create_vector(0, 1, 0, 0);;

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 23:38:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:20:46 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,21 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 
 t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 {
+	double	**inv_trans;
+	double	**transp_trans;
 	t_coo	*o_point;
 	t_coo	*o_normal;
 	t_coo	w_normal;
-	double	**inv_trans;
-	double	**transp_trans;
 
 	inv_trans = matrix_inverter(transform);
 	o_point = mult_matrix_vector(inv_trans, w_point);
 	o_normal = normal_object_type(o_point, obj_type_height);
+	free(o_point);
 	transp_trans = matrix_transpose(inv_trans);
 	w_normal = mult_matrix_vector_temp(transp_trans, o_normal);
 	w_normal.w = 0;
 	free_matrix(inv_trans, 4);
+	free(o_normal);
 	return (vector_normalize(&w_normal));
 }
 
