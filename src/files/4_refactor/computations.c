@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 12:35:23 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 22:45:24 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
 			get_normal_vec(tmp, obj_type_cylinder_height, comps);
 			return ;
 		}
+		
 		tmp = tmp->next;
 	}
 }
