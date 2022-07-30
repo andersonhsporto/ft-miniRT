@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/28 22:16:07 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:38:54 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_sphere	*init_sphere_re(void)
+t_sphere *init_sphere_re(void)
 {
 	t_sphere *sphere;
 
@@ -23,17 +23,17 @@ t_sphere	*init_sphere_re(void)
 	sphere->material = (t_material *)malloc(sizeof(t_material));
 	sphere->material->color = create_vector(0.2, 0.2, 1, 0);
 	sphere->material->ambient = 0.1;
-	sphere->material->diffuse = 0.9; // randomico
+	sphere->material->diffuse = 0.9;  // randomico
 	sphere->material->specular = 0.9; // randomico
 	sphere->material->shininess = 200.0;
 	return (sphere);
 }
 
-void	render_sphere_transform(t_sphere *sphere)
+void render_sphere_transform(t_sphere *sphere)
 {
-	double	**translate;
-	double	**scale;
-	double	**transform;
+	double **translate;
+	double **scale;
+	double **transform;
 
 	translate = translation(sphere->center->x,
 							sphere->center->y, sphere->center->z);
@@ -42,15 +42,15 @@ void	render_sphere_transform(t_sphere *sphere)
 	sphere->transform = transform;
 }
 
-t_intersec	*sphere_intersection(t_ray *base_ray, void *ptr)
+t_intersec *sphere_intersection(t_ray *base_ray, void *ptr)
 {
-	t_sphere_d	*obj = (t_sphere_d *)ptr;
-	t_intersec	*intersectionPoints = NULL;
-	t_ray		ray = ray_to_object_space(base_ray, obj->transform);
-	t_coo		temp = create_vector_temp(0, 0, 0, 1);
-	t_coo		sphere_to_ray = vector_subtration_temp(&ray.origin, &temp);
-	double		dot;
-	double		vals[3];
+	t_sphere_d *obj = (t_sphere_d *)ptr;
+	t_intersec *intersectionPoints = NULL;
+	t_ray ray = ray_to_object_space(base_ray, obj->transform);
+	t_coo temp = create_vector_temp(0, 0, 0, 1);
+	t_coo sphere_to_ray = vector_subtraction_temp(&ray.origin, &temp);
+	double dot;
+	double vals[3];
 
 	vals[0] = vector_abs(&ray.direction, &ray.direction);
 	vals[1] = 2 * vector_abs(&ray.direction, &sphere_to_ray);

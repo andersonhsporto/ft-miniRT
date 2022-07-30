@@ -24,7 +24,7 @@ t_coo	*vector_multipli(t_coo *a, t_coo *b)
 	return (res);
 }
 
-t_coo	*vector_subtration(t_coo *a, t_coo *b)
+t_coo	*vector_subtraction(t_coo *a, t_coo *b)
 {
 	t_coo *res;
 

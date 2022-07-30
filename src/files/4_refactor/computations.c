@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/28 23:31:32 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:38:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_coo	*reflect(t_coo *v, t_coo *n)
 	t_coo	*res;
 
 	var = vector_multipli_scalar(2.0 * vector_abs(v, n), n);
-	res = vector_subtration(v, var);
+	res = vector_subtraction(v, var);
 	free(var);
 	return(res);
 }
@@ -44,7 +44,7 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 {
 	if (obj_type_height[0] == sphere)
 	{
-		return (vector_subtration(o_point, create_vector(0, 0, 0, 1)));
+		return (vector_subtraction(o_point, create_vector(0, 0, 0, 1)));
 	}
 	else if (obj_type_height[0] == plane)
 		return (create_vector(0, 1, 0, 0));
@@ -137,7 +137,6 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	}
 	else
 		comps->inside = 0;
-	comps->reflect_vec = reflect(&rt->direction, comps->normal_vec);
 	comps->over_point = vector_addition(&comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
 }
 

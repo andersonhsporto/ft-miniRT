@@ -6,15 +6,15 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/28 23:01:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:38:55 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	create_ray(t_coo *origin, t_coo *direction)
+t_ray create_ray(t_coo *origin, t_coo *direction)
 {
-	t_ray	new;
+	t_ray new;
 
 	new.origin.x = origin->x;
 	new.origin.y = origin->y;
@@ -27,28 +27,27 @@ t_ray	create_ray(t_coo *origin, t_coo *direction)
 	return (new);
 }
 
-t_ray	ray_for_pixel(t_cam_d *cam, int x, int y)
+t_ray ray_for_pixel(t_cam_d *cam, int x, int y)
 {
-	const double	x_offset = (x + 0.5) * cam->pixel_size;
-	const double	y_offset = (y + 0.5) * cam->pixel_size;
-	t_coo			direction;
-	t_coo			test;
-	t_coo			temp;
-	t_coo			matrix;
+	const double x_offset = (x + 0.5) * cam->pixel_size;
+	const double y_offset = (y + 0.5) * cam->pixel_size;
+	t_coo direction;
+	t_coo test;
+	t_coo temp;
+	t_coo matrix;
 
-
-	test = create_vector_temp(cam->half_width - x_offset, \
-						cam->half_height - y_offset, -1, 1);
+	test = create_vector_temp(cam->half_width - x_offset,
+							  cam->half_height - y_offset, -1, 1);
 	matrix = mult_matrix_vector_temp(cam->transform, &test);
-	temp = vector_subtration_temp(&matrix, &cam->origin);
+	temp = vector_subtraction_temp(&matrix, &cam->origin);
 	direction = vector_normalize_temp(&temp);
 	return (create_ray(&cam->origin, &direction));
 }
 
-t_coo	mult_matrix_vector_temp(double **m1, t_coo *t1); // add to header
-t_ray	ray_to_object_space(t_ray *ray, double **matrix)
+t_coo mult_matrix_vector_temp(double **m1, t_coo *t1); // add to header
+t_ray ray_to_object_space(t_ray *ray, double **matrix)
 {
-	t_ray	res;
+	t_ray res;
 
 	res.inverse = matrix_inverter(matrix);
 	res.origin = mult_matrix_vector_temp(res.inverse, &ray->origin);

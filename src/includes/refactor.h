@@ -133,7 +133,6 @@ typedef struct		s_comps
 	t_poly		*poly;
 	t_material	*material;
 	t_coo		*normal_vec;
-	t_coo		*reflect_vec;
 	t_coo		*over_point;
 	t_coo		*color;
 	int			inside;
@@ -147,7 +146,7 @@ typedef struct s_sence
 
 t_coo	*vector_addition(t_coo *a, t_coo *b);
 
-t_coo	*vector_subtration(t_coo *a, t_coo *b);
+t_coo	*vector_subtraction(t_coo *a, t_coo *b);
 
 t_coo	*vector_multipli_scalar(double scalar, t_coo *a);
 
@@ -222,8 +221,6 @@ void	all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *lis
 t_intersec	*hiter_point(t_caster	*head);
 
 t_ray	ray_to_object_space(t_ray *ray, double **matrix);
-
-t_plane	*init_plane_re(void);
 
 double	**normal_rotation_matrix(t_coo *normal);
 

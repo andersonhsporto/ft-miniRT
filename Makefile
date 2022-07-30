@@ -25,7 +25,9 @@ IMAGE	= $(addprefix 3_image/, \
 )
 
 REFACTOR	= $(addprefix 4_refactor/, \
-		0_matrix_operations_1.c 0_matrix_operations_2.c matrix_inverter.c cam.c \
+		0_matrix_operations_1.c 0_matrix_operations_2.c 0_transform.c \
+		0_normal_rotation.c \
+		matrix_inverter.c cam.c \
 		computations.c cylinder.c intersections.c light.c \
 		render.c plane.c sphere.c vector.c \
 )

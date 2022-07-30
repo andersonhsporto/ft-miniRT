@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:40:12 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 23:46:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:36:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ double	**calculate_orientation(t_coo *left, t_coo *true_up, t_coo *forward, t_co
 	translate =  translation(-1.0 * from->x, -1.0 * from->y, -1.0 * from->z);
 	orientation = matrix_multiply(matrix, translate);
 	return (orientation);
-}
-
-double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
-{
-	t_coo		*forward = vector_normalize(vector_subtration(to, from));
-	t_coo		*up_normal = vector_normalize(up);
-	t_coo		*left = vector_cross(forward, up_normal);
-	t_coo		*true_up = vector_cross(left, forward);
-
-	// free((t_coo *)forward);
-	// free((t_coo *)up_normal);
-	// free((t_coo *)left);
-	// // free((t_coo *)true_up);
-	return (calculate_orientation(left, true_up, forward, from));
 }
 
 void	camera_pixel_size(int width, int height, t_cam_d *cam)

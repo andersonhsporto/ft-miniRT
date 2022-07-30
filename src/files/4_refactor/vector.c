@@ -1,9 +1,9 @@
 #include "minirt.h"
 
-t_coo	vector_normalize_temp(t_coo *a)
+t_coo vector_normalize_temp(t_coo *a)
 {
-	t_coo	res;
-	double	length;
+	t_coo res;
+	double length;
 
 	length = vector_lenght(a);
 	res.x = a->x / length;
@@ -12,9 +12,9 @@ t_coo	vector_normalize_temp(t_coo *a)
 	return (res);
 }
 
-t_coo	vector_multipli_scalar_temp(double scalar, t_coo *a)
+t_coo vector_multipli_scalar_temp(double scalar, t_coo *a)
 {
-	t_coo	res;
+	t_coo res;
 
 	res.x = a->x * scalar;
 	res.y = a->y * scalar;
@@ -23,9 +23,9 @@ t_coo	vector_multipli_scalar_temp(double scalar, t_coo *a)
 	return (res);
 }
 
-t_coo	vector_addition_temp(t_coo *a, t_coo *b)
+t_coo vector_addition_temp(t_coo *a, t_coo *b)
 {
-	t_coo	res;
+	t_coo res;
 
 	res.x = a->x + b->x;
 	res.y = a->y + b->y;
@@ -34,9 +34,9 @@ t_coo	vector_addition_temp(t_coo *a, t_coo *b)
 	return (res);
 }
 
-t_coo	vector_subtration_temp(t_coo *a, t_coo *b)
+t_coo vector_subtraction_temp(t_coo *a, t_coo *b)
 {
-	t_coo	res;
+	t_coo res;
 
 	res.x = a->x - b->x;
 	res.y = a->y - b->y;
@@ -45,9 +45,9 @@ t_coo	vector_subtration_temp(t_coo *a, t_coo *b)
 	return (res);
 }
 
-t_coo	create_vector_temp(double x, double y, double z, double w)
+t_coo create_vector_temp(double x, double y, double z, double w)
 {
-	t_coo	res;
+	t_coo res;
 
 	res.x = x;
 	res.y = y;
@@ -56,11 +56,11 @@ t_coo	create_vector_temp(double x, double y, double z, double w)
 	return (res);
 }
 
-static t_coo	get_cylinder_normal_temp(double height, t_coo *o_point)
+static t_coo get_cylinder_normal_temp(double height, t_coo *o_point)
 {
-	double		dist;
-	double		min;
-	double		max;
+	double dist;
+	double min;
+	double max;
 
 	max = height / 2.0;
 	min = -1.0 * max;
@@ -73,26 +73,26 @@ static t_coo	get_cylinder_normal_temp(double height, t_coo *o_point)
 		return (create_vector_temp(o_point->x, 0, o_point->z, 0));
 }
 
-t_coo	normal_object_type_temp(t_coo o_point, double *obj_type_height)
+t_coo normal_object_type_temp(t_coo o_point, double *obj_type_height)
 {
-	t_coo	temp = create_vector_temp(0, 0, 0, 1);
+	t_coo temp = create_vector_temp(0, 0, 0, 1);
 
 	if (obj_type_height[0] == sphere)
-		return (vector_subtration_temp(&o_point, &temp));
+		return (vector_subtraction_temp(&o_point, &temp));
 	else if (obj_type_height[0] == plane)
 		return (create_vector_temp(0, 1, 0, 0));
 	else if (obj_type_height[0] == cylinder)
 		return (get_cylinder_normal_temp(obj_type_height[1], &o_point));
-	return(create_vector_temp(0, 0, 0, 0));
+	return (create_vector_temp(0, 0, 0, 0));
 }
 
-t_coo	normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height)
+t_coo normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height)
 {
-	t_coo	o_point;
-	t_coo	o_normal;
-	t_coo	w_normal;
-	double	**inv_trans;
-	double	**transp_trans;
+	t_coo o_point;
+	t_coo o_normal;
+	t_coo w_normal;
+	double **inv_trans;
+	double **transp_trans;
 
 	inv_trans = matrix_inverter(transform);
 	o_point = mult_matrix_vector_temp(inv_trans, w_point);
