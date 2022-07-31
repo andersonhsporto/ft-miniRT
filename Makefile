@@ -10,7 +10,9 @@ HEADER	= 	./src/includes/minirt.h
 MATRIX	= $(addprefix 0_matrix/, \
 		0_calculate_orientation.c \
 		0_matrix_operations_1.c 0_matrix_operations_2.c \
+		0_matrix_operations_3.c \
 		0_normal_rotation.c 0_transform.c \
+		0_sub_matrix.c \
 )
 
 FILE	= $(addprefix 1_file/, \
