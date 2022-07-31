@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:59:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/25 22:08:55 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:24:16 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ char	*replace_string(char *string, char character)
 		}
 		index++;
 	}
-	free(string);
-	string = NULL;
 	return (new_string);
 }
 

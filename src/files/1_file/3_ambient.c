@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 23:37:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/26 23:30:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:19:00 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	find_ambient(t_mini *data, char	**string)
 		}
 		else
 		{
+			data->index.ambient++;
 			return (1);
 		}
 	}

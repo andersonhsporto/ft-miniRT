@@ -6,14 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/30 00:32:17 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:25:24 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	check_line(char *line);
-static void	exit_and_free(t_mini *data);
 static void	check_legal_char(char *file, t_mini *data);
 
 void	check_file(t_mini *data, char *file)
@@ -30,6 +29,7 @@ void	check_file(t_mini *data, char *file)
 		if (map_line == NULL)
 			break ;
 		temp = replace_string(map_line, '+');
+		free(map_line);
 		get_line_scene(data, temp);
 		free(temp);
 	}
@@ -46,7 +46,7 @@ static void	check_legal_char(char *file, t_mini *data)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_and_free(data);
+		exit_and_free(data, "miniRT: Open Error");
 	while (fd)
 	{
 		line = get_next_line(fd);
@@ -57,23 +57,12 @@ static void	check_legal_char(char *file, t_mini *data)
 			print_error("miniRT: Illegal Character");
 			close(fd);
 			free(line);
-			exit_and_free(data);
+			exit_and_free(data, "miniRT: Open Error");
 		}
 		free(line);
 	}
 	close(fd);
 	return ;
-}
-
-static void	exit_and_free(t_mini *data)
-{
-	print_error("miniRT: Open Error");
-	mlx_destroy_image(data->mlx->mlx, data->img.img);
-	mlx_destroy_window(data->mlx->mlx, data->mlx->win);
-	mlx_destroy_display(data->mlx->mlx);
-	free(data->mlx->mlx);
-	free(data->mlx);
-	exit(1);
 }
 
 static int	check_line(char *line)

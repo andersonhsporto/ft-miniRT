@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/30 00:33:43 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 01:52:02 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_coo str_to_coo_vector_temp(char *string, char *error_message);
 void camera_pixel_size(int width, int height, t_cam_d *cam);
 
 t_coo vector_normalize_temp(t_coo *a);
-void free_mini(t_mini *data);
-
-void free_matrix(double **matrix, int line);
+void	free_mini(t_mini *data);
+void	exit_and_free(t_mini *data, char *string);
+void	free_matrix(double **matrix, int line);
 #endif

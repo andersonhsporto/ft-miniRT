@@ -6,24 +6,29 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/28 23:13:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:28:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_coo	init_light_intensity(t_coo *rgb, double temp_data)
-{
-	t_coo	light_intensity;
-	t_coo	temp0;
-	t_coo	temp1;
-	t_coo	temp2;
+static void	line_scene_helper(t_mini *data, char **split);
 
-	temp0 = create_vector_temp(1, 1, 1, 0);
-	temp1 = vector_normalize_temp(rgb);
-	temp2 = vector_multipli_scalar_temp(temp_data, &temp1);
-	light_intensity = vector_addition_temp(&temp0, &temp2);
-	return (light_intensity);
+static	free_line(t_mini *data, char *line, char **split)
+{
+	matrix_free(split);
+	free(line);
+	if (data->index.ambient == 1)
+	{
+		printf("AQU\n");
+		free(data->light_a);
+	}
+	else if (data->index.camera == 1)
+	{
+		free(data->cam);
+	}
+	exit_and_free(data, "miniRT: Invalid Line");
+	exit(1);
 }
 
 void	get_line_scene(t_mini *data, char *line)
@@ -38,10 +43,16 @@ void	get_line_scene(t_mini *data, char *line)
 	}
 	if (matrix_len(split) < 3)
 	{
+		free(line);
 		printf("%s\n", split[0]);
-		print_error("miniRT: Invalid Line");
-		exit(0); // free memory
+		free_line(data, line, split);
 	}
+	line_scene_helper(data, split);
+	matrix_free(split);
+}
+
+static void	line_scene_helper(t_mini *data, char **split)
+{
 	if (find_ambient(data, split))
 		data->light_a = init_ambient(split);
 	else if (find_camera(data, split))
@@ -54,5 +65,4 @@ void	get_line_scene(t_mini *data, char *line)
 		lst_new_plane(data, split);
 	else if (find_cylinder(split))
 		lst_new_cylinder(data, split);
-	matrix_free(split);
 }
