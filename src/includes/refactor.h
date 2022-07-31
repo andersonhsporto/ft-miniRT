@@ -164,7 +164,7 @@ t_coo	*create_vector(double x, double y, double z, double w);
 
 double	matrix_determinant(double **a);
 
-double	**matrix_transpose(double **a);
+void	matrix_transpose(double **a);
 
 double	**matrix_multiply(double **a, double **b);
 

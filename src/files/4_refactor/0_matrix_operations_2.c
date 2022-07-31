@@ -138,7 +138,7 @@ t_coo	*mult_matrix_vector(double **m1, t_coo *t1)
 	return (new_t);
 }
 
-double	**matrix_transpose(double **a)
+void	matrix_transpose(double **a)
 {
 	double	b[4][4];
 
@@ -156,7 +156,6 @@ double	**matrix_transpose(double **a)
 			a[i][j] = b[j][i];
 		}
 	}
-	return (a);
 }
 
 

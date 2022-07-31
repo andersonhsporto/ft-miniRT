@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/30 00:20:46 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:19:29 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,15 @@ static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 
 t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 {
+	t_coo	*posi;
+	t_coo	*sphere_posi;
+
 	if (obj_type_height[0] == sphere)
 	{
-		return (vector_subtraction(o_point, create_vector(0, 0, 0, 1)));
+		posi = create_vector(0, 0, 0, 1);
+		sphere_posi = vector_subtraction(o_point, posi);
+		free(posi);
+		return (sphere_posi);
 	}
 	else if (obj_type_height[0] == plane)
 		return (create_vector(0, 1, 0, 0));
@@ -56,7 +62,6 @@ t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 {
 	double	**inv_trans;
-	double	**transp_trans;
 	t_coo	*o_point;
 	t_coo	*o_normal;
 	t_coo	w_normal;
@@ -65,8 +70,8 @@ t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 	o_point = mult_matrix_vector(inv_trans, w_point);
 	o_normal = normal_object_type(o_point, obj_type_height);
 	free(o_point);
-	transp_trans = matrix_transpose(inv_trans);
-	w_normal = mult_matrix_vector_temp(transp_trans, o_normal);
+	matrix_transpose(inv_trans);
+	w_normal = mult_matrix_vector_temp(inv_trans, o_normal);
 	w_normal.w = 0;
 	free_matrix(inv_trans, 4);
 	free(o_normal);
@@ -128,6 +133,8 @@ t_coo	ray_position(t_ray *ray, double t)
 
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 {
+	t_coo	*scalar;
+
 	comps->t = data->hit->t;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, &rt->direction);
@@ -139,7 +146,10 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	}
 	else
 		comps->inside = 0;
-	comps->over_point = vector_addition(&comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
+	scalar = vector_multipli_scalar(EPSILON, comps->normal_vec);
+	comps->over_point = vector_addition(&comps->position, scalar);
+	free(scalar);
+	free(data->hit);
 }
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)

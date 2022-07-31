@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:03:55 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/26 22:35:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:49:21 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ t_intersec	*hiter_point(t_caster *head)
 			hit = tmp_intersec;
 		current = current->next;
 		i++;
+	}
+	if (hit)
+	{
+		tmp_intersec = (t_intersec *)malloc(sizeof(t_intersec));
+		tmp_intersec->t = hit->t;
+		tmp_intersec->obj_pos = hit->obj_pos;
+		tmp_intersec->obj_type = hit->obj_type;
+		tmp_intersec->next = NULL;
+		hit = tmp_intersec;
 	}
 	return (hit);
 }

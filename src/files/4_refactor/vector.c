@@ -92,13 +92,12 @@ t_coo normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height
 	t_coo o_normal;
 	t_coo w_normal;
 	double **inv_trans;
-	double **transp_trans;
 
 	inv_trans = matrix_inverter(transform);
 	o_point = mult_matrix_vector_temp(inv_trans, w_point);
 	o_normal = normal_object_type_temp(o_point, obj_type_height);
-	transp_trans = matrix_transpose(inv_trans);
-	w_normal = mult_matrix_vector_temp(transp_trans, &o_normal);
+	matrix_transpose(inv_trans);
+	w_normal = mult_matrix_vector_temp(inv_trans, &o_normal);
 	w_normal.w = 0;
 	return (vector_normalize_temp(&w_normal));
 }

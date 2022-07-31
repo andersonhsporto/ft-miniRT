@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:16 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/30 00:23:45 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:33:40 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ t_coo lighting(t_comps args, int in_shadow, t_mini *data)
 	free(params.light_v);
 	free(args.eye_vec);
 	free(params.effective_color);
+	free(args.normal_vec);
 	return (norm_light(params.diffuse, params.specular, params.ambient));
 }

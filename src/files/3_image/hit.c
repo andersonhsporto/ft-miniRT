@@ -1,5 +1,21 @@
 #include "minirt.h"
 
+void	free_intersec_list(t_caster *intersect)
+{
+	int			count;
+	t_intersec	*aux;
+
+	count = 0;
+	while (count < intersect->cont)
+	{
+		aux = intersect->intersec;
+		intersect->intersec = intersect->intersec->next;
+		free(aux);
+		count++;
+	}
+	free(intersect);
+}
+
 void	get_hit(int x, int y, t_mini *data)
 {
 	t_caster	*intersec;
@@ -19,7 +35,7 @@ void	get_hit(int x, int y, t_mini *data)
 		tmp = tmp->next;
 	}
 	data->hit = hiter_point(intersec);
-	free(intersec);
+	free_intersec_list(intersec);
 }
 
 t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)
@@ -44,8 +60,7 @@ t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)
 			all_intersec(intersec, &ray, tmp->ptr, plane_intersection);
 		tmp = tmp->next;
 	}
-	// free_matrix(ray.inverse, 4);
 	hit = hiter_point(intersec);
-	free(intersec);
+	free_intersec_list(intersec);
 	return(hit);
 }
