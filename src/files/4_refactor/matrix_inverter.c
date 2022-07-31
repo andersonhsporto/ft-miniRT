@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:34:51 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/30 21:12:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 17:51:37 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ double **matrix_inverter(double **a)
 	}
 	transp = matrix_transpose(temp);
 	res = scalar_4x4_matrix(transp, 1 / abs);
-	// free_matrix(temp, 4); ///why ?????
+	free_matrix(temp, 4); ///why ?????
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:36:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:39:33 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			find_ambient(t_mini *data, char	**string);
 t_ambient	*init_ambient(char	**string, t_mini *data);
 
 int			find_camera(t_mini *data, char	**string);
-t_cam_d		*init_camera(char	**string);
+t_cam_d		*init_camera(char **string, t_mini *data);
 
 int				find_light(t_mini *data, char **string);
 t_light_d		*init_light(char **string);

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:51:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:10:05 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,17 @@ t_error	init_error_struct(void)
 {
 	t_error	error;
 
-	error.line_error = 0;
-	error.multiple_ambient = 0;
-	error.rgb = 0;
-	error.ambient_color = 0;
-	error.ambient_ratio = 0;
+	error.line_error = false;
+	error.multiple_ambient = false;
+	error.rgb = false;
+	error.ambient_color = false;
+	error.ambient_ratio = false;
+	error.multiple_camera = false;
+	error.camera_view_point = false;
+	error.camera_orientation = false;
+	error.camera_fov = false;
+	error.light_point = false;
+	error.light_range = false;
 	return (error);
 }
 

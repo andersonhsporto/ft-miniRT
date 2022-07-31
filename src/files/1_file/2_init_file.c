@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:53:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:58:22 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,15 @@ int	there_file_error(t_mini *data)
 	{
 		return (1);
 	}
-	if (data->error.ambient_ratio != 0)
+	if (data->error.ambient_ratio != 0 || data->error.multiple_camera != 0)
+	{
+		return (1);
+	}
+	if (data->error.camera_view_point != 0 || data->error.camera_orientation != 0)
+	{
+		return (1);
+	}
+	if (data->error.camera_fov != 0)
 	{
 		return (1);
 	}
@@ -56,7 +64,7 @@ static void	line_scene_helper(t_mini *data, char **split)
 	if (find_ambient(data, split))
 		data->light_a = init_ambient(split, data);
 	else if (find_camera(data, split))
-		data->cam = init_camera(split);
+		data->cam = init_camera(split, data);
 	else if (find_light(data, split))
 		data->light = init_light(split);
 	else if (find_sphere(split))

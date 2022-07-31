@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/30 00:20:46 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:38:07 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,15 @@ static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 
 t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
 {
+	t_coo	*temp;
+	t_coo	*subtraction;
+
 	if (obj_type_height[0] == sphere)
 	{
-		return (vector_subtraction(o_point, create_vector(0, 0, 0, 1)));
+		temp = create_vector(0, 0, 0, 1);
+		subtraction = vector_subtraction(o_point, temp);
+		free(temp);
+		return (subtraction);
 	}
 	else if (obj_type_height[0] == plane)
 		return (create_vector(0, 1, 0, 0));
@@ -73,7 +79,7 @@ t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 	return (vector_normalize(&w_normal));
 }
 
-void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
+void	get_normal_vec(t_element *node, double *ch, t_comps *comps)
 {
 	t_cylinder_d	*cy_ptr;
 	t_sphere_d		*sp_ptr;
@@ -111,7 +117,7 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	{
 		if (tmp->type == obj_type && tmp->id == obj_pos)
 		{
-			get_normal_vec(tmp, obj_type_cylinder_height, comps, obj_pos);
+			get_normal_vec(tmp, obj_type_cylinder_height, comps);
 			return ;
 		}
 		tmp = tmp->next;
@@ -128,6 +134,7 @@ t_coo	ray_position(t_ray *ray, double t)
 
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 {
+	t_coo *temp;
 	comps->t = data->hit->t;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, &rt->direction);
@@ -139,7 +146,9 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	}
 	else
 		comps->inside = 0;
-	comps->over_point = vector_addition(&comps->position, vector_multipli_scalar(EPSILON, comps->normal_vec));
+	temp = vector_multipli_scalar(EPSILON, comps->normal_vec);
+	comps->over_point = vector_addition(&comps->position, temp);
+	free(temp);
 }
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 20:52:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/29 23:38:55 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:33:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_ray ray_for_pixel(t_cam_d *cam, int x, int y)
 	t_coo temp;
 	t_coo matrix;
 
-	test = create_vector_temp(cam->half_width - x_offset,
-							  cam->half_height - y_offset, -1, 1);
+	test = create_vector_temp(cam->half_width - x_offset, \
+								cam->half_height - y_offset, -1, 1);
 	matrix = mult_matrix_vector_temp(cam->transform, &test);
 	temp = vector_subtraction_temp(&matrix, &cam->origin);
 	direction = vector_normalize_temp(&temp);

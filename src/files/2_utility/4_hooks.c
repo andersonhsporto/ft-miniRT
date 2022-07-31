@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:58:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:30:32 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 17:39:09 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	free_mini(t_mini *data)
 {
 	free(data->light_a);
+	free_matrix(data->cam->transform, 4);
 	free(data->cam);
 	free(data->light);
 }

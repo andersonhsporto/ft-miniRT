@@ -13,6 +13,27 @@ t_coo	*double_cross(t_cam_d *cam)
 	return (cross);
 }
 
+void	print_matrix(double **matrix, int size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			printf("%f ", matrix[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	printf("<>>>>>>>>>>>>>>>>>>\n");
+}
+
+
 void	start_camera(t_cam_d *cam)
 {
 	const t_coo	*temp = double_cross(cam);
@@ -21,7 +42,9 @@ void	start_camera(t_cam_d *cam)
 	t_coo		*temp_vector;
 
 	temp_matrix = view_transform(&cam->view_point, (t_coo *)add, (t_coo *)temp);
+	print_matrix(temp_matrix, 4);
 	cam->transform = matrix_inverter(temp_matrix);
+	print_matrix(cam->transform , 4);
 	free_matrix(temp_matrix, 4);
 	free((t_coo *)temp);
 	free((t_coo *)add);

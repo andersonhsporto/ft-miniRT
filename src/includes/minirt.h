@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:39:08 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:00:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include <math.h>
 #include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
-#define WIDTH 10
-#define HEIGHT 10
+#define WIDTH 600
+#define HEIGHT 600
 
 #define EPSILON 0.00001
 
@@ -51,6 +51,8 @@ void matrix_free(char **matrix);
 char *replace_string(char *string, char character);
 
 double str_to_double(char *str);
+
+int	there_file_error(t_mini *data);
 
 int print_image(t_mini *data);
 int exit_esc(int keycode, t_mini *data);
