@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:11:25 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:15:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:37:31 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int	find_camera(t_mini *data, char	**string)
 		if (data->index.camera != 0)
 		{
 			print_error("miniRT: Camera already defined");
-			exit(1);
+			return (0);
 		}
 		else
 		{
+			data->index.camera++;
 			return (1);
 		}
 	}
@@ -34,11 +35,11 @@ int	find_camera(t_mini *data, char	**string)
 
 t_cam_d	*init_camera(char **string)
 {
-	t_cam_d	*camera;
+	t_cam_d	*camera; int i;
 
 	camera = (t_cam_d *)malloc(sizeof(t_cam_d));
-	camera->view_point = str_to_coo_vector_temp(string[1], ERR_VIEWPOINT);
-	camera->orientation = str_to_coo_vector_temp(string[2], ERR_NORMALIZED);
+	camera->view_point = str_to_coo_vector_temp(string[1], i); //ERR_VIEWPOINT
+	camera->orientation = str_to_coo_vector_temp(string[2], i); //ERR_NORMALIZED
 	if (out_range_coo(&camera->orientation, -1, 1))
 	{
 		print_error("miniRT: Invalid Camera Normalized Vector");

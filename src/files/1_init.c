@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/25 22:30:19 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:51:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,23 @@ int	check_extension(char *file)
 	return (0);
 }
 
+t_error	init_error_struct(void)
+{
+	t_error	error;
+
+	error.line_error = 0;
+	error.multiple_ambient = 0;
+	error.rgb = 0;
+	error.ambient_color = 0;
+	error.ambient_ratio = 0;
+	return (error);
+}
+
 void	init_data(t_mini *data)
 {
 	data->index.ambient = 0;
 	data->index.camera = 0;
+	data->index.light = 0;
 	data->index.sphere = -1;
 	data->index.plane = -1;
 	data->index.cylinder = -1;
@@ -56,6 +69,7 @@ void	init_data(t_mini *data)
 	data->light = NULL;
 	data->element = NULL;
 	data->hit = NULL;
+	data->error = init_error_struct();
 	data->mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	data->mlx->mlx = mlx_init();
 	data->mlx->win = mlx_new_window(data->mlx->mlx, WIDTH + 10, HEIGHT + 10, "miniRT");

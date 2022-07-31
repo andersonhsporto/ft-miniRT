@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:39:15 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/05/30 20:52:51 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:53:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # define ERR_SPHERE "miniRT: Invalid Sphere"
 # define ERR_PLANE "miniRT: Invalid Plane"
 # define ERR_CYLINDER "miniRT: Invalid Cylinder"
+# define ERR_RGB "miniRT: Invalid RGB"
 
 #endif

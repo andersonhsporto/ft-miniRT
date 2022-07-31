@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/29 22:48:51 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:38:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ double	**get_plane_transform(t_coo *pos, t_coo *norm)
 
 t_plane_d	*init_plane(t_mini *data, char **string)
 {
-	t_plane_d	*plane;
+	t_plane_d	*plane; int i;
 
 	plane = (t_plane_d *)malloc(sizeof(t_plane_d));
-	plane->coordinates = str_to_coo_vector_temp(string[1], ERR_PLANE);
-	plane->normalized = str_to_coo_vector_temp(string[2], ERR_PLANE);
-	plane->color = str_to_coo_vector_temp(string[3], ERR_PLANE);
+	plane->coordinates = str_to_coo_vector_temp(string[1], i); //ERR_PLANE
+	plane->normalized = str_to_coo_vector_temp(string[2], i); //ERR_PLANE
+	plane->color = str_to_coo_vector_temp(string[3], i); //ERR_PLANE
 	if (out_range_coo(&plane->color, 0, 255))
 	{
 		print_error("miniRT: Invalid Plane Color");

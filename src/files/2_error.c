@@ -6,11 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 01:51:42 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:53:12 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	check_and_free(t_mini *data);
 
 void	print_error(char *error_message)
 {
@@ -20,6 +22,7 @@ void	print_error(char *error_message)
 
 void	exit_and_free(t_mini *data, char *string)
 {
+	check_and_free(data);
 	print_error(string);
 	mlx_destroy_image(data->mlx->mlx, data->img.img);
 	mlx_destroy_window(data->mlx->mlx, data->mlx->win);
@@ -40,4 +43,35 @@ void	free_matrix(double **matrix, int line)
 		i++;
 	}
 	free(matrix);
+}
+
+void	check_if_error(t_mini *data)
+{
+	if (data->error.line_error != 0)
+		exit_and_free(data, "miniRT: Invalid Line");
+	if (data->error.multiple_ambient != 0)
+		exit_and_free(data, "miniRT: Ambient already defined");
+	if (data->error.rgb != 0)
+		exit_and_free(data, ERR_RGB);
+	if (data->error.ambient_color != 0)
+		exit_and_free(data, "miniRT: Invalid Ambient Color");
+	if (data->error.ambient_ratio != 0)
+		exit_and_free(data, "miniRT: Invalid Ambient Ratio");
+}
+
+
+void	check_and_free(t_mini *data)
+{
+	if (data->index.ambient != 0)
+	{
+		free(data->light_a);
+	}
+	else if (data->index.camera != 0)
+	{
+		free(data->cam);
+	}
+	else if (data->index.light != 0)
+	{
+		free(data->light);
+	}
 }

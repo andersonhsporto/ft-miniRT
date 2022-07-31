@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:25:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:55:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ void	check_file(t_mini *data, char *file)
 			break ;
 		temp = replace_string(map_line, '+');
 		free(map_line);
+		map_line = NULL;
 		get_line_scene(data, temp);
 		free(temp);
 	}
 	close(fd);
-	data->light->intensity = init_light_intensity(&data->light_a->rgb, \
+	check_if_error(data);
+	if (data->index.ambient == 1 && data->index.light == 1)
+		data->light->intensity = init_light_intensity(&data->light_a->rgb, \
 												data->light_a->ratio);
 	debug(data);
 }
@@ -54,10 +57,9 @@ static void	check_legal_char(char *file, t_mini *data)
 			break ;
 		else if (check_line(line))
 		{
-			print_error("miniRT: Illegal Character");
 			close(fd);
 			free(line);
-			exit_and_free(data, "miniRT: Open Error");
+			exit_and_free(data, "miniRT: Illegal Character");
 		}
 		free(line);
 	}

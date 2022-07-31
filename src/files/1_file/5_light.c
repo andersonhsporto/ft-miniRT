@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:58:53 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 01:43:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:37:49 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int	find_light(t_mini *data, char **string)
 {
 	if (ft_strcmp(string[0], "L") == 0)
 	{
-		if (data->index.camera != 0)
+		if (data->index.light != 0)
 		{
 			print_error("miniRT: Light already defined");
-			exit(1);
+			return (0);
 		}
 		else
 		{
+			data->index.light++;
 			return (1);
 		}
 	}
@@ -34,10 +35,10 @@ int	find_light(t_mini *data, char **string)
 
 t_light_d	*init_light(char **string)
 {
-	t_light_d	*light;
+	t_light_d	*light; int i;
 
 	light = (t_light_d *)malloc(sizeof(t_light_d));
-	light->point = str_to_coo_vector_temp(string[1], ERR_LIGHT);
+	light->point = str_to_coo_vector_temp(string[1], i); //ERR_LIGHT
 	light->bright = str_to_double(string[2]);
 	if (light->bright < 0 || light->bright > 1)
 	{

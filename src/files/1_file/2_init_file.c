@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:28:13 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:53:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static void	line_scene_helper(t_mini *data, char **split);
 
-static	free_line(t_mini *data, char *line, char **split)
+int	there_file_error(t_mini *data)
 {
-	matrix_free(split);
-	free(line);
-	if (data->index.ambient == 1)
+	if (data->error.line_error != 0 || data->error.multiple_ambient != 0)
 	{
-		printf("AQU\n");
-		free(data->light_a);
+		return (1);
 	}
-	else if (data->index.camera == 1)
+	if (data->error.rgb != 0 || data->error.ambient_color != 0)
 	{
-		free(data->cam);
+		return (1);
 	}
-	exit_and_free(data, "miniRT: Invalid Line");
-	exit(1);
+	if (data->error.ambient_ratio != 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 void	get_line_scene(t_mini *data, char *line)
@@ -36,16 +36,16 @@ void	get_line_scene(t_mini *data, char *line)
 	char	**split;
 
 	split = ft_split(line, '+');
-	if (matrix_len(split) == 1)
+	if (matrix_len(split) == 1 || there_file_error(data))
 	{
 		matrix_free(split);
 		return ;
 	}
 	if (matrix_len(split) < 3)
 	{
-		free(line);
-		printf("%s\n", split[0]);
-		free_line(data, line, split);
+		data->error.line_error = true;
+		matrix_free(split);
+		return ;
 	}
 	line_scene_helper(data, split);
 	matrix_free(split);
@@ -54,7 +54,7 @@ void	get_line_scene(t_mini *data, char *line)
 static void	line_scene_helper(t_mini *data, char **split)
 {
 	if (find_ambient(data, split))
-		data->light_a = init_ambient(split);
+		data->light_a = init_ambient(split, data);
 	else if (find_camera(data, split))
 		data->cam = init_camera(split);
 	else if (find_light(data, split))

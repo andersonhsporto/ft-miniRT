@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/27 00:29:08 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:51:31 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ enum e_type
 	camera,
 	ambient,
 	none
+};
+
+enum e_bool
+{
+	false,
+	true
 };
 
 typedef struct s_utils {
@@ -115,10 +121,19 @@ typedef struct s_ambient {
 typedef struct s_index {
 	int		ambient;
 	int		camera;
+	int		light;
 	int		sphere;
 	int		plane;
 	int		cylinder;
 }	t_index;
+
+typedef struct s_error {
+	int				line_error;
+	int				multiple_ambient;
+	int				ambient_color;
+	int				rgb;
+	int				ambient_ratio;
+}	t_error;
 
 typedef struct s_mini {
 	int				argc;
@@ -132,6 +147,7 @@ typedef struct s_mini {
 	t_image			img;
 	t_ray			ray;
 	t_intersec		*hit;
+	t_error			error;
 }	t_mini;
 
 #endif
