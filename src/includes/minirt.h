@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 16:27:05 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/31 17:02:14 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include <math.h>
 #include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
-#define WIDTH 600
-#define HEIGHT 600
+#define WIDTH 10
+#define HEIGHT 10
 
 #define EPSILON 0.00001
 
@@ -96,6 +96,7 @@ t_coo normal_object_type_temp(t_coo o_point, double *obj_type_height);
 t_coo normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height);
 t_coo vector_multipli_scalar_temp(double scalar, t_coo *a);
 t_coo vector_addition_temp(t_coo *a, t_coo *b);
+double matrix_determinant(double **a);
 
 t_coo str_to_coo_vector_temp(char *string, char *error_message);
 
@@ -105,4 +106,5 @@ t_coo vector_normalize_temp(t_coo *a);
 void free_mini(t_mini *data);
 void	free_intersec_list(t_caster *intersect);
 void free_matrix(double **matrix, int line);
+void	exit_and_free(t_mini *data, char *string);
 #endif

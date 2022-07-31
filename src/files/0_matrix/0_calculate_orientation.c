@@ -6,14 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:09:55 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/30 00:10:43 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/30 21:07:58 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static double	**get_matrix(t_coo *left, t_coo *true_up, \
-									t_coo *forward, t_coo *from);
+static double	**get_matrix(t_coo *left, t_coo *true_up, t_coo *forward);
 
 double	**calculate_orientation(t_coo *left, t_coo *true_up, \
 									t_coo *forward, t_coo *from)
@@ -22,7 +21,7 @@ double	**calculate_orientation(t_coo *left, t_coo *true_up, \
 	double	**translate;
 	double	**orientation;
 
-	matrix = get_matrix(left, true_up, forward, from);
+	matrix = get_matrix(left, true_up, forward);
 	translate = translation(-1.0 * from->x, -1.0 * from->y, -1.0 * from->z);
 	orientation = matrix_multiply(matrix, translate);
 	free_matrix(matrix, 4);
@@ -30,8 +29,7 @@ double	**calculate_orientation(t_coo *left, t_coo *true_up, \
 	return (orientation);
 }
 
-static double	**get_matrix(t_coo *left, t_coo *true_up, \
-									t_coo *forward, t_coo *from)
+static double	**get_matrix(t_coo *left, t_coo *true_up, t_coo *forward)
 {
 	double	**matrix;
 

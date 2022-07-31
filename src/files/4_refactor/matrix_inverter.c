@@ -6,13 +6,13 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:34:51 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 12:23:37 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:30:32 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	**matrix_inverter(double **a)
+double **matrix_inverter(double **a)
 {
 	double	**res;
 	double	**temp;
@@ -29,7 +29,7 @@ double	**matrix_inverter(double **a)
 		index[1] = 0;
 		while (index[1] < 4)
 		{
-			temp[index[0]][index[1]] = cofator_4x4(a, index);
+			temp[index[0]][index[1]] = cofactor_4x4(a, index);
 			index[1]++;
 		}
 		index[0]++;
