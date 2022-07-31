@@ -40,7 +40,7 @@ REFACTOR	= $(addprefix 4_refactor/, \
 
 SRC		= $(addprefix ./src/files/, \
 		$(MATRIX) $(FILE) $(UTILITY) $(IMAGE) $(REFACTOR) \
-		minirt.c 1_init.c 2_error.c\
+		minirt.c 1_init.c 2_error.c 3_if_error.c \
 )
 
 %.o: %.c $(HEADER)
@@ -74,4 +74,4 @@ test:
 
 leak:
 	make
-	valgrind --leak-check=full ./miniRT teste.rt
+	valgrind --leak-check=full --show-leak-kinds=all ./miniRT teste.rt

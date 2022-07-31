@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:10:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:21:16 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_error	init_error_struct(void)
 	error.camera_orientation = false;
 	error.camera_fov = false;
 	error.light_point = false;
-	error.light_range = false;
+	error.light_bright = false;
 	return (error);
 }
 

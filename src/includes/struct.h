@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:09:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:21:10 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ typedef struct s_error {
 	int				camera_orientation;
 	int				camera_fov;
 	int				light_point;
-	int				light_range;
+	int				light_bright;
 }	t_error;
 
 typedef struct s_mini {

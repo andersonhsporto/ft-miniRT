@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:04:43 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:36:42 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,6 @@ void	free_matrix(double **matrix, int line)
 	free(matrix);
 }
 
-void	check_if_error(t_mini *data)
-{
-	if (data->error.line_error != false)
-		exit_and_free(data, "miniRT: Invalid Line");
-	if (data->error.multiple_ambient != false)
-		exit_and_free(data, "miniRT: Ambient already defined");
-	if (data->error.rgb != false)
-		exit_and_free(data, ERR_RGB);
-	if (data->error.ambient_color != false)
-		exit_and_free(data, "miniRT: Invalid Ambient Color");
-	if (data->error.ambient_ratio != false)
-		exit_and_free(data, "miniRT: Invalid Ambient Ratio");
-	if (data->error.multiple_camera != false)
-		exit_and_free(data, "miniRT: Multiple Camera");
-	if (data->error.camera_view_point != false)
-		exit_and_free(data, "miniRT: Invalid Camera View Point");
-	if (data->error.camera_orientation != false)
-		exit_and_free(data, "miniRT: Invalid Camera Orientation");
-	if (data->error.camera_fov != false)
-		exit_and_free(data, "miniRT: Invalid Camera FOV");
-}
 
 
 void	check_and_free(t_mini *data)
@@ -76,11 +55,39 @@ void	check_and_free(t_mini *data)
 	}
 	if (data->index.camera != 0)
 	{
-	printf(">>>>>>>>>>>>>>>>>>>>>>>%d\n", data->index.camera);
 		free(data->cam);
 	}
 	if (data->index.light != 0)
 	{
 		free(data->light);
 	}
+}
+
+int	there_file_error(t_mini *data)
+{
+	if (data->error.line_error != 0 || data->error.multiple_ambient != 0)
+	{
+		return (1);
+	}
+	if (data->error.rgb != 0 || data->error.ambient_color != 0)
+	{
+		return (1);
+	}
+	if (data->error.ambient_ratio != 0 || data->error.multiple_camera != 0)
+	{
+		return (1);
+	}
+	if (data->error.camera_view_point != 0 || data->error.camera_orientation != 0)
+	{
+		return (1);
+	}
+	if (data->error.camera_fov != 0 || data->error.light_bright != 0)
+	{
+		return (1);
+	}
+	if (data->error.light_point != 0)
+	{
+		return (1);
+	}
+	return (0);
 }

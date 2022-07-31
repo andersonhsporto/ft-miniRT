@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:48:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:38:44 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:34:53 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int	find_cylinder(char **string)
 	}
 }
 
-double **get_cylinder_transform(double height, double radius, t_coo *pos, t_coo *norm)
+double	**get_cylinder_transform(double height, double radius, \
+									t_coo *pos, t_coo *norm)
 {
-	double **translate;
-	double **rotate;//
-	double **scale;
-	double **transform;//
-	double **temp;
+	double	**translate;
+	double	**rotate;
+	double	**scale;
+	double	**transform;
+	double	**temp;
 
 	scale = identity(radius, height * 0.5, radius);
-	temp = translation(pos->x,
-							pos->y, pos->z);
+	temp = translation(pos->x, pos->y, pos->z);
 	transform = matrix_multiply(temp, scale);
 	free_matrix(scale, 4);
 	free_matrix(temp, 4);

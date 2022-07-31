@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:55:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 20:31:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	check_line(char *line);
 static void	check_legal_char(char *file, t_mini *data);
+static void	start_camera_and_light(t_mini *data);
 
 void	check_file(t_mini *data, char *file)
 {
@@ -36,9 +37,7 @@ void	check_file(t_mini *data, char *file)
 	}
 	close(fd);
 	check_if_error(data);
-	if (data->index.ambient == 1 && data->index.light == 1)
-		data->light->intensity = init_light_intensity(&data->light_a->rgb, \
-												data->light_a->ratio);
+	start_camera_and_light(data);
 	debug(data);
 }
 
@@ -81,4 +80,15 @@ static int	check_line(char *line)
 		index++;
 	}
 	return (0);
+}
+
+static void	start_camera_and_light(t_mini *data)
+{
+	if (data->index.ambient == 1 && data->index.light == 1)
+	{
+		start_camera(data->cam);
+		data->light->intensity = init_light_intensity(&data->light_a->rgb, \
+		data->light_a->ratio);
+	}
+	return ;
 }
