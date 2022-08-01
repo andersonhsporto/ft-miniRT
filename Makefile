@@ -12,7 +12,7 @@ MATRIX	= $(addprefix 0_matrix/, \
 		0_matrix_operations_1.c 0_matrix_operations_2.c \
 		0_matrix_operations_3.c \
 		0_normal_rotation.c 0_transform.c \
-		0_sub_matrix.c \
+		0_sub_matrix.c vector.c \
 )
 
 FILE	= $(addprefix 1_file/, \
@@ -35,7 +35,7 @@ IMAGE	= $(addprefix 3_image/, \
 REFACTOR	= $(addprefix 4_refactor/, \
 		matrix_inverter.c cam.c \
 		computations.c cylinder.c intersections.c light.c \
-		render.c plane.c sphere.c vector.c \
+		render.c plane.c sphere.c \
 )
 
 SRC		= $(addprefix ./src/files/, \

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 20:36:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:52:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:08:06 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	void	check_ambient_error(t_mini *data);
 static	void	check_camera_error(t_mini *data);
 
-static void	check_sp_cy_error(t_mini *data)
+static void	check_sp_cy_pl_error(t_mini *data)
 {
 	if (data->error.sp_coord != false)
 	{
@@ -24,6 +24,10 @@ static void	check_sp_cy_error(t_mini *data)
 	if (data->error.pl_coord != false || data->error.pl_normalized != false)
 	{
 		exit_and_free(data, ERR_PLANE, 1);
+	}
+	if (data->error.cy_coord != false)
+	{
+		exit_and_free(data, ERR_CYLINDER, 1);
 	}
 	return ;
 }
@@ -38,7 +42,7 @@ void	check_if_error(t_mini *data)
 		exit_and_free(data, "miniRT: Invalid Light Point", 1);
 	if (data->error.light_bright != false)
 		exit_and_free(data, "miniRT: Invalid Light Intensity", 1);
-	check_sp_cy_error(data);
+	check_sp_cy_pl_error(data);
 }
 
 static	void	check_ambient_error(t_mini *data)

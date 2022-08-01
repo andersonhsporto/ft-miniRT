@@ -25,8 +25,8 @@ double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
 static t_coo	*get_forward(t_coo *to, t_coo *from)
 {
 	const t_coo	*temp = vector_subtraction(to, from);
-	const t_coo	*forward = vector_normalize(temp);
+	const t_coo	*forward = vector_normalize((t_coo *)temp);
 
 	free((t_coo *)temp);
-	return(forward);
+	return((t_coo *)forward);
 }

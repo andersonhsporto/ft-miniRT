@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   4_1_cam_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/31 22:48:30 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/07/31 22:49:35 by anhigo-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_coo	*double_cross(t_cam_d *cam)
 {
-	const t_coo	*new = create_vector(0, 1, 0, 0);;
+	const t_coo	*new = create_vector(0, 1, 0, 0);
 	t_coo		*temp;
 	t_coo		*cross;
 
@@ -15,8 +27,8 @@ t_coo	*double_cross(t_cam_d *cam)
 
 void	print_matrix(double **matrix, int size)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < size)
@@ -33,18 +45,17 @@ void	print_matrix(double **matrix, int size)
 	printf("<>>>>>>>>>>>>>>>>>>\n");
 }
 
-
 void	start_camera(t_cam_d *cam)
 {
 	const t_coo	*temp = double_cross(cam);
-	const t_coo *add = vector_addition(&cam->view_point, &cam->orientation);
+	const t_coo	*add = vector_addition(&cam->view_point, &cam->orientation);
 	double		**temp_matrix;
 	t_coo		*temp_vector;
 
 	temp_matrix = view_transform(&cam->view_point, (t_coo *)add, (t_coo *)temp);
 	print_matrix(temp_matrix, 4);
 	cam->transform = matrix_inverter(temp_matrix);
-	print_matrix(cam->transform , 4);
+	print_matrix(cam->transform, 4);
 	free_matrix(temp_matrix, 4);
 	free((t_coo *)temp);
 	free((t_coo *)add);

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:36:08 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:44:36 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char *replace_string(char *string, char character);
 
 double str_to_double(char *str);
 
-int	there_file_error(t_mini *data);
+int there_file_error(t_mini *data);
 
 int print_image(t_mini *data);
 int exit_esc(int keycode, t_mini *data);
@@ -99,14 +99,14 @@ t_coo normal_at_temp(double **transform, t_coo *w_point, double *obj_type_height
 t_coo vector_multipli_scalar_temp(double scalar, t_coo *a);
 t_coo vector_addition_temp(t_coo *a, t_coo *b);
 
-t_coo	str_to_coo_vector_temp(char	*string, int *error);
+t_coo str_to_coo_vector(char *string, int *error);
 
 void camera_pixel_size(int width, int height, t_cam_d *cam);
 
 t_coo vector_normalize_temp(t_coo *a);
-void	free_mini(t_mini *data);
-void	exit_and_free(t_mini *data, char *string, int code);
-void	free_matrix(double **matrix, int line);
+void free_mini(t_mini *data);
+void exit_and_free(t_mini *data, char *string, int code);
+void free_matrix(double **matrix, int line);
 
-void	check_if_error(t_mini *data);
+void check_if_error(t_mini *data);
 #endif

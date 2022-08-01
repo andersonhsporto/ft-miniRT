@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:54:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:30:34 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,26 @@ void	free_content_node(t_element *node)
 	t_plane_d		*pl_ptr;
 	t_cylinder_d	*cy_ptr;
 
-	if (node->id == sphere)
+	if (node->type == sphere)
 	{
 		sp_ptr = (t_sphere_d *)node->ptr;
 		if (sp_ptr->transform_id == true)
 			free_matrix(sp_ptr->transform, 4);
 	}
-	else if (node->id == plane)
+	if (node->type == plane)
 	{
 		pl_ptr = (t_plane_d *)node->ptr;
 		if (pl_ptr->transform_id == true)
+		{
+			printf("TESTE\n");
 			free_matrix(pl_ptr->transform, 4);
+		}
 	}
-	else if (node->id == cylinder)
+	if (node->type == cylinder)
 	{
 		cy_ptr = (t_cylinder_d *)node->ptr;
-		free_matrix(cy_ptr->transform, 4);
+		if (cy_ptr->transform_id == true)
+			free_matrix(cy_ptr->transform, 4);
 	}
 	return ;
 }
@@ -140,6 +144,10 @@ int	there_file_error(t_mini *data)
 		return (1);
 	}
 	if (data->error.sp_coord != 0 || data->error.pl_coord != 0  || data->error.pl_normalized != 0)
+	{
+		return (1);
+	}
+	if (data->error.cy_coord != 0)
 	{
 		return (1);
 	}

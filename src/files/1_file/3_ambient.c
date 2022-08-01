@@ -6,13 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 23:37:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:52:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:45:34 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	find_ambient(t_mini *data, char	**string)
+int	find_ambient(t_mini *data, char **string)
 {
 	if (ft_strcmp(string[0], "A") == 0)
 	{
@@ -38,9 +38,9 @@ t_ambient	*init_ambient(char **string, t_mini *data)
 	t_ambient	*light;
 
 	light = (t_ambient *)malloc(sizeof(t_ambient));
-	light->rgb = str_to_coo_vector_temp(string[2], &data->error.rgb);
+	light->rgb = str_to_coo_vector(string[2], &data->error.rgb);
 	if (light->rgb.x < 0 || light->rgb.x > 255 || light->rgb.y < 0 || \
-	light->rgb.y > 255 || light->rgb.z < 0 || light->rgb.z > 255)
+		light->rgb.y > 255 || light->rgb.z < 0 || light->rgb.z > 255)
 	{
 		data->error.ambient_color = true;
 		return (light);

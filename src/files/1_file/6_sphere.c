@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:59:45 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:50:28 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	find_sphere(char **string)
 	}
 }
 
-double **get_sphere_transform(double radius, t_coo *center)
+double	**get_sphere_transform(double radius, t_coo *center)
 {
-	double **translate;
-	double **scale;
-	double **transform;
+	double	**translate;
+	double	**scale;
+	double	**transform;
 
 	translate = translation(center->x, center->y, center->z);
 	scale = identity(radius, radius, radius);
@@ -40,30 +40,30 @@ double **get_sphere_transform(double radius, t_coo *center)
 
 t_sphere_d	*init_sphere(t_mini *data, char **string)
 {
-	t_sphere_d	*sphere;
+	t_sphere_d	*ptr;
 
-	sphere = (t_sphere_d *)malloc(sizeof(t_sphere_d));
-	sphere->center = str_to_coo_vector_temp(string[1], &data->error.sp_coord);
-	sphere->radius = str_to_double(string[2]) / 2;
-	sphere->color = str_to_coo_vector_temp(string[3], &data->error.rgb);
-	sphere->transform_id = false;
+	ptr = (t_sphere_d *)malloc(sizeof(t_sphere_d));
+	ptr->center = str_to_coo_vector(string[1], &data->error.sp_coord);
+	ptr->radius = str_to_double(string[2]) / 2;
+	ptr->color = str_to_coo_vector(string[3], &data->error.rgb);
+	ptr->transform_id = false;
 	if (there_file_error(data))
 	{
-		return (sphere);
+		return (ptr);
 	}
-	if (out_range_coo(&sphere->color, 0, 255))
+	if (out_range_coo(&ptr->color, 0, 255))
 	{
 		data->error.rgb = true;
-		return (sphere);
+		return (ptr);
 	}
-	divide_coo(&sphere->color, 255);
-	sphere->transform = get_sphere_transform(sphere->radius, &sphere->center);
-	sphere->transform_id = true;
-	sphere->id = ++data->index.sphere;
-	return (sphere);
+	divide_coo(&ptr->color, 255);
+	ptr->transform = get_sphere_transform(ptr->radius, &ptr->center);
+	ptr->transform_id = true;
+	ptr->id = ++data->index.sphere;
+	return (ptr);
 }
 
-void lst_new_sphere(t_mini *data, char **string)
+void	lst_new_sphere(t_mini *data, char **string)
 {
 	t_sphere_d	*ptr;
 	t_element	*new_node;

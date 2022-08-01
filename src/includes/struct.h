@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:49:20 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:04:59 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ typedef struct s_mlx
 
 typedef struct s_cylinder_d
 {
-	int id;
-	t_coo coordinates;
-	t_coo normalized;
-	double radius;
-	double height;
-	t_coo color;
-	double **transform;
+	int			id;
+	t_coo 		coordinates;
+	t_coo 		normalized;
+	double		radius;
+	double 		height;
+	t_coo 		color;
+	double 		**transform;
+	int			transform_id;
 } t_cylinder_d;
 
 typedef struct s_plane_d
@@ -156,6 +157,7 @@ typedef struct s_error
 	int sp_coord;
 	int pl_coord;
 	int pl_normalized;
+	int cy_coord;
 }	t_error;
 
 typedef struct s_mini

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:50:42 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 23:38:54 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:36:45 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void render_sphere_transform(t_sphere *sphere)
 
 t_intersec *sphere_intersection(t_ray *base_ray, void *ptr)
 {
-	t_sphere_d *obj = (t_sphere_d *)ptr;
-	t_intersec *intersectionPoints = NULL;
-	t_ray ray = ray_to_object_space(base_ray, obj->transform);
-	t_coo temp = create_vector_temp(0, 0, 0, 1);
-	t_coo sphere_to_ray = vector_subtraction_temp(&ray.origin, &temp);
-	double dot;
-	double vals[3];
+	t_sphere_d	*obj = (t_sphere_d *)ptr;
+	t_intersec	*intersectionPoints = NULL;
+	t_ray		ray = ray_to_object_space(base_ray, obj->transform);
+	t_coo		temp = create_vector_temp(0, 0, 0, 1);
+	t_coo		sphere_to_ray = vector_subtraction_temp(&ray.origin, &temp);
+	double		dot;
+	double		vals[3];
 
 	vals[0] = vector_abs(&ray.direction, &ray.direction);
 	vals[1] = 2 * vector_abs(&ray.direction, &sphere_to_ray);

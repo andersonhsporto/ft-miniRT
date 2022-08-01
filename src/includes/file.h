@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:20:20 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:44:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ t_cam_d		*init_camera(char **string, t_mini *data);
 
 int				find_light(t_mini *data, char **string);
 t_light_d		*init_light(char **string, t_mini *data);
-
-t_coo			*str_to_coo_vector(char	*string, char *error_message);
 
 t_element	*element_new(int type, int id, void *element);
 t_element	*get_last_node(t_element *lst);

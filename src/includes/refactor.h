@@ -100,35 +100,35 @@ typedef struct s_cam
 
 typedef struct s_view
 {
-	t_scene **scenes;
-	t_cam *cam;
-} t_view;
+	t_scene		**scenes;
+	t_cam		*cam;
+}	t_view;
 
 typedef struct s_intersect_list
 {
-	double t;
-	int obj_type;
-	int obj_pos;
+	double					t;
+	int						obj_type;
+	int						obj_pos;
 	struct s_intersect_list *next;
 } t_intersec;
 
 typedef struct s_caster
 {
-	int cont;
-	t_intersec *intersec;
-} t_caster;
+	int			cont;
+	t_intersec	*intersec;
+}	t_caster;
 
 typedef struct s_ltparams
 {
-	double light_dot_normal;
-	double reflect_dot_eye;
-	t_coo *effective_color;
-	t_coo *light_v;
-	t_coo *ambient;
-	t_coo *diffuse;
-	t_coo *specular;
-	t_coo *reflect_v;
-} t_ltparams;
+	double	light_dot_normal;
+	double	reflect_dot_eye;
+	t_coo	*effective_color;
+	t_coo	*light_v;
+	t_coo	*ambient;
+	t_coo	*diffuse;
+	t_coo	*specular;
+	t_coo	*reflect_v;
+}	t_ltparams;
 
 typedef struct s_comps
 {
@@ -143,12 +143,6 @@ typedef struct s_comps
 	t_coo *color;
 	int inside;
 } t_comps;
-
-typedef struct s_sence
-{
-	t_sphere **obj;
-	t_plane **plane;
-} t_sence;
 
 t_coo *vector_addition(t_coo *a, t_coo *b);
 
