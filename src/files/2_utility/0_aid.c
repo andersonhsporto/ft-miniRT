@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_aid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:59:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:24:16 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:58:45 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*replace_string(char *string, char character)
 	}
 	return (new_string);
 }
-
 
 int	out_range_coo(t_coo *vector, double min, double max)
 {

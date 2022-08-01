@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:58:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 16:25:06 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:58:33 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_mini(t_mini *data)
 	free(data->light);
 }
 
-int exit_esc(int keycode, t_mini *data)
+int	exit_esc(int keycode, t_mini *data)
 {
 	if (keycode == ESC)
 	{
@@ -30,7 +30,7 @@ int exit_esc(int keycode, t_mini *data)
 	return (0);
 }
 
-int red_cross(t_mini *data)
+int	red_cross(t_mini *data)
 {
 	free(data->mlx);
 	exit(0);
@@ -40,6 +40,6 @@ int red_cross(t_mini *data)
 int	print_image(t_mini *data)
 {
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win,
-							data->img.img, 5, 5);
+		data->img.img, 5, 5);
 	return (1);
 }
