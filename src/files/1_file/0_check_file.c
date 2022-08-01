@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_check_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:55:41 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:09:14 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	check_line(char *line);
 static void	check_legal_char(char *file, t_mini *data);
+static void	start_camera_and_light(t_mini *data);
+static void	minimum_args(t_mini *data);
 
 void	check_file(t_mini *data, char *file)
 {
@@ -30,12 +32,14 @@ void	check_file(t_mini *data, char *file)
 			break ;
 		temp = replace_string(map_line, '+');
 		free(map_line);
+		map_line = NULL;
 		get_line_scene(data, temp);
 		free(temp);
 	}
 	close(fd);
-	data->light->intensity = init_light_intensity(&data->light_a->rgb, \
-												data->light_a->ratio);
+	minimum_args(data);
+	check_if_error(data);
+	start_camera_and_light(data);
 }
 
 static void	check_legal_char(char *file, t_mini *data)
@@ -45,7 +49,7 @@ static void	check_legal_char(char *file, t_mini *data)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_and_free(data, "miniRT: Open Error");
+		exit_and_free(data, "miniRT: Open Error", 1);
 	while (fd)
 	{
 		line = get_next_line(fd);
@@ -53,10 +57,9 @@ static void	check_legal_char(char *file, t_mini *data)
 			break ;
 		else if (check_line(line))
 		{
-			print_error("miniRT: Illegal Character");
 			close(fd);
 			free(line);
-			exit_and_free(data, "miniRT: Open Error");
+			exit_and_free(data, "miniRT: Illegal Character", 1);
 		}
 		free(line);
 	}
@@ -78,4 +81,33 @@ static int	check_line(char *line)
 		index++;
 	}
 	return (0);
+}
+
+static void	start_camera_and_light(t_mini *data)
+{
+	if (data->index.ambient == 1 && data->index.light == 1)
+	{
+		start_camera(data->cam);
+		data->light->intensity = init_light_intensity(&data->light_a->rgb, \
+		data->light_a->ratio);
+	}
+	return ;
+}
+
+static void	minimum_args(t_mini *data)
+{
+	if (data->index.ambient == 0 || data->index.camera == 0)
+	{
+		data->error.minimum_args = true;
+	}
+	if (data->index.light == 0)
+	{
+		data->error.minimum_args = true;
+	}
+	if (data->index.sphere == -1 && data->index.plane == -1 \
+	&& data->index.cylinder == -1)
+	{
+		data->error.minimum_args = true;
+	}
+	return ;
 }

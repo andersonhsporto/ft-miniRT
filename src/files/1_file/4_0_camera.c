@@ -3,27 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   4_0_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:11:25 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:53:51 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:01:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	find_camera(t_mini *data, char	**string)
+int	find_camera(t_mini *data, char **string)
 {
 	if (ft_strcmp(string[0], "C") == 0)
 	{
-		if (data->index.camera != 0)
+		if (data->index.camera == 0)
 		{
-			print_error("miniRT: Camera already defined");
-			exit(1);
+			data->index.camera++;
+			return (1);
 		}
 		else
 		{
-			return (1);
+			data->error.multiple_camera = true;
+			return (0);
 		}
 	}
 	else
@@ -32,24 +33,25 @@ int	find_camera(t_mini *data, char	**string)
 	}
 }
 
-t_cam_d	*init_camera(char **string)
+t_cam_d	*init_camera(char **string, t_mini *data)
 {
 	t_cam_d	*camera;
 
 	camera = (t_cam_d *)malloc(sizeof(t_cam_d));
-	camera->view_point = str_to_coo_vector_temp(string[1], ERR_VIEWPOINT);
-	camera->orientation = str_to_coo_vector_temp(string[2], ERR_NORMALIZED);
-	if (out_range_coo(&camera->orientation, -1, 1))
+	camera->view_point = str_to_coo_vector(string[1], \
+	&data->error.camera_view_point);
+	camera->orientation = str_to_coo_vector(string[2], \
+	&data->error.camera_orientation);
+	if (out_range_coo(&camera->orientation, -1, 1) || there_file_error(data))
 	{
-		print_error("miniRT: Invalid Camera Normalized Vector");
-		exit(1);
+		data->error.camera_orientation = true;
+		return (camera);
 	}
 	camera->fov = str_to_double(string[3]);
-	if (camera->fov < 0 || camera->fov > 180)
+	if (camera->fov < 0 || camera->fov > 180 || there_file_error(data))
 	{
-		print_error("miniRT: Invalid Camera FOV");
-		exit(1);
+		data->error.camera_fov = true;
+		return (camera);
 	}
-	start_camera(camera);
 	return (camera);
 }

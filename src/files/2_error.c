@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 01:51:42 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:04:52 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ void	print_error(char *error_message)
 	return ;
 }
 
-void	exit_and_free(t_mini *data, char *string)
+void	exit_and_free(t_mini *data, char *string, int code)
 {
+	if (code != 0)
+	{
+		check_and_free(data);
+	}
+	free_element_list(data);
 	print_error(string);
 	mlx_destroy_image(data->mlx->mlx, data->img.img);
 	mlx_destroy_window(data->mlx->mlx, data->mlx->win);
 	mlx_destroy_display(data->mlx->mlx);
 	free(data->mlx->mlx);
 	free(data->mlx);
-	exit(1);
+	exit(code);
 }
-
 void	free_matrix(double **matrix, int line)
 {
 	int	i;

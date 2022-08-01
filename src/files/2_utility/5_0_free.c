@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_hooks.c                                          :+:      :+:    :+:   */
+/*   5_0_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 22:58:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:10:50 by anhigo-s         ###   ########.fr       */
+/*   Created: 2022/07/31 22:56:26 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/07/31 23:06:51 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	free_mini(t_mini *data)
+void	matrix_free(char **matrix)
 {
-	free(data->light_a);
-	free_matrix(data->cam->transform, 4);
-	free(data->cam);
-	free(data->light);
-}
+	int	index;
 
-int exit_esc(int keycode, t_mini *data)
-{
-	if (keycode == ESC)
+	index = 0;
+	while (matrix[index] != 0)
 	{
-		exit_and_free(data, "", 0);
+		free(matrix[index]);
+		index++;
 	}
-	return (0);
+	free(matrix);
+	return ;
 }
 
-int red_cross(t_mini *data)
+void	check_and_free(t_mini *data)
 {
-	exit_and_free(data, "", 0);
-	return (0);
-}
-
-int	print_image(t_mini *data)
-{
-	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win,
-							data->img.img, 5, 5);
-	return (1);
+	if (data->index.ambient != 0)
+	{
+		free(data->light_a);
+	}
+	if (data->index.camera != 0)
+	{
+		free(data->cam);
+	}
+	if (data->index.light != 0)
+	{
+		free(data->light);
+	}
 }

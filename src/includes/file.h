@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/25 22:10:45 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:06:20 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@ int			out_range_coo(t_coo *vector, double min, double max);
 void		get_line_scene(t_mini *data, char *line);
 
 int			find_ambient(t_mini *data, char	**string);
-t_ambient	*init_ambient(char	**string);
-
+t_ambient	*init_ambient(char **string, t_mini *data);
 int			find_camera(t_mini *data, char	**string);
-t_cam_d		*init_camera(char	**string);
+t_cam_d		*init_camera(char **string, t_mini *data);
 
 int				find_light(t_mini *data, char **string);
-t_light_d		*init_light(char **string);
+t_light_d		*init_light(char **string, t_mini *data);
 
-t_coo			*str_to_coo_vector(char	*string, char *error_message);
+t_coo			str_to_coo_vector(char	*string, char *error_message);
 
 t_element	*element_new(int type, int id, void *element);
 t_element	*get_last_node(t_element *lst);

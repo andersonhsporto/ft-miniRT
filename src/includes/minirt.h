@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:54:48 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:11:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include <math.h>
 #include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
-#define WIDTH 600
-#define HEIGHT 600
+#define WIDTH 500
+#define HEIGHT 500
 
 #define EPSILON 0.00001
 
@@ -103,5 +103,5 @@ t_coo vector_normalize_temp(t_coo *a);
 void free_mini(t_mini *data);
 void	free_intersec_list(t_caster *intersect);
 void free_matrix(double **matrix, int line);
-void	exit_and_free(t_mini *data, char *string);
+void	exit_and_free(t_mini *data, char *string, int code);
 #endif

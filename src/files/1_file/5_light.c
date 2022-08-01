@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:58:53 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 01:43:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:01:43 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int	find_light(t_mini *data, char **string)
 {
 	if (ft_strcmp(string[0], "L") == 0)
 	{
-		if (data->index.camera != 0)
+		if (data->index.light != 0)
 		{
 			print_error("miniRT: Light already defined");
-			exit(1);
+			return (0);
 		}
 		else
 		{
+			data->index.light++;
 			return (1);
 		}
 	}
@@ -32,17 +33,16 @@ int	find_light(t_mini *data, char **string)
 	}
 }
 
-t_light_d	*init_light(char **string)
+t_light_d	*init_light(char **string, t_mini *data)
 {
 	t_light_d	*light;
 
 	light = (t_light_d *)malloc(sizeof(t_light_d));
-	light->point = str_to_coo_vector_temp(string[1], ERR_LIGHT);
+	light->point = str_to_coo_vector(string[1], &data->error.light_point);
 	light->bright = str_to_double(string[2]);
 	if (light->bright < 0 || light->bright > 1)
 	{
-		print_error("miniRT: Invalid Light Intensity");
-		exit(1);
+		data->error.light_bright = true;
 	}
 	light->ambient = 0.1;
 	light->diffuse = 0.9;
