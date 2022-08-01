@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:58:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 17:39:09 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:35:54 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int exit_esc(int keycode, t_mini *data)
 {
 	if (keycode == ESC)
 	{
-		free(data->mlx);
-		exit(0);
+		exit_and_free(data, "", 0);
 	}
 	return (0);
 }

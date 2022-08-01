@@ -6,14 +6,14 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:21:10 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:27:07 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
-# define STRUCT_H
+#define STRUCT_H
 
-# include "refactor.h" //TODO: remove this
+#include "refactor.h" //TODO: remove this
 
 enum e_type
 {
@@ -32,128 +32,143 @@ enum e_bool
 	true
 };
 
-typedef struct s_utils {
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	root;
-}	t_utils;
+typedef struct s_utils
+{
+	double a;
+	double b;
+	double c;
+	double discriminant;
+	double root;
+} t_utils;
 
-typedef struct s_image {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_image;
+typedef struct s_image
+{
+	void *img;
+	char *addr;
+	int bits_per_pixel;
+	int line_length;
+	int endian;
+} t_image;
 
-typedef struct s_mlx {
-	void	*mlx;
-	void	*win;
-	int		*data;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}	t_mlx;
+typedef struct s_mlx
+{
+	void *mlx;
+	void *win;
+	int *data;
+	int bpp;
+	int size_line;
+	int endian;
+} t_mlx;
 
-typedef struct s_cylinder_d {
+typedef struct s_cylinder_d
+{
+	int id;
+	t_coo coordinates;
+	t_coo normalized;
+	double radius;
+	double height;
+	t_coo color;
+	double **transform;
+} t_cylinder_d;
+
+typedef struct s_plane_d
+{
+	int id;
+	t_coo coordinates;
+	t_coo normalized;
+	t_coo color;
+	double **transform;
+} t_plane_d;
+
+typedef struct s_sphere_d
+{
 	int			id;
-	t_coo		coordinates;
-	t_coo		normalized;
-	double		radius;
-	double		height;
-	t_coo		color;
-	double		**transform;
-}	t_cylinder_d;
-
-typedef struct s_plane_d {
-	int			id;
-	t_coo		coordinates;
-	t_coo		normalized;
-	t_coo		color;
-	double		**transform;
-}	t_plane_d;
-
-typedef struct s_sphere_d {
-	int			id;
+	int			transform_id;
 	t_coo		center;
 	t_coo		color;
 	double		radius;
 	double		**transform;
-}				t_sphere_d;
+}	t_sphere_d;
 
-typedef struct s_element {
-	int					type;
-	int					id;
-	void				*ptr;
-	struct s_element	*next;
-}	t_element;
+typedef struct s_element
+{
+	int				type;
+	int				id;
+	void			*ptr;
+	struct s_element *next;
+} t_element;
 
-typedef struct s_light_d {
-	t_coo		point;
-	double		bright;
-	t_coo		intensity;
-	double		diffuse;
-	double		ambient;
-	double		specular;
-	double		shininess;
-	double		reflect;
-}	t_light_d;
+typedef struct s_light_d
+{
+	t_coo point;
+	double bright;
+	t_coo intensity;
+	double diffuse;
+	double ambient;
+	double specular;
+	double shininess;
+	double reflect;
+} t_light_d;
 
-typedef struct s_cam_d {
-	t_coo		view_point;
-	t_coo		orientation;
-	double		fov;
+typedef struct s_cam_d
+{
+	t_coo view_point;
+	t_coo orientation;
+	double fov;
 
-	double		**transform;
-	t_coo		origin;
-	double		pixel_size;
-	double		half_height;
-	double		half_width;
-}	t_cam_d;
+	double **transform;
+	t_coo origin;
+	double pixel_size;
+	double half_height;
+	double half_width;
+} t_cam_d;
 
-typedef struct s_ambient {
-	double		ratio;
-	t_coo		rgb;
-}	t_ambient;
+typedef struct s_ambient
+{
+	double ratio;
+	t_coo rgb;
+} t_ambient;
 
-typedef struct s_index {
-	int		ambient;
-	int		camera;
-	int		light;
-	int		sphere;
-	int		plane;
-	int		cylinder;
-}	t_index;
+typedef struct s_index
+{
+	int ambient;
+	int camera;
+	int light;
+	int sphere;
+	int plane;
+	int cylinder;
+} t_index;
 
-typedef struct s_error {
-	int				line_error;
-	int				multiple_ambient;
-	int				ambient_color;
-	int				rgb;
-	int				ambient_ratio;
-	int				multiple_camera;
-	int				camera_view_point;
-	int				camera_orientation;
-	int				camera_fov;
-	int				light_point;
-	int				light_bright;
-}	t_error;
+typedef struct s_error
+{
+	int line_error;
+	int multiple_ambient;
+	int ambient_color;
+	int rgb;
+	int ambient_ratio;
+	int multiple_camera;
+	int camera_view_point;
+	int camera_orientation;
+	int camera_fov;
+	int light_point;
+	int light_bright;
+	int sp_coord;
+} t_error;
 
-typedef struct s_mini {
-	int				argc;
-	char			**argv;
-	t_index			index;
-	t_ambient		*light_a;
-	t_cam_d			*cam;
-	t_light_d		*light;
-	t_element		*element;
-	t_mlx			*mlx;
-	t_image			img;
-	t_ray			ray;
-	t_intersec		*hit;
-	t_error			error;
-}	t_mini;
+typedef struct s_mini
+{
+	int argc;
+	char **argv;
+	t_index index;
+	t_ambient *light_a;
+	t_cam_d *cam;
+	t_light_d *light;
+	t_element *element;
+	t_mlx *mlx;
+	t_image img;
+	t_ray ray;
+	t_intersec *hit;
+	t_error error;
+} t_mini;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:31:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:35:48 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	check_legal_char(char *file, t_mini *data)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_and_free(data, "miniRT: Open Error");
+		exit_and_free(data, "miniRT: Open Error", 1);
 	while (fd)
 	{
 		line = get_next_line(fd);
@@ -58,7 +58,7 @@ static void	check_legal_char(char *file, t_mini *data)
 		{
 			close(fd);
 			free(line);
-			exit_and_free(data, "miniRT: Illegal Character");
+			exit_and_free(data, "miniRT: Illegal Character", 1);
 		}
 		free(line);
 	}

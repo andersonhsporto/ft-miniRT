@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:36:42 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:43:56 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,69 @@ void	check_and_free(t_mini *data);
 
 void	print_error(char *error_message)
 {
-	printf("Error\n%s\n", error_message);
+	if (ft_strcmp(error_message, "") != 0)
+	{
+		printf("Error\n%s\n", error_message);
+	}
 	return ;
 }
 
-void	exit_and_free(t_mini *data, char *string)
+void	free_content_node(t_element *node)
 {
-	check_and_free(data);
+	t_sphere_d		*sp_ptr;
+	t_plane_d		*pl_ptr;
+	t_cylinder_d	*cy_ptr;
+
+	if (node->id == sphere)
+	{
+		sp_ptr = (t_sphere_d *)node->ptr;
+		if (sp_ptr->transform_id == true)
+			free_matrix(sp_ptr->transform, 4);
+	}
+	else if (node->id == plane)
+	{
+		pl_ptr = (t_plane_d *)node->ptr;
+		free_matrix(pl_ptr->transform, 4);
+	}
+	else if (node->id == cylinder)
+	{
+		cy_ptr = (t_cylinder_d *)node->ptr;
+		free_matrix(cy_ptr->transform, 4);
+	}
+	return ;
+}
+
+void	free_element_list(t_mini *data)
+{
+	t_element	*temp;
+	t_element	*head;
+
+	temp = data->element;
+	while (temp != NULL)
+	{
+		head = temp->next;
+		free_content_node(temp);
+		free(temp->ptr);
+		free(temp);
+		temp = head;
+	}
+}
+
+
+void	exit_and_free(t_mini *data, char *string, int code)
+{
+	if (code != 0)
+	{
+		check_and_free(data);
+	}
+	free_element_list(data);
 	print_error(string);
 	mlx_destroy_image(data->mlx->mlx, data->img.img);
 	mlx_destroy_window(data->mlx->mlx, data->mlx->win);
 	mlx_destroy_display(data->mlx->mlx);
 	free(data->mlx->mlx);
 	free(data->mlx);
-	exit(1);
+	exit(code);
 }
 
 void	free_matrix(double **matrix, int line)
@@ -86,6 +135,10 @@ int	there_file_error(t_mini *data)
 		return (1);
 	}
 	if (data->error.light_point != 0)
+	{
+		return (1);
+	}
+	if (data->error.sp_coord != 0)
 	{
 		return (1);
 	}

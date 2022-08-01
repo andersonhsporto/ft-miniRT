@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:00:51 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:36:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include <math.h>
 #include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
-#define WIDTH 600
-#define HEIGHT 600
+#define WIDTH 10
+#define HEIGHT 10
 
 #define EPSILON 0.00001
 
@@ -105,7 +105,7 @@ void camera_pixel_size(int width, int height, t_cam_d *cam);
 
 t_coo vector_normalize_temp(t_coo *a);
 void	free_mini(t_mini *data);
-void	exit_and_free(t_mini *data, char *string);
+void	exit_and_free(t_mini *data, char *string, int code);
 void	free_matrix(double **matrix, int line);
 
 void	check_if_error(t_mini *data);

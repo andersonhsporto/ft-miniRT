@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:38:05 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:33:15 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	find_sphere(char **string)
 	}
 }
 
-double	**get_sphere_transform(double radius, t_coo *center)
+double **get_sphere_transform(double radius, t_coo *center)
 {
-	double	**translate;
-	double	**scale;
-	double	**transform;
+	double **translate;
+	double **scale;
+	double **transform;
 
 	translate = translation(center->x, center->y, center->z);
 	scale = identity(radius, radius, radius);
@@ -40,24 +40,30 @@ double	**get_sphere_transform(double radius, t_coo *center)
 
 t_sphere_d	*init_sphere(t_mini *data, char **string)
 {
-	t_sphere_d	*sphere; int i;
+	t_sphere_d	*sphere;
 
 	sphere = (t_sphere_d *)malloc(sizeof(t_sphere_d));
-	sphere->center = str_to_coo_vector_temp(string[1], i); //ERR_SPHERE
+	sphere->center = str_to_coo_vector_temp(string[1], &data->error.sp_coord);
 	sphere->radius = str_to_double(string[2]) / 2;
-	sphere->color = str_to_coo_vector_temp(string[3], i); //ERR_SPHERE
+	sphere->color = str_to_coo_vector_temp(string[3], &data->error.rgb);
+	sphere->transform = NULL;
 	if (out_range_coo(&sphere->color, 0, 255))
 	{
-		print_error("miniRT: Invalid Sphere Color");
-		exit(1);
+		data->error.rgb = true;
+		return (sphere);
+	}
+	if (there_file_error(data))
+	{
+		return (sphere);
 	}
 	divide_coo(&sphere->color, 255);
 	sphere->transform = get_sphere_transform(sphere->radius, &sphere->center);
+	sphere->transform_id = true;
 	sphere->id = ++data->index.sphere;
 	return (sphere);
 }
 
-void	lst_new_sphere(t_mini *data, char **string)
+void lst_new_sphere(t_mini *data, char **string)
 {
 	t_sphere_d	*ptr;
 	t_element	*new_node;
