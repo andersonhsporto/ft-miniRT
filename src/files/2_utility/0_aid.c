@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:59:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:59:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:55:38 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,6 @@ int	matrix_len(char **matrix)
 		index++;
 	}
 	return (index);
-}
-
-void	matrix_free(char **matrix)
-{
-	int	index;
-
-	index = 0;
-	while (matrix[index] != 0)
-	{
-		free(matrix[index]);
-		index++;
-	}
-	free(matrix);
-	return ;
 }
 
 char	*replace_string(char *string, char character)

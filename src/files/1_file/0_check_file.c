@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:40:36 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:32:30 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	check_line(char *line);
 static void	check_legal_char(char *file, t_mini *data);
 static void	start_camera_and_light(t_mini *data);
+static void	minimum_args(t_mini *data);
 
 void	check_file(t_mini *data, char *file)
 {
@@ -36,6 +37,7 @@ void	check_file(t_mini *data, char *file)
 		free(temp);
 	}
 	close(fd);
+	minimum_args(data);
 	check_if_error(data);
 	start_camera_and_light(data);
 	debug(data);
@@ -89,6 +91,24 @@ static void	start_camera_and_light(t_mini *data)
 		start_camera(data->cam);
 		data->light->intensity = init_light_intensity(&data->light_a->rgb, \
 		data->light_a->ratio);
+	}
+	return ;
+}
+
+static void	minimum_args(t_mini *data)
+{
+	if (data->index.ambient == 0 || data->index.camera == 0)
+	{
+		data->error.minimum_args = true;
+	}
+	if (data->index.light == 0)
+	{
+		data->error.minimum_args = true;
+	}
+	if (data->index.sphere == -1 && data->index.plane == -1 \
+	&& data->index.cylinder == -1)
+	{
+		data->error.minimum_args = true;
 	}
 	return ;
 }

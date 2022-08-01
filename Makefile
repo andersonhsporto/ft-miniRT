@@ -25,7 +25,7 @@ FILE	= $(addprefix 1_file/, \
 
 UTILITY = $(addprefix 2_utility/, \
 		0_aid.c 1_char_double.c 2_strparser.c 3_linked.c \
-		4_hooks.c \
+		4_hooks.c 5_0_free.c 5_1_free_list.c 5_2_there_file_error.c \
 )
 
 IMAGE	= $(addprefix 3_image/, \

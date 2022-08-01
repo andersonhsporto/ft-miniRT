@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:30:34 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:56:13 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,53 +22,6 @@ void	print_error(char *error_message)
 	}
 	return ;
 }
-
-void	free_content_node(t_element *node)
-{
-	t_sphere_d		*sp_ptr;
-	t_plane_d		*pl_ptr;
-	t_cylinder_d	*cy_ptr;
-
-	if (node->type == sphere)
-	{
-		sp_ptr = (t_sphere_d *)node->ptr;
-		if (sp_ptr->transform_id == true)
-			free_matrix(sp_ptr->transform, 4);
-	}
-	if (node->type == plane)
-	{
-		pl_ptr = (t_plane_d *)node->ptr;
-		if (pl_ptr->transform_id == true)
-		{
-			printf("TESTE\n");
-			free_matrix(pl_ptr->transform, 4);
-		}
-	}
-	if (node->type == cylinder)
-	{
-		cy_ptr = (t_cylinder_d *)node->ptr;
-		if (cy_ptr->transform_id == true)
-			free_matrix(cy_ptr->transform, 4);
-	}
-	return ;
-}
-
-void	free_element_list(t_mini *data)
-{
-	t_element	*temp;
-	t_element	*head;
-
-	temp = data->element;
-	while (temp != NULL)
-	{
-		head = temp->next;
-		free_content_node(temp);
-		free(temp->ptr);
-		free(temp);
-		temp = head;
-	}
-}
-
 
 void	exit_and_free(t_mini *data, char *string, int code)
 {
@@ -100,56 +53,3 @@ void	free_matrix(double **matrix, int line)
 }
 
 
-
-void	check_and_free(t_mini *data)
-{
-	if (data->index.ambient != 0)
-	{
-		free(data->light_a);
-	}
-	if (data->index.camera != 0)
-	{
-		free(data->cam);
-	}
-	if (data->index.light != 0)
-	{
-		free(data->light);
-	}
-}
-
-int	there_file_error(t_mini *data)
-{
-	if (data->error.line_error != 0 || data->error.multiple_ambient != 0)
-	{
-		return (1);
-	}
-	if (data->error.rgb != 0 || data->error.ambient_color != 0)
-	{
-		return (1);
-	}
-	if (data->error.ambient_ratio != 0 || data->error.multiple_camera != 0)
-	{
-		return (1);
-	}
-	if (data->error.camera_view_point != 0 || data->error.camera_orientation != 0)
-	{
-		return (1);
-	}
-	if (data->error.camera_fov != 0 || data->error.light_bright != 0)
-	{
-		return (1);
-	}
-	if (data->error.light_point != 0)
-	{
-		return (1);
-	}
-	if (data->error.sp_coord != 0 || data->error.pl_coord != 0  || data->error.pl_normalized != 0)
-	{
-		return (1);
-	}
-	if (data->error.cy_coord != 0)
-	{
-		return (1);
-	}
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:04:59 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 23:23:02 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ typedef struct s_error
 	int pl_coord;
 	int pl_normalized;
 	int cy_coord;
+	int cy_normalized;
+	int minimum_args;
 }	t_error;
 
 typedef struct s_mini
