@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_transform.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 20:36:01 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/31 20:36:03 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:23:26 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ double	**view_transform(t_coo *from, t_coo *to, t_coo *up)
 static t_coo	*get_forward(t_coo *to, t_coo *from)
 {
 	const t_coo	*temp = vector_subtraction(to, from);
-	const t_coo	*forward = vector_normalize(temp);
+	const t_coo	*forward = vector_normalize((t_coo *)temp);
 
 	free((t_coo *)temp);
-	return (forward);
+	return ((t_coo *)forward);
 }

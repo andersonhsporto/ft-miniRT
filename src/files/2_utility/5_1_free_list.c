@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 23:01:12 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 23:07:16 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:21:15 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ static void	free_cylinder_transform(t_element *node);
 
 void	free_content_node(t_element *node)
 {
-	t_plane_d		*pl_ptr;
-	t_cylinder_d	*cy_ptr;
-
 	if (node->type == sphere)
 	{
 		free_sphere_transform(node);

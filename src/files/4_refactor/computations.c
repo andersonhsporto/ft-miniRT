@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/31 16:19:29 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:23:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 	return (vector_normalize(&w_normal));
 }
 
-void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
+void	get_normal_vec(t_element *node, double *ch, t_comps *comps)
 {
 	t_cylinder_d	*cy_ptr;
 	t_sphere_d		*sp_ptr;
@@ -116,7 +116,7 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	{
 		if (tmp->type == obj_type && tmp->id == obj_pos)
 		{
-			get_normal_vec(tmp, obj_type_cylinder_height, comps, obj_pos);
+			get_normal_vec(tmp, obj_type_cylinder_height, comps);
 			return ;
 		}
 		tmp = tmp->next;
