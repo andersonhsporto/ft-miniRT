@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 22:58:52 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:35:54 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:10:01 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int exit_esc(int keycode, t_mini *data)
 
 int red_cross(t_mini *data)
 {
-	free(data->mlx);
-	exit(0);
+	exit_and_free(data, "", 0);
 	return (0);
 }
 
