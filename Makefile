@@ -13,6 +13,7 @@ MATRIX	= $(addprefix 0_matrix/, \
 		0_matrix_operations_3.c \
 		0_normal_rotation.c 0_transform.c \
 		0_sub_matrix.c \
+		0_matrix_operations_4.c\
 )
 
 FILE	= $(addprefix 1_file/, \

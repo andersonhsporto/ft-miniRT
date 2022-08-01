@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   0_transform.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/31 20:36:01 by algabrie          #+#    #+#             */
+/*   Updated: 2022/07/31 20:36:03 by algabrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static t_coo	*get_forward(t_coo *to, t_coo *from);
@@ -28,5 +40,5 @@ static t_coo	*get_forward(t_coo *to, t_coo *from)
 	const t_coo	*forward = vector_normalize(temp);
 
 	free((t_coo *)temp);
-	return(forward);
+	return (forward);
 }
