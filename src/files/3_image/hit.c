@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/31 23:03:51 by algabrie          #+#    #+#             */
+/*   Updated: 2022/07/31 23:03:52 by algabrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	free_intersec_list(t_caster *intersect)
@@ -62,5 +74,5 @@ t_intersec	*get_shadow_hit(t_coo *over_point, t_coo *path, t_mini *data)
 	}
 	hit = hiter_point(intersec);
 	free_intersec_list(intersec);
-	return(hit);
+	return (hit);
 }
