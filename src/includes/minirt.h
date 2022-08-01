@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:11:18 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:14:41 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,5 @@ void free_mini(t_mini *data);
 void	free_intersec_list(t_caster *intersect);
 void free_matrix(double **matrix, int line);
 void	exit_and_free(t_mini *data, char *string, int code);
+void	free_element_list(t_mini *data);
 #endif

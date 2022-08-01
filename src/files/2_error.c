@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:04:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 01:14:12 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	print_error(char *error_message)
 {
-	printf("Error\n%s\n", error_message);
+	if (ft_strcmp(error_message, "") != 0)
+		printf("Error\n%s\n", error_message);
 	return ;
 }
 
