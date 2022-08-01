@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:59:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:24:16 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:59:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*replace_string(char *string, char character)
 int	out_range_coo(t_coo *vector, double min, double max)
 {
 	if (vector->x < min || vector->x > max || \
-	vector->y < min || vector->y > max)
+	vector->y < min || vector->y > max || vector->z < min || vector->z > max)
 	{
 		return (1);
 	}

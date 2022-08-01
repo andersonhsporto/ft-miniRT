@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 14:38:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:02:30 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,30 @@ double	**get_plane_transform(t_coo *pos, t_coo *norm)
 
 t_plane_d	*init_plane(t_mini *data, char **string)
 {
-	t_plane_d	*plane; int i;
+	t_plane_d	*plane;
 
 	plane = (t_plane_d *)malloc(sizeof(t_plane_d));
-	plane->coordinates = str_to_coo_vector_temp(string[1], i); //ERR_PLANE
-	plane->normalized = str_to_coo_vector_temp(string[2], i); //ERR_PLANE
-	plane->color = str_to_coo_vector_temp(string[3], i); //ERR_PLANE
+	plane->coordinates = str_to_coo_vector_temp(string[1], &data->error.pl_coord);
+	plane->normalized = str_to_coo_vector_temp(string[2], &data->error.pl_normalized);
+	plane->color = str_to_coo_vector_temp(string[3], &data->error.rgb);
+	plane->transform_id = false;
+	if (there_file_error(data))
+	{
+		return (plane);
+	}
 	if (out_range_coo(&plane->color, 0, 255))
 	{
-		print_error("miniRT: Invalid Plane Color");
-		exit(1);
+		data->error.rgb = true;
+		return (plane);
+	}
+	if (out_range_coo(&plane->normalized, 0, 1.0))
+	{
+		data->error.pl_normalized = true;
+		return (plane);
 	}
 	divide_coo(&plane->color, 255);
 	plane->transform = get_plane_transform(&plane->coordinates, &plane->normalized);
+	plane->transform_id = true;
 	plane->id = ++data->index.plane;
 	return (plane);
 }

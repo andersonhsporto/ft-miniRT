@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 20:36:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:35:41 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:52:38 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void	check_sp_cy_error(t_mini *data)
 	if (data->error.sp_coord != false)
 	{
 		exit_and_free(data, ERR_SPHERE, 1);
+	}
+	if (data->error.pl_coord != false || data->error.pl_normalized != false)
+	{
+		exit_and_free(data, ERR_PLANE, 1);
 	}
 	return ;
 }

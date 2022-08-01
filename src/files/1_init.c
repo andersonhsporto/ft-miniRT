@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:35 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 20:46:32 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:47:25 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_error init_error_struct(void)
 	error.light_point = false;
 	error.light_bright = false;
 	error.sp_coord = false;
+	error.pl_coord = false;
+	error.pl_normalized = false;
 	return (error);
 }
 

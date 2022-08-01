@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:27:07 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:49:20 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ typedef struct s_cylinder_d
 
 typedef struct s_plane_d
 {
-	int id;
-	t_coo coordinates;
-	t_coo normalized;
-	t_coo color;
-	double **transform;
-} t_plane_d;
+	int			id;
+	t_coo		coordinates;
+	t_coo		normalized;
+	t_coo		color;
+	double		**transform;
+	int			transform_id;
+}	t_plane_d;
 
 typedef struct s_sphere_d
 {
@@ -153,22 +154,24 @@ typedef struct s_error
 	int light_point;
 	int light_bright;
 	int sp_coord;
-} t_error;
+	int pl_coord;
+	int pl_normalized;
+}	t_error;
 
 typedef struct s_mini
 {
-	int argc;
-	char **argv;
-	t_index index;
-	t_ambient *light_a;
-	t_cam_d *cam;
-	t_light_d *light;
-	t_element *element;
-	t_mlx *mlx;
-	t_image img;
-	t_ray ray;
-	t_intersec *hit;
-	t_error error;
+	int 		argc;
+	char		**argv;
+	t_index		index;
+	t_ambient	*light_a;
+	t_cam_d		*cam;
+	t_light_d	*light;
+	t_element	*element;
+	t_mlx		*mlx;
+	t_image		img;
+	t_ray		ray;
+	t_intersec	*hit;
+	t_error 	error;
 } t_mini;
 
 #endif

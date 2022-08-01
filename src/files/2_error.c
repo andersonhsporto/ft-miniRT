@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:43:56 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:54:18 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	free_content_node(t_element *node)
 	else if (node->id == plane)
 	{
 		pl_ptr = (t_plane_d *)node->ptr;
-		free_matrix(pl_ptr->transform, 4);
+		if (pl_ptr->transform_id == true)
+			free_matrix(pl_ptr->transform, 4);
 	}
 	else if (node->id == cylinder)
 	{
@@ -138,7 +139,7 @@ int	there_file_error(t_mini *data)
 	{
 		return (1);
 	}
-	if (data->error.sp_coord != 0)
+	if (data->error.sp_coord != 0 || data->error.pl_coord != 0  || data->error.pl_normalized != 0)
 	{
 		return (1);
 	}
