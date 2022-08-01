@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   8_cylinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:48:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/29 23:02:52 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:38:56 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int	find_cylinder(char **string)
 	}
 }
 
-double **get_cylinder_transform(double height, double radius, t_coo *pos, t_coo *norm)
+double	**get_cylinder_transform(double height, double radius,
+	t_coo *pos, t_coo *norm)
 {
-	double **translate;
-	double **rotate;//
-	double **scale;
-	double **transform;//
-	double **temp;
+	double	**translate;
+	double	**rotate;
+	double	**scale;
+	double	**transform;
+	double	**temp;
 
 	scale = identity(radius, height * 0.5, radius);
-	temp = translation(pos->x,
-							pos->y, pos->z);
+	temp = translation(pos->x, pos->y, pos->z);
 	transform = matrix_multiply(temp, scale);
 	free_matrix(scale, 4);
 	free_matrix(temp, 4);
@@ -62,9 +62,9 @@ t_cylinder_d	*init_cylinder(t_mini *data, char **string)
 	}
 	divide_coo(&cylinder->color, 255);
 	cylinder->transform = get_cylinder_transform(cylinder->height,
-													cylinder->radius,
-													&cylinder->coordinates,
-													&cylinder->normalized);
+			cylinder->radius,
+			&cylinder->coordinates,
+			&cylinder->normalized);
 	cylinder->id = ++data->index.cylinder;
 	return (cylinder);
 }
@@ -77,7 +77,8 @@ void	lst_new_cylinder(t_mini *data, char **string)
 	ptr = init_cylinder(data, string);
 	if (data->element == NULL)
 	{
-		data->element = element_new(cylinder, data->index.cylinder, (void *)ptr);
+		data->element = element_new(cylinder,
+				data->index.cylinder, (void *)ptr);
 	}
 	else
 	{

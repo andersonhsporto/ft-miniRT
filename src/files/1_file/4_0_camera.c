@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_0_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:11:25 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:15:27 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:53:51 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_cam_d	*init_camera(char **string)
 		print_error("miniRT: Invalid Camera FOV");
 		exit(1);
 	}
-	print_vector_coo("Camera View Point: ", &camera->view_point);
 	start_camera(camera);
 	return (camera);
 }

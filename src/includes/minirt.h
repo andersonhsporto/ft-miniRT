@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 21:28:03 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:54:48 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void coo_pixel_put_vector(t_image *img, int y, int x, t_coo *color);
 
 void start_camera(t_cam_d *cam);
-
-void debug(t_mini *data); // TODO REMOVER
-void print_vector_coo(char *vector, t_coo *vec);
 
 // TODO trocar para clang no final
 

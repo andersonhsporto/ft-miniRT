@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 22:33:43 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 16:41:06 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:41:33 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	line_scene_helper(t_mini *data, char **split)
 		lst_new_cylinder(data, split);
 }
 
-static	free_line(t_mini *data, char *line, char **split)
+static void	free_line(t_mini *data, char *line, char **split)
 {
 	matrix_free(split);
 	free(line);

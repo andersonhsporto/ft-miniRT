@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   4_1_cam_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/31 22:35:18 by algabrie          #+#    #+#             */
+/*   Updated: 2022/07/31 22:42:54 by algabrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_coo	*double_cross(t_cam_d *cam)
 {
-	const t_coo	*new = create_vector(0, 1, 0, 0);;
+	const t_coo	*new = create_vector(0, 1, 0, 0);
 	t_coo		*temp;
 	t_coo		*cross;
 
@@ -16,7 +28,7 @@ t_coo	*double_cross(t_cam_d *cam)
 void	start_camera(t_cam_d *cam)
 {
 	const t_coo	*temp = double_cross(cam);
-	const t_coo *add = vector_addition(&cam->view_point, &cam->orientation);
+	const t_coo	*add = vector_addition(&cam->view_point, &cam->orientation);
 	double		**temp_matrix;
 	t_coo		*temp_vector;
 

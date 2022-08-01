@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_check_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 13:25:56 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:25:24 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:55:41 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	check_file(t_mini *data, char *file)
 	close(fd);
 	data->light->intensity = init_light_intensity(&data->light_a->rgb, \
 												data->light_a->ratio);
-	debug(data);
 }
 
 static void	check_legal_char(char *file, t_mini *data)

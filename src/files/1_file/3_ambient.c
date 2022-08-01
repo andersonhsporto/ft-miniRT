@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_ambient.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 23:37:42 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 02:19:00 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/07/31 22:45:47 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ t_ambient	*init_ambient(char **string)
 	if (ligth->rgb.x < 0 || ligth->rgb.x > 255 || ligth->rgb.y < 0 || \
 	ligth->rgb.y > 255 || ligth->rgb.z < 0 || ligth->rgb.z > 255)
 	{
-		print_error("miniRT: Invalid Ambient Color"); //free !!!!
+		print_error("miniRT: Invalid Ambient Color");
 		exit(1);
 	}
 	divide_coo(&ligth->rgb, 255);
 	ligth->ratio = str_to_double(string[1]);
 	if (ligth->ratio < 0 || ligth->ratio > 1)
 	{
-		print_error("miniRT: Invalid Ambient Ratio");	//free !!!!!
+		print_error("miniRT: Invalid Ambient Ratio");
 		exit(1);
 	}
 	return (ligth);
