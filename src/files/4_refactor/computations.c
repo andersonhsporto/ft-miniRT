@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/31 19:38:07 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:17:40 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ t_coo	ray_position(t_ray *ray, double t)
 void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 {
 	t_coo *temp;
+	t_coo *aux;
+
 	comps->t = data->hit->t;
 	comps->position = ray_position(rt, comps->t);
 	comps->eye_vec = vector_multipli_scalar(-1, &rt->direction);
@@ -142,13 +144,16 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
 	{
 		comps->inside = 1;
-		comps->normal_vec = vector_multipli_scalar(-1, comps->normal_vec);
+		aux = comps->normal_vec;
+		comps->normal_vec = vector_multipli_scalar(-1, aux);
+		free (aux);
 	}
 	else
 		comps->inside = 0;
 	temp = vector_multipli_scalar(EPSILON, comps->normal_vec);
 	comps->over_point = vector_addition(&comps->position, temp);
 	free(temp);
+	free(comps->normal_vec);
 }
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)

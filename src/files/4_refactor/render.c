@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:13:10 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/31 17:48:48 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 00:20:06 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	render(t_mini *data)
 			{
 				prepare_computations(&comp, &data->ray, data);
 				rgb = lighting(comp, is_shadowed(&comp, data), data);
+				free(data->hit);
 			}
 			else
 				rgb = create_vector_temp(0, 0, 0, 0);
