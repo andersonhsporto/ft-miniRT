@@ -33,9 +33,12 @@ IMAGE	= $(addprefix 3_image/, \
 )
 
 REFACTOR	= $(addprefix 4_refactor/, \
+		1_0_light.c 1_1_shadow.c \
+		2_0_sphere.c 2_1_cylinder.c 2_1_0_cy_intersec.c \
+		2_2_plane.c  \
 		matrix_inverter.c cam.c \
-		computations.c cylinder.c intersections.c light.c \
-		render.c plane.c sphere.c vector.c \
+		computations.c intersections.c \
+		render.c  vector.c \
 )
 
 SRC		= $(addprefix ./src/files/, \
@@ -74,4 +77,4 @@ test:
 
 leak:
 	make
-	valgrind --leak-check=full ./miniRT teste.rt
+	valgrind --leak-check=full --show-leak-kinds=all ./miniRT teste.rt

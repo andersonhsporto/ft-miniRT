@@ -106,10 +106,10 @@ typedef struct s_view
 
 typedef struct s_intersect_list
 {
-	double					t;
-	int 					obj_type;
-	int 					obj_pos;
-	struct s_intersect_list	*next;
+	double t;
+	int obj_type;
+	int obj_pos;
+	struct s_intersect_list *next;
 } t_intersec;
 
 typedef struct s_caster
@@ -168,7 +168,7 @@ t_coo *vector_multipli(t_coo *a, t_coo *b);
 
 t_coo *create_vector(double x, double y, double z, double w);
 
-void	matrix_transpose(double **a);
+void matrix_transpose(double **a);
 
 double **matrix_multiply(double **a, double **b);
 
@@ -194,8 +194,6 @@ double **scalar_4x4_matrix(double **mat, double abs);
 
 t_intersec *plane_intersection(t_ray *base_ray, void *ptr);
 
-void render_sphere_transform(t_sphere *sphere);
-
 t_intersec *sphere_intersection(t_ray *base_ray, void *ptr);
 
 t_ray create_ray(t_coo *origin, t_coo *direction);
@@ -218,7 +216,7 @@ t_caster *init_intersec_list(void);
 
 void all_sphere_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 
-t_intersec *hiter_point(t_caster *head);
+t_intersec *hitter_point(t_caster *head);
 
 t_ray ray_to_object_space(t_ray *ray, double **matrix);
 
@@ -227,8 +225,6 @@ double **normal_rotation_matrix(t_coo *normal);
 void render_plane_transform(t_plane *plane);
 
 t_cylinder *init_cylinder_re(void);
-
-void render_cylinder_transform(t_cylinder *cylinder);
 
 t_intersec *cylinder_intersec(t_ray *base_ray, void *ptr);
 

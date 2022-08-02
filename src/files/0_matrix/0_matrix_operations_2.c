@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_matrix_operations_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 21:01:11 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 22:22:34 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/02 00:52:32 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_coo	*vector_normalize(t_coo *a)
 	res->x = a->x / length;
 	res->y = a->y / length;
 	res->z = a->z / length;
+	res->w = a->w / length;
 	return (res);
 }
 
