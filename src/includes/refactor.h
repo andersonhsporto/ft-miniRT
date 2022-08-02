@@ -106,10 +106,10 @@ typedef struct s_view
 
 typedef struct s_intersect_list
 {
-	double t;
-	int obj_type;
-	int obj_pos;
-	struct s_intersect_list *next;
+	double					t;
+	int 					obj_type;
+	int 					obj_pos;
+	struct s_intersect_list	*next;
 } t_intersec;
 
 typedef struct s_caster
@@ -193,8 +193,6 @@ double **sub_matrix(double **a, int index[2], int col, int row);
 double **scalar_4x4_matrix(double **mat, double abs);
 
 t_intersec *plane_intersection(t_ray *base_ray, void *ptr);
-
-t_sphere *init_sphere_re(void);
 
 void render_sphere_transform(t_sphere *sphere);
 

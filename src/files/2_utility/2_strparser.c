@@ -6,15 +6,15 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:32:01 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:18:33 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:53:19 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_coo zero_vector(void)
+t_coo	zero_vector(void)
 {
-	t_coo vector;
+	t_coo	vector;
 
 	vector.x = 0;
 	vector.y = 0;
@@ -23,10 +23,10 @@ t_coo zero_vector(void)
 	return (vector);
 }
 
-t_coo str_to_coo_vector(char *string, int *error)
+t_coo	str_to_coo_vector(char *string, int *error)
 {
-	t_coo view_point;
-	char **split;
+	t_coo	view_point;
+	char	**split;
 
 	split = ft_split(string, ',');
 	if (matrix_len(split) != 3)

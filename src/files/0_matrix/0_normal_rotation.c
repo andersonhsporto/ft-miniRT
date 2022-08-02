@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:58:04 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/29 23:59:38 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:56:31 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ double	*get_vals(double angle)
 {
 	double	*vals;
 
-	vals = (double *)malloc(sizeof(double) * 2);
+	vals = (double *)malloc(sizeof(double *) * 3);
 	vals[0] = cos(angle);
 	vals[1] = sin(angle);
 	vals[2] = 1.0 - vals[0];

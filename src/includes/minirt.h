@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:23:11 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:56:50 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include <math.h>
 #include <string.h> // TODO VERIFICAR SE É REALMENTE NECESSARIO
 
-#define WIDTH 500
-#define HEIGHT 500
+#define WIDTH 10
+#define HEIGHT 10
 
 #define EPSILON 0.00001
 
@@ -80,7 +80,7 @@ t_ray ray_for_pixel(t_cam_d *cam, int x, int y);
 void all_cylinder_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 void all_plane_intersec(t_caster *cast, t_ray *ray, t_poly *poly, t_sphere *list);
 
-void rt_mlx_pixel_put(t_image *data, int x, int y, t_coo *rgb);
+void	rt_mlx_pixel_put(t_image *data, int x, int y, t_coo rgb);
 
 void all_intersec(t_caster *cast, t_ray *ray, void *list, t_intersec *(f)(t_ray *, void *));
 

@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/08/01 01:23:50 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:19:35 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,32 @@ t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
 	return (vector_normalize(&w_normal));
 }
 
-void	get_normal_vec(t_element *node, double *ch, t_comps *comps)
+void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
 {
 	t_cylinder_d	*cy_ptr;
 	t_sphere_d		*sp_ptr;
 	t_plane_d		*pl_ptr;
 
-	if (node->type == cylinder)
+	if (node->type == cylinder && node->id == obj_pos)
 	{
 		cy_ptr = (t_cylinder_d *)node->ptr;
 		ch[1] = cy_ptr->height;
 		comps->normal_vec = normal_at(cy_ptr->transform, &comps->position, ch);
 		comps->color = &cy_ptr->color;
 	}
-	else if (node->type == sphere)
+	else if (node->type == sphere && node->id == obj_pos)
 	{
 		sp_ptr = (t_sphere_d *)node->ptr;
 		comps->normal_vec = normal_at(sp_ptr->transform, &comps->position, ch);
 		comps->color = &sp_ptr->color;
 	}
-	else if (node->type == plane)
+	else if (node->type == plane && node->id == obj_pos)
 	{
 		pl_ptr = (t_plane_d *)node->ptr;
 		comps->normal_vec = normal_at(pl_ptr->transform, &comps->position, ch);
 		comps->color = &pl_ptr->color;
 	}
+	return ;
 }
 
 static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
@@ -116,7 +117,8 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	{
 		if (tmp->type == obj_type && tmp->id == obj_pos)
 		{
-			get_normal_vec(tmp, obj_type_cylinder_height, comps);
+			// printf("obj_type: %d\n", obj_pos);
+			get_normal_vec(tmp, obj_type_cylinder_height, comps, obj_pos);
 			return ;
 		}
 		tmp = tmp->next;

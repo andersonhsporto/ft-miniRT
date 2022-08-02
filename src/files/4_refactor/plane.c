@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:59:00 by algabrie          #+#    #+#             */
-/*   Updated: 2022/07/29 23:46:19 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:22:11 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_intersec	*plane_intersection(t_ray *base_ray, void *ptr)
 	intersectionPoints->t = (-1 * ray.origin.y) / ray.direction.y;
 	free_matrix(ray.inverse, 4);
 	intersectionPoints->obj_type = plane;
+	intersectionPoints->obj_pos = obj2->id;
 	intersectionPoints->next = NULL;
 	return (intersectionPoints);
 }

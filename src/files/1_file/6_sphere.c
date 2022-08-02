@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 21:43:46 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:01:53 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:36:31 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_sphere_d	*init_sphere(t_mini *data, char **string)
 
 	ptr = (t_sphere_d *)malloc(sizeof(t_sphere_d));
 	ptr->center = str_to_coo_vector(string[1], &data->error.sp_coord);
+	ptr->center.x = ptr->center.x - 2;
 	ptr->radius = str_to_double(string[2]) / 2;
 	ptr->color = str_to_coo_vector(string[3], &data->error.rgb);
 	ptr->transform_id = false;
