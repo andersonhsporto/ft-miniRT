@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 00:27:04 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/02 01:24:20 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,15 @@ typedef struct s_mlx {
 
 typedef struct s_cylinder_d
 {
-	int			id;
-	t_coo 		coordinates;
-	t_coo 		normalized;
-	double		radius;
-	double 		height;
-	t_coo 		color;
-	double 		**transform;
-	int			transform_id;
-} t_cylinder_d;
+	int		id;
+	t_coo	coordinates;
+	t_coo	normalized;
+	double	radius;
+	double	height;
+	t_coo	color;
+	double	**transform;
+	int		transform_id;
+}	t_cylinder_d;
 
 typedef struct s_plane_d
 {
@@ -143,38 +143,38 @@ typedef struct s_ambient {
 
 typedef struct s_index
 {
-	int ambient;
-	int camera;
-	int light;
-	int sphere;
-	int plane;
-	int cylinder;
-} t_index;
+	int	ambient;
+	int	camera;
+	int	light;
+	int	sphere;
+	int	plane;
+	int	cylinder;
+}	t_index;
 
 typedef struct s_error
 {
-	int line_error;
-	int multiple_ambient;
-	int ambient_color;
-	int rgb;
-	int ambient_ratio;
-	int multiple_camera;
-	int camera_view_point;
-	int camera_orientation;
-	int camera_fov;
-	int light_point;
-	int light_bright;
-	int sp_coord;
-	int pl_coord;
-	int pl_normalized;
-	int cy_coord;
-	int cy_normalized;
-	int minimum_args;
+	int	line_error;
+	int	multiple_ambient;
+	int	ambient_color;
+	int	rgb;
+	int	ambient_ratio;
+	int	multiple_camera;
+	int	camera_view_point;
+	int	camera_orientation;
+	int	camera_fov;
+	int	light_point;
+	int	light_bright;
+	int	sp_coord;
+	int	pl_coord;
+	int	pl_normalized;
+	int	cy_coord;
+	int	cy_normalized;
+	int	minimum_args;
 }	t_error;
 
 typedef struct s_mini
 {
-	int 		argc;
+	int			argc;
 	char		**argv;
 	t_index		index;
 	t_ambient	*light_a;
@@ -185,7 +185,7 @@ typedef struct s_mini
 	t_image		img;
 	t_ray		ray;
 	t_intersec	*hit;
-	t_error 	error;
-} t_mini;
+	t_error		error;
+}	t_mini;
 
 #endif

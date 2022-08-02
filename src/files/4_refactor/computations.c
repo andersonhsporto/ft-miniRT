@@ -6,24 +6,13 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 23:26:05 by algabrie          #+#    #+#             */
-/*   Updated: 2022/08/01 22:19:35 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/02 01:16:11 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_coo	*reflect(t_coo *v, t_coo *n)
-{
-	t_coo	*var;
-	t_coo	*res;
-
-	var = vector_multipli_scalar(2.0 * vector_abs(v, n), n);
-	res = vector_subtraction(v, var);
-	free(var);
-	return(res);
-}
-
-static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
+t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 {
 	double		dist;
 	double		min;
@@ -40,73 +29,7 @@ static t_coo	*get_cylinder_normal(double height, t_coo *o_point)
 		return (create_vector(o_point->x, 0, o_point->z, 0));
 }
 
-t_coo	*normal_object_type(t_coo *o_point, double *obj_type_height)
-{
-	t_coo	*posi;
-	t_coo	*sphere_posi;
-
-	if (obj_type_height[0] == sphere)
-	{
-		posi = create_vector(0, 0, 0, 1);
-		sphere_posi = vector_subtraction(o_point, posi);
-		free(posi);
-		return (sphere_posi);
-	}
-	else if (obj_type_height[0] == plane)
-		return (create_vector(0, 1, 0, 0));
-	else if (obj_type_height[0] == cylinder)
-		return (get_cylinder_normal(obj_type_height[1], o_point));
-	return(create_vector(0, 0, 0, 0));
-}
-
-t_coo	*normal_at(double **transform, t_coo *w_point, double *obj_type_height)
-{
-	double	**inv_trans;
-	t_coo	*o_point;
-	t_coo	*o_normal;
-	t_coo	w_normal;
-
-	inv_trans = matrix_inverter(transform);
-	o_point = mult_matrix_vector(inv_trans, w_point);
-	o_normal = normal_object_type(o_point, obj_type_height);
-	free(o_point);
-	matrix_transpose(inv_trans);
-	w_normal = mult_matrix_vector_temp(inv_trans, o_normal);
-	w_normal.w = 0;
-	free_matrix(inv_trans, 4);
-	free(o_normal);
-	return (vector_normalize(&w_normal));
-}
-
-void	get_normal_vec(t_element *node, double *ch, t_comps *comps, int obj_pos)
-{
-	t_cylinder_d	*cy_ptr;
-	t_sphere_d		*sp_ptr;
-	t_plane_d		*pl_ptr;
-
-	if (node->type == cylinder && node->id == obj_pos)
-	{
-		cy_ptr = (t_cylinder_d *)node->ptr;
-		ch[1] = cy_ptr->height;
-		comps->normal_vec = normal_at(cy_ptr->transform, &comps->position, ch);
-		comps->color = &cy_ptr->color;
-	}
-	else if (node->type == sphere && node->id == obj_pos)
-	{
-		sp_ptr = (t_sphere_d *)node->ptr;
-		comps->normal_vec = normal_at(sp_ptr->transform, &comps->position, ch);
-		comps->color = &sp_ptr->color;
-	}
-	else if (node->type == plane && node->id == obj_pos)
-	{
-		pl_ptr = (t_plane_d *)node->ptr;
-		comps->normal_vec = normal_at(pl_ptr->transform, &comps->position, ch);
-		comps->color = &pl_ptr->color;
-	}
-	return ;
-}
-
-static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
+void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *data)
 {
 	double		obj_type_cylinder_height[2];
 	t_element	*tmp;
@@ -117,41 +40,11 @@ static void	get_obj_props(t_comps *comps, int obj_type, int obj_pos, t_mini *dat
 	{
 		if (tmp->type == obj_type && tmp->id == obj_pos)
 		{
-			// printf("obj_type: %d\n", obj_pos);
 			get_normal_vec(tmp, obj_type_cylinder_height, comps, obj_pos);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-}
-
-t_coo	ray_position(t_ray *ray, double t)
-{
-	t_coo	temp;
-
-	temp = vector_multipli_scalar_temp(t, &ray->direction);
-	return (vector_addition_temp(&ray->origin, &temp));
-}
-
-void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
-{
-	t_coo	*scalar;
-
-	comps->t = data->hit->t;
-	comps->position = ray_position(rt, comps->t);
-	comps->eye_vec = vector_multipli_scalar(-1, &rt->direction);
-	get_obj_props(comps, data->hit->obj_type, data->hit->obj_pos, data);
-	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
-	{
-		comps->inside = 1;
-		comps->normal_vec = vector_multipli_scalar(-1, comps->normal_vec);
-	}
-	else
-		comps->inside = 0;
-	scalar = vector_multipli_scalar(EPSILON, comps->normal_vec);
-	comps->over_point = vector_addition(&comps->position, scalar);
-	free(scalar);
-	free(data->hit);
 }
 
 t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
@@ -160,16 +53,13 @@ t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 	int			cont;
 	int			i;
 
-	i = 0;
+	i = -1;
 	aux = cast->intersec;
 	if (intersec)
 	{
 		cont = cast->cont - 1;
-		while (i < cont)
-		{
-			cast->intersec  = cast->intersec->next;
-			i++;
-		}
+		while (++i < cont)
+			cast->intersec = cast->intersec->next;
 		if (intersec->next)
 			cast->cont++;
 		cast->cont++;
@@ -183,14 +73,3 @@ t_caster	*put_intersection_in_cast(t_caster *cast, t_intersec *intersec)
 	}
 	return (cast);
 }
-
-t_caster	*init_intersec_list(void)
-{
-	t_caster *list;
-
-	list = (t_caster *)malloc(sizeof(t_caster) * 1);
-	list->cont = 0;
-	list->intersec = NULL;
-	return (list);
-}
-

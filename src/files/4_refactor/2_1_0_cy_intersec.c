@@ -1,5 +1,16 @@
-#include "minirt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   2_1_0_cy_intersec.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 00:56:36 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/08/02 01:00:50 by anhigo-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minirt.h"
 
 static void	get_y0_y1(double *intersec, double *y0_y1, t_ray *ray)
 {
@@ -35,6 +46,14 @@ static t_intersec	*intersec_helper(double intersec, int pos)
 	return (res);
 }
 
+void	intersec_while_helper(t_intersec *res, double intersec, int pos)
+{
+	if (res == NULL)
+		res = intersec_helper(intersec, pos);
+	else
+		res->next = intersec_helper(intersec, pos);
+}
+
 t_intersec	*create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 {
 	t_intersec	*res;
@@ -55,10 +74,7 @@ t_intersec	*create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 			res = intersec_helper(intersec[0], cyd->id);
 		if (y_y1[1] > min && max > y_y1[1])
 		{
-			if (res == NULL)
-				res = intersec_helper(intersec[1], cyd->id);
-			else
-				res->next  = intersec_helper(intersec[1], cyd->id);
+			intersec_while_helper(res, intersec[1], cyd->id);
 		}
 	}
 	free_matrix(ray->inverse, 4);

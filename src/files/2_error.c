@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:51:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:14:12 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/02 01:20:32 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	exit_and_free(t_mini *data, char *string, int code)
 	free(data->mlx);
 	exit(code);
 }
+
 void	free_matrix(double **matrix, int line)
 {
 	int	i;

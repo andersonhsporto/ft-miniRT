@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_inverter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
+/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:34:51 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/07/31 16:30:32 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/02 01:14:08 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double **matrix_inverter(double **a)
+double	**matrix_inverter(double **a)
 {
 	double	**res;
 	double	**temp;

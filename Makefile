@@ -33,12 +33,13 @@ IMAGE	= $(addprefix 3_image/, \
 )
 
 REFACTOR	= $(addprefix 4_refactor/, \
+		0_0_render.c 0_1_utilities.c 0_2_utilities.c \
 		1_0_light.c 1_1_shadow.c \
 		2_0_sphere.c 2_1_cylinder.c 2_1_0_cy_intersec.c \
 		2_2_plane.c  \
 		matrix_inverter.c cam.c \
 		computations.c intersections.c \
-		render.c  vector.c \
+		vector.c vector_2.c \
 )
 
 SRC		= $(addprefix ./src/files/, \
