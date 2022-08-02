@@ -38,7 +38,7 @@ REFACTOR	= $(addprefix 4_refactor/, \
 		2_2_plane.c  \
 		matrix_inverter.c cam.c \
 		computations.c intersections.c \
-		render.c  vector.c \
+		render.c  vector.c vector_2.c\
 )
 
 SRC		= $(addprefix ./src/files/, \
