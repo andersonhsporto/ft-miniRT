@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:07:02 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/02 00:27:04 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ enum e_bool
 	false,
 	true
 };
+
+typedef struct s_cy_intersec {
+	t_ray			ray;
+	double			a;
+	double			b;
+	double			c;
+	double			disc;
+	double			vals[3];
+}	t_cy_intersec;
+
+typedef struct s_sp_intersec {
+	t_ray	ray;
+	t_coo	temp;
+	t_coo	sphere_to_ray;
+	double	dot;
+	double	vals[3];
+}	t_sp_intersec;
 
 typedef struct s_utils {
 	double	a;

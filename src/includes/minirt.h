@@ -6,7 +6,7 @@
 /*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 00:48:23 by algabrie         ###   ########.fr       */
+/*   Updated: 2022/08/02 00:58:04 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,6 @@ void	free_element_list(t_mini *data);
 void	check_and_free(t_mini *data);
 int		there_file_error(t_mini *data);
 void	check_if_error(t_mini *data);
+
+t_intersec	*create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd);
 #endif
