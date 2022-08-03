@@ -6,14 +6,14 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:09:23 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 01:24:20 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 02:12:17 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "refactor.h" //TODO: remove this
+# include "refactor.h"
 
 enum e_type
 {

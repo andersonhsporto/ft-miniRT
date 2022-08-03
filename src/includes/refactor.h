@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 01:37:13 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 01:45:09 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 02:11:59 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,19 @@ typedef struct s_plane
 	double			**transform;
 }	t_plane;
 
-typedef struct s_objects
+typedef struct s_poly
 {
 	t_sphere	**sphere;
 	t_plane		**plane;
 	t_cylinder	**cylinder;
 }	t_poly;
 
-typedef struct s_intersect_list
+typedef struct s_intersec
 {
-	double					t;
-	int						obj_type;
-	int						obj_pos;
-	struct s_intersect_list	*next;
+	double				t;
+	int					obj_type;
+	int					obj_pos;
+	struct s_intersec	*next;
 }	t_intersec;
 
 typedef struct s_caster
