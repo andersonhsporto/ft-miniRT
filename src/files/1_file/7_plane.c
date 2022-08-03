@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:41:50 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:02:02 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:47:35 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_plane_d	*init_plane(t_mini *data, char **string)
 		data->error.rgb = true;
 		return (ptr);
 	}
-	if (out_range_coo(&ptr->normalized, 0, 1.0))
+	if (out_range_coo(&ptr->normalized, -1.0, 1.0))
 	{
 		data->error.pl_normalized = true;
 		return (ptr);
