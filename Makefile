@@ -74,8 +74,8 @@ re: fclean all
 
 test:
 	make
-	./miniRT teste.rt
+	./miniRT test.rt
 
 leak:
 	make
-	valgrind --leak-check=full --show-leak-kinds=all ./miniRT teste.rt
+	valgrind --leak-check=full --show-leak-kinds=all ./miniRT test.rt
