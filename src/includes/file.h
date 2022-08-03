@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: algabrie <alefgabrielr@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 00:49:17 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:17:47 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/02 01:23:49 by algabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FILE_H
 
 # include "struct.h"
+
+# define NO_EVENT 0L
 
 int			legal_char(char character);
 int			out_range_coo(t_coo *vector, double min, double max);
@@ -24,10 +26,10 @@ t_ambient	*init_ambient(char **string, t_mini *data);
 int			find_camera(t_mini *data, char	**string);
 t_cam_d		*init_camera(char **string, t_mini *data);
 
-int				find_light(t_mini *data, char **string);
-t_light_d		*init_light(char **string, t_mini *data);
+int			find_light(t_mini *data, char **string);
+t_light_d	*init_light(char **string, t_mini *data);
 
-t_coo	str_to_coo_vector(char *string, int *error);
+t_coo		str_to_coo_vector(char *string, int *error);
 
 t_element	*element_new(int type, int id, void *element);
 t_element	*get_last_node(t_element *lst);
