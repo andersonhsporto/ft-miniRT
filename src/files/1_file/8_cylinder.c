@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 20:48:24 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/01 01:02:09 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:02:27 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_cylinder_d	*init_cylinder(t_mini *data, char **string)
 	ptr->height = str_to_double(string[4]);
 	ptr->color = str_to_coo_vector(string[5], &data->error.cy_coord);
 	ptr->transform_id = false;
-	if (out_range_coo(&ptr->normalized, 0, 1))
+	if (out_range_coo(&ptr->normalized, -1, 1))
 		data->error.cy_coord = true;
 	if (out_range_coo(&ptr->color, 0, 255))
 		data->error.rgb = true;
