@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 22:29:53 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 01:41:03 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ t_mini *data);
 t_coo		*get_cylinder_normal(double height, t_coo *o_point);
 void		get_normal_vec(t_element *node, double *ch, t_comps *comps, \
 int obj_pos);
+void		helper_cy(double **matrix, double *vector);
 #endif

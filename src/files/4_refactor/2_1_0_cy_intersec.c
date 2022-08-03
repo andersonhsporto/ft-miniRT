@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 00:56:36 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 01:00:50 by anhigo-s         ###   ########.fr       */
+/*   Created: 2022/08/03 01:20:19 by anhigo-s          #+#    #+#             */
+/*   Updated: 2022/08/03 01:40:02 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ static t_intersec	*intersec_helper(double intersec, int pos)
 	return (res);
 }
 
-void	intersec_while_helper(t_intersec *res, double intersec, int pos)
+double	*get_max_min(t_cylinder_d *cyd)
 {
-	if (res == NULL)
-		res = intersec_helper(intersec, pos);
-	else
-		res->next = intersec_helper(intersec, pos);
+	double	*max_min;
+
+	max_min = (double *)malloc(sizeof(double) * 2);
+	max_min[0] = cyd->height / 2.0;
+	max_min[1] = -1.0 * max_min[0];
+	return (max_min);
 }
 
 t_intersec	*create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
@@ -59,24 +61,25 @@ t_intersec	*create_intersec(double *vals, t_ray *ray, t_cylinder_d *cyd)
 	t_intersec	*res;
 	double		intersec[2];
 	double		y_y1[2];
-	double		min;
-	double		max;
+	double		*max_min;
 
-	max = cyd->height / 2.0;
-	min = -1.0 * max;
 	res = NULL;
+	max_min = get_max_min(cyd);
 	intersec[0] = (((-1 * vals[1]) - sqrt(vals[2])) / (2 * vals[0]));
 	intersec[1] = (((-1 * vals[1]) + sqrt(vals[2])) / (2 * vals[0]));
 	if (vals[2] >= 0 && eof(vals[0], 0) == 0)
 	{
 		get_y0_y1(intersec, y_y1, ray);
-		if (y_y1[0] > min && max > y_y1[0])
+		if (y_y1[0] > max_min[1] && max_min[0] > y_y1[0])
 			res = intersec_helper(intersec[0], cyd->id);
-		if (y_y1[1] > min && max > y_y1[1])
+		if (y_y1[1] > max_min[1] && max_min[0] > y_y1[1])
 		{
-			intersec_while_helper(res, intersec[1], cyd->id);
+			if (res == NULL)
+				res = intersec_helper(intersec[1], cyd->id);
+			else
+				res->next = intersec_helper(intersec[1], cyd->id);
 		}
 	}
-	free_matrix(ray->inverse, 4);
+	helper_cy(ray->inverse, max_min);
 	return (res);
 }

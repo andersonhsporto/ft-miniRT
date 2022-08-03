@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:04:59 by algabrie          #+#    #+#             */
-/*   Updated: 2022/08/02 00:35:39 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 01:41:26 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,12 @@ t_intersec	*cylinder_intersec(t_ray *base_ray, void *ptr)
 	cy_data.vals[1] = cy_data.b;
 	cy_data.vals[2] = cy_data.disc;
 	return (create_intersec(cy_data.vals, &cy_data.ray, (t_cylinder_d *)cyd));
+}
+
+void	helper_cy(double **matrix, double *vector)
+{
+	free(vector);
+	vector = NULL;
+	free_matrix(matrix, 4);
+	return ;
 }
