@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:26:07 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/03 19:38:31 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/04 10:04:24 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WIDTH 100
-# define HEIGHT 100
+# define WIDTH 600
+# define HEIGHT 600
 # define EPSILON 0.00001
 # define KEY_RELEASE 3
 # define DESTROY_NOTIFY 17

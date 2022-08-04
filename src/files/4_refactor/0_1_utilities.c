@@ -6,7 +6,7 @@
 /*   By: anhigo-s <anhigo-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 01:05:05 by anhigo-s          #+#    #+#             */
-/*   Updated: 2022/08/02 01:11:15 by anhigo-s         ###   ########.fr       */
+/*   Updated: 2022/08/03 20:40:42 by anhigo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	prepare_computations(t_comps *comps, t_ray *rt, t_mini *data)
 	if (vector_abs(comps->normal_vec, comps->eye_vec) < 0)
 	{
 		comps->inside = 1;
-		comps->normal_vec = vector_multipli_scalar(-1, comps->normal_vec);
+		scalar = vector_multipli_scalar(-1, comps->normal_vec);
+		free(comps->normal_vec);
+		comps->normal_vec = scalar;
 	}
 	else
 		comps->inside = 0;
