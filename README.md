@@ -1,6 +1,6 @@
 # ft-miniRT
-![norminette](https://github.com/andersonhsporto/ft-miniRT/workflows/norminette/badge.svg)
-### O objetivo deste projeto é criar um protocolo Ray Tracing utilizando a biblioteca [MinilibX](https://github.com/42Paris/minilibx-linux).
+
+### O objetivo deste projeto é criar um ray tracer utilizando a biblioteca [MinilibX](https://github.com/42Paris/minilibx-linux).
 <hr>
 
 ## Exemplos:
@@ -20,9 +20,14 @@ Compile a parte **mandatória** utilizando:
 make
 ```
 
+## Estilo de código
+
+O estilo de código utilizado neste projeto é o [Norminette](https://github.com/42School/norminette) criado pela escola 42.
+
+![norminette](https://github.com/andersonhsporto/ft-miniRT/workflows/norminette/badge.svg)
 
 
 
 ## REFERÊNCIAS
-* Informação Adicional - [Harm Smits - MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx) 
-* Informação Adicional - [MiniLibX](https://github.com/42Paris/minilibx-linux) 
+*  [Harm Smits - MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx) 
+*  [MiniLibX](https://github.com/42Paris/minilibx-linux) 
