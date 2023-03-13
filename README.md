@@ -4,9 +4,11 @@
 <hr>
 
 ## Exemplos:
-![mandatory](https://github.com/andersonhsporto/ft-miniRT/blob/main/images/sphere.png)
+![sphere](https://user-images.githubusercontent.com/47704550/224850196-937a42b0-3e1f-42b8-a47d-1a64bb109caa.png)
+
 <br>
-![mandatory](https://github.com/andersonhsporto/ft-miniRT/blob/main/images/sphere2.png)
+![sphere2](https://user-images.githubusercontent.com/47704550/224850218-b4eccf64-4226-4c4c-986c-8e07e3dc77e2.png)
+
 
 
 ## Instalação
