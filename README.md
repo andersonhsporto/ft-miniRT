@@ -7,7 +7,8 @@
 ![sphere](https://user-images.githubusercontent.com/47704550/224850196-937a42b0-3e1f-42b8-a47d-1a64bb109caa.png)
 
 <br>
-![sphere2](https://user-images.githubusercontent.com/47704550/224850218-b4eccf64-4226-4c4c-986c-8e07e3dc77e2.png)
+
+![sphere2](https://user-images.githubusercontent.com/47704550/224850381-57d16408-7e4d-4c51-acf8-f3e04f273dfd.png)
 
 
 
